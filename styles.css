@@ -37,6 +37,7 @@ main {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 10px;
     text-align: center;
+    width: 100%;
 }
 
 p {
@@ -84,6 +85,19 @@ input[type="submit"] {
 }
 
 
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+
+.rounded-image {
+    border-radius: 30px;
+}
+
+
 
 
 @media only screen and (max-width: 768px) {
@@ -98,8 +112,20 @@ input[type="submit"] {
 }
 
 
+.image {
+    display: none;
+    padding-right: 10px;
+    padding-top: 10px;
+
+}
+
 @media only screen and (min-width: 1200px) {
     body {
         font-size: 28px;
     }
+    .image {
+        display: block;
+        width: 50%;
+    }
+
 }
