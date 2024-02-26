@@ -99,11 +99,6 @@ input[type="submit"] {
 
 
 @media only screen and (min-width: 1200px) {
-    .topnav li {
-        display: block;
-        margin-bottom: 10px;
-        padding: 5px;
-    }
     body {
         font-size: 28px;
     }
