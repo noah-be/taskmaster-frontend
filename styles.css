@@ -6,6 +6,7 @@ body {
     flex-direction: column;
     justify-content: center;
     background-color: lightgray;
+    min-height: 100vh;
 }
 
 header, footer {
@@ -15,6 +16,12 @@ header, footer {
     display: flex;
     justify-content: space-between;
 }
+
+
+footer {
+    margin-top: auto;
+}
+
 
 main {
     flex: 1;
