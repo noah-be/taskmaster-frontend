@@ -7,14 +7,16 @@ body {
     justify-content: center;
     background-color: lightgray;
 }
+
 header, footer {
     background-color: #333;
     color: #fff;
     padding: 20px;
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
 }
 
-form {
+#login-form {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -45,3 +47,21 @@ input[type="submit"] {
 }
 
 
+
+
+.task-view {
+    flex: 1;
+    background-color: #ccc;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row; 
+}
+
+
+a {
+    color: white;
+    text-decoration: none;
+    border: 1px solid white; 
+    padding: 5px 10px;
+}
