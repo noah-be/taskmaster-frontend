@@ -72,9 +72,29 @@ input[type="submit"] {
 }
 
 
+.topnav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.topnav li {
+    display: inline;
+    margin-right: 10px;
+}
+
+
 
 @media only screen and (max-width: 768px) {
     body {
         font-size: 20px;
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    .topnav li {
+        display: block;
+        margin-bottom: 10px;
+        padding: 5px;
     }
 }
