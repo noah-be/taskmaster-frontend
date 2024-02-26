@@ -16,6 +16,16 @@ header, footer {
     justify-content: space-between;
 }
 
+main {
+    flex: 1;
+}
+
+footer {
+    margin-top: auto;
+}
+
+
+
 #login-form {
     background-color: #fff;
     padding: 20px;
@@ -46,6 +56,9 @@ input[type="submit"] {
     cursor: pointer;
 }
 
+#register-link {
+    color: blue;
+}
 
 
 
@@ -59,9 +72,11 @@ input[type="submit"] {
 }
 
 
-a {
+
+
+.topnav a {
     color: white;
     text-decoration: none;
-    border: 1px solid white; 
+    border: 1px solid white;
     padding: 5px 10px;
 }
