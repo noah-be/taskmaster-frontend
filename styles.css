@@ -7,6 +7,7 @@ body {
     justify-content: center;
     background-color: lightgray;
     min-height: 100vh;
+    font-size: 24px;
 }
 
 header, footer {
@@ -84,17 +85,26 @@ input[type="submit"] {
 
 
 
-@media only screen and (max-width: 768px) {
-    body {
-        font-size: 20px;
-    }
-}
-
 
 @media only screen and (max-width: 768px) {
     .topnav li {
         display: block;
         margin-bottom: 10px;
         padding: 5px;
+    }
+    body {
+        font-size: 20px;
+    }
+}
+
+
+@media only screen and (min-width: 1200px) {
+    .topnav li {
+        display: block;
+        margin-bottom: 10px;
+        padding: 5px;
+    }
+    body {
+        font-size: 28px;
     }
 }
