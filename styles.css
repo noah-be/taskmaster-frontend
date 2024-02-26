@@ -27,10 +27,6 @@ main {
     flex: 1;
 }
 
-footer {
-    margin-top: auto;
-}
-
 
 
 #login-form {
@@ -68,22 +64,17 @@ input[type="submit"] {
 }
 
 
-
-.task-view {
-    flex: 1;
-    background-color: #ccc;
-    padding: 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: row; 
-}
-
-
-
-
 .topnav a {
     color: white;
     text-decoration: none;
     border: 1px solid white;
     padding: 5px 10px;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+    body {
+        font-size: 20px;
+    }
 }
