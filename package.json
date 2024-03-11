@@ -2,8 +2,11 @@
   "name": "private-to-do-list",
   "version": "1.0.0",
   "description": "A private to-do list web application",
-  "main": "index.js",
+  "main": "app.js",
+  "type": "module",
   "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +21,8 @@
   "homepage": "https://github.com/noah-frank/private-to-do-list#readme",
   "dependencies": {
     "express": "^4.18.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
   }
 }
