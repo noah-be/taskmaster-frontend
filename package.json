@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests/*/*.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "chai": "^5.1.0",
+    "chai-http": "^4.4.0",
     "mocha": "^10.3.0",
     "nodemon": "^3.1.0",
     "supertest": "^6.3.4"
