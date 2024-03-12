@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="styles/main.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <link rel="manifest" href="site.webmanifest">
+    <title>Task master</title>
+</head>
+
+<body>
+    <header class="header">
+        <h1>Task master</h1>
+        <nav class="topnav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container">
+        <form id="login-form" action="/login" method="POST">
+            <h2>Login</h2>
+
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username"><br>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password"><br><br>
+
+            <input type="submit" value="Login">
+            <hr>
+            <a id="register-link" href="#register">Create new account</a>
+        </form>
+        <img class="image" src="images/todo_list.jpg"
+            alt="A table on which there are plants, paper clips, a clipboard, an alarm clock and a ballpoint pen"
+            class="rounded-image">
+    </main>
+    <footer>
+        <p>Made with love in Berlin</p>
+    </footer>
+</body>
+
+</html>
