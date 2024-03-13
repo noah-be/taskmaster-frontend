@@ -16,6 +16,6 @@ jobs:
       run: |
         git pull origin master
         docker build -t taskmaster .
-        docker stop taskmaster_web || true
-        docker rm taskmaster_web || true
-        docker run -d --name taskmaster_web -p 3009:3009 taskmaster
+        docker stop taskmaster || true
+        docker rm taskmaster || true
+        docker run -d --name taskmaster 3009:3009 taskmaster
