@@ -3,6 +3,9 @@ import bodyParser from 'body-parser'
 
 const app = express()
 
+// Configure ETag
+app.set('etag', 'strong'); // 'strong', 'weak', false
+
 app.use(express.static("public"))
 
 // middleware to parse incoming requests with form data
