@@ -26,11 +26,13 @@ $breakpoint-large: 1200px;
 }
 
 @mixin respond-to($breakpoint) {
-    @if $breakpoint == small {
+    @if $breakpoint ==small {
         @media only screen and (max-width: $breakpoint-small) {
             @content;
         }
-    } @else if $breakpoint == large {
+    }
+
+    @else if $breakpoint ==large {
         @media only screen and (min-width: $breakpoint-large) {
             @content;
         }
@@ -50,7 +52,8 @@ body {
     font-size: $base-font-size;
 }
 
-header, footer {
+header,
+footer {
     background-color: $primary-color;
     color: $secondary-color;
     padding: 20px;
@@ -64,6 +67,10 @@ footer {
 
 main {
     flex: 1;
+}
+
+.image {
+    border-radius: 30px;
 }
 
 #login-form {
@@ -80,7 +87,9 @@ p {
     padding-left: 10px;
 }
 
-input[type="text"], input[type="password"], input[type="submit"] {
+input[type="text"],
+input[type="password"],
+input[type="submit"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -118,6 +127,22 @@ input[type="submit"] {
     }
 }
 
+
+
+.btn {
+    @include button-style(#007bff);
+}
+
+#cat_404 {
+    max-width: 80%;
+    max-height: 80%;
+    margin-bottom: 20px;
+}
+
+
+
+
+
 .container {
     display: flex;
     flex-direction: row;
@@ -144,15 +169,13 @@ input[type="submit"] {
     body {
         font-size: 20px;
     }
+
+    .image {
+        display: none;
+    }
 }
 
-// Dont show image by default
-.image {
-    display: none;
-    padding-right: 10px;
-    padding-top: 10px;
-    border-radius: 30px;
-}
+
 
 
 @include respond-to(large) {
@@ -160,19 +183,12 @@ input[type="submit"] {
         font-size: 28px;
     }
 
+
     .image {
         display: block;
         width: 50%;
+        padding-right: 10px;
+        padding-top: 10px;
     }
-}
 
-// Button Styles
-.btn {
-    @include button-style(#007bff);
-}
-
-#cat_404 {
-    max-width: 80%;
-    max-height: 80%;
-    margin-bottom: 20px;
 }
