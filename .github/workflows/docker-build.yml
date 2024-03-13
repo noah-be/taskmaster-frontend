@@ -1,0 +1,21 @@
+name: Docker Build and Deploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Build and Push Docker Image
+      run: |
+        git pull origin main
+        docker build -t taskmaster .
+        docker stop taskmaster_web || true
+        docker rm taskmaster_web || true
+        docker run -d --name taskmaster_web -p 3009:3009 taskmaster

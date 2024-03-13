@@ -1,5 +1,45 @@
+// Variables
+$primary-color: #333;
+$secondary-color: #fff;
+$font-stack: Arial, sans-serif;
+$base-font-size: 24px;
+$link-color: blue;
+$error-color: red;
+$breakpoint-small: 768px;
+$breakpoint-large: 1200px;
+
+// Mixins
+@mixin button-style($bg-color) {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: $secondary-color;
+    background-color: $bg-color;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: darken($bg-color, 10%);
+    }
+}
+
+@mixin respond-to($breakpoint) {
+    @if $breakpoint == small {
+        @media only screen and (max-width: $breakpoint-small) {
+            @content;
+        }
+    } @else if $breakpoint == large {
+        @media only screen and (min-width: $breakpoint-large) {
+            @content;
+        }
+    }
+}
+
+// Base Styles
 body {
-    font-family: Arial, sans-serif;
+    font-family: $font-stack;
     margin: 0;
     padding: 0;
     display: flex;
@@ -7,32 +47,27 @@ body {
     justify-content: center;
     background-color: lightgray;
     min-height: 100vh;
-    font-size: 24px;
+    font-size: $base-font-size;
 }
 
-header,
-footer {
-    background-color: #333;
-    color: #fff;
+header, footer {
+    background-color: $primary-color;
+    color: $secondary-color;
     padding: 20px;
     display: flex;
     justify-content: space-between;
 }
 
-
 footer {
     margin-top: auto;
 }
-
 
 main {
     flex: 1;
 }
 
-
-
 #login-form {
-    background-color: #fff;
+    background-color: $secondary-color;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -45,10 +80,7 @@ p {
     padding-left: 10px;
 }
 
-
-input[type="text"],
-input[type="password"],
-input[type="submit"] {
+input[type="text"], input[type="password"], input[type="submit"] {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -58,25 +90,20 @@ input[type="submit"] {
 }
 
 input[type="submit"] {
-    background-color: #333;
-    color: #fff;
+    background-color: $primary-color;
+    color: $secondary-color;
     cursor: pointer;
 }
 
 #register-link {
-    color: blue;
+    color: $link-color;
 }
 
-
-
-
-
 .topnav {
-
     a {
-        color: white;
+        color: $secondary-color;
         text-decoration: none;
-        border: 1px solid white;
+        border: 1px solid $secondary-color;
         padding: 5px 10px;
     }
 
@@ -91,16 +118,11 @@ input[type="submit"] {
     }
 }
 
-
-
-
-
 .container {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
-
 
 .error404 {
     display: flex;
@@ -109,15 +131,8 @@ input[type="submit"] {
 }
 
 
-
-.rounded-image {
-    border-radius: 30px;
-}
-
-
-
-
-@media only screen and (max-width: 768px) {
+// Responsive Design
+@include respond-to(small) {
     .topnav {
         li {
             display: block;
@@ -131,15 +146,16 @@ input[type="submit"] {
     }
 }
 
-
+// Dont show image by default
 .image {
     display: none;
     padding-right: 10px;
     padding-top: 10px;
-
+    border-radius: 30px;
 }
 
-@media only screen and (min-width: 1200px) {
+
+@include respond-to(large) {
     body {
         font-size: 28px;
     }
@@ -148,25 +164,12 @@ input[type="submit"] {
         display: block;
         width: 50%;
     }
-
 }
 
+// Button Styles
 .btn {
-    display: inline-block;
-    padding: 15px 30px;
-    font-size: 18px;
-    font-weight: bold;
-    text-decoration: none;
-    color: #fff;
-    background-color: #007bff;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    @include button-style(#007bff);
 }
-
-.btn:hover {
-    background-color: #0056b3;
-}
-
 
 #cat_404 {
     max-width: 80%;
