@@ -18,4 +18,4 @@ jobs:
         docker build -t taskmaster .
         docker stop taskmaster || true
         docker rm taskmaster || true
-        docker run -d --name taskmaster 3009:3009 taskmaster
+        docker run -d -p 3009:3009 --restart always taskmaster
