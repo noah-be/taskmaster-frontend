@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "test": "mocha tests/*/*.js"
+    "test": "mocha tests/*/*.js",
+    "sass": "sass --watch public/styles/main.scss:public/styles/main.css"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,8 @@
     "esm": "^3.2.25",
     "express": "^4.18.3",
     "node-fetch": "^3.3.2",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "sass": "^1.71.1"
   },
   "devDependencies": {
     "chai": "^5.1.0",
