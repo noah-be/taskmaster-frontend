@@ -1,37 +1,44 @@
-import express from 'express'
-import bodyParser from 'body-parser'
+import express from 'express';
 
-const app = express()
+const app = express();
 
-// Configure ETag
-app.set('etag', 'strong'); // 'strong', 'weak', false
+app.set('view engine', 'ejs');
+app.set('etag', 'strong');
 
-app.use(express.static("public"))
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
 
-// middleware to parse incoming requests with form data
-app.use(bodyParser.urlencoded({ extended: true }));
+app.get('/', (req, res) => {
+    res.render('main', { title: 'Task Master', main: 'home' });
+});
+
+app.get('/about', (req, res) => {
+    res.render('main', { title: 'Task Master', main: 'about' });
+});
+
+app.get('/contact', (req, res) => {
+    res.render('main', { title: 'Task Master', main: 'contact' });
+});
 
 
-// route handler for receiving login data
+
+
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
-    // show the received data
     res.send(`Received username: ${username} and password: ${password}`);
 });
 
-// dynamic route handler
-app.get('/users/:userId/tasks/:taskId', (request, response) => {
-    const userId = request.params.userId
-    const taskId = request.params.taskId
-    response.send(`Hello User ${userId} you choose the task ${taskId}`)
-})
-
-
-// route handler for 404 errors
-app.use((req, res, next) => {
-    res.status(404).sendFile('public/404.html', { root: process.cwd() });
+app.get('/users/:userId/tasks/:taskId', (req, res) => {
+    const userId = req.params.userId;
+    const taskId = req.params.taskId;
+    res.send(`Hello User ${userId} you chose the task ${taskId}`);
 });
 
+app.use((req, res) => {
+    res.status(404).render('main', { title: 'Page not found', main: '404' });
+});
 
-
-app.listen(3009)
+const PORT = process.env.PORT || 3009;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
