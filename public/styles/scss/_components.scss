@@ -1,0 +1,53 @@
+// Component-specific styles
+.btn {
+    @include button-style(#007bff);
+}
+
+#login-form {
+    background-color: $secondary-color;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type="submit"] {
+    background-color: $primary-color;
+    color: $secondary-color;
+    cursor: pointer;
+}
+
+#register-link {
+    color: $link-color;
+}
+
+#cat_404 {
+    width: 30%;
+    height: 30%;
+    margin: 20px;
+}
+
+.image {
+    border-radius: 30px;
+    display: none; // Image hidden by default
+
+    @include respond-to(large) {
+        display: block; // Image displayed on larger screens
+        width: 50%;
+        padding-right: 10px;
+        padding-top: 10px;
+    }
+}

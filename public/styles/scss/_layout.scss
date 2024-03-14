@@ -1,0 +1,63 @@
+// Layout-specific styles
+header,
+footer {
+    background-color: $primary-color;
+    color: $secondary-color;
+    display: flex;
+    justify-content: space-between;
+}
+
+footer {
+    margin-top: auto;
+}
+
+main {
+    display: flex;
+    align-items: center;
+}
+
+.topnav {
+    a {
+        color: $secondary-color;
+        text-decoration: none;
+        border: 1px solid $secondary-color;
+        padding: 5px 10px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        display: inline;
+        margin-right: 10px;
+    }
+}
+
+.flex_dir_row {
+    flex-direction: row;
+}
+
+.flex_dir_column {
+    flex-direction: column;
+}
+
+@include respond-to(small) {
+    .topnav {
+        li {
+            display: block;
+            margin-bottom: 10px;
+            padding: 5px;
+        }
+    }
+}
+
+@include respond-to(large) {
+    .image {
+        display: block;
+        width: 50%;
+        padding-right: 10px;
+        padding-top: 10px;
+    }
+}

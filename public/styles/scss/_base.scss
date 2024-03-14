@@ -1,0 +1,17 @@
+// Base Styles
+body {
+    font-family: $font-stack;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: lightgray;
+    min-height: 100vh;
+    font-size: $base-font-size;
+}
+
+h1,
+p {
+    padding: 10px;
+}

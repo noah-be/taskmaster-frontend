@@ -22,6 +22,21 @@ app.get('/contact', (req, res) => {
 
 
 
+const tasks = [
+    { task: "Complete project report", date: "2024-03-15 09:00", priority: "high", done: false },
+    { task: "Call client for follow-up", date: "2024-03-15 11:30", priority: "normal", done: true },
+    { task: "Review presentation slides", date: "2024-03-16 14:00", priority: "low", done: false },
+    { task: "Send out meeting invites", date: "2024-03-17 10:00", priority: "normal", done: false },
+    { task: "Prepare for team meeting", date: "2024-03-17 15:00", priority: "high", done: false }
+];
+
+
+
+app.get('/tasks', (req, res) => {
+    res.render('main', { main: 'tasks', tasks: tasks });
+});
+
+
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;

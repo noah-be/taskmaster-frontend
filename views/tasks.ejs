@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="style.css"> <!-- Compiled CSS from SASS -->
+</head>
+
+<body>
+    <h2>To-Do List</h2>
+    <input type="text" id="taskInput" placeholder="Enter task...">
+    <select id="priorityInput">
+        <option value="low">Low</option>
+        <option value="normal" selected>Normal</option>
+        <option value="high">High</option>
+    </select>
+    <button onclick="addTask()">Add Task</button>
+    <table id="todoTable">
+        <tr>
+            <th>Task</th>
+            <th>Date Added</th>
+            <th>Priority</th>
+            <th>Done</th>
+        </tr>
+        <% tasks.forEach((task, index)=> { %>
+            <tr class="<%= task.done ? 'done' : 'not-done-' + task.priority %>">
+                <td>
+                    <%= task.task %>
+                </td>
+                <td>
+                    <%= task.date %>
+                </td>
+                <td>
+                    <%= task.priority %>
+                </td>
+                <td><input type="checkbox" <%=task.done ? 'checked' : '' %> onchange="toggleTask(<%= index %>)"></td>
+            </tr>
+            <% }); %>
+    </table>
+
+    <script>
+        // Your existing JavaScript code
+    </script>
+</body>
+
+</html>

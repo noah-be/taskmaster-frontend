@@ -8,7 +8,7 @@
     "start": "node app.js",
     "nm": "nodemon app.js",
     "test": "mocha tests/*/*.js",
-    "sass": "sass --watch public/styles/main.scss:public/styles/main.css",
+    "sass": "sass --watch public/styles/scss:public/styles/css",
     "dev": "concurrently \"npm run nm\" \"npm run sass\""
   },
   "repository": {

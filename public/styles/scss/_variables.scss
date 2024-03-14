@@ -1,0 +1,17 @@
+// Variables
+$primary-color: #333;
+$secondary-color: #fff;
+$font-stack: Arial, sans-serif;
+$base-font-size: 16px;
+$link-color: blue;
+$error-color: red;
+$breakpoint-small: 768px;
+$breakpoint-large: 1100px;
+
+// New variables for to-do list
+$todo-bg-color: #eaf6ff;
+$priority-colors: (
+    "important": #ffcccc,
+    "normal": #ffcc99,
+    "low": #cce6ff
+);

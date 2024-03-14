@@ -1,0 +1,49 @@
+// Styles for to-do list
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#taskInput,
+#priorityInput {
+    width: 70%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+#taskInput {
+    width: 70%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+
+    &,
+    th,
+    td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+}
+
+.done {
+    background-color: lightgreen;
+}
+
+@each $priority, $color in $priority-colors {
+    .not-done-#{$priority} {
+        background-color: $color;
+    }
+}
