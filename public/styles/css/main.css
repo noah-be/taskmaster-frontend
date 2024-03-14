@@ -27,11 +27,6 @@ footer {
   margin-top: auto;
 }
 
-main {
-  display: flex;
-  align-items: center;
-}
-
 .topnav a {
   color: #fff;
   text-decoration: none;
@@ -45,14 +40,6 @@ main {
 .topnav li {
   display: inline;
   margin-right: 10px;
-}
-
-.flex_dir_row {
-  flex-direction: row;
-}
-
-.flex_dir_column {
-  flex-direction: column;
 }
 
 @media only screen and (max-width: 768px) {
@@ -133,6 +120,11 @@ input[type=submit] {
     padding-right: 10px;
     padding-top: 10px;
   }
+}
+
+main {
+  flex-direction: column;
+  align-items: center;
 }
 
 h2 {

@@ -7,13 +7,9 @@ footer {
     justify-content: space-between;
 }
 
+
 footer {
     margin-top: auto;
-}
-
-main {
-    display: flex;
-    align-items: center;
 }
 
 .topnav {
@@ -35,13 +31,6 @@ main {
     }
 }
 
-.flex_dir_row {
-    flex-direction: row;
-}
-
-.flex_dir_column {
-    flex-direction: column;
-}
 
 @include respond-to(small) {
     .topnav {
