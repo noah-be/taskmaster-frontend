@@ -7,7 +7,7 @@ body {
   justify-content: center;
   background-color: lightgray;
   min-height: 100vh;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 header,
@@ -41,8 +41,9 @@ main {
   width: 100%;
 }
 
-p {
-  padding-left: 10px;
+p,
+h1 {
+  padding: 10px;
 }
 
 input[type=text],
@@ -110,20 +111,18 @@ input[type=submit] {
   flex-direction: column;
 }
 
+.image {
+  display: none;
+}
+
 @media only screen and (max-width: 768px) {
   .topnav li {
     display: block;
     margin-bottom: 10px;
     padding: 5px;
   }
-  .image {
-    display: none;
-  }
 }
 @media only screen and (min-width: 1200px) {
-  body {
-    font-size: 24px;
-  }
   .image {
     display: block;
     width: 50%;

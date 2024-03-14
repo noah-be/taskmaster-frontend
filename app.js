@@ -9,15 +9,15 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => {
-    res.render('main', { title: 'Task Master', main: 'home' });
+    res.render('main', { main: 'home' });
 });
 
 app.get('/about', (req, res) => {
-    res.render('main', { title: 'Task Master', main: 'about' });
+    res.render('main', { main: 'about' });
 });
 
 app.get('/contact', (req, res) => {
-    res.render('main', { title: 'Task Master', main: 'contact' });
+    res.render('main', { main: 'contact' });
 });
 
 

@@ -2,7 +2,7 @@
 $primary-color: #333;
 $secondary-color: #fff;
 $font-stack: Arial, sans-serif;
-$base-font-size: 20px;
+$base-font-size: 16px;
 $link-color: blue;
 $error-color: red;
 $breakpoint-small: 768px;
@@ -85,8 +85,9 @@ main {
     width: 100%;
 }
 
-p {
-    padding-left: 10px;
+p,
+h1 {
+    padding: 10px;
 }
 
 input[type="text"],
@@ -151,6 +152,11 @@ input[type="submit"] {
 }
 
 
+.image {
+    display: none;
+}
+
+
 // Responsive Design
 @include respond-to(small) {
     .topnav {
@@ -160,19 +166,12 @@ input[type="submit"] {
             padding: 5px;
         }
     }
-
-    .image {
-        display: none;
-    }
 }
 
 
 
 
 @include respond-to(large) {
-    body {
-        font-size: 24px;
-    }
 
     .image {
         display: block;
