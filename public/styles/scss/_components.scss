@@ -3,6 +3,20 @@
     @include button-style(#007bff);
 }
 
+#add-task-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+
+    &:hover {
+        background-color: #45a049;
+    }
+}
+
 #login-form {
     background-color: $secondary-color;
     padding: 20px;

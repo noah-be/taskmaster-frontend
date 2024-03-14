@@ -72,6 +72,19 @@ footer {
   background-color: #0062cc;
 }
 
+#add-task-btn {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+#add-task-btn:hover {
+  background-color: #45a049;
+}
+
 #login-form {
   background-color: #fff;
   padding: 20px;
@@ -123,8 +136,14 @@ input[type=submit] {
 }
 
 main {
+  display: flex;
+  flex-direction: row;
+}
+
+main {
+  display: flex;
   flex-direction: column;
-  align-items: center;
+  padding: 10px;
 }
 
 h2 {
@@ -168,16 +187,16 @@ table th {
   background-color: lightgreen;
 }
 
-.not-done-important {
-  background-color: #ffcccc;
+.not-done-high {
+  background-color: #f70000;
 }
 
 .not-done-normal {
-  background-color: #ffcc99;
+  background-color: #ffd000;
 }
 
 .not-done-low {
-  background-color: #cce6ff;
+  background-color: #01aeff;
 }
 
 /*# sourceMappingURL=main.css.map */
