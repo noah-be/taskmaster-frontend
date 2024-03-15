@@ -26,22 +26,11 @@
                 <td>
                     <%= task.priority %>
                 </td>
-                <td><input type="checkbox" <%=task.done ? 'checked' : '' %> onchange="toggleTask(<%= index %>)"></td>
+                <td><input type="checkbox" <%=task.done ? 'checked' : '' %> onchange="toggleTask(<%= index %>)">
+                </td>
             </tr>
             <% }); %>
     </table>
 </main>
 
-<script>
-    function toggleTask(index) {
-        const taskRow = document.getElementById(`task-row-${index}`);
-        taskRow.classList.toggle('done');
-
-        if (taskRow.classList.contains('done')) {
-            taskRow.classList.remove('not-done-high', 'not-done-normal', 'not-done-low');
-        } else {
-            const priority = taskRow.getAttribute('data-priority');
-            taskRow.classList.add(`not-done-${priority}`);
-        }
-    }
-</script>
+<script src="js/tasks.js"></script>

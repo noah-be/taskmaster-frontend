@@ -11,7 +11,10 @@ h2 {
 
 #taskInput,
 #priorityInput {
-    width: 70%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -19,9 +22,6 @@ h2 {
     font-size: 16px;
 }
 
-#taskInput {
-    width: 70%;
-}
 
 table {
     width: 100%;
