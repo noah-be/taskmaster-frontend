@@ -1,0 +1,17 @@
+{
+    "reporter": [
+        "lcov",
+        "text"
+    ],
+    "sourceMap": true,
+    "instrument": true,
+    "include": [
+        "app.js",
+        "server.js",
+        "startServer.js"
+    ],
+    "exclude": [
+        "node_modules/",
+        "tests/"
+    ]
+}

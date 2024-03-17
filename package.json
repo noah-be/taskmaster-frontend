@@ -5,9 +5,9 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "node app.js",
-    "nm": "nodemon app.js",
-    "test": "mocha tests/*/*.js",
+    "start": "node startServer.js",
+    "nm": "nodemon startServer.js",
+    "test": "NODE_ENV=test nyc --require @babel/register --reporter=html --reporter=text mocha 'tests/*'",
     "sass": "sass --watch public/styles/scss:public/styles/css",
     "dev": "concurrently \"npm run nm\" \"npm run sass\""
   },
@@ -30,12 +30,23 @@
     "sass": "^1.71.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.23.9",
+    "@babel/core": "^7.24.0",
+    "@babel/node": "^7.23.9",
+    "@babel/plugin-transform-runtime": "^7.24.0",
+    "@babel/preset-env": "^7.24.0",
+    "@babel/register": "^7.23.7",
+    "@babel/runtime": "^7.24.0",
+    "@istanbuljs/nyc-config-babel": "^3.0.0",
+    "babel-plugin-istanbul": "^6.1.1",
     "chai": "^5.1.0",
     "chai-http": "^4.4.0",
     "concurrently": "^8.2.2",
     "ejs": "^3.1.9",
     "mocha": "^10.3.0",
     "nodemon": "^3.1.0",
+    "nyc": "^15.1.0",
+    "source-map-support": "^0.5.21",
     "supertest": "^6.3.4"
   }
 }

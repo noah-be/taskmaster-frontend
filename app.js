@@ -3,7 +3,6 @@ import { promises as fs } from 'fs';
 
 const app = express();
 
-
 async function readTodos() {
     try {
         const data = await fs.readFile('todos.json', 'utf8');
@@ -23,7 +22,6 @@ async function writeTodos(todos) {
     }
 }
 
-
 app.set('view engine', 'ejs');
 app.set('etag', 'strong');
 
@@ -31,7 +29,7 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
+app.use('/coverage', express.static('coverage'));
 
 
 app.get('/tasks', async (req, res) => {
@@ -52,13 +50,10 @@ app.get('/contact', (req, res) => {
     res.render('main', { main: 'contact' });
 });
 
-
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
     res.send(`Received username: ${username} and password: ${password}`);
 });
-
-
 
 app.post('/add-task', async (req, res) => {
     try {
@@ -74,8 +69,6 @@ app.post('/add-task', async (req, res) => {
         res.status(500).send('Failed to add task');
     }
 });
-
-
 
 app.post('/toggle-task', async (req, res) => {
     try {
@@ -95,24 +88,14 @@ app.post('/toggle-task', async (req, res) => {
     }
 });
 
-
-
-
-
 app.get('/users/:userId/tasks/:taskId', (req, res) => {
     const userId = req.params.userId;
     const taskId = req.params.taskId;
     res.send(`Hello User ${userId} you chose the task ${taskId}`);
 });
 
-
 app.use((req, res) => {
     res.status(404).render('main', { title: 'Page not found', main: '404' });
 });
 
-
-
-const PORT = process.env.PORT || 3009;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+export default app;
