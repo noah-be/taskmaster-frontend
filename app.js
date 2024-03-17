@@ -29,6 +29,10 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+app.get('/', (req, res) => {
+    res.render('main', { main: 'main' });
+});
+
 app.use('/coverage', express.static('coverage'));
 
 
