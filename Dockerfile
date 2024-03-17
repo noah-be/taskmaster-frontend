@@ -10,4 +10,4 @@ COPY . .
 
 EXPOSE 3009
 
-CMD ["node", "app.js"]
+CMD ["node", "startServer.js"]
