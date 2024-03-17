@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.render('main', { main: 'main' });
+    res.render('main', { main: 'home' });
 });
 
 app.use('/coverage', express.static('coverage'));
