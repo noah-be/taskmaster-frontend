@@ -30,7 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.render('main', { main: 'home' });
+    res.render('main', { content: 'home' });
 });
 
 app.use('/coverage', express.static('coverage'));
@@ -39,7 +39,7 @@ app.use('/coverage', express.static('coverage'));
 app.get('/tasks', async (req, res) => {
     try {
         const tasks = await readTodos();
-        res.render('main', { main: 'tasks', tasks: tasks });
+        res.render('main', { content: 'tasks', tasks: tasks });
     } catch (err) {
         console.error('Error fetching tasks', err);
         res.status(500).send('Error fetching tasks');
@@ -47,11 +47,11 @@ app.get('/tasks', async (req, res) => {
 });
 
 app.get('/about', (req, res) => {
-    res.render('main', { main: 'about' });
+    res.render('main', { content: 'about' });
 });
 
 app.get('/contact', (req, res) => {
-    res.render('main', { main: 'contact' });
+    res.render('main', { content: 'contact' });
 });
 
 app.post('/login', (req, res) => {

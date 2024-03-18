@@ -31,6 +31,11 @@ footer {
     }
 }
 
+.image {
+    display: none;
+}
+
+
 
 @include respond-to(small) {
     .topnav {
@@ -42,11 +47,26 @@ footer {
     }
 }
 
+
+
 @include respond-to(large) {
+
+    .content-container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    #login-form {
+        width: 50%;
+    }
+
     .image {
         display: block;
+        border-radius: 30px;
         width: 50%;
-        padding-right: 10px;
-        padding-top: 10px;
+        padding: 10px;
     }
 }

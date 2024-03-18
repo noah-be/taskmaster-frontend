@@ -42,6 +42,10 @@ footer {
   margin-right: 10px;
 }
 
+.image {
+  display: none;
+}
+
 @media only screen and (max-width: 768px) {
   .topnav li {
     display: block;
@@ -50,11 +54,20 @@ footer {
   }
 }
 @media only screen and (min-width: 1100px) {
+  .content-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  #login-form {
+    width: 50%;
+  }
   .image {
     display: block;
+    border-radius: 30px;
     width: 50%;
-    padding-right: 10px;
-    padding-top: 10px;
+    padding: 10px;
   }
 }
 .btn {
@@ -92,7 +105,6 @@ footer {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 10px;
   text-align: center;
-  width: 100%;
 }
 
 input[type=text],
@@ -120,24 +132,6 @@ input[type=submit] {
   width: 30%;
   height: 30%;
   margin: 20px;
-}
-
-.image {
-  border-radius: 30px;
-  display: none;
-}
-@media only screen and (min-width: 1100px) {
-  .image {
-    display: block;
-    width: 50%;
-    padding-right: 10px;
-    padding-top: 10px;
-  }
-}
-
-main {
-  display: flex;
-  flex-direction: row;
 }
 
 main {
