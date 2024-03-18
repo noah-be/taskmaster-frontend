@@ -4,7 +4,7 @@ function toggleTask(index) {
     const checkbox = taskRow.querySelector('input[type="checkbox"]');
     const isDone = checkbox.checked;
 
-    fetch('/toggle-task', {
+    fetch('/tasks/toggle-task', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ function addTask() {
         done: false
     };
 
-    fetch('/add-task', {
+    fetch('/tasks/add-task', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
