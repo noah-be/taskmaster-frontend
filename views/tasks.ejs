@@ -15,8 +15,8 @@
             <th>Done</th>
         </tr>
         <% tasks.forEach((task, index)=> { %>
-            <tr id="task-row-<%= index %>" class="<%= task.done ? 'done' : 'not-done-' + task.priority %>"
-                data-priority="<%= task.priority %>">
+            <tr onclick="editTask('<%= task._id %>')" id="task-row-<%= index %>"
+                class="<%= task.done ? 'done' : 'not-done-' + task.priority %>" data-priority="<%= task.priority %>">
                 <td>
                     <%= task.title %>
                 </td>
@@ -26,12 +26,12 @@
                 <td>
                     <%= task.priority %>
                 </td>
-                <td><input type="checkbox" <%=task.done ? 'checked' : '' %> onchange="toggleTask(<%= index %>)">
+                <td><input type="checkbox" <%=task.done ? 'checked' : '' %> >
                 </td>
             </tr>
             <% }); %>
     </table>
+
 </main>
 
-
-<script src="js/tasks.js"></script>
+<script type="module" src="js/tasks.js"></script>

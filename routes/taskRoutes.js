@@ -43,17 +43,27 @@ router.get('/:id', async (req, res) => {
 });
 
 // PATCH: Update a task
-router.patch('/:id', async (req, res) => {
+router.patch('/api/tasks/:taskId', async (req, res) => {
+    const updates = req.body; // This could include any combination of updatable fields
+    const taskId = req.params.taskId;
+
     try {
-        const task = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        const task = await Task.findById(taskId);
         if (!task) {
-            return res.status(404).send();
+            return res.status(404).send({ message: 'Task not found' });
         }
-        res.send(task);
+
+        Object.keys(updates).forEach(update => {
+            task[update] = updates[update];
+        });
+
+        await task.save();
+        res.json({ success: true, task });
     } catch (error) {
-        res.status(400).send(error);
+        res.status(500).send({ success: false, message: 'Internal Server Error' });
     }
 });
+
 
 // DELETE: Delete a task
 router.delete('/:id', async (req, res) => {

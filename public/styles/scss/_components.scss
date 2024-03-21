@@ -1,51 +1,91 @@
 // Component-specific styles
-.btn {
-    @include button-style(#007bff);
-}
-
-#add-task-btn {
-    padding: 10px 20px;
-    background-color: #4CAF50;
+%button-style {
     color: white;
+    padding: 15px 20px;
     border: none;
     border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
     cursor: pointer;
-    font-size: 16px;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+.loginBtn {
+    @extend %button-style;
+    background-color: #808080;
+    width: 100%;
 
     &:hover {
-        background-color: #45a049;
+        background-color: #696969;
+    }
+
+    &:active {
+        background-color: #505050;
     }
 }
 
-#login-form {
+.registerBtn {
+    @extend %button-style;
+    background-color: #42b72a;
+    font-size: 18px;
+
+    &:hover {
+        background-color: #369b22;
+    }
+
+    &:active {
+        background-color: #2d8220;
+    }
+}
+
+
+#signUpBtn {
+    @extend %button-style;
+    background-color: rgb(80, 80, 231);
+
+    &:hover {
+        background-color: rgb(50, 50, 205);
+    }
+
+    &:active {
+        background-color: blue;
+    }
+}
+
+
+
+
+hr {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+
+
+#loginForm {
     background-color: $secondary-color;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin: 10px;
     text-align: center;
+
+
+    input[type="text"],
+    input[type="password"],
+    input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
 }
 
-input[type="text"],
-input[type="password"],
-input[type="submit"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
 
-input[type="submit"] {
-    background-color: $primary-color;
-    color: $secondary-color;
-    cursor: pointer;
-}
 
-#register-link {
-    color: $link-color;
-}
 
 #cat_404 {
     width: 30%;

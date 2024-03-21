@@ -1,36 +1,24 @@
-function toggleTask(index) {
-    const table = document.getElementById('todoTable');
-    const taskRow = table.rows[index + 1];
-    const checkbox = taskRow.querySelector('input[type="checkbox"]');
-    const isDone = checkbox.checked;
+function editTask(taskId) {
+    fetch(`/api/tasks/${taskId}`)
+        .then(response => response.json())
+        .then(task => {
+            // Populate the form fields in the popup
+            document.getElementById('editTitle').value = task.title;
+            document.getElementById('editPriority').value = task.priority;
+            document.getElementById('editDone').checked = task.done;
 
-    fetch('/tasks/toggle-task', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ index: index, done: isDone }),
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
+            // Store the task ID in the form for later use
+            document.getElementById('editTaskForm').setAttribute('data-task-id', taskId);
+
+            // Display the popup
+            document.getElementById('editTaskModal').style.display = 'block';
         })
-        .then(data => {
-            if (data.success) {
-                const priority = data.task.priority;
-                updateTaskRowAppearance(taskRow, isDone, priority);
-            } else {
-                console.error('Task update was not successful.');
-                checkbox.checked = !isDone;
-            }
-        })
-        .catch(error => {
-            console.error('Fetch error:', error);
-            checkbox.checked = !isDone;
-        });
+        .catch(error => console.error('Error:', error));
 }
+
+
+
+
 
 
 function updateTaskRowAppearance(taskRow, isDone, priority) {
@@ -97,4 +85,8 @@ function appendTaskToTable(task, index) {
 }
 
 
+window.addTask = addTask;
+window.appendTaskToTable = appendTaskToTable;
+window.updateTaskRowAppearance = updateTaskRowAppearance;
+window.editTask = editTask;
 
