@@ -229,7 +229,6 @@ hr {
   margin-bottom: 5px;
 }
 .registerBox input[type=text],
-.registerBox input[type=email],
 .registerBox input[type=password],
 .registerBox button[type=submit] {
   padding: 10px;
