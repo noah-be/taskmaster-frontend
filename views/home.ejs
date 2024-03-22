@@ -1,9 +1,9 @@
 <main class="content-container">
     <form id="loginForm" action="/login" method="POST">
         <h2>Login</h2>
-        <input type="text" id="username" name="username" placeholder="Username">
-        <input type="password" id="password" name="password" placeholder="Password">
-        <button type="submit" class="loginBtn">Log In</button>
+        <input type="text" id="loginUsername" name="username" placeholder="Username">
+        <input type="password" id="loginPassword" name="password" placeholder="Password">
+        <button id="loginBtn">Log In</button>
         <hr>
         <button id="registerBtn" class="registerBtn">Create new account</button>
     </form>
@@ -13,18 +13,16 @@
 
 </main>
 
+<script type="module" src="js/auth.js"></script>
+
 <div id="registerBox" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Register</h2>
         <form id="registerForm">
-            <input type="text" id="username" name="username" placeholder="Username">
-            <input type="password" id="password" name="password" placeholder="Password">
+            <input type="text" id="registerUsername" name="username" placeholder="Username">
+            <input type="password" id="registerPassword" name="password" placeholder="Password">
             <button id="signUpBtn">Sign Up</button>
         </form>
     </div>
 </div>
-
-
-
-<script type="module" src="js/registerBox.js"></script>

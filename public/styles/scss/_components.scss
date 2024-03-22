@@ -11,7 +11,22 @@
     transition: background-color 0.3s;
 }
 
-.loginBtn {
+
+#homeBtn {
+    @extend %button-style;
+    background-color: #2cf309;
+    width: 100%;
+
+    &:hover {
+        background-color: #1f760f;
+    }
+
+    &:active {
+        background-color: #085608;
+    }
+}
+
+#loginBtn {
     @extend %button-style;
     background-color: #808080;
     width: 100%;
@@ -54,13 +69,10 @@
 }
 
 
-
-
 hr {
     margin-top: 20px;
     margin-bottom: 20px;
 }
-
 
 
 #loginForm {
@@ -85,10 +97,8 @@ hr {
 }
 
 
-
-
 #cat_404 {
     width: 30%;
     height: 30%;
-    margin: 20px;
+    margin-bottom: 10px;
 }

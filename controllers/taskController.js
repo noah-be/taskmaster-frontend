@@ -1,4 +1,4 @@
-import * as todoModel from '../models/todoModel.js';
+import * as todoModel from '../models/Task.js';
 
 async function getTasks(req, res) {
     try {

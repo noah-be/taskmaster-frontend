@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import taskRoutes from './routes/taskRoutes.js';
 import userRoutes from './routes/userRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 import generalRoutes from './routes/generalRoutes.js';
 
 const app = express();
@@ -18,10 +19,13 @@ mongoose.connect(mongoURI)
 app.set('view engine', 'ejs');
 app.set('etag', 'strong');
 app.use(express.json());
-app.use('/api/tasks', taskRoutes);
-app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
+app.use('/api/tasks', taskRoutes);
+app.use('/api/auth', authRoutes);
 app.use('/', generalRoutes);
+app.use(express.static("public"));
+
 
 
 app.use((req, res) => {

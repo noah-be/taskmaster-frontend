@@ -70,7 +70,7 @@ footer {
     padding: 10px;
   }
 }
-#signUpBtn, .registerBtn, .loginBtn {
+#signUpBtn, .registerBtn, #loginBtn, #homeBtn {
   color: white;
   padding: 15px 20px;
   border: none;
@@ -82,14 +82,25 @@ footer {
   transition: background-color 0.3s;
 }
 
-.loginBtn {
+#homeBtn {
+  background-color: #2cf309;
+  width: 100%;
+}
+#homeBtn:hover {
+  background-color: #1f760f;
+}
+#homeBtn:active {
+  background-color: #085608;
+}
+
+#loginBtn {
   background-color: #808080;
   width: 100%;
 }
-.loginBtn:hover {
+#loginBtn:hover {
   background-color: #696969;
 }
-.loginBtn:active {
+#loginBtn:active {
   background-color: #505050;
 }
 
@@ -141,7 +152,7 @@ hr {
 #cat_404 {
   width: 30%;
   height: 30%;
-  margin: 20px;
+  margin-bottom: 10px;
 }
 
 .blurred-background {
