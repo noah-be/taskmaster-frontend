@@ -44,19 +44,6 @@
                 border: 1px solid #ccc;
                 border-radius: 3px;
             }
-
-            button[type="submit"] {
-                padding: 10px;
-                border: none;
-                border-radius: 3px;
-                background-color: #4CAF50;
-                color: white;
-                cursor: pointer;
-
-                &:hover {
-                    background-color: #45a049;
-                }
-            }
         }
     }
 
@@ -99,8 +86,7 @@
     }
 
     input[type="text"],
-    input[type="password"],
-    button[type="submit"] {
+    input[type="password"] {
         padding: 10px;
         margin-bottom: 10px;
         border: 1px solid #ccc;
@@ -108,13 +94,13 @@
         font-size: 16px;
     }
 
-    button[type="submit"] {
-        background-color: #4CAF50;
-        color: white;
-        cursor: pointer;
 
-        &:hover {
-            background-color: #45a049;
-        }
+    .username-available {
+        color: green;
     }
+
+    .username-taken {
+        color: red;
+    }
+
 }

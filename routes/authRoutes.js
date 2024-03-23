@@ -52,5 +52,20 @@ router.post('/login', async (req, res) => {
 });
 
 
+router.get('/check-username', async (req, res) => {
+    const { username } = req.query;
+
+    const userExists = await User.findOne({ username });
+    if (userExists) {
+        return res.json({ isAvailable: false });
+    } else {
+        return res.json({ isAvailable: true });
+    }
+});
+
+
+
+
+
 
 export default router;

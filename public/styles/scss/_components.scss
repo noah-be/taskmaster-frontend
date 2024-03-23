@@ -69,6 +69,31 @@
 }
 
 
+#toggleGuidelinesBtn {
+
+    color: white;
+    padding: 10px 15px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+
+
+    background-color: rgb(80, 80, 231);
+
+    &:hover {
+        background-color: rgb(50, 50, 205);
+    }
+
+    &:active {
+        background-color: blue;
+    }
+}
+
+
 hr {
     margin-top: 20px;
     margin-bottom: 20px;

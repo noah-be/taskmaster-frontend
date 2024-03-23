@@ -20,9 +20,34 @@
         <span class="close">&times;</span>
         <h2>Create new account</h2>
         <form id="registerForm">
+            <button type="button" id="toggleGuidelinesBtn">Show Registration Guidelines</button>
+            <div id="registrationGuidelines" style="display: none;">
+                <h3>Registration Guidelines</h3>
+                <ul>
+                    <li><strong>Username:</strong>
+                        <ul>
+                            <li>Must be unique and not already in use</li>
+                            <li>At least 3 characters long</li>
+                        </ul>
+                    </li>
+                    <li><strong>Password:</strong>
+                        <ul>
+                            <li>At least 8 characters long.</li>
+                            <li>Include a mix of upper and lower case letters</li>
+                            <li>Include at least one number and one special symbol (e.g., !, @, #)</li>
+                            <li>Avoid using easily guessable information like your name or birthday</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="usernameFeedback"></div>
             <input type="text" id="registerUsername" name="username" placeholder="Username">
+            <div id="passwordFeedback"></div>
             <input type="password" id="registerPassword" name="password" placeholder="Password">
             <button id="signUpBtn">Sign Up</button>
-        </form>
     </div>
+
+    </form>
+</div>
 </div>

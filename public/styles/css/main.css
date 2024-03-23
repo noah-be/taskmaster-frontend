@@ -11,6 +11,8 @@ body {
 }
 
 h1,
+h2,
+h3,
 p {
   padding: 10px;
 }
@@ -125,6 +127,25 @@ footer {
   background-color: blue;
 }
 
+#toggleGuidelinesBtn {
+  color: white;
+  padding: 10px 15px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s;
+  background-color: rgb(80, 80, 231);
+}
+#toggleGuidelinesBtn:hover {
+  background-color: rgb(50, 50, 205);
+}
+#toggleGuidelinesBtn:active {
+  background-color: blue;
+}
+
 hr {
   margin-top: 20px;
   margin-bottom: 20px;
@@ -198,17 +219,6 @@ hr {
   border: 1px solid #ccc;
   border-radius: 3px;
 }
-.modal-content form button[type=submit] {
-  padding: 10px;
-  border: none;
-  border-radius: 3px;
-  background-color: #4CAF50;
-  color: white;
-  cursor: pointer;
-}
-.modal-content form button[type=submit]:hover {
-  background-color: #45a049;
-}
 .modal .close {
   color: #aaa;
   float: right;
@@ -241,21 +251,18 @@ hr {
   margin-bottom: 5px;
 }
 .registerBox input[type=text],
-.registerBox input[type=password],
-.registerBox button[type=submit] {
+.registerBox input[type=password] {
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
   font-size: 16px;
 }
-.registerBox button[type=submit] {
-  background-color: #4CAF50;
-  color: white;
-  cursor: pointer;
+.registerBox .username-available {
+  color: green;
 }
-.registerBox button[type=submit]:hover {
-  background-color: #45a049;
+.registerBox .username-taken {
+  color: red;
 }
 
 main {
