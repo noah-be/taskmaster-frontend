@@ -113,6 +113,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 feedbackElement.textContent = 'Error checking username';
                 feedbackElement.style.color = 'red';
             });
+
+        updateSignUpButtonState();
     });
 
     document.getElementById('registerPassword').addEventListener('input', function () {
@@ -149,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // All checks passed
         passwordFeedback.textContent = '';
+        updateSignUpButtonState();
     });
 
 
@@ -164,6 +167,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
+
+    function updateSignUpButtonState() {
+        const usernameFeedback = document.getElementById('usernameFeedback').textContent;
+        const passwordFeedback = document.getElementById('passwordFeedback').textContent;
+        const signUpButton = document.getElementById('signUpBtn');
+
+        signUpButton.disabled = usernameFeedback !== '' || passwordFeedback !== '';
+    }
 
 
 });
