@@ -157,6 +157,7 @@ hr {
 
 .blurred-background {
   filter: blur(5px);
+  transition: filter 2s ease;
 }
 
 .modal {

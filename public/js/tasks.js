@@ -2,15 +2,12 @@ function editTask(taskId) {
     fetch(`/api/tasks/${taskId}`)
         .then(response => response.json())
         .then(task => {
-            // Populate the form fields in the popup
             document.getElementById('editTitle').value = task.title;
             document.getElementById('editPriority').value = task.priority;
             document.getElementById('editDone').checked = task.done;
 
-            // Store the task ID in the form for later use
             document.getElementById('editTaskForm').setAttribute('data-task-id', taskId);
 
-            // Display the popup
             document.getElementById('editTaskModal').style.display = 'block';
         })
         .catch(error => console.error('Error:', error));
