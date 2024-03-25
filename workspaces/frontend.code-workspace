@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "../"
+		}
+	],
+    "settings": {
+    "files.exclude": {
+        "**/coverage": true,
+        "**/Dockerfile": true,
+        "**/README.md": true,
+        "**/node_modules": true,
+        "**/models": true,
+        "**/routes": true,
+        "**/middlewares": true,
+        "**/controllers": true,
+        "**/tests": true,
+        "**/workspaces": true,
+        "**/*.json": true,
+        "*.js": true,
+        "**/.*": true
+    }
+}

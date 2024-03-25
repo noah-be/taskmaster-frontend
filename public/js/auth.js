@@ -3,6 +3,7 @@ var link = document.getElementById("registerBtn");
 var span = document.getElementsByClassName("close")[0];
 
 
+
 function toggleModal() {
     var elementsToBlur = document.querySelectorAll('main, header, footer');
 
@@ -38,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const password = document.getElementById('registerPassword').value;
 
 
-        fetch('http://localhost:3009/api/auth/register', {
+        fetch('/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const username = document.getElementById('loginUsername').value;
         const password = document.getElementById('loginPassword').value;
 
-        fetch('http://localhost:3009/api/auth/login', {
+        fetch('/api/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -74,15 +75,17 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (!response.ok) {
                     throw new Error('Login failed');
                 }
-                return response.json();
+                return response.text();
             })
-            .then(data => {
-                console.log('Login Success:', data);
+            .then(message => {
+                console.log(message);
+
                 window.location.href = '/tasks';
             })
             .catch((error) => {
                 console.error('Login Error:', error);
             });
+
     });
 
 
