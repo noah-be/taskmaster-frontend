@@ -6,16 +6,13 @@ on:
       - master
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
 
-    - name: Build and Push Docker Image
-      run: |
-        git pull origin master
-        docker build -t taskmaster .
-        docker stop taskmaster || true
-        docker rm taskmaster || true
-        docker run -d -p 3009:3009 --restart always taskmaster
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Build and Deploy
+        run: |
+          docker-compose -f docker-compose.yml up --build -d
+          docker-compose -f docker-compose.yml ps
