@@ -12,6 +12,8 @@
 }
 
 
+
+
 #homeBtn {
     @extend %button-style;
     background-color: #2cf309;
@@ -26,19 +28,6 @@
     }
 }
 
-#loginBtn {
-    @extend %button-style;
-    background-color: #808080;
-    width: 100%;
-
-    &:hover {
-        background-color: #696969;
-    }
-
-    &:active {
-        background-color: #505050;
-    }
-}
 
 .registerBtn {
     @extend %button-style;
@@ -110,15 +99,31 @@ hr {
 
 
     input[type="text"],
-    input[type="password"],
-    input[type="submit"] {
+    input[type="password"] {
         width: 100%;
         padding: 10px;
-        margin-bottom: 10px;
+        margin-top: 10px;
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
     }
+
+
+    #loginBtn {
+        @extend %button-style;
+        background-color: #808080;
+        width: 100%;
+        margin-top: 10px;
+
+        &:hover {
+            background-color: #696969;
+        }
+
+        &:active {
+            background-color: #505050;
+        }
+    }
+
 }
 
 

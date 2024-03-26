@@ -13,7 +13,7 @@
             <th>Description</th>
             <th>Due Date</th>
             <th>Priority</th>
-            <th>Completed</th>
+            <th>Done</th>
         </tr>
         <% tasks.forEach((task, index)=> { %>
             <tr onclick="editTask('<%= task._id %>')" id="task-row-<%= index %>"

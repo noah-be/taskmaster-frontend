@@ -12,21 +12,30 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required: true
+        required: function () { return !this.isGoogleAccount; }
+    },
+    isGoogleAccount: {
+        type: Boolean,
+        default: false
+    },
+    googleId: {
+        type: String,
+        unique: true,
+        sparse: true
     }
-
 }, { timestamps: true });
 
-
 userSchema.pre('save', async function (next) {
-    if (!this.isModified('password')) return next();
-
-    this.password = await bcrypt.hash(this.password, 12);
+    if (this.isModified('password') && !this.isGoogleAccount) {
+        this.password = await bcrypt.hash(this.password, 12);
+    }
     next();
 });
 
-
 userSchema.methods.comparePassword = async function (candidatePassword) {
+    if (this.isGoogleAccount) {
+        throw new Error('Cannot compare passwords for a Google account');
+    }
     return await bcrypt.compare(candidatePassword, this.password);
 };
 

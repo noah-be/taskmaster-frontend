@@ -1,8 +1,9 @@
 <main class="content-container">
     <form id="loginForm" action="/login" method="POST">
         <h2>Login</h2>
-        <input type="text" id="loginUsername" name="username" placeholder="Username">
-        <input type="password" id="loginPassword" name="password" placeholder="Password">
+        <div id="googleBtn" style="width: 100%;"></div>
+        <input type="text" id="loginUsername" name="username" placeholder="Username" autocomplete="username">
+        <input type="password" id="loginPassword" name="password" placeholder="Password" autocomplete="passwort">
         <button id="loginBtn">Log In</button>
         <hr>
         <button id="registerBtn" class="registerBtn">Create new account</button>
@@ -12,8 +13,6 @@
         alt="A table on which there are plants, paper clips, a clipboard, an alarm clock and a ballpoint pen.">
 
 </main>
-
-<script type="module" src="js/auth.js"></script>
 
 <div id="registerBox" class="modal">
     <div class="modal-content">

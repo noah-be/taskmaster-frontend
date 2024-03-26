@@ -88,8 +88,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 
-
-
     document.getElementById('registerUsername').addEventListener('input', function () {
         const username = this.value;
         const feedbackElement = document.getElementById('usernameFeedback');
@@ -157,8 +155,6 @@ document.addEventListener('DOMContentLoaded', function () {
         updateSignUpButtonState();
     });
 
-
-
     document.getElementById('toggleGuidelinesBtn').addEventListener('click', function () {
         const guidelines = document.getElementById('registrationGuidelines');
         if (guidelines.style.display === 'none' || guidelines.style.display === '') {
@@ -169,7 +165,6 @@ document.addEventListener('DOMContentLoaded', function () {
             this.textContent = 'Show Registration Guidelines';
         }
     });
-
 
     function updateSignUpButtonState() {
         const usernameFeedback = document.getElementById('usernameFeedback').textContent;

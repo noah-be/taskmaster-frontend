@@ -2,8 +2,9 @@ import express from 'express';
 import mongoose from 'mongoose';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
+import bodyParser from 'body-parser';
 import routes from './routes/index.js';
-import handle404 from './middlewares/handle404.js';
+import mdws from './middlewares/index.js';
 import('dotenv').then((dotenv) => dotenv.config());
 
 
@@ -31,11 +32,12 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
-app.use('/api/task', routes.taskRoutes);
 app.use('/api/auth', routes.authRoutes);
+app.use('/api/task', routes.taskRoutes);
 app.use('/', routes.generalRoutes);
-app.use(handle404);
+app.use(mdws.handle404);
 
 export default app;

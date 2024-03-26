@@ -10,7 +10,17 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <title>Task Master</title>
+
+
+    <% if (content==='home' ) { %>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <script type="module" src="../js/auth.js"></script>
+        <script type="module" src="../js/googleSignIn.js"></script>
+        <% } %>
+
+
+
+            <title>Task Master</title>
 </head>
 
 <body>

@@ -1,6 +1,6 @@
 import express from 'express';
-import Task from '../models/Task.js'
-import TaskController from '../controllers/taskController.js';
+import Task from '../models/TaskModel.js'
+import TaskController from '../controllers/TaskController.js';
 import authenticateToken from '../middlewares/authenticateToken.js';
 
 const router = express.Router();
