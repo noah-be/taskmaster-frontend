@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <meta charSet="utf-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/css/main.css" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
@@ -13,11 +13,13 @@
 
 
     <% if (content==='home' ) { %>
-        <script src="https://accounts.google.com/gsi/client" async defer></script>
         <script type="module" src="../js/auth.js"></script>
         <script type="module" src="../js/googleSignIn.js"></script>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
         <% } %>
 
+            <script type="module" src="/js/cookieHandler.js"></script>
 
 
             <title>Task Master</title>
@@ -40,6 +42,31 @@
         <footer>
             <p>Made with love in Berlin</p>
         </footer>
+
+
+        <div id="cookieConsentBanner">
+            <div class="cookie-banner-content">
+                <div class="cookie-banner-text">
+                    <strong>🍪 Got Cookies? Yes, I Do!</strong>
+                    <p>Ahoy there, web traveler! Just letting you know that <strong>I've loaded this site with delicious
+                            digital
+                            cookies</strong>. Why? Well, to make your browsing experience 'yummier', of course!</p>
+                    <p>And, maybe, just maybe, <strong>to keep an eye on every click, scroll, and hover you
+                            make</strong> (in
+                        the friendliest way possible, I promise!).</p>
+                    <p>So, if you're okay with sharing your digital crumbs with me (and my 9324 partners that are at
+                        least as
+                        trustworthy as I am 💀), hit the <strong>"Aye Aye, Captain!"</strong> button. If not, well, I'll
+                        try not
+                        to take it too personally. Remember, I am watching... sort of! 😜</p>
+                </div>
+                <img src="/images/cookie_banner.jpg" alt="Cookie" class="cookie-banner-image">
+            </div>
+            <button id="acceptCookieConsent">Aye Aye, Captain!</button>
+        </div>
+
+
+
 </body>
 
 </html>

@@ -56,8 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 
-
-
     document.getElementById('loginBtn').addEventListener('click', function (event) {
         event.preventDefault();
 

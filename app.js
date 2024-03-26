@@ -23,6 +23,11 @@ mongoose.connect(mongoURI)
     })
     .catch(err => console.error('Could not connect to MongoDB:', err));
 
+app.use((req, res, next) => {
+    res.setHeader("Content-Security-Policy", "script-src 'nonce-source' http://localhost:3009 https://accounts.google.com https://apis.google.com");
+    next();
+});
+
 app.set('view engine', 'ejs');
 app.set('etag', 'strong');
 

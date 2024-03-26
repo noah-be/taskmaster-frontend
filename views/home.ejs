@@ -3,7 +3,8 @@
         <h2>Login</h2>
         <div id="googleBtn" style="width: 100%;"></div>
         <input type="text" id="loginUsername" name="username" placeholder="Username" autocomplete="username">
-        <input type="password" id="loginPassword" name="password" placeholder="Password" autocomplete="passwort">
+        <input type="password" id="loginPassword" name="password" placeholder="Password"
+            autocomplete="current-password">
         <button id="loginBtn">Log In</button>
         <hr>
         <button id="registerBtn" class="registerBtn">Create new account</button>
@@ -39,11 +40,11 @@
                     </li>
                 </ul>
             </div>
-
             <div id="usernameFeedback"></div>
-            <input type="text" id="registerUsername" name="username" placeholder="Username">
+            <input type="text" id="registerUsername" name="username" placeholder="Username" autocomplete="username">
             <div id="passwordFeedback"></div>
-            <input type="password" id="registerPassword" name="password" placeholder="Password">
+            <input type="password" id="registerPassword" name="password" placeholder="Password"
+                autocomplete="new-password">
             <button id="signUpBtn" disabled>Sign Up</button>
     </div>
 

@@ -1,8 +1,4 @@
-// Main file to import all others
-@import 'variables';
-@import 'mixins';
-@import 'base';
-@import 'layout';
-@import 'components';
-@import 'home';
-@import 'tasks';
+@import 'base/base.scss';
+@import 'components/components.scss';
+@import 'layout/layout';
+@import 'pages/pages';

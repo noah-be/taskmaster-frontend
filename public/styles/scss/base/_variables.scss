@@ -1,0 +1,23 @@
+$breakpoint-small: 768px;
+$breakpoint-large: 1100px;
+
+$font-stack: Arial, sans-serif;
+$base-font-size: 16px;
+
+$primary-color: #333;
+$secondary-color: #fff;
+
+$link-color: blue;
+$error-color: red;
+
+$cookie-banner-bg-color: #f2e6d9;
+$cookie-banner-border-color: #e0c3a6;
+$cookie-banner-text-color: #5a3825;
+$cookie-button-bg-color: #e0c3a6;
+
+$todo-bg-color: #eaf6ff;
+$priority-colors: (
+    "high": #f70000,
+    "normal": #ffd000,
+    "low": #01aeff
+);

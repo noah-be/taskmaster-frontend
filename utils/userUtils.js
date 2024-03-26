@@ -46,7 +46,7 @@ const handleUserFromGoogle = async (payload) => {
 };
 
 const setJwtCookie = (res, token) => {
-    res.cookie('jwt', token, { httpOnly: true, sameSite: 'strict' });
+    res.cookie('jwt', token, { httpOnly: true, sameSite: 'none' });
 };
 
 export { createUser, validateUser, handleUserFromGoogle, setJwtCookie, checkUsername };

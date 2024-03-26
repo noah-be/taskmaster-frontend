@@ -1,5 +1,8 @@
 const onSignIn = async (googleUser) => {
     try {
+        if (!googleUser) {
+            throw new Error('Google user object is undefined');
+        }
         const token = googleUser.getAuthResponse().id_token;
         await signInWithServer(token);
     } catch (error) {
