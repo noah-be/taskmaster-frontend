@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node startServer.js",
-    "nm": "nodemon startServer.js",
+    "nm": "nodemon -x 'clear && node startServer.js'",
     "test": "jest --coverage",
     "sass": "sass --watch public/styles/scss:public/styles/css",
     "dev": "NODE_ENV=development concurrently \"npm run nm\" \"npm run sass\""
@@ -36,6 +36,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.5.0",
     "mongoose": "^7.6.3",
+    "morgan": "^1.10.0",
     "node-fetch": "^3.3.2",
     "path": "^0.12.7",
     "sass": "^1.71.1"
