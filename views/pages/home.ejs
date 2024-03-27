@@ -1,27 +1,26 @@
 <main class="content-container">
-    <form id="loginForm" action="/login" method="POST">
+    <form id="login-form" action="/login" method="POST">
         <h2>Login</h2>
-        <div id="googleBtn" style="width: 100%;"></div>
-        <input type="text" id="loginUsername" name="username" placeholder="Username" autocomplete="username">
-        <input type="password" id="loginPassword" name="password" placeholder="Password"
+        <div id="google-btn" style="width: 100%;"></div>
+        <input type="text" id="login-username" name="username" placeholder="Username" autocomplete="username">
+        <input type="password" id="login-password" name="password" placeholder="Password"
             autocomplete="current-password">
-        <button id="loginBtn">Log In</button>
+        <button id="login-btn">Log In</button>
         <hr>
-        <button id="registerBtn" class="registerBtn">Create new account</button>
+        <button id="register-btn" class="register-btn">Create new account</button>
     </form>
 
-    <img class="image" src="images/todo_list.jpg" class="rounded-image"
+    <img id="todo-list-img" src="images/todo_list.jpg" class="rounded-image"
         alt="A table on which there are plants, paper clips, a clipboard, an alarm clock and a ballpoint pen.">
-
 </main>
 
-<div id="registerBox" class="modal">
+<div id="register-box" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Create new account</h2>
-        <form id="registerForm">
-            <button type="button" id="toggleGuidelinesBtn">Show Registration Guidelines</button>
-            <div id="registrationGuidelines" style="display: none;">
+        <form id="register-form">
+            <button type="button" id="toggle-guidelines-btn">Show Registration Guidelines</button>
+            <div id="registration-guidelines" style="display: none;">
                 <h3>Registration Guidelines</h3>
                 <ul>
                     <li><strong>Username:</strong>
@@ -40,14 +39,13 @@
                     </li>
                 </ul>
             </div>
-            <div id="usernameFeedback"></div>
-            <input type="text" id="registerUsername" name="username" placeholder="Username" autocomplete="username">
-            <div id="passwordFeedback"></div>
-            <input type="password" id="registerPassword" name="password" placeholder="Password"
+            <div id="username-feedback"></div>
+            <input type="text" id="register-username" name="username" placeholder="Username" autocomplete="username">
+            <div id="password-feedback"></div>
+            <input type="password" id="register-password" name="password" placeholder="Password"
                 autocomplete="new-password">
-            <button id="signUpBtn" disabled>Sign Up</button>
+            <button id="sign-up-btn" disabled>Sign Up</button>
     </div>
-
     </form>
 </div>
 </div>

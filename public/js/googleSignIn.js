@@ -41,7 +41,7 @@ const initGoogleSignIn = () => {
     });
 
     google.accounts.id.renderButton(
-        document.getElementById('googleBtn'),
+        document.getElementById('google-btn'),
         { theme: 'outline', size: 'large' }
     );
 };

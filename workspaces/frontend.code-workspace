@@ -8,7 +8,9 @@
         "window.title": "frontend",
         "files.exclude": {
             "**/coverage": true,
+            "**/public/styles/css": true,
             "**/Dockerfile": true,
+            "**/docker-compose.yml": true,
             "**/README.md": true,
             "**/node_modules": true,
             "**/models": true,

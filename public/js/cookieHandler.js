@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
-    var cookieConsentBanner = document.getElementById("cookieConsentBanner");
-    var acceptCookieConsent = document.getElementById("acceptCookieConsent");
+    var cookieConsentBanner = document.getElementById("cookie-consent-banner");
+    var acceptCookieConsent = document.getElementById("accept-cookie-consent");
 
     if (!getCookie("cookieConsent")) {
         cookieConsentBanner.style.display = "block";

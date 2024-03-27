@@ -10,7 +10,23 @@
     transition: background-color 0.3s;
 }
 
-#homeBtn {
+
+#login-btn {
+    @extend %button-style;
+    background-color: #808080;
+    width: 100%;
+    margin-top: 10px;
+
+    &:hover {
+        background-color: #696969;
+    }
+
+    &:active {
+        background-color: #505050;
+    }
+}
+
+#home-btn {
     @extend %button-style;
     background-color: #2cf309;
     width: 100%;
@@ -24,7 +40,7 @@
     }
 }
 
-.registerBtn {
+#register-btn {
     @extend %button-style;
     background-color: #42b72a;
     font-size: 18px;
@@ -38,7 +54,7 @@
     }
 }
 
-#signUpBtn {
+#sign-up-btn {
     @extend %button-style;
     background-color: rgb(80, 80, 231);
 
@@ -51,7 +67,7 @@
     }
 }
 
-#toggleGuidelinesBtn {
+#toggle-guidelines-btn {
 
     color: white;
     padding: 10px 15px;

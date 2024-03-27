@@ -1,7 +1,7 @@
 function addTask() {
     const taskData = {
-        title: document.getElementById('taskInput').value,
-        priority: document.getElementById('priorityInput').value
+        title: document.getElementById('task-input').value,
+        priority: document.getElementById('priority-input').value
     };
 
     fetch('/api/task', {
@@ -19,7 +19,7 @@ function addTask() {
         })
         .then(data => {
             console.log('Task added:', data);
-            const table = document.getElementById('todoTable').getElementsByTagName('tbody')[0];
+            const table = document.getElementById('todo-table').getElementsByTagName('tbody')[0];
             const newRow = table.insertRow();
 
             const titleCell = newRow.insertCell();
@@ -28,8 +28,8 @@ function addTask() {
             const priorityCell = newRow.insertCell();
             priorityCell.textContent = data.priority;
 
-            document.getElementById('taskInput').value = '';
-            document.getElementById('priorityInput').value = 'Medium';
+            document.getElementById('task-input').value = '';
+            document.getElementById('priority-input').value = 'Medium';
         })
         .catch(error => {
             console.error('Error:', error);

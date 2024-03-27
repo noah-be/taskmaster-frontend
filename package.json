@@ -5,8 +5,8 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "start": "node startServer.js",
-    "nm": "nodemon -x 'clear && node startServer.js'",
+    "start": "node app.js",
+    "nm": "nodemon -x 'clear && node app.js'",
     "test": "jest --coverage",
     "sass": "sass --watch public/styles/scss:public/styles/css",
     "dev": "NODE_ENV=development concurrently \"npm run nm\" \"npm run sass\""
@@ -41,6 +41,37 @@
     "node-fetch": "^3.3.2",
     "path": "^0.12.7",
     "sass": "^1.71.1"
+  },
+  "nodemonConfig": {
+    "ext": "ejs,js,html"
+  },
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "sourceMap": true,
+    "instrument": true,
+    "include": [
+      "app.js"
+    ],
+    "exclude": [
+      "node_modules/",
+      "tests/"
+    ]
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "esmodules": true
+          }
+        }
+      ]
+    ],
+    "sourceMaps": "inline"
   },
   "devDependencies": {
     "@babel/cli": "^7.23.9",

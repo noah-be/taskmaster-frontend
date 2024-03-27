@@ -1,4 +1,4 @@
-#loginForm #loginBtn, #signUpBtn, .registerBtn, #homeBtn {
+#sign-up-btn, #register-btn, #home-btn, #login-btn {
   color: white;
   padding: 15px 20px;
   border: none;
@@ -10,39 +10,51 @@
   transition: background-color 0.3s;
 }
 
-#homeBtn {
+#login-btn {
+  background-color: #808080;
+  width: 100%;
+  margin-top: 10px;
+}
+#login-btn:hover {
+  background-color: #696969;
+}
+#login-btn:active {
+  background-color: #505050;
+}
+
+#home-btn {
   background-color: #2cf309;
   width: 100%;
 }
-#homeBtn:hover {
+#home-btn:hover {
   background-color: #1f760f;
 }
-#homeBtn:active {
+#home-btn:active {
   background-color: #085608;
 }
 
-.registerBtn {
+#register-btn {
   background-color: #42b72a;
   font-size: 18px;
 }
-.registerBtn:hover {
+#register-btn:hover {
   background-color: #369b22;
 }
-.registerBtn:active {
+#register-btn:active {
   background-color: #2d8220;
 }
 
-#signUpBtn {
+#sign-up-btn {
   background-color: rgb(80, 80, 231);
 }
-#signUpBtn:hover {
+#sign-up-btn:hover {
   background-color: rgb(50, 50, 205);
 }
-#signUpBtn:active {
+#sign-up-btn:active {
   background-color: blue;
 }
 
-#toggleGuidelinesBtn {
+#toggle-guidelines-btn {
   color: white;
   padding: 10px 15px;
   margin: 10px;
@@ -54,10 +66,10 @@
   transition: background-color 0.3s;
   background-color: rgb(80, 80, 231);
 }
-#toggleGuidelinesBtn:hover {
+#toggle-guidelines-btn:hover {
   background-color: rgb(50, 50, 205);
 }
-#toggleGuidelinesBtn:active {
+#toggle-guidelines-btn:active {
   background-color: blue;
 }
 
@@ -121,19 +133,8 @@
   border-radius: 4px;
   box-sizing: border-box;
 }
-#loginForm #loginBtn {
-  background-color: #808080;
-  width: 100%;
-  margin-top: 10px;
-}
-#loginForm #loginBtn:hover {
-  background-color: #696969;
-}
-#loginForm #loginBtn:active {
-  background-color: #505050;
-}
 
-.image {
+#todo-list-img {
   display: none;
 }
 

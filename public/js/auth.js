@@ -1,5 +1,5 @@
-var modal = document.getElementById('registerBox');
-var link = document.getElementById("registerBtn");
+var modal = document.getElementById('register-box');
+var link = document.getElementById("register-btn");
 var span = document.getElementsByClassName("close")[0];
 
 
@@ -32,11 +32,11 @@ window.onclick = function (event) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('signUpBtn').addEventListener('click', function (event) {
+    document.getElementById('sign-up-btn').addEventListener('click', function (event) {
         event.preventDefault();
 
-        const username = document.getElementById('registerUsername').value;
-        const password = document.getElementById('registerPassword').value;
+        const username = document.getElementById('register-username').value;
+        const password = document.getElementById('register-password').value;
 
 
         fetch('/api/auth/register', {
@@ -56,11 +56,11 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 
-    document.getElementById('loginBtn').addEventListener('click', function (event) {
+    document.getElementById('login-btn').addEventListener('click', function (event) {
         event.preventDefault();
 
-        const username = document.getElementById('loginUsername').value;
-        const password = document.getElementById('loginPassword').value;
+        const username = document.getElementById('login-username').value;
+        const password = document.getElementById('login-password').value;
 
         fetch('/api/auth/login', {
             method: 'POST',
@@ -86,9 +86,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 
-    document.getElementById('registerUsername').addEventListener('input', function () {
+    document.getElementById('register-username').addEventListener('input', function () {
         const username = this.value;
-        const feedbackElement = document.getElementById('usernameFeedback');
+        const feedbackElement = document.getElementById('username-feedback');
 
         if (username.length < 3) {
             feedbackElement.textContent = 'Username must be at least 3 characters';
@@ -116,9 +116,9 @@ document.addEventListener('DOMContentLoaded', function () {
         updateSignUpButtonState();
     });
 
-    document.getElementById('registerPassword').addEventListener('input', function () {
+    document.getElementById('register-password').addEventListener('input', function () {
         const password = this.value;
-        const passwordFeedback = document.getElementById('passwordFeedback');
+        const passwordFeedback = document.getElementById('password-feedback');
 
         // Check the length
         if (password.length < 8) {
@@ -153,8 +153,8 @@ document.addEventListener('DOMContentLoaded', function () {
         updateSignUpButtonState();
     });
 
-    document.getElementById('toggleGuidelinesBtn').addEventListener('click', function () {
-        const guidelines = document.getElementById('registrationGuidelines');
+    document.getElementById('toggle-guidelines-btn').addEventListener('click', function () {
+        const guidelines = document.getElementById('registration-guidelines');
         if (guidelines.style.display === 'none' || guidelines.style.display === '') {
             guidelines.style.display = 'block';
             this.textContent = 'Hide Registration Guidelines';
@@ -165,9 +165,9 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function updateSignUpButtonState() {
-        const usernameFeedback = document.getElementById('usernameFeedback').textContent;
-        const passwordFeedback = document.getElementById('passwordFeedback').textContent;
-        const signUpButton = document.getElementById('signUpBtn');
+        const usernameFeedback = document.getElementById('username-feedback').textContent;
+        const passwordFeedback = document.getElementById('password-feedback').textContent;
+        const signUpButton = document.getElementById('sign-up-btn');
 
         signUpButton.disabled = usernameFeedback !== '' || passwordFeedback !== '';
     }
