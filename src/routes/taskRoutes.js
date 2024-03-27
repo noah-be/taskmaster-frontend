@@ -1,5 +1,5 @@
 import express from 'express';
-import authenticateToken from '../middlewares/authenticateToken.js';
+import authenticateToken from '../middlewares/authTokenMiddleware.js';
 import TaskController from '../controllers/TaskController.js';
 
 

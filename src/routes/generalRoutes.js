@@ -1,7 +1,7 @@
 import express from 'express';
 import Task from '../models/TaskModel.js'
 import TaskController from '../controllers/TaskController.js';
-import authenticateToken from '../middlewares/authenticateToken.js';
+import authenticateToken from '../middlewares/authTokenMiddleware.js';
 
 const router = express.Router();
 

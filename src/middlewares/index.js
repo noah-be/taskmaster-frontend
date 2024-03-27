@@ -1,4 +1,5 @@
-import authenticateToken from './authenticateToken.js';
-import handle404 from './handle404.js';
+import authenticateToken from './authTokenMiddleware.js';
+import notFoundMiddleware from './notFoundMiddleware.js';
+import cspMiddleware from './cspMiddleware.js'
 
-export default { authenticateToken, handle404 };
+export default { authenticateToken, notFoundMiddleware, cspMiddleware };

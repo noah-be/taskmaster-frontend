@@ -14,16 +14,10 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3009;
 
+process.env.NODE_ENV === 'development' && app.use(morgan('dev'));
+
 app.set('view engine', 'ejs');
 app.set('etag', 'strong');
-
-
-app.use((req, res, next) => {
-    res.setHeader("Content-Security-Policy", "script-src 'nonce-source' http://localhost:3009 https://accounts.google.com https://apis.google.com");
-    next();
-});
-
-process.env.NODE_ENV === 'development' && app.use(morgan('dev'));
 
 app.use(cookieParser());
 app.use(express.json());
@@ -33,7 +27,7 @@ app.use(express.static("public"));
 app.use('/api/auth', routes.authRoutes);
 app.use('/api/task', routes.taskRoutes);
 app.use('/', routes.generalRoutes);
-app.use(mdws.handle404);
+app.use(mdws.notFoundMiddleware);
 
 
 
