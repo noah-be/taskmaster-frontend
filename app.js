@@ -3,6 +3,10 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import mongoose from 'mongoose';
 import morgan from 'morgan';
+import path from 'path';
+import {
+    fileURLToPath
+} from 'url';
 
 import routes from './src/routes/index.js';
 import mdws from './src/middlewares/index.js';
@@ -11,26 +15,34 @@ import dbConnect from './config/dbConnect.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
+const __filename = fileURLToPath(
+    import.meta.url);
+const __dirname = path.dirname(__filename);
 const app = express();
 const port = process.env.PORT || 3009;
+
+const viewsDirectories = [
+    path.join(__dirname, 'views/layouts'),
+    path.join(__dirname, 'views/pages'),
+    path.join(__dirname, 'views/partials')
+];
 
 process.env.NODE_ENV === 'development' && app.use(morgan('dev'));
 
 app.set('view engine', 'ejs');
 app.set('etag', 'strong');
-
+app.set('views', viewsDirectories);
 app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({
+    extended: true
+}));
 app.use(express.static("public"));
 app.use('/api/auth', routes.authRoutes);
 app.use('/api/task', routes.taskRoutes);
 app.use('/', routes.generalRoutes);
 app.use(mdws.notFoundMiddleware);
-
-
-
 
 dbConnect();
 

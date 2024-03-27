@@ -73,7 +73,7 @@
   background-color: blue;
 }
 
-#cookieConsentBanner {
+#cookie-consent-banner {
   display: none;
   flex-direction: column;
   align-items: center;
@@ -85,28 +85,28 @@
   text-align: center;
   border-top: 2px solid #e0c3a6;
 }
-#cookieConsentBanner .cookie-banner-content {
+#cookie-consent-banner .cookie-banner-content {
   display: flex;
   width: 100%;
   align-items: center;
 }
-#cookieConsentBanner .cookie-banner-content .cookie-banner-image {
+#cookie-consent-banner .cookie-banner-content .cookie-banner-image {
   width: 25%;
   object-fit: cover;
 }
-#cookieConsentBanner .cookie-banner-content .cookie-banner-text {
+#cookie-consent-banner .cookie-banner-content .cookie-banner-text {
   width: 75%;
   padding-left: 10px;
   text-align: left;
 }
-#cookieConsentBanner .cookie-banner-content .cookie-banner-text strong {
+#cookie-consent-banner .cookie-banner-content .cookie-banner-text strong {
   font-size: 18px;
 }
-#cookieConsentBanner .cookie-banner-content .cookie-banner-text p {
+#cookie-consent-banner .cookie-banner-content .cookie-banner-text p {
   margin: 5px 0;
   line-height: 1.4;
 }
-#cookieConsentBanner #acceptCookieConsent {
+#cookie-consent-banner #accept-cookie-consent {
   margin-top: 10px;
   padding: 10px 20px;
   background-color: #e0c3a6;
@@ -116,7 +116,7 @@
   cursor: pointer;
 }
 
-#loginForm {
+#login-form {
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
@@ -124,8 +124,8 @@
   margin: 10px;
   text-align: center;
 }
-#loginForm input[type=text],
-#loginForm input[type=password] {
+#login-form input[type=text],
+#login-form input[type=password] {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
@@ -192,6 +192,30 @@ p {
   margin-right: 10px;
 }
 
+@media only screen and (max-width: 768px) {
+  .topnav li {
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+}
+@media only screen and (min-width: 1100px) {
+  .home {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  #login-form {
+    width: 50%;
+  }
+  #todo-list-img {
+    display: block;
+    border-radius: 30px;
+    width: 50%;
+    padding: 10px;
+  }
+}
 #cat_404 {
   width: 30%;
   height: 30%;
@@ -265,29 +289,29 @@ p {
   cursor: pointer;
 }
 
-.registerBox {
+.register-box {
   display: flex;
   flex-direction: column;
 }
-.registerBox label {
+.register-box label {
   margin-bottom: 5px;
 }
-.registerBox input[type=text],
-.registerBox input[type=password] {
+.register-box input[type=text],
+.register-box input[type=password] {
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
   border-radius: 3px;
   font-size: 16px;
 }
-.registerBox .username-available {
+.register-box .username-available {
   color: green;
 }
-.registerBox .username-taken {
+.register-box .username-taken {
   color: red;
 }
 
-main {
+home {
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -299,7 +323,7 @@ h2 {
 }
 
 #taskInput,
-#priorityInput {
+#priority-input {
   display: flex;
   justify-content: space-between;
   align-items: center;

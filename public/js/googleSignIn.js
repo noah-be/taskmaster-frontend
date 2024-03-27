@@ -14,8 +14,12 @@ const signInWithServer = async (token) => {
     try {
         const serverResponse = await fetch('/api/auth/googleSignIn', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ token })
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                token
+            })
         });
 
         handleServerResponse(serverResponse);
@@ -41,8 +45,10 @@ const initGoogleSignIn = () => {
     });
 
     google.accounts.id.renderButton(
-        document.getElementById('google-btn'),
-        { theme: 'outline', size: 'large' }
+        document.getElementById('google-btn'), {
+            theme: 'outline',
+            size: 'large'
+        }
     );
 };
 

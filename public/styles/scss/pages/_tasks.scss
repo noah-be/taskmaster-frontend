@@ -1,4 +1,4 @@
-main {
+home {
     display: flex;
     flex-direction: column;
     padding: 10px;
@@ -10,7 +10,7 @@ h2 {
 }
 
 #taskInput,
-#priorityInput {
+#priority-input {
 
     display: flex;
     justify-content: space-between;
@@ -47,7 +47,8 @@ table {
     background-color: lightgreen;
 }
 
-@each $priority, $color in $priority-colors {
+@each $priority,
+$color in $priority-colors {
     .not-done-#{$priority} {
         background-color: $color;
     }

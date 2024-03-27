@@ -6,7 +6,7 @@ import authenticateToken from '../middlewares/authTokenMiddleware.js';
 const router = express.Router();
 
 const renderMainWithContent = (content) => (req, res) => {
-    res.render('main', { content });
+    res.render('main-layout', { content });
 };
 
 router.get('/', renderMainWithContent('home'));

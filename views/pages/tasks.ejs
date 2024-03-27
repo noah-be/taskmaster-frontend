@@ -1,40 +1,13 @@
 <main>
     <h2>To-Do List</h2>
+
     <input type="text" id="task-input" placeholder="Enter task...">
-    <select id="priority-input">
-        <option value="Low">Low</option>
-        <option value="Medium" selected>Medium</option>
-        <option value="High">High</option>
-    </select>
+
+    <%- include('_priority-input') %>
+
     <button id='add-task-btn' onclick="addTask()">Add Task</button>
-    <table id="todo-table">
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Due Date</th>
-            <th>Priority</th>
-            <th>Done</th>
-        </tr>
-        <% tasks.forEach((task, index)=> { %>
-            <tr onclick="editTask('<%= task._id %>')" id="task-row-<%= index %>"
-                class="<%= task.done ? 'done' : 'not-done-' + task.priority %>" data-priority="<%= task.priority %>">
-                <td>
-                    <%= task.title %>
-                </td>
-                <td>
-                    <%= task.description %>
-                </td>
-                <td>
-                    <%= task.dueDate %>
-                </td>
-                <td>
-                    <%= task.priority %>
-                </td>
-                <td><input type="checkbox" <%=task.done ? 'checked' : '' %> >
-                </td>
-            </tr>
-            <% }); %>
-    </table>
+
+    <%- include('_todo-table') %>
 
     <script src="/js/task.js"></script>
 

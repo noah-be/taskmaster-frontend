@@ -1,51 +1,13 @@
-<main class="content-container">
-    <form id="login-form" action="/login" method="POST">
-        <h2>Login</h2>
-        <div id="google-btn" style="width: 100%;"></div>
-        <input type="text" id="login-username" name="username" placeholder="Username" autocomplete="username">
-        <input type="password" id="login-password" name="password" placeholder="Password"
-            autocomplete="current-password">
-        <button id="login-btn">Log In</button>
-        <hr>
-        <button id="register-btn" class="register-btn">Create new account</button>
-    </form>
+<div class="home">
+
+    <%- include('_login-form') %>
 
     <img id="todo-list-img" src="images/todo_list.jpg" class="rounded-image"
         alt="A table on which there are plants, paper clips, a clipboard, an alarm clock and a ballpoint pen.">
-</main>
 
-<div id="register-box" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Create new account</h2>
-        <form id="register-form">
-            <button type="button" id="toggle-guidelines-btn">Show Registration Guidelines</button>
-            <div id="registration-guidelines" style="display: none;">
-                <h3>Registration Guidelines</h3>
-                <ul>
-                    <li><strong>Username:</strong>
-                        <ul>
-                            <li>Must be unique and not already in use</li>
-                            <li>At least 3 characters long</li>
-                        </ul>
-                    </li>
-                    <li><strong>Password:</strong>
-                        <ul>
-                            <li>At least 8 characters long.</li>
-                            <li>Include a mix of upper and lower case letters</li>
-                            <li>Include at least one number and one special symbol (e.g., !, @, #)</li>
-                            <li>Avoid using easily guessable information like your name or birthday</li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <div id="username-feedback"></div>
-            <input type="text" id="register-username" name="username" placeholder="Username" autocomplete="username">
-            <div id="password-feedback"></div>
-            <input type="password" id="register-password" name="password" placeholder="Password"
-                autocomplete="new-password">
-            <button id="sign-up-btn" disabled>Sign Up</button>
-    </div>
-    </form>
 </div>
-</div>
+
+
+<%- include('_register-box') %>
+
+<%- include('_cookie-banner') %>

@@ -18,7 +18,6 @@
             "**/tests": true,
             "**/workspaces": true,
             "**/*.json": true,
-            "*.js": true,
             "**/.*": true
         }
     }

@@ -10,7 +10,7 @@
 
 @include respond-to(large) {
 
-    .content-container {
+    .home {
         display: flex;
         flex-direction: row;
         align-items: center;
