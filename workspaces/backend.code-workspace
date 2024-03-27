@@ -1,22 +1,9 @@
 {
     "folders": [
         {
-            "path": "../"
+            "path": "../src"
         }
     ],
     "settings": {
-        "window.title": "backend",
-        "files.exclude": {
-            "**/coverage": true,
-            "**/Dockerfile": true,
-            "**/README.md": true,
-            "**/node_modules": true,
-            "**/tests": true,
-            "**/public": true,
-            "**/views": true,
-            "**/workspaces": true,
-            "**/*.json": true,
-            "**/*.js": false,
-            "**/.*": true
-        }
+        "window.title": "backend"
     }

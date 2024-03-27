@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"path": "../"
+		}
+	],
+	"settings": {
+		"window.title": "config",
+		"files.exclude": {
+            "**/node_modules": true,
+            "**/src": true,
+            "**/tests": true,
+            "**/public": true,
+            "**/views": true,
+            "**/coverage": true,
+            "**/public/styles/css": true,
+            "**/node_modules": true,
+            "**/models": true,
+            "**/routes": true,
+            "**/middlewares": true,
+            "**/controllers": true,
+            "**/tests": true
+            "**/app.js": true,
+        }
+	}
+}
