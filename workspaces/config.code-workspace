@@ -14,12 +14,10 @@
             "**/views": true,
             "**/coverage": true,
             "**/public/styles/css": true,
-            "**/node_modules": true,
             "**/models": true,
             "**/routes": true,
             "**/middlewares": true,
             "**/controllers": true,
-            "**/tests": true
             "**/app.js": true,
         }
 	}
