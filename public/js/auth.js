@@ -1,42 +1,46 @@
-var modal = document.getElementById('register-box');
-var link = document.getElementById("register-btn");
-var span = document.getElementsByClassName("close")[0];
+document.addEventListener('DOMContentLoaded', function() {
 
+    var modal = document.getElementById('register-box');
+    var link = document.getElementById("register-btn");
+    var span = document.getElementsByClassName("close")[0];
 
-function toggleModal() {
-    var elementsToBlur = document.querySelectorAll('main, header, footer');
+    // #region test
 
-    if (modal.style.display === 'none' || modal.style.display === '') {
-        modal.style.display = 'block';
-        elementsToBlur.forEach(el => el.classList.add('blurred-background'));
-    } else {
-        modal.style.display = 'none';
-        elementsToBlur.forEach(el => el.classList.remove('blurred-background'));
+    function toggleModal() {
+        var elementsToBlur = document.querySelectorAll('main, header, footer');
+
+        if (modal.style.display === 'none' || modal.style.display === '') {
+            modal.style.display = 'block';
+            elementsToBlur.forEach(el => el.classList.add('blurred-background'));
+        } else {
+            modal.style.display = 'none';
+            elementsToBlur.forEach(el => el.classList.remove('blurred-background'));
+        }
     }
-}
 
-link.onclick = function(event) {
-    event.preventDefault();
-    toggleModal();
-}
-
-span.onclick = function() {
-    toggleModal();
-}
-
-window.onclick = function(event) {
-    if (event.target == modal) {
+    link.onclick = function(event) {
+        event.preventDefault();
         toggleModal();
     }
-}
 
-document.addEventListener('DOMContentLoaded', function() {
+    span.onclick = function() {
+        toggleModal();
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            toggleModal();
+        }
+    }
+
+    // #endregion
+
+
     document.getElementById('sign-up-btn').addEventListener('click', function(event) {
         event.preventDefault();
 
         const username = document.getElementById('register-username').value;
         const password = document.getElementById('register-password').value;
-
 
         fetch('/api/auth/register', {
                 method: 'POST',
@@ -51,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                window.location.href = '/tasks';
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -76,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error('Login failed');
+                    throw new Error(response.status);
                 }
                 return response.text();
             })
@@ -100,7 +103,6 @@ document.addEventListener('DOMContentLoaded', function() {
             feedbackElement.style.color = 'red';
             return;
         }
-
 
         fetch(`/api/auth/check-username?username=${encodeURIComponent(username)}`)
             .then(response => response.json())

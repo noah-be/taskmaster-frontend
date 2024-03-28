@@ -1,9 +1,7 @@
 {
-    "folders": [
-        {
-            "path": "../"
-        }
-    ],
+    "folders": [{
+        "path": "../"
+    }],
     "settings": {
         "window.title": "backend",
         "files.exclude": {
@@ -19,6 +17,7 @@
             "**/workspaces": true,
             "**/*.json": true,
             "**/.*": true
-        }
+        },
+        "editor.wordWrapColumn": 120
     }
 }

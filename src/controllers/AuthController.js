@@ -1,23 +1,7 @@
 import UserModel from '../models/UserModel.js';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
 import {
     OAuth2Client
 } from 'google-auth-library';
-import {
-    createUser,
-    validateUser,
-    handleUserFromGoogle
-} from '../utils/userUtils.js';
-import {
-    createToken,
-    verifyGoogleToken
-} from '../utils/tokenUtils.js';
-import {
-    setJwtCookie,
-    finalizeAuthentication
-} from '../utils/authUtils.js';
-
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
@@ -36,11 +20,9 @@ const AuthController = {
                 });
             }
 
-            const user = await createUser(username, password);
-            const token = createToken(user._id);
+            const user = await userUtility.createUser(username, password);
+            finalizeAuthentication(res, user._id);
 
-            setJwtCookie(res, token);
-            res.redirect('/tasks');
         } catch (error) {
             res.status(500).json({
                 message: 'Error registering user',
@@ -48,13 +30,13 @@ const AuthController = {
             });
         }
     },
-
     async login(req, res) {
         try {
             const {
                 username,
                 password
             } = req.body;
+
             const user = await validateUser(username, password);
 
             if (!user) {
@@ -63,9 +45,8 @@ const AuthController = {
                 });
             }
 
-            const token = createToken(user._id);
-            setJwtCookie(res, token);
-            res.redirect('/tasks');
+            finalizeAuthentication(res, user._id);
+
         } catch (error) {
             res.status(500).json({
                 message: 'Login failed',
@@ -73,7 +54,6 @@ const AuthController = {
             });
         }
     },
-
     async googleSignIn(req, res) {
         try {
             const {
@@ -81,10 +61,7 @@ const AuthController = {
             } = req.body;
             const payload = await verifyGoogleToken(theToken, client);
             const user = await handleUserFromGoogle(payload);
-
-            const token = createToken(user._id);
-            setJwtCookie(res, token);
-            res.redirect('/tasks');
+            finalizeAuthentication(res, user._id);
         } catch (error) {
             res.status(401).json({
                 message: 'Authentication failed',
