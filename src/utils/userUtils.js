@@ -5,12 +5,16 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const checkUsername = async (username) => {
-    const existingUser = await UserModel.findOne({ username });
+    const existingUser = await UserModel.findOne({
+        username
+    });
     return Boolean(existingUser);
 };
 
 const validateUser = async (username, password) => {
-    const user = await UserModel.findOne({ username });
+    const user = await UserModel.findOne({
+        username
+    });
     if (!user) {
         return null;
     }
@@ -35,11 +39,18 @@ const createUser = async (username, password) => {
 };
 
 const generateJwtToken = (user) => {
-    return jwt.sign({ userId: user._id, username: user.username }, 'YOUR_SECRET_KEY', { expiresIn: '1h' });
+    return jwt.sign({
+        userId: user._id,
+        username: user.username
+    }, 'YOUR_SECRET_KEY', {
+        expiresIn: '1h'
+    });
 };
 
 const handleUserFromGoogle = async (googleUserData) => {
-    let user = await UserModel.findOne({ googleId: googleUserData.googleId });
+    let user = await UserModel.findOne({
+        googleId: googleUserData.googleId
+    });
 
     if (!user) {
         user = new UserModel({
@@ -54,9 +65,10 @@ const handleUserFromGoogle = async (googleUserData) => {
     return user;
 };
 
-const setJwtCookie = (user, res) => {
-    const token = generateJwtToken(user);
-    res.cookie('jwt', token, { httpOnly: true, maxAge: 3600000 }); // 1 hour
+export {
+    createUser,
+    validateUser,
+    handleUserFromGoogle,
+    checkUsername,
+    generateJwtToken
 };
-
-export { createUser, validateUser, handleUserFromGoogle, setJwtCookie, checkUsername, generateJwtToken };

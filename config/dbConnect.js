@@ -3,10 +3,7 @@ import mongoose from 'mongoose';
 const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/todoApp';
 
 const dbConnect = () => {
-    mongoose.connect(mongoURI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        })
+    mongoose.connect(mongoURI)
         .then(() => {
             console.log(`\x1b[32m[MongoDB] Connected to ${mongoURI}\x1b[0m`);
         })

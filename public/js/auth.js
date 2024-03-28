@@ -3,7 +3,6 @@ var link = document.getElementById("register-btn");
 var span = document.getElementsByClassName("close")[0];
 
 
-
 function toggleModal() {
     var elementsToBlur = document.querySelectorAll('main, header, footer');
 
@@ -16,23 +15,23 @@ function toggleModal() {
     }
 }
 
-link.onclick = function (event) {
+link.onclick = function(event) {
     event.preventDefault();
     toggleModal();
 }
 
-span.onclick = function () {
+span.onclick = function() {
     toggleModal();
 }
 
-window.onclick = function (event) {
+window.onclick = function(event) {
     if (event.target == modal) {
         toggleModal();
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('sign-up-btn').addEventListener('click', function (event) {
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('sign-up-btn').addEventListener('click', function(event) {
         event.preventDefault();
 
         const username = document.getElementById('register-username').value;
@@ -40,12 +39,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
         fetch('/api/auth/register', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-        })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username,
+                    password
+                }),
+            })
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
@@ -56,19 +58,22 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     });
 
-    document.getElementById('login-btn').addEventListener('click', function (event) {
+    document.getElementById('login-btn').addEventListener('click', function(event) {
         event.preventDefault();
 
         const username = document.getElementById('login-username').value;
         const password = document.getElementById('login-password').value;
 
         fetch('/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-        })
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username,
+                    password
+                }),
+            })
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Login failed');
@@ -86,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     });
 
-    document.getElementById('register-username').addEventListener('input', function () {
+    document.getElementById('register-username').addEventListener('input', function() {
         const username = this.value;
         const feedbackElement = document.getElementById('username-feedback');
 
@@ -116,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
         updateSignUpButtonState();
     });
 
-    document.getElementById('register-password').addEventListener('input', function () {
+    document.getElementById('register-password').addEventListener('input', function() {
         const password = this.value;
         const passwordFeedback = document.getElementById('password-feedback');
 
@@ -143,7 +148,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Check for special characters
         if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
-            passwordFeedback.textContent = 'Password must include at least one special symbol like !, @, #, etc.';
+            passwordFeedback.textContent =
+                'Password must include at least one special symbol like !, @, #, etc.';
             passwordFeedback.style.color = 'red';
             return;
         }
@@ -153,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
         updateSignUpButtonState();
     });
 
-    document.getElementById('toggle-guidelines-btn').addEventListener('click', function () {
+    document.getElementById('toggle-guidelines-btn').addEventListener('click', function() {
         const guidelines = document.getElementById('registration-guidelines');
         if (guidelines.style.display === 'none' || guidelines.style.display === '') {
             guidelines.style.display = 'block';
@@ -172,8 +178,4 @@ document.addEventListener('DOMContentLoaded', function () {
         signUpButton.disabled = usernameFeedback !== '' || passwordFeedback !== '';
     }
 
-
 });
-
-
-

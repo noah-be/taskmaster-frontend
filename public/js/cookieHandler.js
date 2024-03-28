@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function() {
     var cookieConsentBanner = document.getElementById("cookie-consent-banner");
     var acceptCookieConsent = document.getElementById("accept-cookie-consent");
 
@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
         cookieConsentBanner.style.display = "block";
     }
 
-    acceptCookieConsent.onclick = function () {
+    acceptCookieConsent.onclick = function() {
         setCookie("cookie-consent", "accepted", 7);
         cookieConsentBanner.style.display = "none";
     };
@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
             date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
             expires = "; expires=" + date.toUTCString();
         }
-        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        var cookieString = name + "=" + (value || "") + expires + "; path=/; SameSite=None; Secure";
+        document.cookie = cookieString;
     }
 
     function getCookie(name) {

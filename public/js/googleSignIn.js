@@ -37,19 +37,23 @@ const handleServerResponse = (serverResponse) => {
     }
 };
 
-// Initialize Google Sign In button
-const initGoogleSignIn = () => {
-    google.accounts.id.initialize({
-        client_id: '116568495505-3bnm8atka0uvirhu9rf5k4ol631n69a9.apps.googleusercontent.com',
-        callback: onSignIn
-    });
 
-    google.accounts.id.renderButton(
-        document.getElementById('google-btn'), {
-            theme: 'outline',
-            size: 'large'
-        }
-    );
-};
+function initGoogleSignIn() {
+    gapi.load('auth2', function() {
+        var auth2 = gapi.auth2.init({
+            client_id: '116568495505-3bnm8atka0uvirhu9rf5k4ol631n69a9.apps.googleusercontent.com',
+        });
+
+        auth2.attachClickHandler('sign-in-button', {},
+            function(googleUser) {
+                console.log('Google User signed in:', googleUser.getBasicProfile().getName());
+            },
+            function(error) {
+                console.error('Error signing in:', error);
+            }
+        );
+    });
+}
+
 
 window.onload = initGoogleSignIn;
