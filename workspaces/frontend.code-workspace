@@ -9,7 +9,6 @@
         "files.exclude": {
             "**/src": true,
             "**/config": true,
-            "**/views": true,
             "**/coverage": true,
             "**/public/styles/css": true,
             "**/Dockerfile": true,
