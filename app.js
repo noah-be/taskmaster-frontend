@@ -40,10 +40,11 @@ app.use('/api/auth', routes.authRoutes);
 app.use('/api/task', routes.taskRoutes);
 app.use('/', routes.generalRoutes);
 app.use(mdws.notFoundMiddleware);
+app.use(mdws.errorHandlingMiddleware);
 
 dbConnect();
 
-app.listen(port, function () {
+app.listen(port, function() {
     const serverDomain = process.env.SERVER_DOMAIN || 'localhost';
     const currentTime = new Date().toLocaleTimeString('en-US', {
         hour: '2-digit',
