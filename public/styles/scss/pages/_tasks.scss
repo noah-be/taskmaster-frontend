@@ -1,6 +1,4 @@
-home {
-    display: flex;
-    flex-direction: column;
+main {
     padding: 10px;
 }
 
@@ -9,21 +7,53 @@ h2 {
     margin-bottom: 20px;
 }
 
-#taskInput,
-#priority-input {
 
+
+
+#new-task-form {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+    gap: 10px;
+
+    #task-input,
+    #priority-input,
+    #add-task-btn {
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        line-height: 1;
+        box-sizing: border-box;
+        flex-grow: 1;
+    }
+
+    #task-input {
+        flex-basis: 70%;
+    }
+
+    #priority-input {
+        flex-basis: 15%;
+    }
+
+    #add-task-btn {
+        flex-basis: 15%;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #45a049;
+        }
+    }
 }
 
 
-table {
+
+
+
+
+
+#todo-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;

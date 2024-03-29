@@ -1,13 +1,9 @@
 <main>
-  <h2>To-Do List</h2>
+    <h2>To-Do List</h2>
 
-  <input type="text" id="task-input" placeholder="Enter task..." />
+    <%- include('_new-task-form') %>
 
-  <%- include('_priority-input') %>
+    <%- include('_todo-table') %>
 
-  <button id="add-task-btn" onclick="addTask()">Add Task</button>
-
-  <%- include('_todo-table') %>
-
-  <script src="/js/task.js"></script>
+    <script src="/js/task.js"></script>
 </main>

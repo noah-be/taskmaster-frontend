@@ -1,3 +1,258 @@
+footer {
+  margin-top: auto;
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding: 10px;
+}
+header .user-profile-icon img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+header #profile-button {
+  width: 50px;
+  height: 50px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: lightgray;
+  min-height: 100vh;
+  font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+p {
+  padding: 10px;
+}
+
+.topnav a {
+  color: #fff;
+  text-decoration: none;
+  border: 5px solid #fff;
+  padding: 10px 15px;
+}
+.topnav ul {
+  list-style-type: none;
+  padding: 0;
+}
+.topnav li {
+  display: inline;
+  margin-right: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .topnav li {
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+}
+@media only screen and (min-width: 1100px) {
+  .home {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  #login-form {
+    width: 50%;
+  }
+  #todo-list-img {
+    display: block;
+    border-radius: 30px;
+    width: 50%;
+    padding: 10px;
+  }
+}
+#cat_404 {
+  width: 30%;
+  height: 30%;
+  margin-bottom: 10px;
+}
+
+.blurred-background {
+  filter: blur(5px);
+  transition: filter 2s ease;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-content h2 {
+  margin-top: 0;
+}
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+}
+.modal-content form label {
+  margin-bottom: 5px;
+}
+.modal-content form input[type=text],
+.modal-content form input[type=password] {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.modal .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.modal .close:hover, .modal .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover, .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.register-box {
+  display: flex;
+  flex-direction: column;
+}
+.register-box label {
+  margin-bottom: 5px;
+}
+.register-box input[type=text],
+.register-box input[type=password] {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 16px;
+}
+.register-box .username-available {
+  color: green;
+}
+.register-box .username-taken {
+  color: red;
+}
+
+main {
+  padding: 10px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#new-task-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#new-task-form #task-input,
+#new-task-form #priority-input,
+#new-task-form #add-task-btn {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  line-height: 1;
+  box-sizing: border-box;
+  flex-grow: 1;
+}
+#new-task-form #task-input {
+  flex-basis: 70%;
+}
+#new-task-form #priority-input {
+  flex-basis: 15%;
+}
+#new-task-form #add-task-btn {
+  flex-basis: 15%;
+  background-color: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+#new-task-form #add-task-btn:hover {
+  background-color: #45a049;
+}
+
+#todo-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+#todo-table,
+#todo-table th,
+#todo-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+#todo-table th {
+  background-color: #f2f2f2;
+}
+
+.done {
+  background-color: lightgreen;
+}
+
+.not-done-high {
+  background-color: #f70000;
+}
+
+.not-done-normal {
+  background-color: #ffd000;
+}
+
+.not-done-low {
+  background-color: #01aeff;
+}
+
 #sign-up-btn, #create-new-account-btn, #home-btn, #login-btn {
   color: white;
   padding: 15px 20px;
@@ -141,231 +396,6 @@
 hr {
   margin-top: 20px;
   margin-bottom: 20px;
-}
-
-footer {
-  margin-top: auto;
-  background-color: #333;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-}
-
-header {
-  background-color: #333;
-  color: #fff;
-  display: flex;
-  justify-content: space-between;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: lightgray;
-  min-height: 100vh;
-  font-size: 16px;
-}
-
-h1,
-h2,
-h3,
-p {
-  padding: 10px;
-}
-
-.topnav a {
-  color: #fff;
-  text-decoration: none;
-  border: 1px solid #fff;
-  padding: 5px 10px;
-}
-.topnav ul {
-  list-style-type: none;
-  padding: 0;
-}
-.topnav li {
-  display: inline;
-  margin-right: 10px;
-}
-
-@media only screen and (max-width: 768px) {
-  .topnav li {
-    display: block;
-    margin-bottom: 10px;
-    padding: 5px;
-  }
-}
-@media only screen and (min-width: 1100px) {
-  .home {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-  #login-form {
-    width: 50%;
-  }
-  #todo-list-img {
-    display: block;
-    border-radius: 30px;
-    width: 50%;
-    padding: 10px;
-  }
-}
-#cat_404 {
-  width: 30%;
-  height: 30%;
-  margin-bottom: 10px;
-}
-
-.blurred-background {
-  filter: blur(5px);
-  transition: filter 2s ease;
-}
-
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 2;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-.modal-content {
-  background-color: #fefefe;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 500px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.modal-content h2 {
-  margin-top: 0;
-}
-.modal-content form {
-  display: flex;
-  flex-direction: column;
-}
-.modal-content form label {
-  margin-bottom: 5px;
-}
-.modal-content form input[type=text],
-.modal-content form input[type=password] {
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-.modal .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-.modal .close:hover, .modal .close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-.close:hover, .close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.register-box {
-  display: flex;
-  flex-direction: column;
-}
-.register-box label {
-  margin-bottom: 5px;
-}
-.register-box input[type=text],
-.register-box input[type=password] {
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  font-size: 16px;
-}
-.register-box .username-available {
-  color: green;
-}
-.register-box .username-taken {
-  color: red;
-}
-
-home {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-}
-
-h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-#taskInput,
-#priority-input {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  border-radius: 10px;
-  overflow: hidden;
-}
-table,
-table th,
-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: left;
-}
-table th {
-  background-color: #f2f2f2;
-}
-
-.done {
-  background-color: lightgreen;
-}
-
-.not-done-high {
-  background-color: #f70000;
-}
-
-.not-done-normal {
-  background-color: #ffd000;
-}
-
-.not-done-low {
-  background-color: #01aeff;
 }
 
 /*# sourceMappingURL=main.css.map */

@@ -7,8 +7,7 @@
         <th>Done</th>
     </tr>
     <% tasks.forEach((task, index)=> { %>
-    <tr onclick="editTask('<%= task._id %>')" id="task-row-<%= index %>"
-        class="<%= task.done ? 'done' : 'not-done-' + task.priority %>" data-priority="<%= task.priority %>">
+    <tr onclick="editTask('<%= task._id %>')" id="task-row-<%= index %>" class="<%= task.done ? 'done' : 'not-done-' + task.priority %>" data-priority="<%= task.priority %>">
         <td>
             <%= task.title %>
         </td>
