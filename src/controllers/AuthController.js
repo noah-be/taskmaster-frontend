@@ -29,11 +29,7 @@ const AuthController = {
         }
         try {
             const user = await createUser(username, password);
-            res.status(201).json({
-                message: 'User successfully registered',
-                userId: user._id
-            });
-            finalizeAuthentication(res, user._id);
+            await finalizeAuthentication(res, user._id);
         } catch (error) {
             next(error);
         }
@@ -50,10 +46,6 @@ const AuthController = {
                     message: 'Invalid credentials'
                 });
             }
-            res.status(200).json({
-                message: 'Login successful',
-                userId: user._id
-            });
             finalizeAuthentication(res, user._id);
         } catch (error) {
             next(error);

@@ -5,7 +5,12 @@ function errorHandlingMiddleware(error, req, res, next) {
         errorResponse.error.stack = error.stack;
     }
 
-    const statusCode = error.statusCode || 500;
+    const errorResponse = {
+        error: {
+            message: error.message || 'Internal Server Error',
+        }
+    };
+
     const message = error.message || 'Internal Server Error';
 
     res.status(statusCode).json({
