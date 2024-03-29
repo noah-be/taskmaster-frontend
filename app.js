@@ -1,6 +1,7 @@
 import express from 'express';
 import morgan from 'morgan';
 import path from 'path';
+import cookieParser from 'cookie-parser';
 import {
     fileURLToPath
 } from 'url';
@@ -29,6 +30,7 @@ process.env.NODE_ENV === 'development' && app.use(morgan('dev'));
 app.set('view engine', 'ejs');
 app.set('etag', 'strong');
 app.set('views', viewsDirectories);
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({
     extended: true
@@ -41,7 +43,7 @@ app.use(mdws.notFoundMiddleware);
 
 dbConnect();
 
-app.listen(port, function() {
+app.listen(port, function () {
     const serverDomain = process.env.SERVER_DOMAIN || 'localhost';
     const currentTime = new Date().toLocaleTimeString('en-US', {
         hour: '2-digit',

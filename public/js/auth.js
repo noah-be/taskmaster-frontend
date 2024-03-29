@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
 
     var modal = document.getElementById('register-box');
     var link = document.getElementById("register-btn");
@@ -18,16 +18,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    link.onclick = function(event) {
+    link.onclick = function (event) {
         event.preventDefault();
         toggleModal();
     }
 
-    span.onclick = function() {
+    span.onclick = function () {
         toggleModal();
     }
 
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modal) {
             toggleModal();
         }
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // #endregion
 
 
-    document.getElementById('sign-up-btn').addEventListener('click', function(event) {
+    document.getElementById('sign-up-btn').addEventListener('click', function (event) {
         event.preventDefault();
 
         const username = document.getElementById('register-username').value;
@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.json())
             .then(data => {
+                window.location.href = data.redirectUrl;
                 console.log('Success:', data);
             })
             .catch((error) => {
@@ -61,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
     });
 
-    document.getElementById('login-btn').addEventListener('click', function(event) {
+    document.getElementById('login-btn').addEventListener('click', function (event) {
         event.preventDefault();
 
         const username = document.getElementById('login-username').value;
@@ -94,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     });
 
-    document.getElementById('register-username').addEventListener('input', function() {
+    document.getElementById('register-username').addEventListener('input', function () {
         const username = this.value;
         const feedbackElement = document.getElementById('username-feedback');
 
@@ -123,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateSignUpButtonState();
     });
 
-    document.getElementById('register-password').addEventListener('input', function() {
+    document.getElementById('register-password').addEventListener('input', function () {
         const password = this.value;
         const passwordFeedback = document.getElementById('password-feedback');
 
@@ -161,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateSignUpButtonState();
     });
 
-    document.getElementById('toggle-guidelines-btn').addEventListener('click', function() {
+    document.getElementById('toggle-guidelines-btn').addEventListener('click', function () {
         const guidelines = document.getElementById('registration-guidelines');
         if (guidelines.style.display === 'none' || guidelines.style.display === '') {
             guidelines.style.display = 'block';

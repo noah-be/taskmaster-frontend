@@ -1,7 +1,10 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 
-const { Schema, model } = mongoose;
+const {
+    Schema,
+    model
+} = mongoose;
 
 const userSchema = new Schema({
     username: {
@@ -12,7 +15,9 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required: function () { return !this.isGoogleAccount; }
+        required: function () {
+            return !this.isGoogleAccount;
+        }
     },
     isGoogleAccount: {
         type: Boolean,
@@ -23,7 +28,9 @@ const userSchema = new Schema({
         unique: true,
         sparse: true
     }
-}, { timestamps: true });
+}, {
+    timestamps: true
+});
 
 userSchema.pre('save', async function (next) {
     if (this.isModified('password') && !this.isGoogleAccount) {

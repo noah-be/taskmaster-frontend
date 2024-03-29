@@ -1,9 +1,19 @@
-import UserModel from '../models/UserModel.js';
 import {
     OAuth2Client
 } from 'google-auth-library';
+import {
+    createUser,
+    validateUser
+} from '../utils/userUtils.js';
+import {
+    finalizeAuthentication,
+    handleUserFromGoogle
+} from '../utils/authUtils.js';
+import {
+    verifyGoogleToken
+} from '../utils/tokenUtils.js';
 
-const JWT_SECRET = process.env.JWT_SECRET;
+
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const client = new OAuth2Client(GOOGLE_CLIENT_ID);
 
@@ -19,10 +29,8 @@ const AuthController = {
                     message: 'Username and password are required'
                 });
             }
-
-            const user = await userUtility.createUser(username, password);
+            const user = await createUser(username, password);
             finalizeAuthentication(res, user._id);
-
         } catch (error) {
             res.status(500).json({
                 message: 'Error registering user',
@@ -68,29 +76,7 @@ const AuthController = {
                 error: error.message
             });
         }
-    },
-    async checkUsername(req, res) {
-        try {
-            const {
-                username
-            } = req.query;
-            const userExists = await UserModel.findOne({
-                username
-            });
-            if (userExists) {
-                return res.json({
-                    isAvailable: false
-                });
-            } else {
-                return res.json({
-                    isAvailable: true
-                });
-            }
-        } catch (error) {
-            console.error(error);
-            res.status(500).send('Internal Server Error');
-        }
-    },
+    }
 };
 
 export default AuthController;
