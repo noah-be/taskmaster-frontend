@@ -1,4 +1,4 @@
-#sign-up-btn, #register-btn, #home-btn, #login-btn {
+#sign-up-btn, #create-new-account-btn, #home-btn, #login-btn {
   color: white;
   padding: 15px 20px;
   border: none;
@@ -33,14 +33,14 @@
   background-color: #085608;
 }
 
-#register-btn {
+#create-new-account-btn {
   background-color: #42b72a;
   font-size: 18px;
 }
-#register-btn:hover {
+#create-new-account-btn:hover {
   background-color: #369b22;
 }
-#register-btn:active {
+#create-new-account-btn:active {
   background-color: #2d8220;
 }
 

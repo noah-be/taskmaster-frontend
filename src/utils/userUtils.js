@@ -1,24 +1,20 @@
 import UserModel from '../models/UserModel.js';
 import bcrypt from 'bcryptjs';
-
 const createUser = async (username, password) => {
     const hashedPassword = await bcrypt.hash(password, 12);
     const newUser = new UserModel({
         username,
         password: hashedPassword
     });
-
     await newUser.save();
     return newUser;
 };
-
 const checkUsername = async (username) => {
     const existingUser = await UserModel.findOne({
         username
     });
     return Boolean(existingUser);
 };
-
 const validateUser = async (username, password) => {
     const user = await UserModel.findOne({
         username
@@ -26,15 +22,12 @@ const validateUser = async (username, password) => {
     if (!user) {
         return null;
     }
-
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = bcrypt.compare(password, user.password);
     if (!isMatch) {
         return null;
     }
-
     return user;
 };
-
 export {
     createUser,
     checkUsername,

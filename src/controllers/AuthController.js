@@ -12,10 +12,8 @@ import {
 import {
     verifyGoogleToken
 } from '../utils/tokenUtils.js';
-
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const client = new OAuth2Client(GOOGLE_CLIENT_ID);
-
 const AuthController = {
     async register(req, res, next) {
         const {
@@ -39,14 +37,14 @@ const AuthController = {
             username,
             password
         } = req.body;
+        if (!username || !password) {
+            return res.status(400).json({
+                message: 'Username and password are required'
+            });
+        }
         try {
             const user = await validateUser(username, password);
-            if (!user) {
-                return res.status(400).json({
-                    message: 'Invalid credentials'
-                });
-            }
-            finalizeAuthentication(res, user._id);
+            await finalizeAuthentication(res, user._id);
         } catch (error) {
             next(error);
         }
@@ -68,5 +66,4 @@ const AuthController = {
         }
     }
 };
-
 export default AuthController;

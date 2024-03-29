@@ -9,7 +9,6 @@ const onSignIn = async (googleUser) => {
         console.error('Error during Google Sign In:', error);
     }
 };
-
 const signInWithServer = async (token) => {
     try {
         const serverResponse = await fetch('/api/auth/googleSignIn', {
@@ -21,13 +20,11 @@ const signInWithServer = async (token) => {
                 token
             })
         });
-
         handleServerResponse(serverResponse);
     } catch (error) {
         console.error('Network error:', error);
     }
 };
-
 const handleServerResponse = (serverResponse) => {
     if (serverResponse.ok) {
         console.log('Sign in successful');
@@ -37,13 +34,11 @@ const handleServerResponse = (serverResponse) => {
     }
 };
 
-
 function initGoogleSignIn() {
     gapi.load('auth2', function() {
         var auth2 = gapi.auth2.init({
             client_id: '116568495505-3bnm8atka0uvirhu9rf5k4ol631n69a9.apps.googleusercontent.com',
         });
-
         auth2.attachClickHandler('sign-in-button', {},
             function(googleUser) {
                 console.log('Google User signed in:', googleUser.getBasicProfile().getName());
@@ -54,6 +49,4 @@ function initGoogleSignIn() {
         );
     });
 }
-
-
 window.onload = initGoogleSignIn;

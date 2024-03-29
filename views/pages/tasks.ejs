@@ -1,14 +1,13 @@
 <main>
-    <h2>To-Do List</h2>
+  <h2>To-Do List</h2>
 
-    <input type="text" id="task-input" placeholder="Enter task...">
+  <input type="text" id="task-input" placeholder="Enter task..." />
 
-    <%- include('_priority-input') %>
+  <%- include('_priority-input') %>
 
-    <button id='add-task-btn' onclick="addTask()">Add Task</button>
+  <button id="add-task-btn" onclick="addTask()">Add Task</button>
 
-    <%- include('_todo-table') %>
+  <%- include('_todo-table') %>
 
-    <script src="/js/task.js"></script>
-
+  <script src="/js/task.js"></script>
 </main>
