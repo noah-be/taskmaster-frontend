@@ -3,41 +3,66 @@ document.addEventListener('DOMContentLoaded', function () {
     addButton.addEventListener('click', addTask);
 
     async function addTask() {
+        const taskTitleInput = document.getElementById('task-input');
+        const taskPrioritySelect = document.getElementById('priority-input');
+
+        if (taskTitleInput.value.trim() === '') {
+            alert('Please enter a task title.');
+            return;
+        }
+
+        addButton.disabled = true;
+
         const taskData = {
-            title: document.getElementById('task-input').value,
-            priority: document.getElementById('priority-input').value
+            title: taskTitleInput.value,
+            priority: taskPrioritySelect.value
         };
 
-        fetch('/api/task/add', {
-                method: 'POST',
+        performFetch('/api/task/add', 'POST', JSON.stringify(taskData))
+            .then(data => {
+                updateTaskTable();
+                taskTitleInput.value = '';
+                taskPrioritySelect.value = 'Medium';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert(error.message);
+            })
+            .finally(() => {
+                addButton.disabled = false;
+            });
+    }
+
+    function updateTaskTable() {
+        fetch('/api/task/table', {})
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.text();
+            })
+            .then(html => {
+                document.getElementById('todo-table-container').innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Error fetching the task table:', error);
+            });
+    }
+
+    async function performFetch(url, method, body) {
+        return fetch(url, {
+                method: method,
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(taskData)
+                body: body
             })
             .then(response => {
                 console.log("Response: " + response.statusText);
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error(`HTTP error! Status: ${response.status}`);
                 }
                 return response.json();
-            })
-            .then(data => {
-                console.log('Task added:', data);
-                const table = document.getElementById('todo-table').getElementsByTagName('tbody')[0];
-                const newRow = table.insertRow();
-
-                const titleCell = newRow.insertCell();
-                titleCell.textContent = data.title;
-
-                const priorityCell = newRow.insertCell();
-                priorityCell.textContent = data.priority;
-
-                document.getElementById('task-input').value = '';
-                document.getElementById('priority-input').value = 'Medium';
-            })
-            .catch(error => {
-                console.error('Error:', error);
             });
     }
 });

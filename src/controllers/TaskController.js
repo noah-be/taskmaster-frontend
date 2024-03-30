@@ -1,6 +1,19 @@
 import Task from '../models/TaskModel.js';
 
 const TaskController = {
+    getTaskTable: async (req, res) => {
+        try {
+            const tasks = await Task.find({
+                user: req.user._id
+            });
+            res.render('_todo-table', {
+                tasks: tasks
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+        }
+    },
     async addTask(req, res) {
         console.log("Request body:", req.body);
         try {

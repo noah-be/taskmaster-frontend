@@ -5,6 +5,7 @@ import TaskController from '../controllers/TaskController.js';
 
 const router = express.Router();
 
+router.get('/table', authenticateToken, TaskController.getTaskTable);
 router.post('/add', authenticateToken, TaskController.addTask);
 router.get('/getAll', authenticateToken, TaskController.getAllTasks);
 router.get('/:taskId', authenticateToken, TaskController.getTaskById);
