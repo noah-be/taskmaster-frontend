@@ -2,14 +2,34 @@ import Task from '../models/TaskModel.js';
 
 const TaskController = {
     async addTask(req, res) {
+        console.log("Request body:", req.body);
         try {
             const {
                 title,
                 priority
             } = req.body;
 
-            const description = "Default description";
-            const dueDate = new Date();
+            if (!title) {
+                return res.status(400).json({
+                    error: 'Title is required'
+                });
+            }
+            if (!['High', 'Medium', 'Low'].includes(priority)) {
+                return res.status(400).json({
+                    error: 'Invalid priority value'
+                });
+            }
+
+            const description = req.body.description || "Default description";
+            const dueDate = req.body.dueDate ? new Date(req.body.dueDate) : new Date();
+
+            if (!req.user || !req.user._id) {
+                console.log("User identification missing");
+                return res.status(400).json({
+                    error: 'User identification is missing'
+                });
+            }
+
 
             const newTask = new Task({
                 title: title,
@@ -25,7 +45,7 @@ const TaskController = {
             res.status(201).json(newTask);
         } catch (error) {
             console.error(error);
-            res.status(500).send('Internal Server Error');
+            res.status(500).send(`Internal Server Error: ${error.message}`);
         }
     },
     async getAllTasks(req, res) {

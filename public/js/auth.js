@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var modal = document.getElementById('register-box');
     var link = document.getElementById("create-new-account-btn");
     var span = document.getElementsByClassName("close")[0];
@@ -13,20 +13,20 @@ document.addEventListener('DOMContentLoaded', function() {
             elementsToBlur.forEach(el => el.classList.remove('blurred-background'));
         }
     }
-    link.onclick = function(event) {
+    link.onclick = function (event) {
         event.preventDefault();
         toggleModal();
     }
-    span.onclick = function() {
+    span.onclick = function () {
         toggleModal();
     }
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target == modal) {
             toggleModal();
         }
     }
     // #endregion
-    document.getElementById('sign-up-btn').addEventListener('click', function(event) {
+    document.getElementById('sign-up-btn').addEventListener('click', function (event) {
         event.preventDefault();
         const username = document.getElementById('register-username').value;
         const password = document.getElementById('register-password').value;
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error:', error);
             });
     });
-    document.getElementById('login-btn').addEventListener('click', function(event) {
+    document.getElementById('login-btn').addEventListener('click', function (event) {
         event.preventDefault();
         const username = document.getElementById('login-username').value;
         const password = document.getElementById('login-password').value;
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error:', error);
             });
     });
-    document.getElementById('register-username').addEventListener('input', function() {
+    document.getElementById('register-username').addEventListener('input', function () {
         const username = this.value;
         const feedbackElement = document.getElementById('username-feedback');
         if (username.length < 3) {
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         updateSignUpButtonState();
     });
-    document.getElementById('register-password').addEventListener('input', function() {
+    document.getElementById('register-password').addEventListener('input', function () {
         const password = this.value;
         const passwordFeedback = document.getElementById('password-feedback');
         // Check the length
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
         passwordFeedback.textContent = '';
         updateSignUpButtonState();
     });
-    document.getElementById('toggle-guidelines-btn').addEventListener('click', function() {
+    document.getElementById('toggle-guidelines-btn').addEventListener('click', function () {
         const guidelines = document.getElementById('registration-guidelines');
         if (guidelines.style.display === 'none' || guidelines.style.display === '') {
             guidelines.style.display = 'block';

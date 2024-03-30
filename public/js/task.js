@@ -1,37 +1,43 @@
-function addTask() {
-    const taskData = {
-        title: document.getElementById('task-input').value,
-        priority: document.getElementById('priority-input').value
-    };
+document.addEventListener('DOMContentLoaded', function () {
+    const addButton = document.getElementById('add-task-btn');
+    addButton.addEventListener('click', addTask);
 
-    fetch('/api/task', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(taskData)
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('Task added:', data);
-            const table = document.getElementById('todo-table').getElementsByTagName('tbody')[0];
-            const newRow = table.insertRow();
+    async function addTask() {
+        const taskData = {
+            title: document.getElementById('task-input').value,
+            priority: document.getElementById('priority-input').value
+        };
 
-            const titleCell = newRow.insertCell();
-            titleCell.textContent = data.title;
+        fetch('/api/task/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(taskData)
+            })
+            .then(response => {
+                console.log("Response: " + response.statusText);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Task added:', data);
+                const table = document.getElementById('todo-table').getElementsByTagName('tbody')[0];
+                const newRow = table.insertRow();
 
-            const priorityCell = newRow.insertCell();
-            priorityCell.textContent = data.priority;
+                const titleCell = newRow.insertCell();
+                titleCell.textContent = data.title;
 
-            document.getElementById('task-input').value = '';
-            document.getElementById('priority-input').value = 'Medium';
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
+                const priorityCell = newRow.insertCell();
+                priorityCell.textContent = data.priority;
+
+                document.getElementById('task-input').value = '';
+                document.getElementById('priority-input').value = 'Medium';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+});
