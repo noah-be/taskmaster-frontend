@@ -7,6 +7,7 @@
             <th>Due Date</th>
             <th>Priority</th>
             <th>Done</th>
+            <th>Delete</th>
         </tr>
         <% tasks.forEach((task, index)=> { %>
         <tr onclick="editTask('<%= task._id %>')" id="task-row-<%= index %>"
@@ -24,6 +25,9 @@
                 <%= task.priority %>
             </td>
             <td><input type="checkbox" <%=task.done ? 'checked' : '' %>>
+            </td>
+            <td>
+                <button onclick="deleteTask('<%= task._id %>')">Delete</button>
             </td>
         </tr>
         <% }); %>
