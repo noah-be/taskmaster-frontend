@@ -1,4 +1,4 @@
-function errorHandlingMiddleware(error, req, res, next) {
+function errorHandlingMiddleware(error, req, res) {
     console.error(error);
 
     if (process.env.NODE_ENV === 'development') {
@@ -12,6 +12,8 @@ function errorHandlingMiddleware(error, req, res, next) {
     };
 
     const message = error.message || 'Internal Server Error';
+    const statusCode = error.statusCode || 'Undefined Error Code';
+
 
     res.status(statusCode).json({
         error: {
