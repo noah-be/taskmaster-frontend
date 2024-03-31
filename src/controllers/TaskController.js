@@ -61,36 +61,39 @@ const TaskController = {
             res.status(500).send(`Internal Server Error: ${error.message}`);
         }
     },
-    async getAllTasks(req, res) {
+    getAllTasks: async (req, res) => {
         try {
             const userTasks = await Task.find({
                 user: req.user._id
             });
-            res.render('main-layout', {
-                content: 'tasks',
-                tasks: userTasks
-            });
+            res.json(userTasks);
         } catch (error) {
             console.error(error);
-            res.status(500).send('Internal Server Error');
+            res.status(500).json({
+                error: 'Internal Server Error'
+            });
         }
     },
-    async getTaskById(req, res) {
+    getTaskById: async (req, res) => {
         try {
             const task = await Task.findOne({
                 _id: req.params.taskId,
                 user: req.user._id
             });
             if (!task) {
-                return res.status(404).send('Task not found');
+                return res.status(404).json({
+                    error: 'Task not found'
+                });
             }
             res.json(task);
         } catch (error) {
             console.error(error);
-            res.status(500).send('Internal Server Error');
+            res.status(500).json({
+                error: 'Internal Server Error'
+            });
         }
     },
-    async updateTask(req, res) {
+    updateTask: async (req, res) => {
         try {
             const updatedTask = await Task.findOneAndUpdate({
                     _id: req.params.taskId,
@@ -101,27 +104,35 @@ const TaskController = {
                 }
             );
             if (!updatedTask) {
-                return res.status(404).send('Task not found');
+                return res.status(404).json({
+                    error: 'Task not found'
+                });
             }
             res.json(updatedTask);
         } catch (error) {
             console.error(error);
-            res.status(500).send('Internal Server Error');
+            res.status(500).json({
+                error: 'Internal Server Error'
+            });
         }
     },
-    async deleteTask(req, res) {
+    deleteTask: async (req, res) => {
         try {
             const deletedTask = await Task.findOneAndDelete({
                 _id: req.params.taskId,
                 user: req.user._id
             });
             if (!deletedTask) {
-                return res.status(404).send('Task not found');
+                return res.status(404).json({
+                    error: 'Task not found'
+                });
             }
             res.status(204).send();
         } catch (error) {
             console.error(error);
-            res.status(500).send('Internal Server Error');
+            res.status(500).json({
+                error: 'Internal Server Error'
+            });
         }
     }
 };
