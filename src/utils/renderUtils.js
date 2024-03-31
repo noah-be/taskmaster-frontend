@@ -1,7 +1,10 @@
 const renderMainWithContent = (content) => (req, res) => {
-    res.render('main-layout', {
-        content
-    });
+    const data = {
+        content: content,
+        tasks: req.tasks
+    };
+
+    res.render('main-layout', data);
 };
 
 export {
