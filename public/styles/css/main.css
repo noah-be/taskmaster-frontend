@@ -94,68 +94,6 @@ p {
   transition: filter 2s ease;
 }
 
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 2;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-.modal-content {
-  background-color: #fefefe;
-  margin: 10% auto;
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 500px;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-.modal-content h2 {
-  margin-top: 0;
-}
-.modal-content form {
-  display: flex;
-  flex-direction: column;
-}
-.modal-content form label {
-  margin-bottom: 5px;
-}
-.modal-content form input[type=text],
-.modal-content form input[type=password] {
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-}
-.modal .close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-.modal .close:hover, .modal .close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-.close:hover, .close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
-}
-
 .register-box {
   display: flex;
   flex-direction: column;
@@ -185,6 +123,46 @@ main {
 h2 {
   text-align: center;
   margin-bottom: 20px;
+}
+
+.edit-task-modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+.edit-task-modal-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+}
+.edit-task-modal-content h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.close:hover, .close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 #new-task-form {
@@ -253,7 +231,7 @@ h2 {
   background-color: #01aeff;
 }
 
-#sign-up-btn, #create-new-account-btn, #home-btn, #login-btn {
+#save-edit-task-btn, #sign-up-btn, #create-new-account-btn, #home-btn, #login-btn {
   color: white;
   padding: 15px 20px;
   border: none;
@@ -328,6 +306,18 @@ h2 {
   background-color: blue;
 }
 
+#save-edit-task-btn {
+  background-color: #1de912;
+  width: 100%;
+  margin-top: 10px;
+}
+#save-edit-task-btn:hover {
+  background-color: #4aee13;
+}
+#save-edit-task-btn:active {
+  background-color: #505050;
+}
+
 #cookie-consent-banner {
   display: none;
   flex-direction: column;
@@ -389,8 +379,61 @@ h2 {
   box-sizing: border-box;
 }
 
+#register-form {
+  display: flex;
+  flex-direction: column;
+}
+#register-form label {
+  margin-bottom: 5px;
+}
+#register-form input[type=text],
+#register-form input[type=password] {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+
 #todo-list-img {
   display: none;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.modal-content h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 24px;
+}
+.modal .close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+.modal .close:hover, .modal .close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 hr {

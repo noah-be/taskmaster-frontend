@@ -1,10 +1,10 @@
 /* Error: Undefined variable.
- *    ,
- * 81 | $color in $priority-colors {
- *    |           ^^^^^^^^^^^^^^^^
- *    '
- *   public/styles/scss/pages/_tasks.scss 81:11  @import
- *   public/styles/scss/pages/pages.scss 4:9     root stylesheet */
+ *     ,
+ * 132 | $color in $priority-colors {
+ *     |           ^^^^^^^^^^^^^^^^
+ *     '
+ *   public/styles/scss/pages/_tasks.scss 132:11  @import
+ *   public/styles/scss/pages/pages.scss 4:9      root stylesheet */
 
 body::before {
   font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
@@ -14,5 +14,5 @@ body::before {
   padding: 1em;
   margin-bottom: 1em;
   border-bottom: 2px solid black;
-  content: "Error: Undefined variable.\a    \2577 \a 81 \2502  $color in $priority-colors {\a    \2502            ^^^^^^^^^^^^^^^^\a    \2575 \a   public/styles/scss/pages/_tasks.scss 81:11  @import\a   public/styles/scss/pages/pages.scss 4:9     root stylesheet";
+  content: "Error: Undefined variable.\a     \2577 \a 132 \2502  $color in $priority-colors {\a     \2502            ^^^^^^^^^^^^^^^^\a     \2575 \a   public/styles/scss/pages/_tasks.scss 132:11  @import\a   public/styles/scss/pages/pages.scss 4:9      root stylesheet";
 }

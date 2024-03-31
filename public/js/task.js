@@ -23,19 +23,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     window.submitEditTask = function () {
-        const taskId = document.getElementById('edit-task-id').value;
-        const taskTitle = document.getElementById('edit-task-title').value;
-        const taskDescription = document.getElementById('edit-task-description').value;
-        const taskDueDate = document.getElementById('edit-task-due-date').value;
-        const taskPriority = document.getElementById('edit-task-priority').value;
+        // const taskId = document.getElementById('edit-task-id').value;
+        // const taskTitle = document.getElementById('edit-task-title').value;
+        // const taskDescription = document.getElementById('edit-task-description').value;
+        // const taskDueDate = document.getElementById('edit-task-due-date').value;
+        // const taskPriority = document.getElementById('edit-task-priority').value;
 
-        const updatedTask = {
-            id: taskId,
-            title: taskTitle,
-            description: taskDescription,
-            dueDate: taskDueDate,
-            priority: taskPriority
-        };
+        // const updatedTask = {
+        //     id: taskId,
+        //     title: taskTitle,
+        //     description: taskDescription,
+        //     dueDate: taskDueDate,
+        //     priority: taskPriority
+        // };
 
         window.closeEditModal();
     }
