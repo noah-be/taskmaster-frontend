@@ -1,5 +1,4 @@
 <div id="todo-table-container">
-
     <table id="todo-table">
         <tr>
             <th>Title</th>
@@ -8,25 +7,17 @@
             <th>Priority</th>
             <th>Done</th>
         </tr>
-        <% tasks.forEach((task, index)=> { %>
-        <tr onclick="editTask('<%= task._id %>')" id="task-row-<%= index %>"
-            class="<%= task.done ? 'done' : 'not-done-' + task.priority %>" data-priority="<%= task.priority %>">
-            <td>
-                <%= task.title %>
-            </td>
-            <td>
-                <%= task.description %>
-            </td>
-            <td>
-                <%= task.dueDate %>
-            </td>
-            <td>
-                <%= task.priority %>
-            </td>
-            <td><input type="checkbox" <%=task.done ? 'checked' : '' %>>
-            </td>
+        <% tasks.forEach((task, index) => { %>
+        <tr id="task-row-<%= index %>" class="<%= task.done ? 'done' : 'not-done-' + task.priority %>"
+            data-task-id="<%= task._id %>" data-task-title="<%= task.title %>"
+            data-task-description="<%= task.description %>" data-task-due-date="<%= task.dueDate %>"
+            data-task-priority="<%= task.priority %>" onclick="editTask(this)">
+            <td><%= task.title %></td>
+            <td><%= task.description %></td>
+            <td><%= task.dueDate %></td>
+            <td><%= task.priority %></td>
+            <td><input type="checkbox" name="task_done" value="<%= task._id %>" <%= task.done ? 'checked' : '' %>></td>
         </tr>
         <% }); %>
     </table>
-
 </div>
