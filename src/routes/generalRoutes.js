@@ -1,7 +1,9 @@
 import express from 'express';
-import Task from '../models/TaskModel.js'
-import TaskController from '../controllers/TaskController.js';
 import authenticateToken from '../middlewares/authTokenMiddleware.js';
+import {
+    renderMainWithContent
+} from '../utils/renderUtils.js';
+import fetchTasks from '../middlewares/fetchTasksMiddleware.js';
 
 const router = express.Router();
 
@@ -10,14 +12,6 @@ const router = express.Router();
 router.get('/', renderMainWithContent('home'));
 router.get('/about', renderMainWithContent('about'));
 router.get('/contact', renderMainWithContent('contact'));
-
-router.get('/tasks', authenticateToken, async (req, res) => {
-    try {
-        await TaskController.getAllTasks(req, res);
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
-    }
-});
+router.get('/tasks', authenticateToken, fetchTasks, renderMainWithContent('tasks'));
 
 export default router;

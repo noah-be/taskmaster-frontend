@@ -1,4 +1,4 @@
-import TaskModel from "../models/TaskModel";
+import Task from '../models/TaskModel.js'
 
 async function fetchTasks(req, res, next) {
     try {
