@@ -1,12 +1,35 @@
 document.addEventListener('DOMContentLoaded', function () {
+
     const addButton = document.getElementById('add-task-btn');
+    const saveEditTaskButton = document.getElementById('save-edit-task-btn');
+
     addButton.addEventListener('click', addTask);
+    saveEditTaskButton.addEventListener('click', window.submitEditTask);
+
 
     window.editTask = function (taskElement) {
-        const taskId = taskElement.getAttribute('data-task-id');
+        setFormData(taskElement, true);
+        document.getElementById('edit-task-modal').style.display = 'block';
+    };
+
+    window.closeEditModal = function () {
+        document.getElementById('edit-task-modal').style.display = 'none';
+    };
+
+    window.submitEditTask = function () {
+        const formData = getFormData();
+        performFetch(`/api/task/${formData.id}`, 'PATCH', JSON.stringify(formData))
+            .then(updateTaskTable)
+            .catch(handleError)
+            .finally(window.closeEditModal);
+    };
+
+
+    function setFormData(taskElement, isEditMode = false) {
+        const taskId = isEditMode ? taskElement.getAttribute('data-task-id') : '';
         const taskTitle = taskElement.getAttribute('data-task-title');
         const taskDescription = taskElement.getAttribute('data-task-description');
-        const taskDueDate = taskElement.getAttribute('data-task-due-date');
+        const taskDueDate = isEditMode ? formatDateToInput(taskElement.getAttribute('data-task-due-date')) : '';
         const taskPriority = taskElement.getAttribute('data-task-priority');
 
         document.getElementById('edit-task-id').value = taskId;
@@ -14,34 +37,22 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('edit-task-description').value = taskDescription;
         document.getElementById('edit-task-due-date').value = taskDueDate;
         document.getElementById('edit-task-priority').value = taskPriority;
-
-        document.getElementById('edit-task-modal').style.display = 'block';
     }
 
-    window.closeEditModal = function () {
-        document.getElementById('edit-task-modal').style.display = 'none';
+    function getFormData() {
+        return {
+            id: document.getElementById('edit-task-id').value,
+            title: document.getElementById('edit-task-title').value,
+            description: document.getElementById('edit-task-description').value,
+            dueDate: document.getElementById('edit-task-due-date').value,
+            priority: document.getElementById('edit-task-priority').value
+        };
     }
 
-    window.submitEditTask = function () {
-        // const taskId = document.getElementById('edit-task-id').value;
-        // const taskTitle = document.getElementById('edit-task-title').value;
-        // const taskDescription = document.getElementById('edit-task-description').value;
-        // const taskDueDate = document.getElementById('edit-task-due-date').value;
-        // const taskPriority = document.getElementById('edit-task-priority').value;
-
-        // const updatedTask = {
-        //     id: taskId,
-        //     title: taskTitle,
-        //     description: taskDescription,
-        //     dueDate: taskDueDate,
-        //     priority: taskPriority
-        // };
-
-        window.closeEditModal();
+    function handleError(error) {
+        console.error('Error:', error);
+        alert(error.message);
     }
-
-
-
 
     async function addTask() {
         const taskTitleInput = document.getElementById('task-input');
@@ -59,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
             priority: taskPrioritySelect.value
         };
 
-        performFetch('/api/task/add', 'POST', JSON.stringify(taskData))
+        performFetch('/api/task/', 'POST', JSON.stringify(taskData))
             .then(() => {
                 updateTaskTable();
                 taskTitleInput.value = '';
@@ -73,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 addButton.disabled = false;
             });
     }
+
 
     function updateTaskTable() {
         fetch('/api/task/table', {})
@@ -105,5 +117,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 return response.json();
             });
+    }
+
+
+    function formatDateToInput(date) {
+        const d = new Date(date);
+        let month = '' + (d.getMonth() + 1);
+        let day = '' + d.getDate();
+        const year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [year, month, day].join('-');
     }
 });
