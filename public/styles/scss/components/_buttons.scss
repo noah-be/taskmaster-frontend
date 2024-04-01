@@ -89,20 +89,3 @@
         background-color: blue;
     }
 }
-
-
-
-#save-edit-task-btn {
-    @extend %button-style;
-    background-color: #1de912;
-    width: 100%;
-    margin-top: 10px;
-
-    &:hover {
-        background-color: #4aee13;
-    }
-
-    &:active {
-        background-color: #505050;
-    }
-}

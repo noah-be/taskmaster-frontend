@@ -254,7 +254,7 @@ h2 {
   background-color: #01aeff;
 }
 
-#save-edit-task-btn, #sign-up-btn, #create-new-account-btn, #home-btn, #login-btn {
+#sign-up-btn, #create-new-account-btn, #home-btn, #login-btn {
   color: white;
   padding: 15px 20px;
   border: none;
@@ -327,18 +327,6 @@ h2 {
 }
 #toggle-guidelines-btn:active {
   background-color: blue;
-}
-
-#save-edit-task-btn {
-  background-color: #1de912;
-  width: 100%;
-  margin-top: 10px;
-}
-#save-edit-task-btn:hover {
-  background-color: #4aee13;
-}
-#save-edit-task-btn:active {
-  background-color: #505050;
 }
 
 #cookie-consent-banner {
