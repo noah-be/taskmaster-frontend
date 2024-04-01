@@ -164,45 +164,45 @@ h2 {
         white-space: nowrap;
         text-overflow: ellipsis;
 
-        &:nth-child(1) {
-            width: 15%;
-        }
-
         // Title column
-        &:nth-child(2) {
-            width: 63%;
+        &:nth-child(1) {
+            width: 20%;
         }
 
         // Description column
+        &:nth-child(2) {
+            width: 58%;
+        }
+
+        // Due Date column
         &:nth-child(3) {
             width: 10%;
         }
 
-        // Due Date column
+        // Priority column
         &:nth-child(4) {
             width: 7%;
         }
 
-        // Priority column
+        // Done column
         &:nth-child(5) {
             width: 5%;
         }
-
-        // Done column
     }
 
     th {
         background-color: #f2f2f2;
     }
+
+    @each $priority,
+    $color in $priority-colors {
+        .not-done-#{$priority} {
+            background-color: $color;
+        }
+    }
+
 }
 
 .done {
     background-color: lightgreen;
-}
-
-@each $priority,
-$color in $priority-colors {
-    .not-done-#{$priority} {
-        background-color: $color;
-    }
 }
