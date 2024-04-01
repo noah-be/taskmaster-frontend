@@ -23,6 +23,14 @@ document.addEventListener('DOMContentLoaded', function() {
             .finally(window.closeEditModal);
     };
 
+    window.deleteTask = function() {
+        const formData = getFormData();
+        performFetch(`/api/task/${formData.id}`, 'DELETE', JSON.stringify(formData))
+            .then(updateTaskTable)
+            .catch(handleError)
+            .finally(window.closeEditModal);
+    };
+
     function setFormData(taskElement, isEditMode = false) {
         const taskId = isEditMode ? taskElement.getAttribute('data-task-id') : '';
         const taskTitle = taskElement.getAttribute('data-task-title');

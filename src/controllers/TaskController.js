@@ -106,7 +106,10 @@ const TaskController = {
                     error: 'Task not found'
                 });
             }
-            res.status(204).send();
+            res.status(200).json({
+                message: 'Task successfully deleted',
+                taskId: req.params.taskId
+            });
         } catch (error) {
             console.error(error);
             res.status(500).json({

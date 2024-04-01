@@ -7,7 +7,6 @@ h2 {
     margin-bottom: 20px;
 }
 
-
 .edit-task-modal {
     display: none;
     position: fixed;
@@ -97,7 +96,6 @@ h2 {
     }
 }
 
-
 .close {
     color: #aaa;
     float: right;
@@ -111,8 +109,6 @@ h2 {
         cursor: pointer;
     }
 }
-
-
 
 #new-task-form {
     display: flex;
@@ -150,8 +146,6 @@ h2 {
         }
     }
 }
-
-
 
 #todo-table {
     width: 100%;
