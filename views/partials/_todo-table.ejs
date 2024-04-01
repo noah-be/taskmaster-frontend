@@ -14,7 +14,7 @@
             data-task-priority="<%= task.priority %>" onclick="editTask(this)">
             <td><%= task.title %></td>
             <td><%= task.description %></td>
-            <td><%= task.dueDate %></td>
+            <td><%= task.formattedDueDate %></td>
             <td><%= task.priority %></td>
             <td><input type="checkbox" name="task_done" value="<%= task._id %>" <%= task.done ? 'checked' : '' %>></td>
         </tr>
