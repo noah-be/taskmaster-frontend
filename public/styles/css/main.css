@@ -139,18 +139,68 @@ h2 {
   overflow: auto;
 }
 .edit-task-modal-content {
-  background-color: #fff;
+  background-color: #fefefe;
+  margin: 5% auto;
   padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid #888;
   width: 80%;
   max-width: 500px;
-  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 .edit-task-modal-content h2 {
   margin-bottom: 20px;
   color: #333;
-  font-size: 24px;
+  font-size: 28px;
+  font-weight: bold;
+}
+.edit-task-modal-content label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+  font-size: 18px;
+}
+.edit-task-modal-content input[type=text],
+.edit-task-modal-content input[type=date],
+.edit-task-modal-content textarea,
+.edit-task-modal-content select {
+  width: 100%;
+  padding: 8px 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+.edit-task-modal-content textarea {
+  height: 100px;
+  resize: vertical;
+}
+.edit-task-modal-content button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, color 0.3s;
+}
+.edit-task-modal-content button:hover {
+  opacity: 0.9;
+}
+.edit-task-modal-content #save-edit-task-btn {
+  background-color: #4CAF50;
+  color: white;
+}
+.edit-task-modal-content #save-edit-task-btn:hover {
+  background-color: #45a049;
+}
+.edit-task-modal-content #delete-task-btn {
+  background-color: #f44336;
+  color: white;
+  margin-right: 10px;
+}
+.edit-task-modal-content #delete-task-btn:hover {
+  background-color: #da190b;
 }
 
 .close {

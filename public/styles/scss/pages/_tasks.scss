@@ -22,21 +22,81 @@ h2 {
     overflow: auto;
 
     &-content {
-        background-color: #fff;
+        background-color: #fefefe;
+        margin: 5% auto;
         padding: 30px;
-        border-radius: 8px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        border: 1px solid #888;
         width: 80%;
         max-width: 500px;
-        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 
         h2 {
             margin-bottom: 20px;
             color: #333;
-            font-size: 24px;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 18px;
+        }
+
+        input[type=text],
+        input[type=date],
+        textarea,
+        select {
+            width: 100%;
+            padding: 8px 12px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, color 0.3s;
+
+            &:hover {
+                opacity: 0.9;
+            }
+        }
+
+        #save-edit-task-btn {
+            background-color: #4CAF50;
+            color: white;
+
+            &:hover {
+                background-color: #45a049;
+            }
+        }
+
+        #delete-task-btn {
+            background-color: #f44336;
+            color: white;
+            margin-right: 10px;
+
+            &:hover {
+                background-color: #da190b;
+            }
         }
     }
 }
+
 
 .close {
     color: #aaa;
