@@ -12,8 +12,14 @@ import {
 import {
     verifyGoogleToken
 } from '../utils/tokenUtils.js';
+import {
+    exampleTasks
+} from '../utils/exampleTasks.js';
+import Task from '../models/TaskModel.js'
+
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const client = new OAuth2Client(GOOGLE_CLIENT_ID);
+
 const AuthController = {
     async register(req, res, next) {
         const {
@@ -26,8 +32,16 @@ const AuthController = {
             });
         }
         try {
-            const user = await createUser(username, password);
-            await finalizeAuthentication(res, user._id);
+            const newUser = await createUser(username, password);
+
+            const tasksForUser = exampleTasks.map(task => ({
+                ...task,
+                user: newUser._id
+            }));
+
+            await Task.insertMany(tasksForUser);
+
+            await finalizeAuthentication(res, newUser._id);
         } catch (error) {
             next(error);
         }
