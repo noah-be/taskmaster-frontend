@@ -9,23 +9,21 @@
 }
 
 @include respond-to(large) {
-
     .home {
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: center;
-    }
 
+        #login-form {
+            width: 50%;
+        }
 
-    #login-form {
-        width: 50%;
-    }
-
-    #todo-list-img {
-        display: block;
-        border-radius: 30px;
-        width: 50%;
-        padding: 10px;
+        #todo-list-img {
+            display: block;
+            border-radius: 30px;
+            width: 50%;
+            padding: 10px;
+        }
     }
 }

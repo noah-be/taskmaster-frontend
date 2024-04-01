@@ -73,10 +73,10 @@ p {
     align-items: center;
     justify-content: center;
   }
-  #login-form {
+  .home #login-form {
     width: 50%;
   }
-  #todo-list-img {
+  .home #todo-list-img {
     display: block;
     border-radius: 30px;
     width: 50%;
