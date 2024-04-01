@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
 
     const addButton = document.getElementById('add-task-btn');
     const saveEditTaskButton = document.getElementById('save-edit-task-btn');
@@ -6,24 +6,22 @@ document.addEventListener('DOMContentLoaded', function () {
     addButton.addEventListener('click', addTask);
     saveEditTaskButton.addEventListener('click', window.submitEditTask);
 
-
-    window.editTask = function (taskElement) {
+    window.editTask = function(taskElement) {
         setFormData(taskElement, true);
         document.getElementById('edit-task-modal').style.display = 'block';
     };
 
-    window.closeEditModal = function () {
+    window.closeEditModal = function() {
         document.getElementById('edit-task-modal').style.display = 'none';
     };
 
-    window.submitEditTask = function () {
+    window.submitEditTask = function() {
         const formData = getFormData();
         performFetch(`/api/task/${formData.id}`, 'PATCH', JSON.stringify(formData))
             .then(updateTaskTable)
             .catch(handleError)
             .finally(window.closeEditModal);
     };
-
 
     function setFormData(taskElement, isEditMode = false) {
         const taskId = isEditMode ? taskElement.getAttribute('data-task-id') : '';
@@ -85,21 +83,8 @@ document.addEventListener('DOMContentLoaded', function () {
             });
     }
 
-
     function updateTaskTable() {
-        fetch('/api/task/table', {})
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(html => {
-                document.getElementById('todo-table-container').innerHTML = html;
-            })
-            .catch(error => {
-                console.error('Error fetching the task table:', error);
-            });
+        window.location.reload();
     }
 
     async function performFetch(url, method, body) {
@@ -118,7 +103,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 return response.json();
             });
     }
-
 
     function formatDateToInput(date) {
         const d = new Date(date);

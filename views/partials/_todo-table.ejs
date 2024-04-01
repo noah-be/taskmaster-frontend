@@ -8,10 +8,8 @@
             <th>Done</th>
         </tr>
         <% tasks.forEach((task, index) => { %>
-        <tr id="task-row-<%= index %>" class="<%= task.done ? 'done' : 'not-done-' + task.priority %>"
-            data-task-id="<%= task._id %>" data-task-title="<%= task.title %>"
-            data-task-description="<%= task.description %>" data-task-due-date="<%= task.dueDate %>"
-            data-task-priority="<%= task.priority %>" onclick="editTask(this)">
+        <tr id="task-row-<%= index %>" class="<%= task.done ? 'done' : 'not-done-' + task.priority %>" data-task-id="<%= task._id %>" data-task-title="<%= task.title %>" data-task-description="<%= task.description %>" data-task-due-date="<%= task.dueDate %>" data-task-priority="<%= task.priority %>"
+            onclick="editTask(this)">
             <td><%= task.title %></td>
             <td><%= task.description %></td>
             <td><%= task.formattedDueDate %></td>
