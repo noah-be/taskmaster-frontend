@@ -56,15 +56,6 @@ h2 {
 
 
 
-
-
-
-
-
-
-
-
-
 #new-task-form {
     display: flex;
     align-items: center;
@@ -106,17 +97,46 @@ h2 {
 
 #todo-table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
     margin-top: 20px;
     border-radius: 10px;
     overflow: hidden;
 
-    &,
     th,
     td {
-        border: 1px solid #ddd;
         padding: 8px;
+        border: 1px solid #ccc;
         text-align: left;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+
+        &:nth-child(1) {
+            width: 15%;
+        }
+
+        // Title column
+        &:nth-child(2) {
+            width: 63%;
+        }
+
+        // Description column
+        &:nth-child(3) {
+            width: 10%;
+        }
+
+        // Due Date column
+        &:nth-child(4) {
+            width: 7%;
+        }
+
+        // Priority column
+        &:nth-child(5) {
+            width: 5%;
+        }
+
+        // Done column
     }
 
     th {

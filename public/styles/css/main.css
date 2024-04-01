@@ -199,17 +199,40 @@ h2 {
 
 #todo-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
   margin-top: 20px;
   border-radius: 10px;
   overflow: hidden;
 }
-#todo-table,
 #todo-table th,
 #todo-table td {
-  border: 1px solid #ddd;
   padding: 8px;
+  border: 1px solid #ccc;
   text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#todo-table th:nth-child(1),
+#todo-table td:nth-child(1) {
+  width: 15%;
+}
+#todo-table th:nth-child(2),
+#todo-table td:nth-child(2) {
+  width: 63%;
+}
+#todo-table th:nth-child(3),
+#todo-table td:nth-child(3) {
+  width: 10%;
+}
+#todo-table th:nth-child(4),
+#todo-table td:nth-child(4) {
+  width: 7%;
+}
+#todo-table th:nth-child(5),
+#todo-table td:nth-child(5) {
+  width: 5%;
 }
 #todo-table th {
   background-color: #f2f2f2;
