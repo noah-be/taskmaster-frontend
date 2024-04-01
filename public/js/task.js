@@ -6,6 +6,10 @@ document.addEventListener('DOMContentLoaded', function() {
     addButton.addEventListener('click', addTask);
     saveEditTaskButton.addEventListener('click', window.submitEditTask);
 
+    window.toggleTaskCompletion = function(event, taskId) {
+        event.stopImmediatePropagation(); // Prevent edit task modal from opening
+    }
+
     window.editTask = function(taskElement) {
         setFormData(taskElement, true);
         document.getElementById('edit-task-modal').style.display = 'block';

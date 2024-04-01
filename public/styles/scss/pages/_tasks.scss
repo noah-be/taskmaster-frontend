@@ -194,6 +194,7 @@ h2 {
         background-color: #f2f2f2;
     }
 
+
     @each $priority,
     $color in $priority-colors {
         .not-done-#{$priority} {
@@ -201,8 +202,7 @@ h2 {
         }
     }
 
-}
-
-.done {
-    background-color: lightgreen;
+    .done {
+        background-color: lightgreen;
+    }
 }
