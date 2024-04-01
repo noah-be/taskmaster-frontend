@@ -9,4 +9,6 @@ router.post('/', authenticateToken, TaskController.addTask);
 router.get('/:taskId', authenticateToken, TaskController.getTaskById);
 router.patch('/:taskId', authenticateToken, TaskController.updateTask);
 router.delete('/:taskId', authenticateToken, TaskController.deleteTask);
+router.patch('/toggle/:taskId', authenticateToken, TaskController.toggleTask);
+
 export default router;

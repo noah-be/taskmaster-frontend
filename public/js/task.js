@@ -8,12 +8,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.toggleTaskCompletion = function(event, taskId) {
         event.stopImmediatePropagation(); // Prevent edit task modal from opening
+        window.toggleTaskCompletion();
     }
 
     window.editTask = function(taskElement) {
         setFormData(taskElement, true);
         document.getElementById('edit-task-modal').style.display = 'block';
     };
+
+    window.toggleTaskCompletion = function(event, taskId) {
+        event.stopImmediatePropagation();
+
+        performFetch(`/api/task/toggle/${taskId}`, 'PATCH')
+            .then(() => {
+                updateTaskTable();
+            })
+            .catch(handleError);
+    }
 
     window.closeEditModal = function() {
         document.getElementById('edit-task-modal').style.display = 'none';

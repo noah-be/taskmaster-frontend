@@ -116,6 +116,40 @@ const TaskController = {
                 error: 'Internal Server Error'
             });
         }
+    },
+    toggleTask: async (req, res) => {
+
+        try {
+            const task = await Task.findById(req.params.taskId);
+
+            if (!task) {
+                return res.status(404).json({
+                    message: 'Task not found'
+                });
+            }
+
+            if (task.user.toString() !== req.user._id.toString()) {
+                return res.status(403).json({
+                    message: 'Unauthorized to access this task'
+                });
+            }
+
+            task.completed = !task.completed;
+
+            const updatedTask = await task.save();
+
+            res.status(200).json({
+                message: 'Task toggled successfully',
+                task: updatedTask
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({
+                error: 'Internal Server Error'
+            });
+        }
+
     }
+
 };
 export default TaskController;
