@@ -41,7 +41,13 @@ const AuthController = {
 
             await Task.insertMany(tasksForUser);
 
-            await finalizeAuthentication(res, newUser._id);
+            const authResult = await finalizeAuthentication(res, newUser._id);
+            res.status(200).json({
+                message: 'User registered successfully',
+                userId: newUser._id,
+                redirectUrl: authResult.redirectUrl
+            });
+
         } catch (error) {
             next(error);
         }
@@ -63,21 +69,21 @@ const AuthController = {
             next(error);
         }
     },
-    async googleSignIn(req, res, next) {
-        const {
-            theToken
-        } = req.body;
-        try {
-            const payload = await verifyGoogleToken(theToken, client);
-            const user = await handleUserFromGoogle(payload);
-            res.status(200).json({
-                message: 'Google sign in successful',
-                userId: user._id
-            });
-            finalizeAuthentication(res, user._id);
-        } catch (error) {
-            next(error);
-        }
-    }
+    // async googleSignIn(req, res, next) {
+    //     const {
+    //         theToken
+    //     } = req.body;
+    //     try {
+    //         const payload = await verifyGoogleToken(theToken, client);
+    //         const user = await handleUserFromGoogle(payload);
+    //         res.status(200).json({
+    //             message: 'Google sign in successful',
+    //             userId: user._id
+    //         });
+    //         finalizeAuthentication(res, user._id);
+    //     } catch (error) {
+    //         next(error);
+    //     }
+    // }
 };
 export default AuthController;

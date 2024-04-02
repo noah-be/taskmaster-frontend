@@ -3,18 +3,20 @@ import {
     setJwtCookie
 } from './tokenUtils.js';
 import UserModel from '../models/UserModel.js';
+
 const finalizeAuthentication = async (res, userId) => {
     try {
         const token = createToken(userId);
         await setJwtCookie(token, res);
-        res.status(200).json({
+        return {
             redirectUrl: '/tasks'
-        });
+        };
     } catch (error) {
         console.error(error);
-        res.status(500).send('Internal Server Error');
+        throw new Error('Internal Server Error');
     }
 };
+
 const handleUserFromGoogle = async (googleUserData) => {
     let user = await UserModel.findOne({
         googleId: googleUserData.googleId
