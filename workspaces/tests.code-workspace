@@ -1,0 +1,8 @@
+{
+    "folders": [{
+        "path": "../tests"
+    }],
+    "settings": {
+        "window.title": "tests",
+    }
+}
