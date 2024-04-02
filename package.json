@@ -7,7 +7,8 @@
     "scripts": {
         "start": "node app.js",
         "nm": "nodemon -x 'clear && node app.js'",
-        "test": "jest --coverage",
+        "test": "mocha ",
+        "test:watch": "mocha --watch ./src/tests/*.spec.js",
         "sass": "sass --watch public/styles/scss:public/styles/css",
         "dev": "NODE_ENV=development concurrently \"npm run nm\" \"npm run sass\"",
         "lint": "eslint ."
