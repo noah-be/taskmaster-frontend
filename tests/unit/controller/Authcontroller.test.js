@@ -1,24 +1,26 @@
-import AuthController from "../../src/controllers/AuthController";
-import { createUser, validateUser } from "../../src/utils/userUtils";
-import { finalizeAuthentication } from "../../src/utils/authUtils";
-import Task from "../../src/models/TaskModel";
+import AuthController from "controllers/AuthController";
+import { createUser, validateUser } from "utils/userUtils";
+import { finalizeAuthentication } from "utils/authUtils";
+import Task from "models/TaskModel";
 
-jest.mock("../../src/utils/userUtils", () => ({
+//#region setup
+jest.mock("utils/userUtils", () => ({
   createUser: jest.fn(),
   validateUser: jest.fn(),
 }));
-jest.mock("../../src/utils/authUtils", () => ({
+jest.mock("utils/authUtils", () => ({
   finalizeAuthentication: jest.fn(),
 }));
-jest.mock("../../src/models/TaskModel", () => ({ insertMany: jest.fn() }));
+jest.mock("models/TaskModel", () => ({ insertMany: jest.fn() }));
+
+const mockRes = {
+  status: jest.fn().mockReturnThis(),
+  json: jest.fn(),
+};
+const next = jest.fn();
+//#endregion
 
 describe("AuthController", () => {
-  const mockRes = {
-    status: jest.fn().mockReturnThis(),
-    json: jest.fn(),
-  };
-  const next = jest.fn();
-
   describe("register", () => {
     const mockUser = { _id: "user123" };
     const mockReq = {
