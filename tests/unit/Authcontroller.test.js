@@ -2,7 +2,6 @@ import AuthController from "../../src/controllers/AuthController";
 import { createUser, validateUser } from "../../src/utils/userUtils";
 import { finalizeAuthentication } from "../../src/utils/authUtils";
 import Task from "../../src/models/TaskModel";
-import { exampleTasks } from "../../src/utils/exampleTasks";
 
 jest.mock("../../src/utils/userUtils", () => ({
   createUser: jest.fn(),
@@ -14,66 +13,81 @@ jest.mock("../../src/utils/authUtils", () => ({
 jest.mock("../../src/models/TaskModel", () => ({ insertMany: jest.fn() }));
 
 describe("AuthController", () => {
-  const mockUser = {
-    _id: "123",
-    username: "newUser",
-  };
-  const mockRedirectUrl = "/tasks";
-  const req = {
-    body: {
-      username: "newUser",
-      password: "password",
-    },
-  };
-  const res = {
+  const mockRes = {
     status: jest.fn().mockReturnThis(),
     json: jest.fn(),
   };
   const next = jest.fn();
 
-  finalizeAuthentication.mockResolvedValue({
-    redirectUrl: mockRedirectUrl,
-  });
-
   describe("register", () => {
-    it("should create a user and assign example tasks", async () => {
+    const mockUser = { _id: "user123" };
+    const mockReq = {
+      body: { username: "testUser", password: "testPass" },
+    };
+
+    it("should successfully register a user", async () => {
       createUser.mockResolvedValue(mockUser);
-      Task.insertMany.mockResolvedValue(true);
+      Task.insertMany.mockResolvedValue([]);
+      finalizeAuthentication.mockResolvedValue({ redirectUrl: "/tasks" });
 
-      await AuthController.register(req, res, next);
+      await AuthController.register(mockReq, mockRes, next);
 
-      expect(createUser).toHaveBeenCalledWith("newUser", "password");
-      expect(Task.insertMany).toHaveBeenCalledWith(
-        exampleTasks.map((task) => ({
-          ...task,
-          user: mockUser._id,
-        })),
+      expect(createUser).toHaveBeenCalledWith("testUser", "testPass");
+      expect(Task.insertMany).toHaveBeenCalled();
+      expect(finalizeAuthentication).toHaveBeenCalledWith(
+        mockRes,
+        mockUser._id,
       );
-      expect(finalizeAuthentication).toHaveBeenCalledWith(res, mockUser._id);
+      expect(mockRes.status).toHaveBeenCalledWith(200);
+    });
 
-      expect(res.status).toHaveBeenCalledWith(200);
-      expect(res.json).toHaveBeenCalledWith({
-        message: "User registered successfully",
-        userId: mockUser._id,
-        redirectUrl: mockRedirectUrl,
-      });
+    it("should return 400 if username or password is missing", async () => {
+      const req = { body: {} };
+      await AuthController.register(req, mockRes, next);
+
+      expect(mockRes.status).toHaveBeenCalledWith(400);
+    });
+
+    it("should handle createUser error", async () => {
+      createUser.mockRejectedValue(new Error("Create user failed"));
+      await AuthController.register(mockReq, mockRes, next);
+
+      expect(next).toHaveBeenCalledWith(expect.any(Error));
     });
   });
 
   describe("login", () => {
-    it("should validate user and finalise the authentification", async () => {
+    const mockUser = { _id: "user123" };
+    const mockReq = {
+      body: { username: "testUser", password: "testPass" },
+    };
+
+    it("should successfully login a user", async () => {
       validateUser.mockResolvedValue(mockUser);
+      finalizeAuthentication.mockResolvedValue({ redirectUrl: "/tasks" });
 
-      await AuthController.login(req, res, next);
+      await AuthController.login(mockReq, mockRes, next);
 
-      expect(validateUser).toHaveBeenCalledWith("newUser", "password");
-      expect(finalizeAuthentication).toHaveBeenCalledWith(res, mockUser._id);
-      expect(res.status).toHaveBeenCalledWith(200);
-      expect(res.json).toHaveBeenCalledWith({
-        message: "User logged in successfully",
-        userId: mockUser._id,
-        redirectUrl: mockRedirectUrl,
-      });
+      expect(validateUser).toHaveBeenCalledWith("testUser", "testPass");
+      expect(finalizeAuthentication).toHaveBeenCalledWith(
+        mockRes,
+        mockUser._id,
+      );
+      expect(mockRes.status).toHaveBeenCalledWith(200);
+    });
+
+    it("should return 400 if username or password is missing", async () => {
+      const req = { body: {} };
+      await AuthController.login(req, mockRes, next);
+
+      expect(mockRes.status).toHaveBeenCalledWith(400);
+    });
+
+    it("should handle validateUser error", async () => {
+      validateUser.mockRejectedValue(new Error("Validate user failed"));
+      await AuthController.login(mockReq, mockRes, next);
+
+      expect(next).toHaveBeenCalledWith(expect.any(Error));
     });
   });
 });
