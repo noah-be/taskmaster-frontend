@@ -44,7 +44,12 @@ const AuthController = {
     }
     try {
       const user = await validateUser(username, password);
-      await finalizeAuthentication(res, user._id);
+      const authResult = await finalizeAuthentication(res, user._id);
+      res.status(200).json({
+        message: "User logged in successfully",
+        userId: user._id,
+        redirectUrl: authResult.redirectUrl,
+      });
     } catch (error) {
       next(error);
     }
