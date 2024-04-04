@@ -1,6 +1,6 @@
 import Task from "../models/TaskModel.js";
 const TaskController = {
-  async addTask(req, res) {
+  addTask: async (req, res) => {
     try {
       const { title, priority } = req.body;
       if (!title) {
