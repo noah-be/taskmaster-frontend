@@ -1,5 +1,5 @@
 import { createToken, setJwtCookie } from "./tokenUtils.js";
-import UserModel from "models/UserModel.js";
+import UserModel from "../models/UserModel.js";
 
 const finalizeAuthentication = async (res, userId) => {
   try {

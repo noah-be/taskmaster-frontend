@@ -1,8 +1,8 @@
-import { createUser, validateUser } from "utils/userUtils.js";
-import { finalizeAuthentication } from "utils/authUtils.js";
-import { exampleTasks } from "utils/exampleTasks.js";
+import { createUser, validateUser } from "../utils/userUtils.js";
+import { finalizeAuthentication } from "../utils/authUtils.js";
+import { exampleTasks } from "../utils/exampleTasks.js";
 
-import Task from "models/TaskModel.js";
+import Task from "../models/TaskModel.js";
 
 // const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 // const client = new OAuth2Client(GOOGLE_CLIENT_ID);
