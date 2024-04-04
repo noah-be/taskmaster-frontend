@@ -1,95 +1,138 @@
-import AuthController from "controllers/AuthController";
 import { createUser, validateUser } from "utils/userUtils";
 import { finalizeAuthentication } from "utils/authUtils";
 import Task from "models/TaskModel";
+import AuthController from "controllers/AuthController";
+import { exampleTasks } from "utils/exampleTasks";
+import httpMocks from "node-mocks-http";
 
-//#region setup
-jest.mock("utils/userUtils", () => ({
-  createUser: jest.fn(),
-  validateUser: jest.fn(),
+jest.mock("utils/userUtils.js");
+jest.mock("utils/authUtils.js");
+jest.mock("models/TaskModel.js");
+jest.mock("utils/exampleTasks.js", () => ({
+  exampleTasks: [
+    { name: "Task 1", completed: false },
+    { name: "Task 2", completed: true },
+  ],
 }));
-jest.mock("utils/authUtils", () => ({
-  finalizeAuthentication: jest.fn(),
-}));
-jest.mock("models/TaskModel", () => ({ insertMany: jest.fn() }));
-
-const mockRes = {
-  status: jest.fn().mockReturnThis(),
-  json: jest.fn(),
-};
-const next = jest.fn();
-//#endregion
 
 describe("AuthController", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   describe("register", () => {
-    const mockUser = { _id: "user123" };
-    const mockReq = {
-      body: { username: "testUser", password: "testPass" },
-    };
+    it("should return 400 if no username or password provided", async () => {
+      const req = httpMocks.createRequest({
+        method: "POST",
+        url: "/register",
+        body: {},
+      });
+      const res = httpMocks.createResponse();
+      res.json = jest.fn();
+      const next = jest.fn();
+
+      await AuthController.register(req, res, next);
+
+      expect(res.statusCode).toBe(400);
+      expect(res.json).toHaveBeenCalledWith({
+        message: "Username and password are required",
+      });
+    });
 
     it("should successfully register a user", async () => {
-      createUser.mockResolvedValue(mockUser);
-      Task.insertMany.mockResolvedValue([]);
+      createUser.mockResolvedValue({ _id: "userId" });
       finalizeAuthentication.mockResolvedValue({ redirectUrl: "/tasks" });
+      Task.insertMany.mockResolvedValue(true);
 
-      await AuthController.register(mockReq, mockRes, next);
+      const req = httpMocks.createRequest({
+        method: "POST",
+        url: "/register",
+        body: { username: "user", password: "password" },
+      });
+      const res = httpMocks.createResponse();
+      const next = jest.fn();
 
-      expect(createUser).toHaveBeenCalledWith("testUser", "testPass");
-      expect(Task.insertMany).toHaveBeenCalled();
-      expect(finalizeAuthentication).toHaveBeenCalledWith(
-        mockRes,
-        mockUser._id,
+      await AuthController.register(req, res, next);
+
+      expect(createUser).toHaveBeenCalledWith("user", "password");
+      expect(Task.insertMany).toHaveBeenCalledWith(
+        exampleTasks.map((task) => ({ ...task, user: "userId" })),
       );
-      expect(mockRes.status).toHaveBeenCalledWith(200);
+      expect(finalizeAuthentication).toHaveBeenCalledWith(res, "userId");
+      expect(res.statusCode).toBe(200);
     });
 
-    it("should return 400 if username or password is missing", async () => {
-      const req = { body: {} };
-      await AuthController.register(req, mockRes, next);
+    it("should handle exceptions during registration", async () => {
+      const error = new Error("Test error");
+      createUser.mockRejectedValue(error);
 
-      expect(mockRes.status).toHaveBeenCalledWith(400);
-    });
+      const req = httpMocks.createRequest({
+        method: "POST",
+        url: "/register",
+        body: { username: "user", password: "password" },
+      });
+      const res = httpMocks.createResponse();
+      const next = jest.fn();
 
-    it("should handle createUser error", async () => {
-      createUser.mockRejectedValue(new Error("Create user failed"));
-      await AuthController.register(mockReq, mockRes, next);
+      await AuthController.register(req, res, next);
 
-      expect(next).toHaveBeenCalledWith(expect.any(Error));
+      expect(next).toHaveBeenCalledWith(error);
     });
   });
 
   describe("login", () => {
-    const mockUser = { _id: "user123" };
-    const mockReq = {
-      body: { username: "testUser", password: "testPass" },
-    };
+    it("should return 400 if no username or password provided", async () => {
+      const req = httpMocks.createRequest({
+        method: "POST",
+        url: "/login",
+        body: {},
+      });
+      const res = httpMocks.createResponse();
+      res.json = jest.fn();
+      const next = jest.fn();
 
-    it("should successfully login a user", async () => {
-      validateUser.mockResolvedValue(mockUser);
+      await AuthController.login(req, res, next);
+
+      expect(res.statusCode).toBe(400);
+      expect(res.json).toHaveBeenCalledWith({
+        message: "Username and password are required",
+      });
+    });
+
+    it("should successfully log in a user", async () => {
+      validateUser.mockResolvedValue({ _id: "userId" });
       finalizeAuthentication.mockResolvedValue({ redirectUrl: "/tasks" });
 
-      await AuthController.login(mockReq, mockRes, next);
+      const req = httpMocks.createRequest({
+        method: "POST",
+        url: "/login",
+        body: { username: "user", password: "password" },
+      });
+      const res = httpMocks.createResponse();
+      const next = jest.fn();
 
-      expect(validateUser).toHaveBeenCalledWith("testUser", "testPass");
-      expect(finalizeAuthentication).toHaveBeenCalledWith(
-        mockRes,
-        mockUser._id,
-      );
-      expect(mockRes.status).toHaveBeenCalledWith(200);
+      await AuthController.login(req, res, next);
+
+      expect(validateUser).toHaveBeenCalledWith("user", "password");
+      expect(finalizeAuthentication).toHaveBeenCalledWith(res, "userId");
+      expect(res.statusCode).toBe(200);
     });
 
-    it("should return 400 if username or password is missing", async () => {
-      const req = { body: {} };
-      await AuthController.login(req, mockRes, next);
+    it("should handle exceptions during login", async () => {
+      const error = new Error("Test error");
+      validateUser.mockRejectedValue(error);
 
-      expect(mockRes.status).toHaveBeenCalledWith(400);
-    });
+      const req = httpMocks.createRequest({
+        method: "POST",
+        url: "/login",
+        body: { username: "user", password: "password" },
+      });
+      const res = httpMocks.createResponse();
+      const next = jest.fn();
 
-    it("should handle validateUser error", async () => {
-      validateUser.mockRejectedValue(new Error("Validate user failed"));
-      await AuthController.login(mockReq, mockRes, next);
+      await AuthController.login(req, res, next);
 
-      expect(next).toHaveBeenCalledWith(expect.any(Error));
+      expect(next).toHaveBeenCalledWith(error);
     });
   });
 });
