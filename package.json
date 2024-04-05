@@ -26,6 +26,9 @@
     "testEnvironment": "node",
     "coverageDirectory": "coverage",
     "collectCoverage": true,
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/jestConsoleMock.js"
+    ],
     "transform": {
       "^.+\\.(js|jsx)$": "babel-jest"
     }

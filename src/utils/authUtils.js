@@ -14,17 +14,17 @@ const finalizeAuthentication = async (res, userId) => {
   }
 };
 
-const handleUserFromGoogle = async (googleUserData) => {
-  let user = await UserModel.findOne({
-    googleId: googleUserData.googleId,
-  });
-  if (!user) {
-    user = new UserModel({
-      username: googleUserData.email,
-      googleId: googleUserData.googleId,
-    });
-    await user.save();
-  }
-  return user;
-};
-export { finalizeAuthentication, handleUserFromGoogle };
+// const handleUserFromGoogle = async (googleUserData) => {
+//   let user = await UserModel.findOne({
+//     googleId: googleUserData.googleId,
+//   });
+//   if (!user) {
+//     user = new UserModel({
+//       username: googleUserData.email,
+//       googleId: googleUserData.googleId,
+//     });
+//     await user.save();
+//   }
+//   return user;
+// };
+export { finalizeAuthentication };

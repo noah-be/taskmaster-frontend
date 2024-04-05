@@ -18,7 +18,7 @@ const TaskController = {
         ? new Date(req.body.dueDate)
         : new Date();
       if (!req.user || !req.user._id) {
-        console.log("User identification missing");
+        console.debug("User identification missing");
         return res.status(400).json({
           error: "User identification is missing",
         });

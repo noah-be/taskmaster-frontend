@@ -27,7 +27,7 @@
 // };
 // const handleServerResponse = (serverResponse) => {
 //     if (serverResponse.ok) {
-//         console.log('Sign in successful');
+//         console.debug('Sign in successful');
 //         window.location.href = '/tasks';
 //     } else {
 //         console.error('Sign in failed');
@@ -41,7 +41,7 @@
 //         });
 //         auth2.attachClickHandler('sign-in-button', {},
 //             function(googleUser) {
-//                 console.log('Google User signed in:', googleUser.getBasicProfile().getName());
+//                 console.debug('Google User signed in:', googleUser.getBasicProfile().getName());
 //             },
 //             function(error) {
 //                 console.error('Error signing in:', error);
