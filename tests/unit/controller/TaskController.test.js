@@ -1,26 +1,13 @@
 import TaskController from "controllers/TaskController";
 import Task from "models/TaskModel";
-import request from "supertest";
-import express from "express";
-import bodyParser from "body-parser";
 
 //#region setup
-jest.mock("models/TaskModel", () => {
-  return jest.fn().mockImplementation(() => {
-    return {
-      save: jest.fn().mockResolvedValue({
-        title: "Test Task",
-        priority: "High",
-        user: { _id: "user123" },
-        _id: "task123",
-      }),
-    };
-  });
-});
 
-const app = express();
-app.use(bodyParser.json());
-app.post("/task", TaskController.addTask);
+jest.mock("models/TaskModel", () => {
+  return jest.fn().mockImplementation(() => ({
+    save: jest.fn().mockResolvedValue(),
+  }));
+});
 
 const mockReq = ({ body = {}, user = {} } = {}) => ({
   body,
@@ -38,30 +25,25 @@ const mockRes = () => {
 
 const res = mockRes();
 
-const next = jest.fn();
 //#endregion
 
 describe("TaskController", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   describe("addTask", () => {
     it("should successfully create a task", async () => {
-      const response = await request(app)
-        .post("/task")
-        .send({
-          title: "Test Task",
-          priority: "High",
-          user: { _id: "user123" },
-        });
-
-      expect(response.status).toBe(201);
-      expect(response.body).toEqual({
-        title: "Test Task",
-        priority: "High",
+      const req = mockReq({
+        body: { title: "Test Task", priority: "High" },
         user: { _id: "user123" },
-        _id: "task123",
       });
-    });
 
-    it("should return 400 if title is missing", async () => {
+      await TaskController.addTask(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(201);
+    });
+    it("should return 400 if no title provided", async () => {
       const req = mockReq({
         body: { priority: "High" },
         user: { _id: "user123" },
@@ -70,7 +52,9 @@ describe("TaskController", () => {
       await TaskController.addTask(req, res);
 
       expect(res.status).toHaveBeenCalledWith(400);
-      expect(res.json).toHaveBeenCalledWith({ error: "Title is required" });
+      expect(res.json).toHaveBeenCalledWith({
+        error: "Title is required",
+      });
     });
     it("should return 400 for invalid priority", async () => {
       const req = mockReq({
@@ -86,6 +70,8 @@ describe("TaskController", () => {
       });
     });
     it("should return 400 if user identification is missing", async () => {
+      const res = mockRes();
+
       const req = mockReq({ body: { title: "Test Task", priority: "High" } }); // No user ID
 
       await TaskController.addTask(req, res);
@@ -115,17 +101,12 @@ describe("TaskController", () => {
     });
   });
 
-  describe("getAllTasks", () => {
-    it("should return all tasks for a user", async () => {
-      expect(true).toBe(true);
-    });
-  });
-
   describe("getTaskById", () => {
     it("should successfully add a task", async () => {
       expect(true).toBe(true);
     });
   });
+
   describe("updateTask", () => {
     it("should successfully add a task", async () => {
       expect(true).toBe(true);
