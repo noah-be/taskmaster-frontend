@@ -1,59 +1,86 @@
+//#region import
 import express from "express";
 import morgan from "morgan";
-import path from "path";
 import cookieParser from "cookie-parser";
-import { fileURLToPath } from "url";
-
+import path from "path";
 import routes from "./src/routes/index.js";
 import mdws from "./src/middlewares/index.js";
-import dbConnect from "./config/dbConnect.js";
-
+import { dbConnect, dbDisconnect } from "./config/dbConnect.js";
 import dotenv from "dotenv";
-dotenv.config();
+//#endregion
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 const app = express();
+let serverInstance;
+
+//#region environment
+dotenv.config();
+const BASE_DIR = process.env.BASE_DIR || process.cwd();
 const port = process.env.PORT || 3009;
-
 const viewsDirectories = [
-  path.join(__dirname, "views/layouts"),
-  path.join(__dirname, "views/pages"),
-  path.join(__dirname, "views/partials"),
+  path.join(BASE_DIR, "views/layouts"),
+  path.join(BASE_DIR, "views/pages"),
+  path.join(BASE_DIR, "views/partials"),
 ];
-
 process.env.NODE_ENV === "development" && app.use(morgan("dev"));
+//#endregion
 
-app.set("view engine", "ejs");
-app.set("etag", "strong");
-app.set("views", viewsDirectories);
-app.use(cookieParser());
-app.use(express.json());
-app.use(
-  express.urlencoded({
-    extended: true,
-  }),
-);
-app.use(express.static(path.join(__dirname, "public")));
-app.use("/api/auth", routes.authRoutes);
-app.use("/api/task", routes.taskRoutes);
-app.use("/", routes.generalRoutes);
-app.use(mdws.notFoundMiddleware);
-app.use(mdws.errorHandlingMiddleware);
+export const startServer = () => {
+  try {
+    dbConnect();
 
-dbConnect();
+    app.set("view engine", "ejs");
+    app.set("etag", "strong");
+    app.set("views", viewsDirectories);
+    app.use(cookieParser());
+    app.use(express.json());
+    app.use(
+      express.urlencoded({
+        extended: true,
+      }),
+    );
 
-app.listen(port, function () {
-  const serverDomain = process.env.SERVER_DOMAIN || "localhost";
-  const currentTime = new Date().toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  });
+    // Routes
+    app.use(express.static(path.join(BASE_DIR, "public")));
+    app.use("/api/auth", routes.authRoutes);
+    app.use("/api/task", routes.taskRoutes);
+    app.use("/", routes.generalRoutes);
 
-  console.debug(
-    `[${currentTime}] \x1b[94m\x1b[1m[Server]\x1b[0m \x1b[94mhttp://${serverDomain}:${port} 🚀\x1b[0m`,
-  );
-});
+    // Middlewares
+    app.use(mdws.notFoundMiddleware);
+    app.use(mdws.errorHandlingMiddleware);
+
+    serverInstance = app.listen(port, function () {
+      const serverDomain = process.env.SERVER_DOMAIN || "localhost";
+      const currentTime = new Date().toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      });
+
+      console.debug(
+        `[${currentTime}] \x1b[94m\x1b[1m[Server]\x1b[0m \x1b[94mhttp://${serverDomain}:${port} 🚀\x1b[0m`,
+      );
+    });
+
+    return serverInstance;
+  } catch (error) {
+    console.error("Error starting server:", error);
+    process.exit(1);
+  }
+};
+
+export const stopServer = async () => {
+  try {
+    await dbDisconnect();
+
+    if (serverInstance) {
+      serverInstance.close();
+      console.log("Server stopped");
+    }
+  } catch (error) {
+    console.error("Error stopping server:", error);
+    process.exit(1);
+  }
+};
 
 export default app;
