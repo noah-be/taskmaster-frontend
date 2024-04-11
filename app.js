@@ -11,6 +11,7 @@ import dotenv from "dotenv";
 
 const app = express();
 let serverInstance;
+let isServerRunning = false;
 
 //#region environment
 dotenv.config();
@@ -25,61 +26,64 @@ process.env.NODE_ENV === "development" && app.use(morgan("dev"));
 //#endregion
 
 export const startServer = () => {
-  try {
-    dbConnect();
+  return new Promise((resolve, reject) => {
+    try {
+      dbConnect();
 
-    app.set("view engine", "ejs");
-    app.set("etag", "strong");
-    app.set("views", viewsDirectories);
-    app.use(cookieParser());
-    app.use(express.json());
-    app.use(
-      express.urlencoded({
-        extended: true,
-      }),
-    );
+      app.set("view engine", "ejs");
+      app.set("etag", "strong");
+      app.set("views", viewsDirectories);
+      app.use(cookieParser());
+      app.use(express.json());
+      app.use(express.urlencoded({ extended: true }));
 
-    // Routes
-    app.use(express.static(path.join(BASE_DIR, "public")));
-    app.use("/api/auth", routes.authRoutes);
-    app.use("/api/task", routes.taskRoutes);
-    app.use("/", routes.generalRoutes);
+      // Routes
+      app.use(express.static(path.join(BASE_DIR, "public")));
+      app.use("/api/auth", routes.authRoutes);
+      app.use("/api/task", routes.taskRoutes);
+      app.use("/", routes.generalRoutes);
 
-    // Middlewares
-    app.use(mdws.notFoundMiddleware);
-    app.use(mdws.errorHandlingMiddleware);
+      // Middlewares
+      app.use(mdws.notFoundMiddleware);
+      app.use(mdws.errorHandlingMiddleware);
 
-    serverInstance = app.listen(port, function () {
-      const serverDomain = process.env.SERVER_DOMAIN || "localhost";
-      const currentTime = new Date().toLocaleTimeString("en-US", {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: false,
+      serverInstance = app.listen(port, () => {
+        isServerRunning = true;
+        const serverDomain = process.env.SERVER_DOMAIN || "localhost";
+        const currentTime = new Date().toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: false,
+        });
+
+        console.debug(
+          `[${currentTime}] \x1b[94m\x1b[1m[Server]\x1b[0m \x1b[94mhttp://${serverDomain}:${port} 🚀\x1b[0m`,
+        );
+        resolve(serverInstance);
       });
-
-      console.debug(
-        `[${currentTime}] \x1b[94m\x1b[1m[Server]\x1b[0m \x1b[94mhttp://${serverDomain}:${port} 🚀\x1b[0m`,
-      );
-    });
-
-    return serverInstance;
-  } catch (error) {
-    console.error("Error starting server:", error);
-    process.exit(1);
-  }
+    } catch (error) {
+      console.error("Error starting server:", error);
+      reject(error);
+    }
+  });
 };
 
 export const stopServer = async () => {
-  try {
+  if (serverInstance) {
     await dbDisconnect();
 
-    if (serverInstance) {
-      serverInstance.close();
-      console.log("Server stopped");
-    }
-  } catch (error) {
-    console.error("Error stopping server:", error);
-    process.exit(1);
+    return new Promise((resolve, reject) => {
+      serverInstance.close((err) => {
+        if (err) {
+          console.error("Error stopping server:", err);
+          reject(err);
+          return;
+        }
+        isServerRunning = false;
+        console.log("Server stopped");
+        resolve();
+      });
+    });
   }
 };
 
@@ -87,4 +91,5 @@ if (process.env.NODE_ENV !== "test") {
   startServer();
 }
 
+export const getServerStatus = () => isServerRunning;
 export default app;

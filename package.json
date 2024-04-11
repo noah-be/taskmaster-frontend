@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node app.js",
     "nm": "nodemon -x 'clear && node app.js'",
-    "test": "NODE_ENV=test jest --detectOpenHandles",
+    "test": "NODE_ENV=test jest",
     "sass": "sass --watch public/styles/scss:public/styles/css",
     "dev": "NODE_ENV=development concurrently \"npm run nm\" \"npm run sass\"",
     "lint": "eslint ."
@@ -25,7 +25,6 @@
   "jest": {
     "testEnvironment": "node",
     "coverageDirectory": "coverage",
-    "collectCoverage": true,
     "setupFilesAfterEnv": [
       "<rootDir>/tests/jestConsoleMock.js"
     ],
