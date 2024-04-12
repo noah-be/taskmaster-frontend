@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var span = document.getElementsByClassName("close")[0];
   // #region test
   function toggleModal() {
-    var elementsToBlur = document.querySelectorAll("main, header, footer");
+    //var elementsToBlur = document.querySelectorAll("main, header, footer");
+    var elementsToBlur = {};
     if (modal.style.display === "none" || modal.style.display === "") {
       modal.style.display = "block";
       elementsToBlur.forEach((el) => el.classList.add("blurred-background"));

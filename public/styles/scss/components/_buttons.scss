@@ -1,91 +1,89 @@
 %button-style {
-    color: white;
-    padding: 15px 20px;
-    border: none;
-    border-radius: 5px;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    outline: none;
-    transition: background-color 0.3s;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s;
 }
 
 #login-btn {
-    @extend %button-style;
-    background-color: #808080;
-    width: 100%;
-    margin-top: 10px;
+  @extend %button-style;
+  background-color: #595959;
+  width: 100%;
+  margin-top: 10px;
 
-    &:hover {
-        background-color: #696969;
-    }
+  &:hover {
+    background-color: #404040;
+  }
 
-    &:active {
-        background-color: #505050;
-    }
+  &:active {
+    background-color: #202020;
+  }
 }
 
 #home-btn {
-    @extend %button-style;
-    background-color: #2cf309;
-    width: 100%;
+  @extend %button-style;
+  background-color: #198214;
+  width: 100%;
 
-    &:hover {
-        background-color: #1f760f;
-    }
+  &:hover {
+    background-color: #145a0d;
+  }
 
-    &:active {
-        background-color: #085608;
-    }
+  &:active {
+    background-color: #0f3d09;
+  }
 }
 
 #create-new-account-btn {
-    @extend %button-style;
-    background-color: #42b72a;
-    font-size: 18px;
+  @extend %button-style;
+  background-color: #0c2607;
+  font-size: 18px;
 
-    &:hover {
-        background-color: #369b22;
-    }
+  &:hover {
+    background-color: #0f3d09;
+  }
 
-    &:active {
-        background-color: #2d8220;
-    }
+  &:active {
+    background-color: #0a2f07;
+  }
 }
 
 #sign-up-btn {
-    @extend %button-style;
-    background-color: rgb(80, 80, 231);
+  @extend %button-style;
+  background-color: #323aa8;
 
-    &:hover {
-        background-color: rgb(50, 50, 205);
-    }
+  &:hover {
+    background-color: #292c89;
+  }
 
-    &:active {
-        background-color: blue;
-    }
+  &:active {
+    background-color: #1e1f5e;
+  }
 }
 
 #toggle-guidelines-btn {
+  color: white;
+  padding: 10px 15px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s;
 
-    color: white;
-    padding: 10px 15px;
-    margin: 10px;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    outline: none;
-    transition: background-color 0.3s;
+  background-color: #323aa8;
 
+  &:hover {
+    background-color: #292c89;
+  }
 
-    background-color: rgb(80, 80, 231);
-
-    &:hover {
-        background-color: rgb(50, 50, 205);
-    }
-
-    &:active {
-        background-color: blue;
-    }
+  &:active {
+    background-color: #1e1f5e;
+  }
 }

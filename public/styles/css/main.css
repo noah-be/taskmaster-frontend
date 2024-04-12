@@ -313,47 +313,47 @@ h2 {
 }
 
 #login-btn {
-  background-color: #808080;
+  background-color: #595959;
   width: 100%;
   margin-top: 10px;
 }
 #login-btn:hover {
-  background-color: #696969;
+  background-color: #404040;
 }
 #login-btn:active {
-  background-color: #505050;
+  background-color: #202020;
 }
 
 #home-btn {
-  background-color: #2cf309;
+  background-color: #198214;
   width: 100%;
 }
 #home-btn:hover {
-  background-color: #1f760f;
+  background-color: #145a0d;
 }
 #home-btn:active {
-  background-color: #085608;
+  background-color: #0f3d09;
 }
 
 #create-new-account-btn {
-  background-color: #42b72a;
+  background-color: #0c2607;
   font-size: 18px;
 }
 #create-new-account-btn:hover {
-  background-color: #369b22;
+  background-color: #0f3d09;
 }
 #create-new-account-btn:active {
-  background-color: #2d8220;
+  background-color: #0a2f07;
 }
 
 #sign-up-btn {
-  background-color: rgb(80, 80, 231);
+  background-color: #323aa8;
 }
 #sign-up-btn:hover {
-  background-color: rgb(50, 50, 205);
+  background-color: #292c89;
 }
 #sign-up-btn:active {
-  background-color: blue;
+  background-color: #1e1f5e;
 }
 
 #toggle-guidelines-btn {
@@ -366,13 +366,13 @@ h2 {
   cursor: pointer;
   outline: none;
   transition: background-color 0.3s;
-  background-color: rgb(80, 80, 231);
+  background-color: #323aa8;
 }
 #toggle-guidelines-btn:hover {
-  background-color: rgb(50, 50, 205);
+  background-color: #292c89;
 }
 #toggle-guidelines-btn:active {
-  background-color: blue;
+  background-color: #1e1f5e;
 }
 
 #cookie-consent-banner {
