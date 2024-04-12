@@ -26,9 +26,9 @@ process.env.NODE_ENV === "development" && app.use(morgan("dev"));
 //#endregion
 
 export const startServer = () => {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     try {
-      dbConnect();
+      await dbConnect();
 
       app.set("view engine", "ejs");
       app.set("etag", "strong");
