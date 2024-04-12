@@ -1,6 +1,6 @@
 import request from "supertest";
-import app, { startServer, stopServer, getServerStatus } from "../app";
-import * as dbModule from "../config/dbConnect";
+import app, { startServer, stopServer, getServerStatus } from "../../app";
+import * as dbModule from "../../config/dbConnect";
 import { async } from "fast-glob";
 
 describe("Server Control", () => {

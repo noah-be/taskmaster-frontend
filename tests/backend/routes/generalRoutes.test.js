@@ -1,5 +1,5 @@
 import request from "supertest";
-import app, { startServer, stopServer } from "../../app";
+import app, { startServer, stopServer } from "../../../app";
 
 describe("General Routes", () => {
   beforeAll(async () => {
