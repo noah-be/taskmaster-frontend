@@ -44,6 +44,13 @@ const AuthController = {
     }
     try {
       const user = await validateUser(username, password);
+
+      if (!user) {
+        res.status(401).json({
+          message: "Invalid credentials",
+        });
+      }
+
       const authResult = await finalizeAuthentication(res, user._id);
       res.status(200).json({
         message: "User logged in successfully",
