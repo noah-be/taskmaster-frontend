@@ -1,5 +1,5 @@
 import request from "supertest";
-import app, { startServer, stopServer } from "../../../app";
+import app from "../../../app";
 
 export function runGeneralRoutesTests() {
   describe("General Routes", () => {

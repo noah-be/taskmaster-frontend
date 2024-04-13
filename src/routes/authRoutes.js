@@ -11,7 +11,7 @@ router.get("/check-username", async (req, res) => {
   const { username } = req.query;
   if (!username) {
     return res.status(400).json({
-      message: "Benutzername fehlt",
+      message: "Username missing",
     });
   }
   try {
