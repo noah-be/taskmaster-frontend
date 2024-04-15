@@ -56,14 +56,11 @@ To run tests, run the following command
 
 ## Screenshots
 
-![App Screenshot](![homepage](https://github.com/noah-frank/private-to-do-list/assets/10984564/3498d734-f1e4-4be5-a4e2-d91b86505d16)
-)
+![homepage](/screenshots/homepage.png)
 
-![App Screenshot](![tasks](https://github.com/noah-frank/private-to-do-list/assets/10984564/ecc99e94-1376-4236-8ace-4a5376be44e0)
-)
+![task](/screenshots/tasks.png)
 
-![App Screenshot](![edit-task](https://github.com/noah-frank/private-to-do-list/assets/10984564/34a98e25-88f3-4481-9a80-93370ad8b132)
-)
+![edit-tasks](/screenshots/edit-task.png)
 
 
 
