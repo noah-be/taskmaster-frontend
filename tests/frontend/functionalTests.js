@@ -1,22 +1,37 @@
-import User from "../../src/models/UserModel";
 import puppeteer from "puppeteer";
 import { startServer, stopServer } from "../../app";
+import { MongoMemoryServer } from "mongodb-memory-server";
 
 export function runFunctionalTests() {
   describe("Login Page Functional Test", () => {
     let browser;
     let page;
+    let mongoServer;
 
     beforeAll(async () => {
-      await startServer();
-      await User.deleteMany({});
+      mongoServer = await MongoMemoryServer.create();
+      const mongoUri = await mongoServer.getUri();
 
-      browser = await puppeteer.launch({ headless: true });
+      process.env.MONGODB_URI = mongoUri;
+
+      await startServer();
+
+      browser = await puppeteer.launch({
+        headless: true,
+        args: [
+          "--no-sandbox",
+          "--disable-setuid-sandbox",
+          "--disable-dev-shm-usage",
+          "--disable-accelerated-2d-canvas",
+          "--disable-gpu",
+          "--disable-images",
+          "--disable-stylesheets",
+        ],
+      });
       page = await browser.newPage();
     });
 
     afterAll(async () => {
-      await User.deleteMany({});
       await page.close();
       await browser.close();
       await stopServer();
@@ -25,22 +40,22 @@ export function runFunctionalTests() {
     it("should allow a user to register and redirect to tasks page", async () => {
       await page.goto("http://localhost:3002");
       await page.click("#create-new-account-btn");
-      await page.waitForSelector("#register-box");
+      //await page.waitForSelector("#register-box");
 
       await page.type("#register-username", "newuser");
       await page.type("#register-password", "Password7/#");
       await page.click("#sign-up-btn");
-      await page.waitForNavigation({ waitUntil: "networkidle0" });
+      await page.waitForNavigation({ waitUntil: "load" });
       expect(page.url()).toContain("/tasks");
     });
 
     it("should redirect to tasks page upon successful login", async () => {
       await page.goto("http://localhost:3002");
-      await page.waitForSelector("#login-form");
+      //await page.waitForSelector("#login-form");
       await page.type("#login-username", "newuser");
       await page.type("#login-password", "Password7/#");
       await page.click("#login-btn");
-      await page.waitForNavigation({ waitUntil: "networkidle0" });
+      await page.waitForNavigation({ waitUntil: "load" });
       expect(page.url()).toContain("/tasks");
     });
 
