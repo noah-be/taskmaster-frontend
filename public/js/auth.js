@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var modal = document.getElementById("register-box");
-  var link = document.getElementById("create-new-account-btn");
-  var span = document.getElementsByClassName("close")[0];
+  let modal = document.getElementById("register-box");
+  let link = document.getElementById("create-new-account-btn");
+  let span = document.getElementsByClassName("close")[0];
   // #region test
   function toggleModal() {
     if (modal.style.display === "none" || modal.style.display === "") {
