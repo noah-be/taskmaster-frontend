@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.post("/login", AuthController.login);
 router.post("/register", AuthController.register);
-//router.post('/googleSignIn', AuthController.googleSignIn);
 router.get("/check-username", async (req, res) => {
   const { username } = req.query;
   if (!username) {

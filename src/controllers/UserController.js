@@ -13,18 +13,6 @@ const UserController = {
     await newUser.save();
     return newUser;
   },
-  // async handleUserFromGoogle(payload) {
-  //     let user = await UserModel.findOne({ googleId: payload.sub });
-  //     if (!user) {
-  //         user = new UserModel({
-  //             username: payload.email,
-  //             isGoogleAccount: true,
-  //             googleId: payload.sub,
-  //         });
-  //         await user.save();
-  //     }
-  //     return user;
-  // }
 };
 
 export default UserController;
