@@ -1,8 +1,6 @@
-
 # Private todo list
 
 This project is a personal learning initiative focused on understanding the basics of web development. It includes practical implementations of user authentication and task management to provide a hands-on experience with essential web technologies. Tailored as a self-guided exploration, this project documents my progress and serves as a reference for fundamental concepts in building and deploying web applications. It is designed for personal use, to track learning milestones and challenges encountered along the way.
-
 
 ## Features
 
@@ -10,7 +8,6 @@ This project is a personal learning initiative focused on understanding the basi
 - Authentification for all users
 - Users can view, create, update, delete tasks
 - Authorization: Users can only manage their own tasks
-
 
 ## Run Locally
 
@@ -44,7 +41,6 @@ To set up this learning project on your local machine, you'll need Node.js and M
   npm run start
 ```
 
-
 ## Running Tests
 
 To run tests, run the following command
@@ -52,7 +48,6 @@ To run tests, run the following command
 ```bash
   npm run test
 ```
-
 
 ## Screenshots
 
@@ -62,6 +57,13 @@ To run tests, run the following command
 
 ![edit-tasks](/screenshots/edit-task.png)
 
+## Clean code
 
-
-
+- proper an consistent naming conventions
+- self-documenting
+- DRY
+- intention revealing variable and function names
+- no dead code
+- seperation of concern and good structure
+- simplicity
+- using tools like eslint to find problematic code formatting
