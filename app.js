@@ -16,7 +16,7 @@ let isServerRunning = false;
 //#region environment
 dotenv.config();
 const BASE_DIR = process.env.BASE_DIR || process.cwd();
-const port = process.env.PORT;
+const port = process.env.PORT || 3009;
 const viewsDirectories = [
   path.join(BASE_DIR, "views/layouts"),
   path.join(BASE_DIR, "views/pages"),
