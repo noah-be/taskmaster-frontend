@@ -2,6 +2,7 @@ import puppeteer from "puppeteer";
 import { MongoMemoryServer } from "mongodb-memory-server";
 
 import { startServer, stopServer } from "../../app.js";
+import User from "../../src/models/UserModel.js";
 
 export function runFunctionalTests() {
   describe("Login Page Functional Test", () => {
@@ -36,12 +37,17 @@ export function runFunctionalTests() {
       await page.close();
       await browser.close();
       await stopServer();
+      await mongoServer.stop();
+    });
+
+    afterEach(async () => {
+      await User.deleteMany({});
     });
 
     it("should allow a user to register and redirect to tasks page", async () => {
       await page.goto("http://localhost:3002");
       await page.click("#create-new-account-btn");
-
+      await page.waitForSelector("#register-box");
       await page.type("#register-username", "newuser");
       await page.type("#register-password", "Password7/#");
       await page.click("#sign-up-btn");
