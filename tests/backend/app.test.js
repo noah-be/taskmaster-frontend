@@ -1,5 +1,4 @@
-import request from "supertest";
-import app, { startServer, stopServer, getServerStatus } from "../../app";
+import { startServer, stopServer, getServerStatus } from "../../app";
 import * as dbModule from "../../config/dbConnect";
 
 describe("Server Control", () => {
