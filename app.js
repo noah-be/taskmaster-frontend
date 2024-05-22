@@ -3,10 +3,12 @@ import express from "express";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import path from "path";
+import dotenv from "dotenv";
+
 import routes from "./src/routes/index.js";
 import mdws from "./src/middlewares/index.js";
 import { dbConnect, dbDisconnect } from "./config/dbConnect.js";
-import dotenv from "dotenv";
+
 //#endregion
 
 const app = express();
