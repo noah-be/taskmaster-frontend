@@ -30,8 +30,7 @@
     "coverageDirectory": "coverage",
     "coveragePathIgnorePatterns": [
       "/node_modules/",
-      "/tests/frontend/accessibilityTests.js",
-      "/tests/frontend/functionalTests.js"
+      "/tests/"
     ],
     "setupFilesAfterEnv": [
       "<rootDir>/tests/jestConsoleMock.js"
