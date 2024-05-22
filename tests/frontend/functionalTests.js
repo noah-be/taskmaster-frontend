@@ -1,6 +1,7 @@
 import puppeteer from "puppeteer";
-import { startServer, stopServer } from "../../app";
 import { MongoMemoryServer } from "mongodb-memory-server";
+
+import { startServer, stopServer } from "../../app.js";
 
 export function runFunctionalTests() {
   describe("Login Page Functional Test", () => {
@@ -40,7 +41,6 @@ export function runFunctionalTests() {
     it("should allow a user to register and redirect to tasks page", async () => {
       await page.goto("http://localhost:3002");
       await page.click("#create-new-account-btn");
-      //await page.waitForSelector("#register-box");
 
       await page.type("#register-username", "newuser");
       await page.type("#register-password", "Password7/#");
@@ -51,7 +51,6 @@ export function runFunctionalTests() {
 
     it("should redirect to tasks page upon successful login", async () => {
       await page.goto("http://localhost:3002");
-      //await page.waitForSelector("#login-form");
       await page.type("#login-username", "newuser");
       await page.type("#login-password", "Password7/#");
       await page.click("#login-btn");

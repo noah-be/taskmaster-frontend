@@ -1,5 +1,5 @@
-import { runFunctionalTests } from "./functionalTests";
-import { runAccessibilityTests } from "./accessibilityTests";
+import { runFunctionalTests } from "./functionalTests.js";
+import { runAccessibilityTests } from "./accessibilityTests.js";
 
 describe("Frontend Tests", () => {
   runFunctionalTests();

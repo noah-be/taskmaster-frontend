@@ -1,7 +1,7 @@
-import { runGeneralRoutesTests } from "./generalRouteTests";
-import { runAuthRoutesTests } from "./authRoutesTest";
-import { runTaskRoutesTests } from "./taskRouteTests";
-import { startServer, stopServer } from "../../../app";
+import { runGeneralRoutesTests } from "./generalRouteTests.js";
+import { runAuthRoutesTests } from "./authRoutesTest.js";
+import { runTaskRoutesTests } from "./taskRouteTests.js";
+import { startServer, stopServer } from "../../../app.js";
 
 describe("Route Tests", () => {
   beforeAll(async () => {
