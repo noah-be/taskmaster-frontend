@@ -1,5 +1,4 @@
 import puppeteer from "puppeteer";
-import { MongoMemoryServer } from "mongodb-memory-server";
 
 import { startServer, stopServer } from "../../app.js";
 import User from "../../src/models/UserModel.js";
@@ -8,14 +7,8 @@ export function runFunctionalTests() {
   describe("Login Page Functional Test", () => {
     let browser;
     let page;
-    let mongoServer;
 
     beforeAll(async () => {
-      mongoServer = await MongoMemoryServer.create();
-      const mongoUri = await mongoServer.getUri();
-
-      process.env.MONGODB_URI = mongoUri;
-
       await startServer();
 
       browser = await puppeteer.launch({
@@ -37,7 +30,6 @@ export function runFunctionalTests() {
       await page.close();
       await browser.close();
       await stopServer();
-      await mongoServer.stop();
     });
 
     afterEach(async () => {
