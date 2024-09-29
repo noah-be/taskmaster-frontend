@@ -30,7 +30,7 @@ async function setJwtCookie(token, res) {
         res.cookie('jwt', token, {
             httpOnly: true,
             sameSite: 'None',
-            secure: true
+            secure: false
         });
     } catch (error) {
         console.error(error);

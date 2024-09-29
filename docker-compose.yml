@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  app:
+    build: .
+    container_name: todo_app
+    ports:
+      - "3009:3009"
+    environment:
+      MONGODB_URI: mongodb://mongo:27017/todo_database
+      NODE_ENV: development
+      JWT_SECRET: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzb21lIjoicGF5bG9hZCJ9.sHPlRPUlWZb_TH-smDxOBmU9rdVAu_JWwj-Mm7Xgj_o
+    depends_on:
+      - mongo
+    volumes:
+      - .:/usr/src/app
+    command: npm start
+
+  mongo:
+    image: mongo:latest
+    container_name: todo_mongo
+    ports:
+      - "27017:27017"
+    environment:
+#      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+#      - MONGO_INITDB_ROOT_PASSWORD=secret
+      - MONGO_BIND_IP=0.0.0.0
+    volumes:
+      - mongo-data:/data/db
+    command: mongod --quiet
+
+volumes:
+  mongo-data:
