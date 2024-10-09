@@ -4,6 +4,7 @@ import morgan from "morgan";
 import cookieParser from "cookie-parser";
 import path from "path";
 import dotenv from "dotenv";
+import cors from 'cors';
 
 import routes from "./src/routes/index.js";
 import mdws from "./src/middlewares/index.js";
@@ -38,6 +39,7 @@ export const startServer = () => {
       app.use(cookieParser());
       app.use(express.json());
       app.use(express.urlencoded({ extended: true }));
+      app.use(cors());
 
       // Routes
       app.use(express.static(path.join(BASE_DIR, "public")));
