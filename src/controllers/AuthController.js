@@ -53,6 +53,7 @@ const AuthController = {
         message: "User logged in successfully",
         userId: user._id,
         redirectUrl: authResult.redirectUrl,
+        token: authResult.token,
       });
     } catch (error) {
       next(error);

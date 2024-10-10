@@ -6,6 +6,7 @@ const finalizeAuthentication = async (res, userId) => {
     await setJwtCookie(token, res);
     return {
       redirectUrl: "/tasks",
+      token: token,
     };
   } catch (error) {
     console.error(error);
