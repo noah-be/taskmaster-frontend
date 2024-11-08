@@ -7,6 +7,7 @@ dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET;
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const IS_PRODUCTION = process.env.NODE_ENV === "production";
 
 const createToken = (userId) => {
     return jwt.sign({
@@ -29,7 +30,7 @@ async function setJwtCookie(token, res) {
     try {
         res.cookie('jwt', token, {
             httpOnly: true,
-            sameSite: 'None',
+            sameSite: IS_PRODUCTION ? "None" : "Lax",
             secure: false
         });
     } catch (error) {
