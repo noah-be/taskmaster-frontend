@@ -1,4 +1,5 @@
 .DS_Store
 node_modules
-coverage/
+frontend/test/coverage/
+backend/test/coverage/
 .env
