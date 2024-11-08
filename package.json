@@ -11,7 +11,7 @@
     "test-dev": "NODE_ENV=test jest --detectOpenHandles --coverage",
     "test-win": "SET NODE_ENV=test & jest --detectOpenHandles --coverage",
     "test-clean": "NODE_ENV=test STYLE=clean jest --verbose",
-    "sass": "sass --watch public/styles/scss:public/styles/css",
+    "sass": "sass --watch frontend/public/styles/scss:frontend/public/styles/css",
     "dev": "NODE_ENV=development concurrently \"npm run nm\" \"npm run sass\"",
     "lint": "eslint ."
   },
