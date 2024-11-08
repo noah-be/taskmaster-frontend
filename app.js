@@ -5,9 +5,9 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import dotenv from "dotenv";
 import cors from 'cors';
-import routes from "backend/src/routes/index.js";
-import mdws from "backend/src/middlewares/index.js";
-import { dbConnect, dbDisconnect } from "backend/src/config/dbConnect.js";
+import routes from "./backend/src/routes/index.js";
+import mdws from "./backend/src/middlewares/index.js";
+import { dbConnect, dbDisconnect } from "./backend/src/config/dbConnect.js";
 
 //#endregion
 
