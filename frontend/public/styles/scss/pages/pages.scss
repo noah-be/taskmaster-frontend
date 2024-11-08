@@ -1,4 +1,4 @@
-@import '404';
-@import 'about';
-@import 'home';
-@import 'tasks';
+@use 'error404';
+@use 'about';
+@use 'home';
+@use 'tasks';
