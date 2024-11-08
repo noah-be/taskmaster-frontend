@@ -1,3 +1,5 @@
+@use '../base/variables' as *;
+
 #cookie-consent-banner {
     display: none;
     flex-direction: column;

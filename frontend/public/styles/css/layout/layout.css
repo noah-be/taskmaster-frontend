@@ -1,18 +1,87 @@
-/* Error: Undefined variable.
- *   ,
- * 3 |     background-color: $primary-color;
- *   |                       ^^^^^^^^^^^^^^
- *   '
- *   frontend/public/styles/scss/layout/_footer.scss 3:23  @use
- *   frontend/public/styles/scss/layout/layout.scss 1:1    root stylesheet */
-
-body::before {
-  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
-      "Droid Sans Mono", monospace, monospace;
-  white-space: pre;
-  display: block;
-  padding: 1em;
-  margin-bottom: 1em;
-  border-bottom: 2px solid black;
-  content: "Error: Undefined variable.\a   \2577 \a 3 \2502      background-color: $primary-color;\a   \2502                        ^^^^^^^^^^^^^^\a   \2575 \a   frontend/public/styles/scss/layout/_footer.scss 3:23  @use\a   frontend/public/styles/scss/layout/layout.scss 1:1    root stylesheet";
+footer {
+  margin-top: auto;
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
 }
+
+header {
+  background-color: #333;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding: 10px;
+}
+header .user-profile-icon img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+header #profile-button {
+  width: 50px;
+  height: 50px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: lightgray;
+  min-height: 100vh;
+  font-size: 16px;
+}
+
+h1,
+h2,
+h3,
+p {
+  padding: 10px;
+}
+
+.topnav a {
+  color: #fff;
+  text-decoration: none;
+  border: 5px solid #fff;
+  padding: 10px 15px;
+}
+.topnav ul {
+  list-style-type: none;
+  padding: 0;
+}
+.topnav li {
+  display: inline;
+  margin-right: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+  .topnav li {
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+}
+@media only screen and (min-width: 1100px) {
+  .home {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .home #login-form {
+    width: 50%;
+  }
+  .home #todo-list-img {
+    display: block;
+    border-radius: 30px;
+    width: 50%;
+    padding: 10px;
+  }
+}
+
+/*# sourceMappingURL=layout.css.map */
