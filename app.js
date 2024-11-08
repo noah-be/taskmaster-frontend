@@ -20,9 +20,9 @@ dotenv.config();
 const BASE_DIR = process.env.BASE_DIR || process.cwd();
 const port = process.env.PORT || 3009;
 const viewsDirectories = [
-  path.join(BASE_DIR, "views/layouts"),
-  path.join(BASE_DIR, "views/pages"),
-  path.join(BASE_DIR, "views/partials"),
+  path.join(BASE_DIR, "frontend/public/views/layouts"),
+  path.join(BASE_DIR, "frontend/public/views/pages"),
+  path.join(BASE_DIR, "frontend/public/views/partials"),
 ];
 process.env.NODE_ENV === "development" && app.use(morgan("dev"));
 //#endregion
@@ -41,7 +41,7 @@ export const startServer = () => {
       app.use(cors());
 
       // Routes
-      app.use(express.static(path.join(BASE_DIR, "public")));
+      app.use(express.static(path.join(BASE_DIR, "frontend/public")));
       app.use("/api/auth", routes.authRoutes);
       app.use("/api/task", routes.taskRoutes);
       app.use("/", routes.generalRoutes);
