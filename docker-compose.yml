@@ -11,8 +11,6 @@ services:
       JWT_SECRET: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzb21lIjoicGF5bG9hZCJ9.sHPlRPUlWZb_TH-smDxOBmU9rdVAu_JWwj-Mm7Xgj_o
     depends_on:
       - mongo
-    volumes:
-      - .:/usr/src/app
     command: npm start
 
   mongo:
@@ -20,13 +18,12 @@ services:
     container_name: todo_mongo
     ports:
       - "27017:27017"
-    environment:
-#      - MONGO_INITDB_ROOT_USERNAME=mongoadmin
-#      - MONGO_INITDB_ROOT_PASSWORD=secret
-      - MONGO_BIND_IP=0.0.0.0
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: mongoadmin
+#      MONGO_INITDB_ROOT_PASSWORD: secret
     volumes:
       - mongo-data:/data/db
-    command: mongod --quiet
+    command: mongod --bind_ip 0.0.0.0 --noauth
 
 volumes:
   mongo-data:
