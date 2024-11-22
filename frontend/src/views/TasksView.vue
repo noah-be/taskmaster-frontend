@@ -1,5 +1,5 @@
 <script setup></script>
 
 <template>
-  <main></main>
+  <main><p>Tasks table placeholder</p></main>
 </template>

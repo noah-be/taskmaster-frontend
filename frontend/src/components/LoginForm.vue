@@ -1,36 +1,58 @@
 <template>
-    <form id="login-form" @submit.prevent="submitLogin">
-        <h2>Login</h2>
-        <label for="login-username">Username</label>
-        <input type="text" id="login-username" v-model="username" placeholder="Username" autocomplete="username" />
+  <form id="login-form" @submit.prevent="submitLogin">
+    <RegisterBox v-if="showregisterBox" @close="showregisterBox = false" />
 
-        <label for="login-password">Password</label>
-        <input type="password" id="login-password" v-model="password" placeholder="Password"
-            autocomplete="current-password" />
+    <h2>Login</h2>
+    <label for="login-username">Username</label>
+    <input
+      type="text"
+      id="login-username"
+      v-model="username"
+      placeholder="Username"
+      autocomplete="username"
+    />
 
-        <button id="login-btn" type="submit">Log In</button>
-        <hr />
-        <button id="create-new-account-btn" class="create-new-account-btn" @click.prevent="createNewAccount">
-            Create new account
-        </button>
-    </form>
+    <label for="login-password">Password</label>
+    <input
+      type="password"
+      id="login-password"
+      v-model="password"
+      placeholder="Password"
+      autocomplete="current-password"
+    />
+
+    <button id="login-btn" type="submit">Log In</button>
+    <hr />
+    <button
+      id="create-new-account-btn"
+      class="create-new-account-btn"
+      @click.prevent="createNewAccount"
+    >
+      Create new account
+    </button>
+  </form>
 </template>
 
 <script>
+import RegisterBox from "@/components/RegisterBox.vue";
 export default {
-    data() {
-        return {
-            username: "",
-            password: "",
-        };
+  components: {
+    RegisterBox,
+  },
+  data() {
+    return {
+      username: "",
+      password: "",
+      showregisterBox: false,
+    };
+  },
+  methods: {
+    submitLogin() {
+      // TODO: Handle login
     },
-    methods: {
-        submitLogin() {
-            // TODO: Handle login
-        },
-        createNewAccount() {
-            // TODO: Handle  create new account
-        },
+    createNewAccount() {
+      this.showregisterBox = true;
     },
+  },
 };
 </script>
