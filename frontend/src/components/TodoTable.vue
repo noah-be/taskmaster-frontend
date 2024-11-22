@@ -35,6 +35,7 @@
     <EditTaskBox
       v-if="showEditBox"
       :task="selectedTask"
+      @update-task="updateTask"
       @close="showEditBox = false"
     />
   </div>
@@ -72,6 +73,14 @@ export default {
         this.tasks = data;
       } catch (error) {
         console.error("Error loading tasks:", error);
+      }
+    },
+    updateTask(updatedTask) {
+      const index = this.tasks.findIndex(
+        (task) => task._id === updatedTask._id,
+      );
+      if (index !== -1) {
+        this.tasks.splice(index, 1, updatedTask);
       }
     },
     openEditBox(task) {

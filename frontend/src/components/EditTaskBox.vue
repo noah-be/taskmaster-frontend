@@ -51,9 +51,28 @@ export default {
     };
   },
   methods: {
-    saveChanges() {
-      this.$emit("update-task", this.taskCopy);
-      this.$emit("close");
+    async saveChanges() {
+      try {
+        const response = await fetch(`/api/task/${this.taskCopy._id}`, {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+          body: JSON.stringify(this.taskCopy),
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to save task changes");
+        }
+
+        const updatedTask = await response.json();
+        this.$emit("update-task", updatedTask);
+        this.$emit("close");
+      } catch (error) {
+        console.error("Error saving task changes:", error);
+        alert("Failed to save changes. Please try again.");
+      }
     },
   },
 };
