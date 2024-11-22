@@ -35,19 +35,40 @@
 
 <script>
 export default {
-  props: {
-    tasks: {
-      type: Array,
-      required: true,
-    },
+  data() {
+    return {
+      tasks: [],
+    };
   },
   methods: {
+    async fetchTasks() {
+      try {
+        const response = await fetch("/api/task/getAll", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch tasks");
+        }
+
+        const data = await response.json();
+        this.tasks = data;
+      } catch (error) {
+        console.error("Error loading tasks:", error);
+      }
+    },
     editTask(task) {
       // TODO: Handle editing a task
     },
     toggleTaskCompletion(taskId) {
       // TODO: Handle toggling task completion
     },
+  },
+  mounted() {
+    this.fetchTasks();
   },
 };
 </script>
