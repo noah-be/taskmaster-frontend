@@ -34,21 +34,21 @@
 </template>
 
 <script>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 import RegisterBox from "@/components/RegisterBox.vue";
 
 export default {
   components: {
     RegisterBox,
   },
-  data() {
-    return {
-      username: "",
-      password: "",
-      showregisterBox: false,
-    };
-  },
-  methods: {
-    async submitLogin() {
+  setup() {
+    const router = useRouter();
+    const username = ref("");
+    const password = ref("");
+    const showregisterBox = ref(false);
+
+    const submitLogin = async () => {
       try {
         const response = await fetch("/api/auth/login", {
           method: "POST",
@@ -56,8 +56,8 @@ export default {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            username: this.username,
-            password: this.password,
+            username: username.value,
+            password: password.value,
           }),
         });
 
@@ -66,16 +66,29 @@ export default {
         }
 
         const data = await response.json();
+
         console.debug("Success:", data);
-        this.$router.push("/tasks");
+
+        localStorage.setItem("token", data.token);
+
+        router.push(data.redirectUrl);
       } catch (error) {
         console.error("Error:", error);
         alert("Login failed. Please try again.");
       }
-    },
-    createNewAccount() {
-      this.showregisterBox = true;
-    },
+    };
+
+    const createNewAccount = () => {
+      showregisterBox.value = true;
+    };
+
+    return {
+      username,
+      password,
+      showregisterBox,
+      submitLogin,
+      createNewAccount,
+    };
   },
 };
 </script>
