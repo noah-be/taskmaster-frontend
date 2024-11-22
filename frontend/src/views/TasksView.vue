@@ -2,7 +2,7 @@
   <main>
     <h2>To-Do List</h2>
 
-    <NewTaskForm @add-task="addTask" />
+    <NewTaskForm @task-added="addTaskToList" />
 
     <TodoTable
       :tasks="tasks"
@@ -39,8 +39,26 @@ export default {
     };
   },
   methods: {
-    addTask(task) {
-      this.tasks.push({ ...task, id: Date.now(), completed: false });
+    async fetchTasks() {
+      try {
+        const response = await fetch("/api/task/getAll", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch tasks");
+        }
+
+        this.tasks = await response.json();
+      } catch (error) {
+        console.error("Error fetching tasks:", error);
+      }
+    },
+    addTaskToList(newTask) {
+      this.tasks.push(newTask);
     },
     openEditModal(task) {
       this.currentTask = { ...task };
@@ -69,6 +87,9 @@ export default {
         task.completed = !task.completed;
       }
     },
+  },
+  mounted() {
+    this.fetchTasks();
   },
 };
 </script>

@@ -67,7 +67,7 @@ export default {
         }
 
         const updatedTask = await response.json();
-        this.$emit("update-task", updatedTask);
+        this.$emit("save-task", updatedTask);
         this.$emit("close");
       } catch (error) {
         console.error("Error saving task changes:", error);
