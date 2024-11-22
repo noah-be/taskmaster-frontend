@@ -31,7 +31,12 @@
             <option value="Low">Low</option>
           </select>
         </div>
-        <button type="button" @click="saveChanges">Save Changes</button>
+        <button type="button" id="delete-task-btn" @click="deleteTask">
+          Delete
+        </button>
+        <button type="button" id="save-edit-task-btn" @click="saveChanges">
+          Save Changes
+        </button>
       </form>
     </div>
   </div>
@@ -72,6 +77,26 @@ export default {
       } catch (error) {
         console.error("Error saving task changes:", error);
         alert("Failed to save changes. Please try again.");
+      }
+    },
+    async deleteTask() {
+      try {
+        const response = await fetch(`/api/task/${this.taskCopy._id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to delete task");
+        }
+
+        this.$emit("delete-task", this.taskCopy._id);
+        this.$emit("close");
+      } catch (error) {
+        console.error(error);
+        alert("Failed to delete task.");
       }
     },
   },
