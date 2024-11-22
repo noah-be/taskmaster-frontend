@@ -25,10 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(handleError);
   };
 
-  window.closeEditModal = function () {
-    document.getElementById("edit-task-modal").style.display = "none";
-  };
-
   window.submitEditTask = function () {
     const formData = getFormData();
     performFetch(`/api/task/${formData.id}`, "PATCH", JSON.stringify(formData))
@@ -107,9 +103,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  function updateTaskTable() {
-    window.location.reload();
-  }
 
   async function performFetch(url, method, body) {
     return fetch(url, {

@@ -67,7 +67,7 @@ export default {
 
         const data = await response.json();
         console.debug("Success:", data);
-        window.location.href = "/tasks";
+        this.$router.push("/tasks");
       } catch (error) {
         console.error("Error:", error);
         alert("Login failed. Please try again.");

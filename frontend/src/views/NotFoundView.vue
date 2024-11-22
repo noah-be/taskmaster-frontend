@@ -1,4 +1,12 @@
-<script setup></script>
+<script setup>
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+
+function goHome() {
+  router.push("/");
+}
+</script>
 
 <template>
   <main>
@@ -7,8 +15,6 @@
       src="/images/404_cat.jpeg"
       alt="A sad looking cat and the white text 404 not found."
     />
-    <button href="/" id="home-btn">Bring Me Home</button>
-
-    <!-- TODO: Add button function -->
+    <button id="home-btn" @click="goHome">Bring Me Home</button>
   </main>
 </template>

@@ -22,7 +22,7 @@
       features to meet the objectives of both the frontend and backend modules.
       Feel free to explore the features and technologies I've implemented. If
       you have any questions or just want to say hello, feel free to
-      <a href="/contact">contact me</a>.
+      <router-link to="/contact">contact me</router-link>
     </p>
     <p>Thank you for visiting and showing interest in my learning project!</p>
   </main>
