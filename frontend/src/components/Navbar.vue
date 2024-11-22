@@ -9,6 +9,8 @@
 </template>
 
 <style lang="scss">
+@use "@/assets/scss/mixins" as *;
+
 .topnav {
   a {
     color: $secondary-color;

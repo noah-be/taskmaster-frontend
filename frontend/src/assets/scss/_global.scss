@@ -1,4 +1,4 @@
-@use "../base/variables" as *;
+@use "./variables" as *;
 
 html,
 body,
@@ -12,6 +12,11 @@ body,
   background-color: lightgray;
   min-height: 100vh;
   font-size: $base-font-size;
+}
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 h1,

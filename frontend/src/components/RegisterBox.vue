@@ -54,7 +54,9 @@
           {{ passwordFeedback }}
         </div>
 
-        <button type="submit" :disabled="!formValid">Sign Up</button>
+        <button type="submit" id="sign-up-btn" :disabled="!formValid">
+          Sign Up
+        </button>
       </form>
     </div>
   </div>
@@ -176,3 +178,101 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+#register-form {
+  display: flex;
+  flex-direction: column;
+
+  label {
+    margin-bottom: 5px;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+}
+
+.modal {
+  position: fixed;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+
+  &-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 500px;
+    border-radius: 5px;
+    box-shadow:
+      0 4px 8px 0 rgba(0, 0, 0, 0.2),
+      0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 24px;
+    }
+  }
+
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+
+    &:hover,
+    &:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+}
+
+#sign-up-btn {
+  @extend %button-style;
+  background-color: #323aa8;
+
+  &:hover {
+    background-color: #292c89;
+  }
+
+  &:active {
+    background-color: #1e1f5e;
+  }
+}
+
+#toggle-guidelines-btn {
+  color: white;
+  padding: 10px 15px;
+  margin: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s;
+
+  background-color: #323aa8;
+
+  &:hover {
+    background-color: #292c89;
+  }
+
+  &:active {
+    background-color: #1e1f5e;
+  }
+}
+</style>

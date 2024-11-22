@@ -18,6 +18,35 @@ import LoginForm from "@/components/LoginForm.vue";
 </template>
 
 <style lang="scss">
+#login-btn {
+  @extend %button-style;
+  background-color: #595959;
+  width: 100%;
+  margin-top: 10px;
+
+  &:hover {
+    background-color: #404040;
+  }
+
+  &:active {
+    background-color: #202020;
+  }
+}
+
+#create-new-account-btn {
+  @extend %button-style;
+  background-color: #0c2607;
+  font-size: 18px;
+
+  &:hover {
+    background-color: #0f3d09;
+  }
+
+  &:active {
+    background-color: #0a2f07;
+  }
+}
+
 .blurred-background {
   filter: blur(5px);
   transition: filter 2s ease;

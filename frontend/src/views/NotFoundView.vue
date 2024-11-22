@@ -18,3 +18,19 @@ function goHome() {
     <button id="home-btn" @click="goHome">Bring Me Home</button>
   </main>
 </template>
+
+<style lang="scss">
+#home-btn {
+  @extend %button-style;
+  background-color: #198214;
+  width: 100%;
+
+  &:hover {
+    background-color: #145a0d;
+  }
+
+  &:active {
+    background-color: #0f3d09;
+  }
+}
+</style>

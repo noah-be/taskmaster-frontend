@@ -1,3 +1,4 @@
-@use "base/base";
-@use "layout/layout";
-@use "components/components";
+@use "./global" as *;
+@use "./mixins" as *;
+@use "./responsive" as *;
+@use "./variables" as *;
