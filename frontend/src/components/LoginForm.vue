@@ -35,6 +35,7 @@
 
 <script>
 import RegisterBox from "@/components/RegisterBox.vue";
+
 export default {
   components: {
     RegisterBox,
@@ -47,8 +48,30 @@ export default {
     };
   },
   methods: {
-    submitLogin() {
-      // TODO: Handle login
+    async submitLogin() {
+      try {
+        const response = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: this.username,
+            password: this.password,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error("Login failed");
+        }
+
+        const data = await response.json();
+        console.debug("Success:", data);
+        window.location.href = "/tasks";
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Login failed. Please try again.");
+      }
     },
     createNewAccount() {
       this.showregisterBox = true;
