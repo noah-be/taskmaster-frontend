@@ -1,8 +1,7 @@
 $breakpoint-small: 768px;
 $breakpoint-large: 1100px;
 
-$font-stack: Arial,
-sans-serif;
+$font-stack: Arial, sans-serif;
 $base-font-size: 16px;
 
 $primary-color: #333;
@@ -17,6 +16,8 @@ $cookie-banner-text-color: #5a3825;
 $cookie-button-bg-color: #e0c3a6;
 
 $todo-bg-color: #eaf6ff;
-$priority-colors: ("High": #f70000,
-    "Medium": #ffd000,
-    "Low": #01aeff);
+$priority-colors: (
+  "High": #f70000,
+  "Medium": #ffd000,
+  "Low": #01aeff,
+);

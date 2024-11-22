@@ -7,3 +7,24 @@
     </ul>
   </nav>
 </template>
+
+<style lang="scss">
+.topnav {
+  a {
+    color: $secondary-color;
+    text-decoration: none;
+    border: 5px solid $secondary-color;
+    padding: 10px 15px;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    display: inline;
+    margin-right: 10px;
+  }
+}
+</style>
