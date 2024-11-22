@@ -15,6 +15,7 @@
           v-for="(task, index) in tasks"
           :key="task.id"
           :class="task.completed ? 'done' : 'not-done-' + task.priority"
+          @click="openEditBox(task)"
         >
           <td>{{ task.title }}</td>
           <td>{{ task.description }}</td>
@@ -30,14 +31,27 @@
         </tr>
       </tbody>
     </table>
+
+    <EditTaskBox
+      v-if="showEditBox"
+      :task="selectedTask"
+      @close="showEditBox = false"
+    />
   </div>
 </template>
 
 <script>
+import EditTaskBox from "@/components/EditTaskBox.vue";
+
 export default {
+  components: {
+    EditTaskBox,
+  },
   data() {
     return {
       tasks: [],
+      showEditBox: false,
+      selectedTask: null,
     };
   },
   methods: {
@@ -60,8 +74,9 @@ export default {
         console.error("Error loading tasks:", error);
       }
     },
-    editTask(task) {
-      // TODO: Handle editing a task
+    openEditBox(task) {
+      this.selectedTask = task;
+      this.showEditBox = true;
     },
     toggleTaskCompletion(taskId) {
       // TODO: Handle toggling task completion
