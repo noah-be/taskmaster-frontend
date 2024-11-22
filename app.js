@@ -2,9 +2,8 @@
 import express from "express";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
-import path from "path";
 import dotenv from "dotenv";
-import cors from 'cors';
+import cors from "cors";
 import routes from "./backend/src/routes/index.js";
 import mdws from "./backend/src/middlewares/index.js";
 import { dbConnect, dbDisconnect } from "./backend/src/config/dbConnect.js";
@@ -17,13 +16,7 @@ let isServerRunning = false;
 
 //#region environment
 dotenv.config();
-const BASE_DIR = process.env.BASE_DIR || process.cwd();
 const port = process.env.PORT || 3009;
-const viewsDirectories = [
-  path.join(BASE_DIR, "frontend/public/views/layouts"),
-  path.join(BASE_DIR, "frontend/public/views/pages"),
-  path.join(BASE_DIR, "frontend/public/views/partials"),
-];
 process.env.NODE_ENV === "development" && app.use(morgan("dev"));
 //#endregion
 
@@ -32,19 +25,14 @@ export const startServer = () => {
     try {
       await dbConnect();
 
-      app.set("view engine", "ejs");
-      app.set("etag", "strong");
-      app.set("views", viewsDirectories);
       app.use(cookieParser());
       app.use(express.json());
       app.use(express.urlencoded({ extended: true }));
       app.use(cors());
 
       // Routes
-      app.use(express.static(path.join(BASE_DIR, "frontend/public")));
       app.use("/api/auth", routes.authRoutes);
       app.use("/api/task", routes.taskRoutes);
-      app.use("/", routes.generalRoutes);
 
       // Middlewares
       app.use(mdws.notFoundMiddleware);
