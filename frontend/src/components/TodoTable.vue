@@ -1,0 +1,58 @@
+<template>
+  <div id="todo-table-container">
+    <table id="todo-table">
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Due Date</th>
+        <th>Priority</th>
+        <th>Done</th>
+      </tr>
+      <tr
+        v-for="(task, index) in tasks"
+        :key="task._id"
+        :id="'task-row-' + index"
+        :class="task.completed ? 'done' : 'not-done-' + task.priority"
+        :data-task-id="task._id"
+        :data-task-title="task.title"
+        :data-task-description="task.description"
+        :data-task-due-date="task.dueDate"
+        :data-task-priority="task.priority"
+        @click="editTask(task)"
+      >
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.formattedDueDate }}</td>
+        <td>{{ task.priority }}</td>
+        <td>
+          <input
+            type="checkbox"
+            name="task_done"
+            :value="task._id"
+            :checked="task.completed"
+            @click.stop="toggleTaskCompletion(task._id)"
+          />
+        </td>
+      </tr>
+    </table>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    tasks: {
+      type: Array,
+      required: true,
+    },
+  },
+  methods: {
+    editTask(task) {
+      // TODO: Handle editing a task
+    },
+    toggleTaskCompletion(taskId) {
+      // TODO: Handle toggling task completion
+    },
+  },
+};
+</script>
