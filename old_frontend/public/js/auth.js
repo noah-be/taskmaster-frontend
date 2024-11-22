@@ -1,28 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let modal = document.getElementById("register-box");
-  let link = document.getElementById("create-new-account-btn");
-  let span = document.getElementsByClassName("close")[0];
-  // #region test
-  function toggleModal() {
-    if (modal.style.display === "none" || modal.style.display === "") {
-      modal.style.display = "block";
-    } else {
-      modal.style.display = "none";
-    }
-  }
-  link.onclick = function (event) {
-    event.preventDefault();
-    toggleModal();
-  };
-  span.onclick = function () {
-    toggleModal();
-  };
-  window.onclick = function (event) {
-    if (event.target == modal) {
-      toggleModal();
-    }
-  };
-  // #endregion
+
   document
     .getElementById("sign-up-btn")
     .addEventListener("click", function (event) {
@@ -137,28 +114,4 @@ document.addEventListener("DOMContentLoaded", function () {
       passwordFeedback.textContent = "";
       updateSignUpButtonState();
     });
-  document
-    .getElementById("toggle-guidelines-btn")
-    .addEventListener("click", function () {
-      const guidelines = document.getElementById("registration-guidelines");
-      if (
-        guidelines.style.display === "none" ||
-        guidelines.style.display === ""
-      ) {
-        guidelines.style.display = "block";
-        this.textContent = "Hide Registration Guidelines";
-      } else {
-        guidelines.style.display = "none";
-        this.textContent = "Show Registration Guidelines";
-      }
-    });
-
-  function updateSignUpButtonState() {
-    const usernameFeedback =
-      document.getElementById("username-feedback").textContent;
-    const passwordFeedback =
-      document.getElementById("password-feedback").textContent;
-    const signUpButton = document.getElementById("sign-up-btn");
-    signUpButton.disabled = usernameFeedback !== "" || passwordFeedback !== "";
-  }
 });
