@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Header.vue > renders correctly and matches snapshot 1`] = `
+"<header class="header">
+  <h1>Task Master</h1>
+  <nav></nav><button id="profile-button" class="user-profile-icon"><img src="/images/profile-user.png" alt="User Profile"></button>
+</header>"
+`;
