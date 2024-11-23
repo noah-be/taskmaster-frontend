@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`LoginForm.vue > matches the snapshot 1`] = `
+"<form id="login-form">
+  <!--v-if-->
+  <h2>Login</h2><label for="login-username">Username</label><input type="text" id="login-username" placeholder="Username" autocomplete="username"><label for="login-password">Password</label><input type="password" id="login-password" placeholder="Password" autocomplete="current-password"><button id="login-btn" type="submit">Log In</button>
+  <hr><button id="create-new-account-btn" class="create-new-account-btn"> Create new account </button>
+</form>"
+`;
