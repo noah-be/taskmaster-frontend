@@ -47,20 +47,20 @@ describe("TodoTable.vue", () => {
     expect(wrapper.emitted("edit-task")[1][0]).toEqual(mockTasks[1]);
   });
 
-  //   it("emits 'toggle-task' when the checkbox is clicked", async () => {
-  //     const wrapper = mount(TodoTable, {
-  //       props: { tasks: mockTasks },
-  //     });
+  it("emits 'toggle-task' when the checkbox is clicked", async () => {
+    const wrapper = mount(TodoTable, {
+      props: { tasks: mockTasks },
+    });
 
-  //     const checkboxes = wrapper.findAll("tbody input[type='checkbox']");
+    const checkboxes = wrapper.findAll("tbody input[type='checkbox']");
 
-  //     await checkboxes[0].trigger("change");
-  //     expect(wrapper.emitted("toggle-task")).toBeTruthy();
-  //     expect(wrapper.emitted("toggle-task")[0][0]).toBe(mockTasks[0].id);
+    await checkboxes[0].trigger("change");
+    expect(wrapper.emitted("toggle-task")).toBeTruthy();
+    expect(wrapper.emitted("toggle-task")[0][0]).toBe(mockTasks[0]._id);
 
-  //     await checkboxes[1].trigger("change");
-  //     expect(wrapper.emitted("toggle-task")[1][0]).toBe(mockTasks[1].id);
-  //   });
+    await checkboxes[1].trigger("change");
+    expect(wrapper.emitted("toggle-task")[1][0]).toBe(mockTasks[1]._id);
+  });
 
   it("applies the correct row class based on task completion", () => {
     const wrapper = mount(TodoTable, {
