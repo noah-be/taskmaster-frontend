@@ -10,6 +10,9 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "jsdom",
+    coverage: {
+      exclude: ["src/main.js", "src/App.vue"],
+    },
   },
   css: {
     preprocessorOptions: {
