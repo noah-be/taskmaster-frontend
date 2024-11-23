@@ -3,6 +3,10 @@ import { mount } from "@vue/test-utils";
 import NewTaskForm from "@/components/NewTaskForm.vue";
 
 describe("NewTaskForm.vue", () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
   it("matches the snapshot", () => {
     const wrapper = mount(NewTaskForm);
     expect(wrapper.html()).toMatchSnapshot();
@@ -58,6 +62,46 @@ describe("NewTaskForm.vue", () => {
         }),
       }),
     );
+  });
+
+  it("handles backend error when adding a task", async () => {
+    const consoleErrorMock = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+    global.fetch = vi.fn(() =>
+      Promise.resolve({
+        ok: false,
+      }),
+    );
+
+    const wrapper = mount(NewTaskForm);
+
+    await wrapper.find("#task-input").setValue("Test Task");
+    await wrapper.find("#due-date-input").setValue("2024-12-01");
+    await wrapper.find("#add-task-btn").trigger("click");
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      "/api/task",
+      expect.objectContaining({
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+        body: JSON.stringify({
+          title: "Test Task",
+          priority: "Medium",
+          dueDate: "2024-12-01",
+        }),
+      }),
+    );
+
+    expect(consoleErrorMock).toHaveBeenCalledWith(expect.any(Error));
+    expect(consoleErrorMock.mock.calls[0][0].message).toBe(
+      "Failed to add task",
+    );
+
+    consoleErrorMock.mockRestore();
   });
 
   it("emits task-added with the new task", async () => {
