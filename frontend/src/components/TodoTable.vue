@@ -25,7 +25,8 @@
             <input
               type="checkbox"
               :checked="task.completed"
-              @change.stop="$emit('toggle-task', task.id)"
+              @click.stop
+              @change="$emit('toggle-task', task._id)"
             />
           </td>
         </tr>

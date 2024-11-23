@@ -81,10 +81,29 @@ export default {
       }
       this.closeEditModal();
     },
-    toggleTaskCompletion(taskId) {
-      const task = this.tasks.find((task) => task.id === taskId);
-      if (task) {
-        task.completed = !task.completed;
+    async toggleTaskCompletion(taskId) {
+      try {
+        const response = await fetch(`/api/task/toggle/${taskId}`, {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to toggle task completion in backend");
+        }
+
+        const data = await response.json();
+        const updatedTask = data.task;
+
+        const taskIndex = this.tasks.findIndex((task) => task._id === taskId);
+        if (taskIndex !== -1) {
+          this.tasks.splice(taskIndex, 1, updatedTask);
+        }
+      } catch (error) {
+        console.error(error);
+        alert("Error toggling task completion. Please try again.");
       }
     },
   },
