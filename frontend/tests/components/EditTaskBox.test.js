@@ -56,6 +56,38 @@ describe("EditTaskBox.vue", () => {
     global.fetch.mockRestore();
   });
 
+  it("handles error when saving changes fails", async () => {
+    const consoleErrorMock = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
+
+    global.fetch = vi.fn(() =>
+      Promise.resolve({
+        ok: false,
+      }),
+    );
+
+    const wrapper = mount(EditTaskBox, {
+      props: { task: mockTask },
+    });
+
+    await wrapper.find("#edit-task-title").setValue("Failed Update");
+    await wrapper.find("#save-edit-task-btn").trigger("click");
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      `/api/task/${mockTask._id}`,
+      expect.anything(),
+    );
+    expect(consoleErrorMock).toHaveBeenCalled();
+    expect(alertMock).toHaveBeenCalledWith(
+      "Failed to save changes. Please try again.",
+    );
+
+    consoleErrorMock.mockRestore();
+    alertMock.mockRestore();
+  });
+
   it("emits delete-task with task ID on deleteTask", async () => {
     const wrapper = mount(EditTaskBox, {
       props: { task: mockTask },
@@ -75,6 +107,35 @@ describe("EditTaskBox.vue", () => {
     );
     expect(wrapper.emitted("delete-task")).toBeTruthy();
     expect(wrapper.emitted("delete-task")[0][0]).toBe(mockTask._id);
+  });
+
+  it("handles error when deleting task fails", async () => {
+    const consoleErrorMock = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
+    const alertMock = vi.spyOn(window, "alert").mockImplementation(() => {});
+
+    global.fetch = vi.fn(() =>
+      Promise.resolve({
+        ok: false,
+      }),
+    );
+
+    const wrapper = mount(EditTaskBox, {
+      props: { task: mockTask },
+    });
+
+    await wrapper.find("#delete-task-btn").trigger("click");
+
+    expect(global.fetch).toHaveBeenCalledWith(
+      `/api/task/${mockTask._id}`,
+      expect.anything(),
+    );
+    expect(consoleErrorMock).toHaveBeenCalled();
+    expect(alertMock).toHaveBeenCalledWith("Failed to delete task.");
+
+    consoleErrorMock.mockRestore();
+    alertMock.mockRestore();
   });
 
   it("emits close on clicking close button", async () => {
