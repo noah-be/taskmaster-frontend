@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`NewTaskForm.vue > matches the snapshot 1`] = `
+"<div id="new-task-form"><input type="text" id="task-input" placeholder="Enter task..."><select id="priority-input">
+    <option value="Low">Low</option>
+    <option value="Medium">Medium</option>
+    <option value="High">High</option>
+  </select><input type="date" id="due-date-input"><button id="add-task-btn">Add Task</button></div>"
+`;
