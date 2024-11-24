@@ -31,6 +31,20 @@ describe("LoginForm.vue", () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
+  it("hides the RegisterBox when the close event is emitted", async () => {
+    const wrapper = mount(LoginForm, {
+      global: {
+        plugins: [mockRouter],
+      },
+    });
+
+    wrapper.vm.showregisterBox = true;
+    await wrapper.vm.$nextTick();
+
+    wrapper.findComponent({ name: "RegisterBox" }).vm.$emit("close");
+    expect(wrapper.vm.showregisterBox).toBe(false);
+  });
+
   it("shows the RegisterBox when the create new account button is clicked", async () => {
     const wrapper = mount(LoginForm, {
       global: {
