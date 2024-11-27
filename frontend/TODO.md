@@ -8,7 +8,8 @@
 
 ## 2. Migrate Components
 ### Basic Components:
-- [ ] Replace the grid system with Vuetify `<v-container>`, `<v-row>`, and `<v-col>`
+- [x] Replace the grid system with Vuetify `<v-container>`, `<v-row>`, and `<v-col>`
+- [ ] Migrate responsive design
 - [ ] Replace buttons with Vuetify `<v-btn>`
 - [ ] Replace modals with Vuetify `<v-dialog>`
 - [ ] Migrate all custom components to use Vuetify

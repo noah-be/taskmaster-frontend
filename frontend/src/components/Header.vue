@@ -3,34 +3,31 @@ import Navbar from "@/components/Navbar.vue";
 </script>
 
 <template>
-  <header class="header">
-    <h1>Task Master</h1>
-    <Navbar />
-    <button id="profile-button" class="user-profile-icon">
-      <img src="/images/profile-user.png" alt="User Profile" />
-    </button>
-  </header>
+  <v-app-bar app dense color="primary" dark>
+    <v-container>
+      <v-row align="center" justify="space-between">
+
+        <v-col cols="auto">
+          <h1 class="text-h5 text-white">Task Master</h1>
+        </v-col>
+
+        <v-col cols="auto">
+          <Navbar />
+        </v-col>
+
+        <v-col cols="auto">
+          <v-btn icon>
+            <v-img
+              src="/images/profile-user.png"
+              alt="User Profile"
+              width="40"
+              height="40"
+              cover
+              class="rounded-circle"
+            />
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-app-bar>
 </template>
-
-<style lang="scss">
-// header {
-//   background-color: $primary-color;
-//   color: $secondary-color;
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   height: 50px;
-//   padding: 10px;
-
-//   .user-profile-icon img {
-//     display: block;
-//     width: 100%;
-//     height: auto;
-//   }
-
-//   #profile-button {
-//     width: 50px;
-//     height: 50px;
-//   }
-// }
-</style>

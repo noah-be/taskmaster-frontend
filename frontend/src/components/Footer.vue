@@ -1,15 +1,9 @@
 <template>
-  <footer>
-    <p>Made with love in Berlin</p>
-  </footer>
+  <v-footer app color="primary" dark>
+    <v-container>
+      <v-row align="center" justify="center">
+        <p class="text-center mb-0">Made with ❤️ in Berlin</p>
+      </v-row>
+    </v-container>
+  </v-footer>
 </template>
-
-<style lang="scss">
-// footer {
-//   margin-top: auto;
-//   background-color: $primary-color;
-//   color: $secondary-color;
-//   display: flex;
-//   justify-content: space-between;
-// }
-</style>

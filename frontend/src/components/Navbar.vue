@@ -1,35 +1,28 @@
+<script>
+export default {
+  data() {
+    return {
+      links: [
+        { label: "Home", to: "/" },
+        { label: "About", to: "/about" },
+        { label: "Contact", to: "/contact" },
+      ],
+    };
+  },
+};
+</script>
+
 <template>
-  <nav class="topnav">
-    <ul>
-      <li><router-link to="/">Home</router-link></li>
-      <li><router-link to="/about">About</router-link></li>
-      <li><router-link to="/contact">Contact</router-link></li>
-    </ul>
-  </nav>
+  <v-row align="center" justify="center">
+    <v-btn
+      v-for="(link, index) in links"
+      :key="index"
+      :to="link.to"
+      text
+      router
+      class="mx-2 text-white"
+    >
+      {{ link.label }}
+    </v-btn>
+  </v-row>
 </template>
-
-<style lang="scss">
-
-// TODO: Responsive design
-
-@use "@/assets/scss/mixins" as *;
-
-// .topnav {
-//   a {
-//     color: $secondary-color;
-//     text-decoration: none;
-//     border: 5px solid $secondary-color;
-//     padding: 10px 15px;
-//   }
-
-//   ul {
-//     list-style-type: none;
-//     padding: 0;
-//   }
-
-//   li {
-//     display: inline;
-//     margin-right: 10px;
-//   }
-// }
-</style>

@@ -6,7 +6,13 @@ import { RouterView } from "vue-router";
 </script>
 
 <template>
-  <Header />
-  <RouterView />
-  <Footer />
+  <v-app>
+    <Header />
+
+    <v-main>
+      <RouterView />
+    </v-main>
+
+    <Footer />
+  </v-app>
 </template>
