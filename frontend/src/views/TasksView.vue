@@ -114,6 +114,7 @@ export default {
 </script>
 
 <style lang="scss">
+// TODO: Convert to vuetify
 
 // $todo-bg-color: #eaf6ff;
 // $priority-colors: (

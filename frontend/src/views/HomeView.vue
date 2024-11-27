@@ -5,7 +5,6 @@ import LoginForm from "@/components/LoginForm.vue";
 <template>
   <v-container>
     <v-row align="center" justify="center" class="home">
-
       <v-col cols="12" md="6" class="d-flex align-center justify-center">
         <v-card outlined class="w-100 h-100">
           <v-card-text>
