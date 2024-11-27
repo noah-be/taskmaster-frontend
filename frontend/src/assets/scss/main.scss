@@ -1,15 +1,1 @@
-//@use "./global" as *;
-//@use "./mixins" as *;
-//@use "./responsive" as *;
-//@use "./variables" as *;
 
-
-$breakpoint-small: 768px;
-$breakpoint-large: 1100px;
-
-$todo-bg-color: #eaf6ff;
-$priority-colors: (
-  "High": #f70000,
-  "Medium": #ffd000,
-  "Low": #01aeff,
-);

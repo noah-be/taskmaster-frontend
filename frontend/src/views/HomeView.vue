@@ -3,78 +3,27 @@ import LoginForm from "@/components/LoginForm.vue";
 </script>
 
 <template>
-  <main>
-    <div class="home">
-      <LoginForm />
+  <v-container>
+    <v-row align="center" justify="center" class="home">
 
-      <img
-        id="todo-list-img"
-        src="/images/todo_list.jpg"
-        class="rounded-image"
-        alt="A table on which there are plants, paper clips, a clipboard, an alarm clock and a ballpoint pen."
-      />
-    </div>
-  </main>
+      <v-col cols="12" md="6" class="d-flex align-center justify-center">
+        <v-card outlined class="w-100 h-100">
+          <v-card-text>
+            <LoginForm />
+          </v-card-text>
+        </v-card>
+      </v-col>
+
+      <v-col cols="12" md="6" class="d-flex align-center justify-center">
+        <v-responsive class="w-100 h-100">
+          <v-img
+            src="/images/todo_list.jpg"
+            alt="A table on which there are plants, paper clips, a clipboard, an alarm clock and a ballpoint pen."
+            class="rounded-xl"
+            contain
+          />
+        </v-responsive>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
-
-<style lang="scss">
-// #login-btn {
-//   @extend %button-style;
-//   background-color: #595959;
-//   width: 100%;
-//   margin-top: 10px;
-
-//   &:hover {
-//     background-color: #404040;
-//   }
-
-//   &:active {
-//     background-color: #202020;
-//   }
-// }
-
-// #create-new-account-btn {
-//   @extend %button-style;
-//   background-color: #0c2607;
-//   font-size: 18px;
-
-//   &:hover {
-//     background-color: #0f3d09;
-//   }
-
-//   &:active {
-//     background-color: #0a2f07;
-//   }
-// }
-
-// .blurred-background {
-//   filter: blur(5px);
-//   transition: filter 2s ease;
-// }
-
-// .register-box {
-//   display: flex;
-//   flex-direction: column;
-
-//   label {
-//     margin-bottom: 5px;
-//   }
-
-//   input[type="text"],
-//   input[type="password"] {
-//     padding: 10px;
-//     margin-bottom: 10px;
-//     border: 1px solid #ccc;
-//     border-radius: 3px;
-//     font-size: 16px;
-//   }
-
-//   .username-available {
-//     color: green;
-//   }
-
-//   .username-taken {
-//     color: red;
-//   }
-// }
-</style>
