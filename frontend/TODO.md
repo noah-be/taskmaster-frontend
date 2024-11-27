@@ -1,7 +1,7 @@
 # To-Do List: Vuetify Migration
 
 ## 1. Preparation
-- [ ] Install and integrate Vuetify into the project
+- [x] Install and integrate Vuetify into the project
 - [ ] Configure global colors/themes based on project requirements
 
 ## 2. Migrate Components
