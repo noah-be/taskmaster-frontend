@@ -5,11 +5,11 @@
 </template>
 
 <style lang="scss">
-footer {
-  margin-top: auto;
-  background-color: $primary-color;
-  color: $secondary-color;
-  display: flex;
-  justify-content: space-between;
-}
+// footer {
+//   margin-top: auto;
+//   background-color: $primary-color;
+//   color: $secondary-color;
+//   display: flex;
+//   justify-content: space-between;
+// }
 </style>

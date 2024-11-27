@@ -13,24 +13,24 @@ import Navbar from "@/components/Navbar.vue";
 </template>
 
 <style lang="scss">
-header {
-  background-color: $primary-color;
-  color: $secondary-color;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 50px;
-  padding: 10px;
+// header {
+//   background-color: $primary-color;
+//   color: $secondary-color;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   height: 50px;
+//   padding: 10px;
 
-  .user-profile-icon img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
+//   .user-profile-icon img {
+//     display: block;
+//     width: 100%;
+//     height: auto;
+//   }
 
-  #profile-button {
-    width: 50px;
-    height: 50px;
-  }
-}
+//   #profile-button {
+//     width: 50px;
+//     height: 50px;
+//   }
+// }
 </style>

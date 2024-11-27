@@ -9,24 +9,27 @@
 </template>
 
 <style lang="scss">
+
+// TODO: Responsive design
+
 @use "@/assets/scss/mixins" as *;
 
-.topnav {
-  a {
-    color: $secondary-color;
-    text-decoration: none;
-    border: 5px solid $secondary-color;
-    padding: 10px 15px;
-  }
+// .topnav {
+//   a {
+//     color: $secondary-color;
+//     text-decoration: none;
+//     border: 5px solid $secondary-color;
+//     padding: 10px 15px;
+//   }
 
-  ul {
-    list-style-type: none;
-    padding: 0;
-  }
+//   ul {
+//     list-style-type: none;
+//     padding: 0;
+//   }
 
-  li {
-    display: inline;
-    margin-right: 10px;
-  }
-}
+//   li {
+//     display: inline;
+//     margin-right: 10px;
+//   }
+// }
 </style>

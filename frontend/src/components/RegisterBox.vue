@@ -241,38 +241,4 @@ export default {
   }
 }
 
-#sign-up-btn {
-  @extend %button-style;
-  background-color: #323aa8;
-
-  &:hover {
-    background-color: #292c89;
-  }
-
-  &:active {
-    background-color: #1e1f5e;
-  }
-}
-
-#toggle-guidelines-btn {
-  color: white;
-  padding: 10px 15px;
-  margin: 10px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  outline: none;
-  transition: background-color 0.3s;
-
-  background-color: #323aa8;
-
-  &:hover {
-    background-color: #292c89;
-  }
-
-  &:active {
-    background-color: #1e1f5e;
-  }
-}
 </style>

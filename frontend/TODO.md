@@ -2,7 +2,9 @@
 
 ## 1. Preparation
 - [x] Install and integrate Vuetify into the project
-- [ ] Configure global colors/themes based on project requirements
+- [x] Configure global colors/themes based on project requirements
+
+(Using default theme now)
 
 ## 2. Migrate Components
 ### Basic Components:
