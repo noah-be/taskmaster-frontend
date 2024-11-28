@@ -14,6 +14,7 @@
     "test:coverage": "vitest --coverage"
   },
   "dependencies": {
+    "@mdi/font": "^7.4.47",
     "vite-plugin-vuetify": "^2.0.4",
     "vue": "^3.5.13",
     "vue-router": "^4.4.5",
@@ -30,5 +31,18 @@
     "vite": "^5.4.11",
     "vite-plugin-vue-devtools": "^7.5.4",
     "vitest": "^2.1.5"
+  },
+  "prettier": {
+    "printWidth": 160,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "jsxSingleQuote": false,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "arrowParens": "avoid",
+    "proseWrap": "never",
+    "endOfLine": "auto"
   }
 }

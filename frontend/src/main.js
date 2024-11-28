@@ -1,15 +1,17 @@
-import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./router";
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
 
-import { createVuetify } from "vuetify";
-import "vuetify/styles";
+import { createVuetify } from 'vuetify';
+import 'vuetify/styles';
+import '@mdi/font/css/materialdesignicons.css';
 
-import "./assets/scss/main.scss";
+import './assets/scss/main.scss';
 
-const vuetify = createVuetify();
+const vuetify = createVuetify({
+  icons: {
+    defaultSet: 'mdi'
+  }
+});
 
-createApp(App)
-  .use(router)
-  .use(vuetify)
-  .mount("#app");
+createApp(App).use(router).use(vuetify).mount('#app');
