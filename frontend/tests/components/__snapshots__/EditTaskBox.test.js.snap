@@ -1,19 +1,23 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`EditTaskBox.vue > matches the snapshot 1`] = `
-"<div class="edit-task-modal">
-  <div class="edit-task-modal-content"><span class="close">×</span>
-    <h2>Edit Task</h2>
-    <form>
-      <div><label for="edit-task-title">Title:</label><input type="text" id="edit-task-title"></div>
-      <div><label for="edit-task-description">Description:</label><textarea id="edit-task-description"></textarea></div>
-      <div><label for="edit-task-due-date">Due Date:</label><input type="date" id="edit-task-due-date"></div>
-      <div><label for="edit-task-priority">Priority:</label><select id="edit-task-priority">
-          <option value="High">High</option>
-          <option value="Medium">Medium</option>
-          <option value="Low">Low</option>
-        </select></div><button type="button" id="delete-task-btn"> Delete </button><button type="button" id="save-edit-task-btn"> Save Changes </button>
-    </form>
-  </div>
-</div>"
+"<v-dialog model-value="false" max-width="500">
+  <v-card>
+    <v-card-title><span class="text-h6">Edit Task</span></v-card-title>
+    <v-card-text>
+      <v-form>
+        <v-text-field modelvalue="Test Task" label="Title" outlined="" dense=""></v-text-field>
+        <v-textarea modelvalue="Test Description" label="Description" outlined="" dense=""></v-textarea>
+        <v-text-field modelvalue="2023-12-31" label="Due Date" type="date" outlined="" dense=""></v-text-field>
+        <v-select modelvalue="High" items="High,Medium,Low" label="Priority" outlined="" dense=""></v-select>
+      </v-form>
+    </v-card-text>
+    <v-divider></v-divider>
+    <v-card-actions>
+      <v-btn color="error">Delete</v-btn>
+      <v-spacer></v-spacer>
+      <v-btn color="success">Save Changes</v-btn>
+    </v-card-actions>
+  </v-card>
+</v-dialog>"
 `;
