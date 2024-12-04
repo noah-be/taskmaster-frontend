@@ -34,8 +34,7 @@ export const startServer = () => {
       app.use("/api/auth", routes.authRoutes);
       app.use("/api/task", routes.taskRoutes);
 
-      // Middlewares
-      app.use(mdws.notFoundMiddleware);
+      // Middleware
       app.use(mdws.errorHandlingMiddleware);
 
       serverInstance = app.listen(port, () => {
