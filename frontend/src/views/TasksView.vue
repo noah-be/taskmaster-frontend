@@ -97,7 +97,6 @@ export default {
         if (!response.ok) throw new Error('Failed to toggle task completion');
         const updatedTask = await response.json();
         const index = tasks.value.findIndex(task => task._id === taskId);
-        if (index !== -1) tasks.value.splice(index, 1, updatedTask);
       } catch (error) {
         console.error(error);
         alert('Error toggling task completion. Please try again.');
