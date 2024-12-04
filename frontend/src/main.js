@@ -6,8 +6,6 @@ import { createVuetify } from 'vuetify';
 import 'vuetify/styles';
 import '@mdi/font/css/materialdesignicons.css';
 
-import './assets/scss/main.scss';
-
 const vuetify = createVuetify({
   icons: {
     defaultSet: 'mdi'
