@@ -1,38 +1,22 @@
 <template>
-  <div id="todo-table-container">
-    <table id="todo-table">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Due Date</th>
-          <th>Priority</th>
-          <th>Done</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="(task, index) in tasks"
-          :key="task.id"
-          :class="task.completed ? 'done' : 'not-done-' + task.priority"
-          @click="$emit('edit-task', task)"
-        >
-          <td>{{ task.title }}</td>
-          <td>{{ task.description }}</td>
-          <td>{{ task.dueDate }}</td>
-          <td>{{ task.priority }}</td>
-          <td>
-            <input
-              type="checkbox"
-              :checked="task.completed"
-              @click.stop
-              @change="$emit('toggle-task', task._id)"
-            />
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <v-container>
+    <v-card>
+      <v-data-table :items="tasks" :headers="headers" item-value="_id" class="elevation-1" dense outlined hide-default-footer>
+        <template #item.dueDate="{ item }">
+          {{ formatDueDate(item.dueDate) }}
+        </template>
+        <template #item.priority="{ item }">
+          <v-chip :color="getPriorityColor(item.priority)" dark small>
+            {{ item.priority }}
+          </v-chip>
+        </template>
+
+        <template #item.completed="{ item }">
+          <v-checkbox v-model="item.completed" @change="toggleTask(item)" dense class="d-flex align-center"></v-checkbox>
+        </template>
+      </v-data-table>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -40,8 +24,39 @@ export default {
   props: {
     tasks: {
       type: Array,
-      required: true,
-    },
+      required: true
+    }
   },
+  data() {
+    return {
+      headers: [
+        { title: 'Title', key: 'title' },
+        { title: 'Description', key: 'description' },
+        { title: 'Due Date', key: 'dueDate' },
+        { title: 'Priority', key: 'priority' },
+        { title: 'Done', key: 'completed' }
+      ]
+    };
+  },
+  methods: {
+    toggleTask(task) {
+      this.$emit('toggle-task', task._id);
+    },
+    getPriorityColor(priority) {
+      switch (priority) {
+        case 'High':
+          return 'red';
+        case 'Medium':
+          return 'orange';
+        case 'Low':
+          return 'blue';
+        default:
+          return 'grey';
+      }
+    },
+    formatDueDate(date) {
+      return new Date(date).toLocaleDateString();
+    }
+  }
 };
 </script>
