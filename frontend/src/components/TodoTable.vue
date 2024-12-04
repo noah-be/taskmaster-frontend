@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card>
-      <v-data-table :items="tasks" :headers="headers" item-value="_id" class="elevation-1" dense outlined hide-default-footer>
+      <v-data-table :items="tasks" :headers="headers" item-value="_id" class="elevation-1" dense outlined hide-default-footer @click:row="onRowClick">
         <template #item.dueDate="{ item }">
           {{ formatDueDate(item.dueDate) }}
         </template>
@@ -41,6 +41,9 @@ export default {
   methods: {
     toggleTask(task) {
       this.$emit('toggle-task', task._id);
+    },
+    onRowClick(event, row) {
+      this.$emit('edit-task', row.item);
     },
     getPriorityColor(priority) {
       switch (priority) {

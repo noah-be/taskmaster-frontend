@@ -9,13 +9,19 @@
           <v-divider></v-divider>
           <v-card-text>
             <NewTaskForm @task-added="addTaskToList" />
-            <TodoTable :tasks="tasks" @edit-task="openEditModal" @toggle-task="toggleTaskCompletion" />
+            <TodoTable :tasks="tasks" @edit-task="openEditDialog" @toggle-task="toggleTaskCompletion" />
           </v-card-text>
         </v-card>
       </v-col>
     </v-row>
 
-    <EditTaskBox v-if="isEditModalVisible" :task="currentTask" @close="closeEditModal" @delete-task="deleteTask" @save-task="saveTaskChanges" />
+    <EditTaskBox
+      :task="currentTask"
+      :is-dialog-visible="isDialogVisible"
+      @update:is-dialog-visible="isDialogVisible = $event"
+      @save-task="saveTaskChanges"
+      @delete-task="deleteTask"
+    />
   </v-container>
 </template>
 
@@ -33,8 +39,13 @@ export default {
   },
   setup() {
     const tasks = ref([]);
-    const isEditModalVisible = ref(false);
-    const currentTask = ref(null);
+    const currentTask = ref({
+      title: '',
+      description: '',
+      dueDate: '',
+      priority: 'Medium'
+    });
+    const isDialogVisible = ref(false);
 
     const fetchTasks = async () => {
       try {
@@ -55,25 +66,24 @@ export default {
       tasks.value.push(newTask);
     };
 
-    const openEditModal = task => {
+    const openEditDialog = task => {
       currentTask.value = { ...task };
-      isEditModalVisible.value = true;
+      isDialogVisible.value = true;
     };
 
-    const closeEditModal = () => {
-      isEditModalVisible.value = false;
-      currentTask.value = null;
+    const closeEditDialog = () => {
+      isDialogVisible.value = false;
     };
 
     const deleteTask = taskId => {
       tasks.value = tasks.value.filter(task => task._id !== taskId);
-      closeEditModal();
+      closeEditDialog();
     };
 
     const saveTaskChanges = updatedTask => {
       const index = tasks.value.findIndex(task => task._id === updatedTask._id);
       if (index !== -1) tasks.value.splice(index, 1, updatedTask);
-      closeEditModal();
+      closeEditDialog();
     };
 
     const toggleTaskCompletion = async taskId => {
@@ -98,12 +108,12 @@ export default {
 
     return {
       tasks,
-      isEditModalVisible,
+      isDialogVisible,
       currentTask,
       fetchTasks,
       addTaskToList,
-      openEditModal,
-      closeEditModal,
+      openEditDialog,
+      closeEditDialog,
       deleteTask,
       saveTaskChanges,
       toggleTaskCompletion
@@ -111,13 +121,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.text-center {
-  text-align: center;
-}
-
-.w-100 {
-  width: 100%;
-}
-</style>
