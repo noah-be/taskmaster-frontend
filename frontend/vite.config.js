@@ -14,6 +14,11 @@ export default defineConfig({
     coverage: {
       exclude: ["src/main.js", "src/App.vue", "vite.config.js"],
     },
+    server: {
+      deps: {
+        inline: ['vuetify'],
+      },
+    },
   },
   css: {
     preprocessorOptions: {

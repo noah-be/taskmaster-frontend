@@ -1,49 +1,59 @@
 import { describe, it, expect } from "vitest";
 import { mount } from "@vue/test-utils";
 import Navbar from "@/components/Navbar.vue";
-import { createRouter, createWebHistory } from "vue-router";
+import { createVuetify } from "vuetify";
+import "vuetify/styles";
 
-const mockRoutes = [
-  { path: "/", name: "home", component: { template: "<div>Home</div>" } },
-  {
-    path: "/about",
-    name: "about",
-    component: { template: "<div>About</div>" },
-  },
-  {
-    path: "/contact",
-    name: "contact",
-    component: { template: "<div>Contact</div>" },
-  },
-];
-const mockRouter = createRouter({
-  history: createWebHistory(),
-  routes: mockRoutes,
-});
+const vuetify = createVuetify();
 
 describe("Navbar.vue", () => {
-  it("renders correctly", () => {
-    const wrapper = mount(Navbar, {
+  const factory = () => {
+    return mount(Navbar, {
       global: {
-        plugins: [mockRouter],
+        plugins: [vuetify],
       },
     });
-    expect(wrapper.html()).toMatchSnapshot();
+  };
+
+  it("renders the correct number of buttons", () => {
+    const wrapper = factory();
+    const buttons = wrapper.findAllComponents({ name: "VBtn" });
+    expect(buttons.length).toBe(3);
   });
 
-  it("contains the correct navigation links", async () => {
-    const wrapper = mount(Navbar, {
-      global: {
-        plugins: [mockRouter],
-      },
+  it("renders buttons with correct labels", () => {
+    const wrapper = factory();
+    const buttons = wrapper.findAllComponents({ name: "VBtn" });
+    expect(buttons[0].text()).toBe("Home");
+    expect(buttons[1].text()).toBe("About");
+    expect(buttons[2].text()).toBe("Contact");
+  });
+
+  it("renders buttons with correct links", () => {
+    const wrapper = factory();
+    const buttons = wrapper.findAllComponents({ name: "VBtn" });
+  
+    expect(buttons[0].props("to")).toBe("/");
+    expect(buttons[1].props("to")).toBe("/about");
+    expect(buttons[2].props("to")).toBe("/contact");
+  });
+  
+
+  it("applies the correct classes to buttons", () => {
+    const wrapper = factory();
+    const buttons = wrapper.findAllComponents({ name: "VBtn" });
+    buttons.forEach((button) => {
+      expect(button.classes()).toContain("text-white");
+      expect(button.classes()).toContain("mx-2");
+      expect(button.classes()).toContain("my-2");
     });
+  });
 
-    await mockRouter.isReady();
-
-    const links = wrapper.findAll("a");
-    expect(links).toHaveLength(3);
-    expect(links[0].attributes("href")).toBe("/");
-    expect(links[1].attributes("href")).toBe("/about");
-    expect(links[2].attributes("href")).toBe("/contact");
+  it("renders buttons as router links", () => {
+    const wrapper = factory();
+    const buttons = wrapper.findAllComponents({ name: "VBtn" });
+    buttons.forEach((button) => {
+      expect(button.attributes("router")).toBeDefined();
+    });
   });
 });

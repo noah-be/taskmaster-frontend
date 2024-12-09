@@ -1,9 +1,20 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`NewTaskForm.vue > matches the snapshot 1`] = `
-"<div id="new-task-form"><input type="text" id="task-input" placeholder="Enter task..."><select id="priority-input">
-    <option value="Low">Low</option>
-    <option value="Medium">Medium</option>
-    <option value="High">High</option>
-  </select><input type="date" id="due-date-input"><button id="add-task-btn">Add Task</button></div>"
+"<v-container data-v-317994b1="">
+  <v-row data-v-317994b1="" align="stretch" class="new-task-form">
+    <v-col data-v-317994b1="" cols="6">
+      <v-text-field data-v-317994b1="" modelvalue="" label="Enter task..." outlined="" dense="" placeholder="Task title"></v-text-field>
+    </v-col>
+    <v-col data-v-317994b1="" cols="2">
+      <v-select data-v-317994b1="" modelvalue="Medium" items="Low,Medium,High" label="Priority" outlined="" dense=""></v-select>
+    </v-col>
+    <v-col data-v-317994b1="" cols="2">
+      <v-text-field data-v-317994b1="" modelvalue="" label="Due Date" type="date" outlined="" dense=""></v-text-field>
+    </v-col>
+    <v-col data-v-317994b1="" cols="2">
+      <v-btn data-v-317994b1="" color="primary" block="" class="h-100"> Add Task </v-btn>
+    </v-col>
+  </v-row>
+</v-container>"
 `;
