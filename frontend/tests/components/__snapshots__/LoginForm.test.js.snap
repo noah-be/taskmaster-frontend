@@ -1,59 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`LoginForm.vue > matches the snapshot 1`] = `
-"<v-container class="py-4">
-  <v-card class="pa-4" outlined="">
-    <v-card-text>
-      <v-form>
-        <v-text-field modelvalue="" label="Username" placeholder="Username" autocomplete="username" outlined="" dense=""></v-text-field>
-        <v-text-field modelvalue="" label="Password" placeholder="Password" type="password" autocomplete="current-password" outlined="" dense=""></v-text-field>
-        <v-btn class="mt-4" color="primary" block="" type="submit"> Log In </v-btn>
-      </v-form>
-    </v-card-text>
-    <v-divider></v-divider>
-    <v-card-actions>
-      <v-btn color="secondary" block="" class="mt-2"> Create New Account </v-btn>
-    </v-card-actions>
-  </v-card>
-  <v-dialog model-value="false" max-width="500">
-    <v-card>
-      <v-card-title class="d-flex justify-center"><span class="text-h6">Create New Account</span></v-card-title>
-      <v-card-text>
-        <v-form id="register-form" lazy-validation="">
-          <v-btn color="primary" block="" class="mb-4" aria-expanded="false" aria-controls="registration-guidelines">Show Registration Guidelines</v-btn>
-          <v-container data-v-1acd98b7="" aria-hidden="!visible" style="display: none;">
-            <v-card data-v-1acd98b7="" class="pa-4" elevation="2">
-              <v-card-title data-v-1acd98b7="" class="text-h6">Registration Guidelines</v-card-title>
-              <v-card-text data-v-1acd98b7="">
-                <ul data-v-1acd98b7="" class="custom-list">
-                  <li data-v-1acd98b7=""><strong data-v-1acd98b7="">Username:</strong>
-                    <ul data-v-1acd98b7="">
-                      <li data-v-1acd98b7="">Must be unique and not already in use</li>
-                      <li data-v-1acd98b7="">At least 3 characters long</li>
-                    </ul>
-                  </li>
-                  <li data-v-1acd98b7=""><strong data-v-1acd98b7="">Password:</strong>
-                    <ul data-v-1acd98b7="">
-                      <li data-v-1acd98b7="">At least 8 characters long</li>
-                      <li data-v-1acd98b7="">Include a mix of upper and lower case letters</li>
-                      <li data-v-1acd98b7="">Include at least one number and one special symbol (e.g., !, @, #)</li>
-                      <li data-v-1acd98b7="">Avoid using easily guessable information like your name or birthday</li>
-                    </ul>
-                  </li>
-                </ul>
-              </v-card-text>
-            </v-card>
-          </v-container>
-          <v-text-field id="register-username" modelvalue="" label="Username" outlined="" dense="" error="false" error-messages=""></v-text-field>
-          <v-text-field id="register-password" modelvalue="" label="Password" type="password" outlined="" dense="" error="false" error-messages=""></v-text-field>
-          <v-btn type="submit" color="success" block="" disabled="true"> Sign Up </v-btn>
-        </v-form>
-      </v-card-text>
-      <v-divider></v-divider>
-      <v-card-actions>
-        <v-btn color="secondary" block=""> Cancel </v-btn>
-      </v-card-actions>
-    </v-card>
-  </v-dialog>
-</v-container>"
+"<form id="login-form">
+  <!--v-if-->
+  <h2>Login</h2><label for="login-username">Username</label><input type="text" id="login-username" placeholder="Username" autocomplete="username"><label for="login-password">Password</label><input type="password" id="login-password" placeholder="Password" autocomplete="current-password"><button id="login-btn" type="submit">Log In</button>
+  <hr><button id="create-new-account-btn" class="create-new-account-btn"> Create new account </button>
+</form>"
 `;

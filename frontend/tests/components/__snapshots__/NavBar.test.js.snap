@@ -1,13 +1,11 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Navbar.vue > renders correctly 1`] = `
-"<v-container>
-  <v-row align="center" justify="center" class="topnav">
-    <v-col cols="12" sm="auto" class="d-flex flex-column flex-sm-row">
-      <v-btn to="/" text="" router="" class="mx-2 my-2 text-white">Home</v-btn>
-      <v-btn to="/about" text="" router="" class="mx-2 my-2 text-white">About</v-btn>
-      <v-btn to="/contact" text="" router="" class="mx-2 my-2 text-white">Contact</v-btn>
-    </v-col>
-  </v-row>
-</v-container>"
+"<nav class="topnav">
+  <ul>
+    <li><a href="/" class="">Home</a></li>
+    <li><a href="/about" class="">About</a></li>
+    <li><a href="/contact" class="">Contact</a></li>
+  </ul>
+</nav>"
 `;

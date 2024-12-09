@@ -1,21 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Header.vue > renders correctly and matches snapshot 1`] = `
-"<v-app-bar app="" dense="" color="primary" dark="">
-  <v-container>
-    <v-row align="center" justify="space-between">
-      <v-col cols="auto">
-        <h1 class="text-h5 text-white">Task Master</h1>
-      </v-col>
-      <v-col cols="auto">
-        <nav></nav>
-      </v-col>
-      <v-col cols="auto">
-        <v-btn icon="">
-          <v-img src="/images/profile-user.png" alt="User Profile" width="40" height="40" cover="" class="rounded-circle"></v-img>
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
-</v-app-bar>"
+"<header class="header">
+  <h1>Task Master</h1>
+  <nav></nav><button id="profile-button" class="user-profile-icon"><img src="/images/profile-user.png" alt="User Profile"></button>
+</header>"
 `;
