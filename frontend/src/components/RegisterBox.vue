@@ -6,15 +6,23 @@
       </v-card-title>
 
       <v-card-text>
-        <v-form id="register-form" @submit.prevent="registerUser" lazy-validation>
-          <v-btn color="primary" block class="mb-4" @click="toggleGuidelines" :aria-expanded="guidelinesVisible" aria-controls="registration-guidelines">
+        <v-form id="register-form" ref="registerForm" @submit.prevent="registerUser" lazy-validation>
+          <v-btn
+            color="primary"
+            ref="registrationGuidelinesButton"
+            block
+            class="mb-4"
+            @click="toggleGuidelines"
+            :aria-expanded="guidelinesVisible"
+            aria-controls="registration-guidelines"
+          >
             {{ guidelinesVisible ? 'Hide Registration Guidelines' : 'Show Registration Guidelines' }}
           </v-btn>
 
           <RegistrationGuidelines :visible="guidelinesVisible" />
-
           <v-text-field
             id="register-username"
+            ref="usernameInput"
             v-model="username"
             label="Username"
             outlined
@@ -26,6 +34,7 @@
 
           <v-text-field
             id="register-password"
+            ref="passwordInput"
             v-model="password"
             label="Password"
             type="password"
@@ -36,14 +45,14 @@
             @input="validatePassword"
           ></v-text-field>
 
-          <v-btn type="submit" color="success" block :disabled="!formValid"> Sign Up </v-btn>
+          <v-btn type="submit" color="success" ref="submitButton" block :disabled="!formValid"> Sign Up </v-btn>
         </v-form>
       </v-card-text>
 
       <v-divider></v-divider>
 
       <v-card-actions>
-        <v-btn color="secondary" block @click="closeModal"> Cancel </v-btn>
+        <v-btn color="secondary" ref="cancelButton" block @click="closeModal">Cancel</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
