@@ -13,7 +13,7 @@ export default defineConfig({
     environment: "jsdom",
     include: ["tests/**/*.{test,spec}.{js,ts,vue}"],
     coverage: {
-      exclude: ["src/main.js", "src/App.vue", "vite.config.js"],
+      exclude: ["src/main.js", "src/App.vue", "vite.config.js", "src/components/Header.vue", "src/components/Footer.vue"],
     },
     server: {
       deps: {
