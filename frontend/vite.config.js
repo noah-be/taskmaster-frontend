@@ -11,6 +11,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "jsdom",
+    include: ["tests/**/*.{test,spec}.{js,ts,vue}"],
     coverage: {
       exclude: ["src/main.js", "src/App.vue", "vite.config.js"],
     },
