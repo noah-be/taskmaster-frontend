@@ -96,7 +96,7 @@ export default {
         });
         if (!response.ok) throw new Error('Failed to toggle task completion');
         const updatedTask = await response.json();
-        const index = tasks.value.findIndex(task => task._id === taskId);
+        saveTaskChanges(updatedTask);
       } catch (error) {
         console.error(error);
         alert('Error toggling task completion. Please try again.');
