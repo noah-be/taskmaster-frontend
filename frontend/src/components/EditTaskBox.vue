@@ -7,19 +7,19 @@
 
       <v-card-text>
         <v-form>
-          <v-text-field v-model="taskCopy.title" label="Title" outlined dense></v-text-field>
-          <v-textarea v-model="taskCopy.description" label="Description" outlined dense></v-textarea>
-          <v-text-field v-model="taskCopy.dueDate" label="Due Date" type="date" outlined dense></v-text-field>
-          <v-select v-model="taskCopy.priority" :items="['High', 'Medium', 'Low']" label="Priority" outlined dense></v-select>
+          <v-text-field v-model="taskCopy.title" label="Title" outlined dense ref="titleField"></v-text-field>
+          <v-textarea v-model="taskCopy.description" label="Description" outlined dense ref="descriptionField"></v-textarea>
+          <v-text-field v-model="taskCopy.dueDate" label="Due Date" type="date" outlined dense ref="dueDateField"></v-text-field>
+          <v-select v-model="taskCopy.priority" :items="['High', 'Medium', 'Low']" label="Priority" outlined dense ref="prioritySelect"></v-select>
         </v-form>
       </v-card-text>
 
       <v-divider></v-divider>
 
       <v-card-actions>
-        <v-btn color="error" @click="deleteTask">Delete</v-btn>
+        <v-btn color="error" @click="deleteTask" ref="deleteButton">Delete</v-btn>
         <v-spacer></v-spacer>
-        <v-btn color="success" @click="saveChanges">Save Changes</v-btn>
+        <v-btn color="success" @click="saveChanges" ref="saveButton">Save Changes</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
