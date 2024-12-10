@@ -1,22 +1,32 @@
-# Private todo list
+# Private todo list 📋✅
 
 This project is a personal learning initiative focused on understanding the basics of web development. It includes practical implementations of user authentication and task management to provide a hands-on experience with essential web technologies. Tailored as a self-guided exploration, this project documents my progress and serves as a reference for fundamental concepts in building and deploying web applications. It is designed for personal use, to track learning milestones and challenges encountered along the way.
 
-## Features
+## Roadmap (Work in Progress) 🎯
+
+- Add roadmap
+
+## Features ✨
 
 - Task and users are stored in the database
 - Authentification for all users
 - Users can view, create, update, delete tasks
 - Authorization: Users can only manage their own tasks
 
-## Run Locally
 
-To set up this learning project on your local machine, you'll need Node.js and MongoDB. Follow these steps:
+## Project Structure ℹ️
+
+- `/frontend`: Contains the Vue.js-based frontend, integrated with Vuetify
+- `/backend`: Contains the Node.js-based backend
+- Docker Compose is used to simplify running the backend locally
+
+
+## Run Locally 🖥️
 
 1. **Clone the project**
 
 ```bash
-  git clone https://github.com/noah-frank/private-to-do-list.git
+  git clone https://github.com/noah-be/private-to-do-list.git
 ```
 
 2. **Go to the project directory**
@@ -25,31 +35,45 @@ To set up this learning project on your local machine, you'll need Node.js and M
   cd private-to-do-list
 ```
 
-3. **Install dependencies**
+3. **Install Dependencies**
 
 ```bash
-  npm install
+cd backend
+
+npm install
+
+cd ../frontend
+
+npm install
 ```
 
-4. **Configure MongoDB:**
 
-   Make sure MongoDB is running on your system. Set up your MongoDB URI in the project’s `.env` file to connect to your database.
-
-5. Start the server
+4. **Start backend with docker-compose**
 
 ```bash
-  npm run start
+  cd ..
+  docker-compose up -d
 ```
 
-## Running Tests
+5. **Start frontend**
 
-To run tests, run the following command
+```bash
+  cd frontend
+  npm run dev
+```
+
+
+
+## Running Tests 🧪
+
+The test files can be found in the tests folder in the frontend and backend.
+To run tests, run the following command in the appropriate folder
 
 ```bash
   npm run test
 ```
 
-## Screenshots
+## Screenshots (Old version without Vue and Vuetify) 👀
 
 ![homepage](/screenshots/homepage.png)
 
@@ -57,7 +81,7 @@ To run tests, run the following command
 
 ![edit-tasks](/screenshots/edit-task.png)
 
-## Clean code
+## Clean code (Work in Progress) 🧐
 
 - proper an consistent naming conventions
 - self-documenting
