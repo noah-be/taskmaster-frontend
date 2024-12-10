@@ -1,0 +1,15 @@
+{
+    "folders": [
+      {
+        "path": "../frontend"
+      }
+    ],
+    "settings": {
+      "files.exclude": {
+        "tests": true,
+        "coverage": true,
+        "node_modules": true,
+        ".vscode": true
+      }
+    }
+  }
