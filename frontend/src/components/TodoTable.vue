@@ -12,7 +12,7 @@
         </template>
 
         <template #item.completed="{ item }">
-          <v-checkbox v-model="item.completed" @click.stop="toggleTask(item)" dense class="d-flex align-center"></v-checkbox>
+          <v-checkbox v-model="item.completed" :ref="'checkbox_' + item._id" @click.stop="toggleTask(item)" dense class="d-flex align-center"></v-checkbox>
         </template>
       </v-data-table>
     </v-card>
