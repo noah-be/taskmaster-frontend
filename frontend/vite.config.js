@@ -13,7 +13,10 @@ export default defineConfig({
     environment: 'jsdom',
     include: ['tests/**/*.{test,spec}.{js,ts,vue}'],
     coverage: {
-      exclude: ['src/main.js', 'src/App.vue', 'vite.config.js', 'src/components/Header.vue', 'src/components/Footer.vue']
+      exclude: ['src/main.js', 'src/App.vue', 'vite.config.js', 'src/components/Header.vue', 'src/components/Footer.vue'],
+      provider: 'v8',
+      reporter: ['text', 'html'],
+      reportsDirectory: './coverage'
     },
     server: {
       deps: {

@@ -1,18 +1,34 @@
 <template>
-  <v-container>
-    <v-card>
-      <v-data-table :items="tasks" :headers="headers" item-value="_id" class="elevation-1" dense outlined hide-default-footer @click:row="onRowClick">
+  <v-container data-testid="v-container">
+    <v-card data-testid="v-card">
+      <v-data-table
+        data-testid="data-table"
+        :items="tasks"
+        :headers="headers"
+        item-value="_id"
+        class="elevation-1"
+        dense
+        outlined
+        hide-default-footer
+        @click:row="onRowClick"
+      >
         <template #item.dueDate="{ item }">
           {{ formatDueDate(item.dueDate) }}
         </template>
         <template #item.priority="{ item }">
-          <v-chip :color="getPriorityColor(item.priority)" dark small>
+          <v-chip :data-testid="'chip-' + item._id" :color="getPriorityColor(item.priority)" dark small>
             {{ item.priority }}
           </v-chip>
         </template>
 
         <template #item.completed="{ item }">
-          <v-checkbox v-model="item.completed" :ref="'checkbox_' + item._id" @click.stop="toggleTask(item)" dense class="d-flex align-center"></v-checkbox>
+          <v-checkbox
+            v-model="item.completed"
+            :data-testid="'checkbox-' + item._id"
+            @click.stop="toggleTask(item)"
+            dense
+            class="d-flex align-center"
+          ></v-checkbox>
         </template>
       </v-data-table>
     </v-card>
@@ -58,7 +74,9 @@ export default {
       }
     },
     formatDueDate(date) {
-      return new Date(date).toLocaleDateString();
+      if (!date) return 'Invalid Date';
+      const parsedDate = new Date(date);
+      return isNaN(parsedDate) ? 'Invalid Date' : parsedDate.toLocaleDateString();
     }
   }
 };

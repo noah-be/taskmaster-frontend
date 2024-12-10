@@ -22,15 +22,18 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.0",
+    "@vitest/coverage-istanbul": "^2.1.5",
     "@vitest/coverage-v8": "^2.1.5",
     "@vitest/ui": "^2.1.5",
     "@vue/test-utils": "^2.4.6",
+    "c8": "^10.1.2",
     "jsdom": "^25.0.1",
     "prettier": "^3.3.3",
     "sass": "^1.81.0",
     "vite": "^5.4.11",
     "vite-plugin-vue-devtools": "^7.5.4",
-    "vitest": "^2.1.5"
+    "vitest": "^2.1.5",
+    "xml": "^1.0.1"
   },
   "prettier": {
     "printWidth": 160,

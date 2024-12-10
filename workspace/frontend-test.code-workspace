@@ -10,7 +10,6 @@
         "src/App.vue": true,
         "src/main.js": true,
         ".vscode": true,
-        "coverage": true,
         "node_modules": true,
         "public": true,
         ".gitignore": true,

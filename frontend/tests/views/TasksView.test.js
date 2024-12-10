@@ -37,6 +37,16 @@ describe('TasksView.vue', () => {
     expect(wrapper.findComponent(EditTaskBox).exists()).toBe(true);
   });
 
+  it('updates isDialogVisible when EditTaskBox emits update:is-dialog-visible', async () => {
+    const editTaskBox = wrapper.findComponent(EditTaskBox);
+
+    await editTaskBox.vm.$emit('update:is-dialog-visible', true);
+    expect(wrapper.vm.isDialogVisible).toBe(true);
+
+    await editTaskBox.vm.$emit('update:is-dialog-visible', false);
+    expect(wrapper.vm.isDialogVisible).toBe(false);
+  });
+
   it('fetches tasks on mount', async () => {
     vi.stubGlobal(
       'fetch',
