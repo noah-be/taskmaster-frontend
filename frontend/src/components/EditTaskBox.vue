@@ -1,25 +1,47 @@
 <template>
-  <v-dialog :model-value="isDialogVisible" max-width="500" @update:model-value="closeDialog">
+  <v-dialog
+    :model-value="isDialogVisible"
+    max-width="500"
+    @update:model-value="closeDialog"
+    role="dialog"
+    aria-labelledby="edit-task-title"
+    aria-describedby="edit-task-description"
+  >
     <v-card>
-      <v-card-title>
+      <v-card-title id="edit-task-title">
         <span class="text-h6">Edit Task</span>
       </v-card-title>
 
-      <v-card-text>
+      <v-card-text id="edit-task-description">
         <v-form>
-          <v-text-field v-model="taskCopy.title" label="Title" outlined dense ref="titleField"></v-text-field>
-          <v-textarea v-model="taskCopy.description" label="Description" outlined dense ref="descriptionField"></v-textarea>
-          <v-text-field v-model="taskCopy.dueDate" label="Due Date" type="date" outlined dense ref="dueDateField"></v-text-field>
-          <v-select v-model="taskCopy.priority" :items="['High', 'Medium', 'Low']" label="Priority" outlined dense ref="prioritySelect"></v-select>
+          <div>
+            <label for="task-title">Title</label>
+            <v-text-field id="task-title" v-model="taskCopy.title" placeholder="Title" outlined dense ref="titleField"></v-text-field>
+          </div>
+
+          <div>
+            <label for="task-description">Description</label>
+            <v-textarea id="task-description" v-model="taskCopy.description" placeholder="Description" outlined dense ref="descriptionField"></v-textarea>
+          </div>
+
+          <div>
+            <label for="task-due-date">Due Date</label>
+            <v-text-field id="task-due-date" v-model="taskCopy.dueDate" type="date" outlined dense ref="dueDateField"></v-text-field>
+          </div>
+
+          <div>
+            <label for="task-priority">Priority</label>
+            <v-select id="task-priority" v-model="taskCopy.priority" :items="['High', 'Medium', 'Low']" outlined dense ref="prioritySelect"></v-select>
+          </div>
         </v-form>
       </v-card-text>
 
       <v-divider></v-divider>
 
       <v-card-actions>
-        <v-btn color="error" @click="deleteTask" ref="deleteButton">Delete</v-btn>
+        <v-btn color="error" @click="deleteTask" ref="deleteButton" aria-label="Delete Task"> Delete </v-btn>
         <v-spacer></v-spacer>
-        <v-btn color="success" @click="saveChanges" ref="saveButton">Save Changes</v-btn>
+        <v-btn color="success" @click="saveChanges" ref="saveButton" aria-label="Save Changes"> Save Changes </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -60,3 +82,11 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+</style>
