@@ -1,6 +1,6 @@
 <template>
-  <v-container v-show="visible" aria-hidden="!visible">
-    <v-card class="pa-4" elevation="2">
+  <v-container v-show="visible" :aria-hidden="!visible ? 'true' : 'false'">
+    <v-card class="pa-4" elevation="2" id="registration-guidelines">
       <v-card-title class="text-h6">Registration Guidelines</v-card-title>
       <v-card-text>
         <ul class="custom-list">
