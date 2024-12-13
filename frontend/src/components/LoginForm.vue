@@ -3,17 +3,13 @@
     <v-card class="pa-4" outlined>
       <v-card-text>
         <v-form @submit.prevent="submitLogin">
-          <v-text-field v-model="username" label="Username" placeholder="Username" autocomplete="username" outlined dense></v-text-field>
+          <label for="username" class="v-label">Username</label>
+          <v-text-field id="username" v-model="username" placeholder="Username" autocomplete="username" outlined
+            dense></v-text-field>
 
-          <v-text-field
-            v-model="password"
-            label="Password"
-            placeholder="Password"
-            type="password"
-            autocomplete="current-password"
-            outlined
-            dense
-          ></v-text-field>
+          <label for="password" class="v-label">Password</label>
+          <v-text-field id="password" v-model="password" placeholder="Password" type="password"
+            autocomplete="current-password" outlined dense></v-text-field>
 
           <v-btn class="mt-4" color="primary" block type="submit"> Log In </v-btn>
         </v-form>
@@ -29,6 +25,7 @@
     <RegisterBox :show="showregisterBox" @update:show="showregisterBox = $event" />
   </v-container>
 </template>
+
 
 <script>
 import { ref } from 'vue';

@@ -5,7 +5,6 @@ import router from './router';
 import { createVuetify } from 'vuetify';
 import 'vuetify/styles';
 import '@mdi/font/css/materialdesignicons.css';
-import axe from 'axe-core';
 
 const vuetify = createVuetify({
   icons: {
