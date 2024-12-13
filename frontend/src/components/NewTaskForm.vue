@@ -14,7 +14,7 @@
     </v-row>
     <v-row align="stretch" class="new-task-form">
       <v-col cols="6">
-        <v-text-field id="task-title" v-model="title" placeholder="Enter task title" outlined dense></v-text-field>
+        <v-text-field id="task-title" v-model="title" placeholder="Task title" outlined dense></v-text-field>
       </v-col>
       <v-col cols="2">
         <v-select id="task-priority" v-model="priority" :items="['Low', 'Medium', 'High']" outlined dense></v-select>
