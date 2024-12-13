@@ -8,6 +8,9 @@ import vueDevTools from 'vite-plugin-vue-devtools';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [vue(), vuetify({ autoImport: true }), vueDevTools()],
+    optimizeDeps: {
+    include: ['axe-core']
+  },
   test: {
     globals: true,
     environment: 'jsdom',
