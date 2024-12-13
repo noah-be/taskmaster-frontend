@@ -1,49 +1,27 @@
 <template>
-  <v-dialog :model-value="show" max-width="500" @update:model-value="closeModal">
+  <v-dialog :model-value="show" max-width="500" @update:model-value="closeModal" aria-labelledby="dialog-title">
     <v-card>
-      <v-card-title class="d-flex justify-center">
+      <v-card-title id="dialog-title" class="d-flex justify-center">
         <span class="text-h6">Create New Account</span>
       </v-card-title>
 
       <v-card-text>
         <v-form id="register-form" ref="registerForm" @submit.prevent="registerUser" lazy-validation>
-          <v-btn
-            color="primary"
-            ref="registrationGuidelinesButton"
-            block
-            class="mb-4"
-            @click="toggleGuidelines"
-            :aria-expanded="guidelinesVisible"
-            aria-controls="registration-guidelines"
-          >
+          <v-btn color="primary" ref="registrationGuidelinesButton" block class="mb-4" @click="toggleGuidelines"
+            :aria-expanded="guidelinesVisible" aria-controls="registration-guidelines">
             {{ guidelinesVisible ? 'Hide Registration Guidelines' : 'Show Registration Guidelines' }}
           </v-btn>
 
           <RegistrationGuidelines :visible="guidelinesVisible" />
-          <v-text-field
-            id="register-username"
-            ref="usernameInput"
-            v-model="username"
-            label="Username"
-            outlined
-            dense
-            :error="!!usernameFeedback"
-            :error-messages="usernameFeedback"
-            @input="validateUsername"
-          ></v-text-field>
 
-          <v-text-field
-            id="register-password"
-            ref="passwordInput"
-            v-model="password"
-            label="Password"
-            type="password"
-            outlined
-            dense
-            :error="!!passwordFeedback"
-            :error-messages="passwordFeedback"
-            @input="validatePassword"
-          ></v-text-field>
+          <label for="register-username">Username</label>
+          <v-text-field id="register-username" ref="usernameInput" v-model="username" placeholder="Username" outlined dense
+            :error="!!usernameFeedback" :error-messages="usernameFeedback" @input="validateUsername"></v-text-field>
+
+          <label for="register-password">Password</label>
+          <v-text-field id="register-password" ref="passwordInput" v-model="password" placeholder="Password" type="password"
+            outlined dense :error="!!passwordFeedback" :error-messages="passwordFeedback"
+            @input="validatePassword"></v-text-field>
 
           <v-btn type="submit" color="success" ref="submitButton" block :disabled="!formValid"> Sign Up </v-btn>
         </v-form>
@@ -56,6 +34,7 @@
       </v-card-actions>
     </v-card>
   </v-dialog>
+
 </template>
 
 <script>
