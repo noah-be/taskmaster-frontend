@@ -1,24 +1,42 @@
 <template>
   <v-container>
+    <v-row>
+      <v-col cols="6">
+        <label for="task-title" class="form-label">Task Title</label>
+      </v-col>
+      <v-col cols="2">
+        <label for="task-priority" class="form-label">Priority</label>
+      </v-col>
+      <v-col cols="2">
+        <label for="due-date" class="form-label">Due Date</label>
+      </v-col>
+      <v-col cols="2"></v-col>
+    </v-row>
     <v-row align="stretch" class="new-task-form">
       <v-col cols="6">
-        <v-text-field v-model="title" label="Enter task..." outlined dense placeholder="Task title"></v-text-field>
+        <v-text-field id="task-title" v-model="title" placeholder="Enter task title" outlined dense></v-text-field>
       </v-col>
-
       <v-col cols="2">
-        <v-select v-model="priority" :items="['Low', 'Medium', 'High']" label="Priority" outlined dense></v-select>
+        <v-select id="task-priority" v-model="priority" :items="['Low', 'Medium', 'High']" outlined dense></v-select>
       </v-col>
-
       <v-col cols="2">
-        <v-text-field v-model="dueDate" label="Due Date" type="date" outlined dense></v-text-field>
+        <v-text-field id="due-date" v-model="dueDate" placeholder="Select due date" type="date" outlined dense></v-text-field>
       </v-col>
-
       <v-col cols="2">
-        <v-btn color="primary" block class="h-100" @click="addTask"> Add Task </v-btn>
+        <v-btn color="primary" block class="h-100" @click="addTask" aria-label="Add Task"> Add Task </v-btn>
       </v-col>
     </v-row>
   </v-container>
 </template>
+
+<style scoped>
+.form-label {
+  font-weight: bold;
+  font-size: large;
+  margin-left: 10px;
+  display: block;
+}
+</style>
 
 <script>
 export default {

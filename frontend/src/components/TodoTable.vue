@@ -15,6 +15,7 @@
         <template #item.dueDate="{ item }">
           {{ formatDueDate(item.dueDate) }}
         </template>
+
         <template #item.priority="{ item }">
           <v-chip :data-testid="'chip-' + item._id" :color="getPriorityColor(item.priority)" dark small>
             {{ item.priority }}
@@ -22,13 +23,19 @@
         </template>
 
         <template #item.completed="{ item }">
-          <v-checkbox
-            v-model="item.completed"
-            :data-testid="'checkbox-' + item._id"
-            @click.stop="toggleTask(item)"
-            dense
-            class="d-flex align-center"
-          ></v-checkbox>
+          <div class="d-flex align-center">
+            <label :for="'checkbox-' + item._id" class="d-flex align-center">
+              <v-checkbox
+                :id="'checkbox-' + item._id"
+                v-model="item.completed"
+                :data-testid="'checkbox-' + item._id"
+                @click.stop="toggleTask(item)"
+                class="d-flex align-center"
+                dense
+              ></v-checkbox>
+              <span class="visually-hidden">Completed</span>
+            </label>
+          </div>
         </template>
       </v-data-table>
     </v-card>
@@ -81,3 +88,17 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+</style>
