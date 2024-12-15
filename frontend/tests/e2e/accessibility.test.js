@@ -6,7 +6,7 @@ test('Accessibility test for Vue 3 and Vuetify website', async () => {
   const page = await browser.newPage();
 
   try {
-    await page.goto('testserverurl'); // TODO setup e2e test evironment
+    await page.goto('http://localhost:3000');
     await page.addScriptTag({ url: 'https://cdn.jsdelivr.net/npm/axe-core@4.3.2/axe.min.js' });
     const results = await page.evaluate(async () => {
       return await axe.run();
