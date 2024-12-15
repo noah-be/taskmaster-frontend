@@ -1,14 +1,14 @@
 import { test, expect } from 'vitest';
 import { chromium } from 'playwright';
 
-test('Accessibility test for Vue 3 and Vuetify website', async () => {
+test('Accessibility', async () => {
   const browser = await chromium.launch();
   const context = await browser.newContext({ bypassCSP: true }); // Allow axe-core
   const page = await context.newPage();
 
   try {
     await page.goto('http://localhost:3000');
-    await page.addScriptTag({ url: 'https://cdn.jsdelivr.net/npm/axe-core@4.3.2/axe.min.js' });
+    await page.addScriptTag({ url: 'https://cdn.jsdelivr.net/npm/axe-core@4.10.2/axe.min.js' });
     const results = await page.evaluate(async () => {
       return await axe.run();
     });
