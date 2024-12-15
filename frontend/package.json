@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest",
+    "test:unit": "vitest run --environment jsdom tests/vue",
+    "test:e2e": "vitest run --environment node tests/e2e",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
     "test:dot": "vitest --silent --reporter dot",
@@ -21,6 +22,7 @@
     "vuetify": "^3.7.4"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.10.1",
     "@vitejs/plugin-vue": "^5.2.0",
     "@vitest/coverage-istanbul": "^2.1.5",
     "@vitest/coverage-v8": "^2.1.5",
@@ -29,11 +31,12 @@
     "axe-core": "^4.10.2",
     "c8": "^10.1.2",
     "jsdom": "^25.0.1",
+    "playwright": "^1.49.1",
     "prettier": "^3.3.3",
     "sass": "^1.81.0",
     "vite": "^5.4.11",
     "vite-plugin-vue-devtools": "^7.5.4",
-    "vitest": "^2.1.5",
+    "vitest": "^2.1.8",
     "vue-axe": "^3.1.2",
     "xml": "^1.0.1"
   },
