@@ -3,7 +3,8 @@ import { chromium } from 'playwright';
 
 test('Accessibility test for Vue 3 and Vuetify website', async () => {
   const browser = await chromium.launch();
-  const page = await browser.newPage();
+  const context = await browser.newContext({ bypassCSP: true }); // Allow axe-core
+  const page = await context.newPage();
 
   try {
     await page.goto('http://localhost:3000');
