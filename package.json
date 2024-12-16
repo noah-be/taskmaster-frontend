@@ -1,191 +1,61 @@
 {
-  "name": "private-to-do-list",
-  "version": "1.0.0",
-  "description": "A private to-do list web application",
-  "main": "app.js",
+  "name": "frontend",
+  "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
-    "start": "NODE_ENV=production node app.js",
-    "nm": "nodemon -x 'clear && node app.js'",
-    "test": "NODE_ENV=test node --trace-deprecation node_modules/.bin/jest",
-    "test-dev": "NODE_ENV=test jest --detectOpenHandles --coverage",
-    "test-win": "SET NODE_ENV=test & jest --detectOpenHandles --coverage",
-    "test-clean": "NODE_ENV=test STYLE=clean jest --verbose",
-    "sass": "sass --watch frontend/public/styles/scss:frontend/public/styles/css",
-    "dev": "NODE_ENV=development concurrently \"npm run nm\" \"npm run sass\"",
-    "lint": "eslint ."
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/noah-frank/private-to-do-list.git"
-  },
-  "author": "Noah Frank",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/noah-frank/private-to-do-list/issues"
-  },
-  "homepage": "https://github.com/noah-frank/private-to-do-list#readme",
-  "jest": {
-    "testEnvironment": "node",
-    "coverageDirectory": "coverage",
-    "coveragePathIgnorePatterns": [
-      "/node_modules/",
-      "/tests/"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/tests/jestConsoleMock.js"
-    ],
-    "transform": {
-      "^.+\\.(js|jsx)$": "babel-jest"
-    }
-  },
-  "prettier": {
-    "prettier.singleQuote": true,
-    "prettier.trailingComma": "none",
-    "prettier.jsxBracketSameLine": true,
-    "prettier.arrowParens": "avoid",
-    "prettier.proseWrap": "never",
-    "prettier.printWidth": 200,
-    "prettier.endOfLine": "auto",
-    "prettier.eslintIntegration": true,
-    "prettier.useTabs": false,
-    "prettier.tabWidth": 2,
-    "prettier.semi": true,
-    "prettier.bracketSpacing": true,
-    "prettier.jsxSingleQuote": false,
-    "prettier.importStatementFormatter": "none"
-  },
-  "eslintConfig": {
-    "settings": {
-      "import/resolver": {
-        "babel-module": {}
-      }
-    },
-    "parser": "@babel/eslint-parser",
-    "parserOptions": {
-      "sourceType": "module",
-      "allowImportExportEverywhere": true
-    },
-    "env": {
-      "browser": true,
-      "node": true,
-      "es2021": true,
-      "jest": true
-    },
-    "extends": [
-      "eslint:recommended",
-      "plugin:import/errors",
-      "plugin:import/warnings",
-      "prettier"
-    ],
-    "plugins": [
-      "import",
-      "prettier"
-    ],
-    "rules": {
-      "prettier/prettier": "error",
-      "import/order": [
-        "error",
-        {
-          "groups": [
-            [
-              "builtin",
-              "external",
-              "internal"
-            ]
-          ],
-          "newlines-between": "always"
-        }
-      ],
-      "import/no-duplicates": "error",
-      "import/extensions": [
-        "error",
-        "ignorePackages",
-        {
-          "js": "always",
-          "jsx": "never",
-          "ts": "never",
-          "tsx": "never"
-        }
-      ]
-    }
-  },
-  "nodemonConfig": {
-    "ext": "ejs,js,html"
-  },
-  "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "targets": {
-            "esmodules": true
-          }
-        }
-      ]
-    ],
-    "plugins": [
-      [
-        "module-resolver",
-        {
-          "root": [
-            "./"
-          ]
-        }
-      ]
-    ],
-    "sourceMaps": "inline"
+    "dev": "vite",
+    "build": "vite build",
+    "serve:test": "node tests/server/test-server.js",
+    "test:e2e": "npm-run-all -p serve:test test:e2e:run",
+    "test:e2e:run": "vitest run --environment node tests/e2e",
+    "test:cleanup": "kill $(lsof -t -i:3000 || echo 0)",
+    "preview": "vite preview",
+    "test:unit": "vitest run --environment jsdom tests/vue",
+    "test:watch": "vitest --watch",
+    "test:ui": "vitest --ui",
+    "test:dot": "vitest --silent --reporter dot",
+    "test:coverage": "vitest --coverage"
   },
   "dependencies": {
-    "axe-puppeteer": "^1.1.1",
-    "axios": "^1.6.8",
-    "bcryptjs": "^2.4.3",
-    "body-parser": "^1.20.2",
-    "cookie-parser": "^1.4.6",
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "eslint-plugin-module-resolver": "^1.5.0",
-    "esm": "^3.2.25",
-    "express": "^4.18.3",
-    "fast-glob": "^3.3.2",
-    "google-auth-library": "^9.7.0",
-    "jsonwebtoken": "^9.0.2",
-    "moment": "^2.30.1",
-    "mongodb": "^6.5.0",
-    "mongoose": "^8.3.1",
-    "morgan": "^1.10.0",
-    "node-fetch": "^3.3.2",
-    "path": "^0.12.7",
-    "punycode": "^2.3.1",
-    "puppeteer": "^22.6.4",
-    "sass": "^1.71.1"
+    "@mdi/font": "^7.4.47",
+    "vite-plugin-vuetify": "^2.0.4",
+    "vue": "^3.5.13",
+    "vue-router": "^4.4.5",
+    "vuetify": "^3.7.4"
   },
   "devDependencies": {
-    "@babel/cli": "^7.23.9",
-    "@babel/core": "^7.24.4",
-    "@babel/eslint-parser": "^7.24.1",
-    "@babel/node": "^7.23.9",
-    "@babel/plugin-transform-runtime": "^7.24.0",
-    "@babel/preset-env": "^7.24.4",
-    "@babel/register": "^7.23.7",
-    "@babel/runtime": "^7.24.0",
-    "@jest/globals": "^29.7.0",
-    "babel-jest": "^29.7.0",
-    "babel-plugin-module-resolver": "^5.0.0",
-    "concurrently": "^8.2.2",
-    "depcheck": "^1.4.7",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-import-resolver-babel-module": "^5.3.2",
-    "eslint-plugin-import": "^2.29.1",
-    "eslint-plugin-prettier": "^5.2.1",
-    "eslint-scope": "^8.0.1",
-    "jest": "^29.7.0",
-    "mongodb-memory-server": "^9.1.8",
-    "node-mocks-http": "^1.14.1",
-    "nodemon": "^3.1.0",
-    "prettier": "^3.2.5",
-    "source-map-support": "^0.5.21",
-    "supertest": "^6.3.4"
+    "@axe-core/playwright": "^4.10.1",
+    "@vitejs/plugin-vue": "^5.2.0",
+    "@vitest/coverage-istanbul": "^2.1.5",
+    "@vitest/coverage-v8": "^2.1.5",
+    "@vitest/ui": "^2.1.5",
+    "@vue/test-utils": "^2.4.6",
+    "axe-core": "^4.10.2",
+    "c8": "^10.1.2",
+    "express": "^4.21.2",
+    "jsdom": "^25.0.1",
+    "npm-run-all": "^4.1.5",
+    "playwright": "^1.49.1",
+    "prettier": "^3.3.3",
+    "sass": "^1.81.0",
+    "vite": "^5.4.11",
+    "vite-plugin-vue-devtools": "^7.5.4",
+    "vitest": "^2.1.8",
+    "vue-axe": "^3.1.2",
+    "xml": "^1.0.1"
+  },
+  "prettier": {
+    "printWidth": 160,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "jsxSingleQuote": false,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "arrowParens": "avoid",
+    "proseWrap": "never",
+    "endOfLine": "auto"
   }
 }
