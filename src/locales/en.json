@@ -1,5 +1,134 @@
 {
-  "message": {
-    "home": "Home"
+  "views": {
+    "home": {},
+    "about": {
+      "personalProject": "This page is a personal project that I use as part of my studies to explore and learn both backend and frontend technologies. Initially, the project was built using plain HTML, CSS, and JavaScript, but I am now transitioning it into a full-stack application to meet the requirements of my studies.",
+      "backendDetails": "The backend is powered by <strong>Node.js</strong> and <strong>MongoDB</strong>, both of which are already implemented. I have also integrated <strong>JWT</strong> for secure user authentication. Moving forward, I will be enhancing the backend further with features like <strong>monitoring</strong> using <strong>Grafana</strong>, optimizing for scalability and performance. On the frontend, I am using <strong>Vue.js</strong> to create a dynamic, component-based user interface.",
+      "siteEvolution": "This site will continue to evolve as I develop my skills and add new features to meet the objectives of both the frontend and backend modules. Feel free to explore the features and technologies I've implemented. If you have any questions or just want to say hello, feel free to <router-link to='/contact'>contact me</router-link>.",
+      "thankYou": "Thank you for visiting and showing interest in my learning project!"
+    },
+    "contact": {
+      "questionMessage": "Have a question or just want to say hello? Feel free to get in touch with me!",
+      "reachMessage": "You can reach me via email or on Github.",
+      "emailText": "Write me an email",
+      "githubText": "Visit my Github"
+    },
+    "tasks": {
+      "title": "To-Do List"
+    },
+    "notFound": {
+      "homeButtonLabel": "Bring Me Home"
+    }
+  },
+  "components": {
+    "header": {
+      "title": "Task Master"
+    },
+    "footer": {
+      "text": "Made with ❤️ in Berlin"
+    },
+    "editTaskBox": {
+      "editTaskDialog": {
+        "title": "Edit Task",
+        "taskTitleLabel": "Title",
+        "taskDescriptionLabel": "Description",
+        "taskDueDateLabel": "Due Date",
+        "taskPriorityLabel": "Priority",
+        "taskTitlePlaceholder": "Title",
+        "taskDescriptionPlaceholder": "Description",
+        "priorityOptions": {
+          "high": "High",
+          "medium": "Medium",
+          "low": "Low"
+        },
+        "deleteButton": "Delete",
+        "saveButton": "Save Changes"
+      }
+    },
+    "loginForm": {
+      "usernameLabel": "Username",
+      "passwordLabel": "Password",
+      "usernamePlaceholder": "Username",
+      "passwordPlaceholder": "Password",
+      "loginButton": "Log In",
+      "createAccountButton": "Create New Account"
+    },
+    "navBar": {
+      "home": "Home",
+      "about": "About",
+      "contact": "Contact"
+    },
+    "newTaskForm": {
+      "taskTitleLabel": "Task Title",
+      "priorityLabel": "Priority",
+      "dueDateLabel": "Due Date",
+      "taskTitlePlaceholder": "Task title",
+      "dueDatePlaceholder": "Select due date",
+      "addTaskButton": "Add Task",
+      "errorMessage": "Task title and due date are required.",
+      "taskAddedSuccess": "Task added successfully!",
+      "taskAddedFailure": "Failed to add task",
+      "priorityOptions": {
+        "low": "Low",
+        "medium": "Medium",
+        "high": "High"
+      }
+    },
+    "registerBox": {
+      "registration": {
+        "title": "Create New Account",
+        "showGuidelinesButton": "Show Registration Guidelines",
+        "hideGuidelinesButton": "Hide Registration Guidelines",
+        "usernameLabel": "Username",
+        "passwordLabel": "Password",
+        "usernamePlaceholder": "Username",
+        "passwordPlaceholder": "Password",
+        "signUpButton": "Sign Up",
+        "cancelButton": "Cancel",
+        "usernameError": {
+          "minLength": "Username must be at least 3 characters",
+          "taken": "Username is already taken",
+          "checkError": "Error checking username"
+        },
+        "passwordError": {
+          "minLength": "Password must be at least 8 characters long",
+          "case": "Password must include both upper and lower case letters",
+          "number": "Password must include at least one number",
+          "symbol": "Password must include at least one special symbol"
+        },
+        "registrationFailed": "Registration failed. Please try again."
+      }
+    },
+    "registrationGuidelines": {
+      "title": "Registration Guidelines",
+      "usernameLabel": "Username",
+      "usernameRequirements": ["Must be unique and not already in use", "At least 3 characters long"],
+      "passwordLabel": "Password",
+      "passwordRequirements": [
+        "At least 8 characters long",
+        "Include a mix of upper and lower case letters",
+        "Include at least one number and one special symbol (e.g., !, @, #)",
+        "Avoid using easily guessable information like your name or birthday"
+      ]
+    },
+    "todoTable": {
+      "title": "Title",
+      "description": "Description",
+      "dueDate": "Due Date",
+      "priority": "Priority",
+      "done": "Done",
+      "invalidDate": "Invalid Date",
+      "priorityColors": {
+        "high": "High",
+        "medium": "Medium",
+        "low": "Low"
+      },
+      "completed": "Completed"
+    }
+  },
+  "altText": {
+    "profileUser": "User Profile",
+    "todoList": "A table on which there are plants, paper clips, a clipboard, an alarm clock and a ballpoint pen.",
+    "notFoundCat": "A sad looking cat and the white text 404 not found."
   }
 }
