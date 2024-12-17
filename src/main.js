@@ -6,9 +6,22 @@ import { createVuetify } from 'vuetify';
 import 'vuetify/styles';
 import '@mdi/font/css/materialdesignicons.css';
 
+import { createI18n } from 'vue-i18n';
+import en from './locales/en.json';
+import de from './locales/de.json';
+
 const vuetify = createVuetify({
   icons: {
     defaultSet: 'mdi'
+  }
+});
+
+const i18n = createI18n({
+  locale: 'en',
+  fallbackLocale: 'en',
+  messages: {
+    en,
+    de
   }
 });
 
@@ -28,9 +41,9 @@ if (process.env.NODE_ENV === 'development') {
       delay: 1000
     });
 
-    app.use(router).use(vuetify).mount('#app');
+    app.use(router).use(vuetify).use(i18n).mount('#app');
   });
 } else {
   app = createApp(App);
-  app.use(router).use(vuetify).mount('#app');
+  app.use(router).use(vuetify).use(i18n).mount('#app');
 }
