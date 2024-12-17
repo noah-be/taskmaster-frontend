@@ -6,15 +6,24 @@
           <v-card-text>
             <p class="mb-4">{{ $t('views.about.personalProject') }}</p>
             <p class="mb-4">
-              The backend is powered by <strong>Node.js</strong> and <strong>MongoDB</strong>, both of which are already implemented. I have also integrated
-              <strong>JWT</strong> for secure user authentication. Moving forward, I will be enhancing the backend further with features like
-              <strong>monitoring</strong> using <strong>Grafana</strong>, optimizing for scalability and performance. On the frontend, I am using
-              <strong>Vue.js</strong> to create a dynamic, component-based user interface.
+              {{ $t('views.about.backendIntro') }}
+              <strong>{{ $t('views.about.nodejs') }}</strong>
+              {{ $t('views.about.and') }}
+              <strong>{{ $t('views.about.mongodb') }}</strong>
+              {{ $t('views.about.integration') }}
+              <strong>{{ $t('views.about.jwt') }}</strong>
+              {{ $t('views.about.forAuth') }}
+              <strong>{{ $t('views.about.monitoring') }}</strong>
+              {{ $t('views.about.using') }}
+              <strong>{{ $t('views.about.grafana') }}</strong>
+              {{ $t('views.about.backendConclusion') }}
+              <strong>{{ $t('views.about.vuejs') }}</strong>
+              {{ $t('views.about.frontendConclusion') }}
             </p>
             <p class="mb-4">
-              This site will continue to evolve as I develop my skills and add new features to meet the objectives of both the frontend and backend modules.
-              Feel free to explore the features and technologies I've implemented. If you have any questions or just want to say hello, feel free to
-              <router-link to="/contact">contact me</router-link>.
+              {{ $t('views.about.siteEvolution') }}
+              {{ $t('views.about.contactIntro') }} <router-link to="/contact">{{ $t('views.about.contactLinkText') }}</router-link
+              >.
             </p>
             <p>{{ $t('views.about.thankYou') }}</p>
           </v-card-text>
@@ -23,5 +32,3 @@
     </v-row>
   </v-container>
 </template>
-
-// TODO: Figure out how to format translatoins without using html tags in translation text
