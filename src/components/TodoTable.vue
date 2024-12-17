@@ -18,7 +18,7 @@
 
         <template #item.priority="{ item }">
           <v-chip :data-testid="'chip-' + item._id" :color="getPriorityColor(item.priority)" dark small>
-            {{ item.priority }}
+            {{ $t('components.todoTable.priorityColors.' + item.priority.toLowerCase()) }}
           </v-chip>
         </template>
 
@@ -33,7 +33,7 @@
                 class="d-flex align-center"
                 dense
               ></v-checkbox>
-              <span class="visually-hidden">Completed</span>
+              <span class="visually-hidden">{{ $t('components.todoTable.completed') }}</span>
             </label>
           </div>
         </template>
@@ -43,6 +43,8 @@
 </template>
 
 <script>
+import { useI18n } from 'vue-i18n';
+
 export default {
   props: {
     tasks: {
@@ -50,14 +52,18 @@ export default {
       required: true
     }
   },
+  setup() {
+    const { t } = useI18n();
+    return { t };
+  },
   data() {
     return {
       headers: [
-        { title: 'Title', key: 'title' },
-        { title: 'Description', key: 'description' },
-        { title: 'Due Date', key: 'dueDate' },
-        { title: 'Priority', key: 'priority' },
-        { title: 'Done', key: 'completed' }
+        { title: this.t('components.todoTable.title'), key: 'title' },
+        { title: this.t('components.todoTable.description'), key: 'description' },
+        { title: this.t('components.todoTable.dueDate'), key: 'dueDate' },
+        { title: this.t('components.todoTable.priority'), key: 'priority' },
+        { title: this.t('components.todoTable.done'), key: 'completed' }
       ]
     };
   },
@@ -81,9 +87,9 @@ export default {
       }
     },
     formatDueDate(date) {
-      if (!date) return 'Invalid Date';
+      if (!date) return this.t('components.todoTable.invalidDate');
       const parsedDate = new Date(date);
-      return isNaN(parsedDate) ? 'Invalid Date' : parsedDate.toLocaleDateString();
+      return isNaN(parsedDate) ? this.t('components.todoTable.invalidDate') : parsedDate.toLocaleDateString();
     }
   }
 };
