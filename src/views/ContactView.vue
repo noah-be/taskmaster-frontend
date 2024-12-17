@@ -4,16 +4,16 @@
       <v-col>
         <v-card outlined>
           <v-card-text>
-            <p>Have a question or just want to say hello? Feel free to get in touch with me!</p>
+            <p>{{ $t('views.contact.questionMessage') }}</p>
             <br />
-            <p>You can reach me via email or on Github.</p>
+            <p>{{ $t('views.contact.reachMessage') }}</p>
             <br />
             <ul class="list-with-padding">
               <li>
-                <a href="mailto:noah.frank@code.berlin">Write me an email</a>
+                <a href="mailto:noah.frank@code.berlin">{{ $t('views.contact.emailText') }}</a>
               </li>
               <li>
-                <a href="https://github.com/noah-frank/" target="_blank"> Visit my Github </a>
+                <a href="https://github.com/noah-frank/" target="_blank">{{ $t('views.contact.githubText') }}</a>
               </li>
             </ul>
             <br />
