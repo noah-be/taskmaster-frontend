@@ -4,7 +4,7 @@
       <v-col cols="12" md="12">
         <v-card>
           <v-card-title>
-            <h2 class="text-center w-100">To-Do List</h2>
+            <h2 class="text-center w-100">{{ $t('views.tasks.title') }}</h2>
           </v-card-title>
           <v-divider></v-divider>
           <v-card-text>
