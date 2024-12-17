@@ -9,6 +9,7 @@ vi.mock('vue-router', () => ({
 }));
 
 describe('EditTaskBox.vue', () => {
+  let wrapper;
   const vuetify = createVuetify();
   const task = {
     _id: '1',
@@ -20,35 +21,24 @@ describe('EditTaskBox.vue', () => {
 
   beforeEach(() => {
     vi.resetAllMocks();
-  });
-
-  it('renders the dialog when visible', () => {
-    const wrapper = mount(EditTaskBox, {
+    wrapper = mount(EditTaskBox, {
       global: {
-        plugins: [vuetify]
+        plugins: [vuetify, global.i18n]
       },
       props: {
         task,
         isDialogVisible: true
       }
     });
+  });
 
+  it('renders the dialog when visible', () => {
     const dialog = wrapper.findComponent({ name: 'VDialog' });
     expect(dialog.exists()).toBe(true);
     expect(dialog.props('modelValue')).toBe(true);
   });
 
   it('updates the task data correctly when input is changed', async () => {
-    const wrapper = mount(EditTaskBox, {
-      global: {
-        plugins: [vuetify]
-      },
-      props: {
-        task,
-        isDialogVisible: true
-      }
-    });
-
     const titleInput = wrapper.findComponent({ ref: 'titleField' });
     await titleInput.setValue('Updated Task');
     expect(wrapper.vm.taskCopy.title).toBe('Updated Task');
@@ -67,16 +57,6 @@ describe('EditTaskBox.vue', () => {
   });
 
   it('emits save-task when Save Changes is clicked', async () => {
-    const wrapper = mount(EditTaskBox, {
-      global: {
-        plugins: [vuetify]
-      },
-      props: {
-        task,
-        isDialogVisible: true
-      }
-    });
-
     const saveButton = wrapper.findComponent({ ref: 'saveButton' });
     await saveButton.trigger('click');
 
@@ -92,16 +72,6 @@ describe('EditTaskBox.vue', () => {
   });
 
   it('emits delete-task when Delete is clicked', async () => {
-    const wrapper = mount(EditTaskBox, {
-      global: {
-        plugins: [vuetify]
-      },
-      props: {
-        task,
-        isDialogVisible: true
-      }
-    });
-
     const deleteButton = wrapper.findComponent({ ref: 'deleteButton' });
     await deleteButton.trigger('click');
 
@@ -109,16 +79,6 @@ describe('EditTaskBox.vue', () => {
   });
 
   it('closes the dialog when closeDialog is called', async () => {
-    const wrapper = mount(EditTaskBox, {
-      global: {
-        plugins: [vuetify]
-      },
-      props: {
-        task,
-        isDialogVisible: true
-      }
-    });
-
     expect(wrapper.props('isDialogVisible')).toBe(true);
 
     await wrapper.vm.closeDialog();
@@ -126,38 +86,12 @@ describe('EditTaskBox.vue', () => {
   });
 
   it('formats the due date correctly', () => {
-    const wrapper = mount(EditTaskBox, {
-      global: {
-        plugins: [vuetify]
-      },
-      props: {
-        task,
-        isDialogVisible: true
-      }
-    });
-
     const dueDateInput = wrapper.findComponent({ ref: 'dueDateField' });
     const inputElement = dueDateInput.find('input');
     expect(inputElement.element.value).toBe('2024-12-31');
   });
 
   it('returns an empty string for invalid date', async () => {
-    const wrapper = mount(EditTaskBox, {
-      global: {
-        plugins: [vuetify]
-      },
-      props: {
-        task: {
-          _id: '123',
-          title: 'Test Task',
-          description: 'Test description',
-          dueDate: 'Invalid Date',
-          priority: 'Medium'
-        },
-        isDialogVisible: true
-      }
-    });
-
     const dueDateInput = wrapper.findComponent({ ref: 'dueDateField' });
     const dueDateInputElement = dueDateInput.find('input');
 

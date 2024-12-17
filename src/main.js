@@ -16,7 +16,7 @@ const vuetify = createVuetify({
   }
 });
 
-const i18n = createI18n({
+export const i18n = createI18n({
   legacy: false,
   locale: 'en',
   fallbackLocale: 'en',
