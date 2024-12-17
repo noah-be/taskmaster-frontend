@@ -1,24 +1,19 @@
 <script setup>
-import { useRouter } from "vue-router";
+import { useRouter } from 'vue-router';
 
 const router = useRouter();
 
 function goHome() {
-  router.push("/");
+  router.push('/');
 }
 </script>
 
 <template>
   <v-container class="text-center py-10">
-    <v-img
-      src="/images/404_cat.jpeg"
-      alt="A sad looking cat and the white text 404 not found."
-      max-width="400px"
-      class="mx-auto rounded-xl"
-    />
+    <v-img src="/images/404_cat.jpeg" alt="A sad looking cat and the white text 404 not found." max-width="400px" class="mx-auto rounded-xl" />
 
     <v-btn class="mt-6" color="success" block large @click="goHome">
-      Bring Me Home
+      {{ $t('views.notFound.homeButtonLabel') }}
     </v-btn>
   </v-container>
 </template>
