@@ -1,24 +1,24 @@
 <template>
   <v-container v-show="visible" :aria-hidden="!visible ? 'true' : 'false'">
     <v-card class="pa-4" elevation="2" id="registration-guidelines">
-      <v-card-title class="text-h6">Registration Guidelines</v-card-title>
+      <v-card-title class="text-h6">{{ $t('components.registrationGuidelines.title') }}</v-card-title>
       <v-card-text>
         <ul class="custom-list">
           <li>
-            <strong>Username:</strong>
+            <strong>{{ $t('components.registrationGuidelines.usernameLabel') }}:</strong>
             <ul>
-              <li>Must be unique and not already in use</li>
-              <li>At least 3 characters long</li>
+              <li>{{ $t('components.registrationGuidelines.usernameRequirements[0]') }}</li>
+              <li>{{ $t('components.registrationGuidelines.usernameRequirements[1]') }}</li>
             </ul>
           </li>
 
           <li>
-            <strong>Password:</strong>
+            <strong>{{ $t('components.registrationGuidelines.passwordLabel') }}:</strong>
             <ul>
-              <li>At least 8 characters long</li>
-              <li>Include a mix of upper and lower case letters</li>
-              <li>Include at least one number and one special symbol (e.g., !, @, #)</li>
-              <li>Avoid using easily guessable information like your name or birthday</li>
+              <li>{{ $t('components.registrationGuidelines.passwordRequirements[0]') }}</li>
+              <li>{{ $t('components.registrationGuidelines.passwordRequirements[1]') }}</li>
+              <li>{{ $t('components.registrationGuidelines.passwordRequirements[2]') }}</li>
+              <li>{{ $t('components.registrationGuidelines.passwordRequirements[3]') }}</li>
             </ul>
           </li>
         </ul>

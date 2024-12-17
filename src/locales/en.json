@@ -107,7 +107,7 @@
       "passwordRequirements": [
         "At least 8 characters long",
         "Include a mix of upper and lower case letters",
-        "Include at least one number and one special symbol (e.g., !, @, #)",
+        "{'Include at least one number and one special symbol (e.g., !, @, #)}'",
         "Avoid using easily guessable information like your name or birthday"
       ]
     },
