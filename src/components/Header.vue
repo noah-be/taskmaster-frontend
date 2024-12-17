@@ -16,7 +16,7 @@ import Navbar from '@/components/Navbar.vue';
 
         <v-col cols="auto">
           <v-btn icon>
-            <v-img src="/images/profile-user.png" alt="User Profile" width="40" height="40" cover class="rounded-circle" />
+            <v-img src="/images/profile-user.png" :alt="$t('altText.profileUser')" width="40" height="40" cover class="rounded-circle" />
           </v-btn>
         </v-col>
       </v-row>
