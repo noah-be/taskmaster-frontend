@@ -92,7 +92,22 @@ describe('EditTaskBox.vue', () => {
   });
 
   it('returns an empty string for invalid date', async () => {
-    const dueDateInput = wrapper.findComponent({ ref: 'dueDateField' });
+    const invalidDateTask = {
+      ...task,
+      dueDate: 'Invalid Date'
+    };
+
+    const invalidDateWrapper = mount(EditTaskBox, {
+      global: {
+        plugins: [vuetify, global.i18n]
+      },
+      props: {
+        task: invalidDateTask,
+        isDialogVisible: true
+      }
+    });
+
+    const dueDateInput = invalidDateWrapper.findComponent({ ref: 'dueDateField' });
     const dueDateInputElement = dueDateInput.find('input');
 
     expect(dueDateInputElement.element.value).toBe('');
