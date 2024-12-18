@@ -26,7 +26,7 @@ describe('TasksView.vue', () => {
 
     wrapper = mount(TasksView, {
       global: {
-        plugins: [vuetify]
+        plugins: [vuetify, i18n]
       }
     });
   });

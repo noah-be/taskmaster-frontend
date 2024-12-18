@@ -18,7 +18,7 @@ describe('TodoTable.vue', () => {
   beforeEach(() => {
     wrapper = mount(TodoTable, {
       global: {
-        plugins: [vuetify]
+        plugins: [vuetify, i18n]
       },
       props: { tasks }
     });

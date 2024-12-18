@@ -19,7 +19,7 @@ describe('NewTaskForm.vue', () => {
     vi.stubGlobal('fetch', vi.fn());
     wrapper = mount(NewTaskForm, {
       global: {
-        plugins: [vuetify]
+        plugins: [vuetify, i18n]
       }
     });
   });
@@ -43,7 +43,7 @@ describe('NewTaskForm.vue', () => {
   it('binds title, priority, and dueDate to the data', async () => {
     const wrapper = mount(NewTaskForm, {
       global: {
-        plugins: [vuetify]
+        plugins: [vuetify, i18n]
       }
     });
 
