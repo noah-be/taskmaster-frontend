@@ -70,6 +70,7 @@
 <script>
 import { ref, computed } from 'vue';
 import RegistrationGuidelines from '@/components/RegistrationGuidelines.vue';
+import { useI18n } from 'vue-i18n';
 
 export default {
   components: {
@@ -83,6 +84,7 @@ export default {
   },
   emits: ['update:show'],
   setup(props, { emit }) {
+    const { t } = useI18n();
     const guidelinesVisible = ref(false);
     const username = ref('');
     const password = ref('');
@@ -103,16 +105,16 @@ export default {
 
     const validateUsername = async () => {
       if (username.value.length < 3) {
-        usernameFeedback.value = $t('components.registerBox.registration.usernameError.minLength');
+        usernameFeedback.value = t('components.registerBox.registration.usernameError.minLength');
         return;
       }
 
       try {
         const response = await fetch(`/api/auth/check-username?username=${encodeURIComponent(username.value)}`);
         const data = await response.json();
-        usernameFeedback.value = data.isAvailable ? '' : $t('components.registerBox.registration.usernameError.taken');
+        usernameFeedback.value = data.isAvailable ? '' : t('components.registerBox.registration.usernameError.taken');
       } catch (error) {
-        usernameFeedback.value = $t('components.registerBox.registration.usernameError.checkError');
+        usernameFeedback.value = t('components.registerBox.registration.usernameError.checkError');
         console.error('Error:', error);
       }
     };
@@ -120,19 +122,19 @@ export default {
     const validatePassword = () => {
       const passwordVal = password.value;
       if (passwordVal.length < 8) {
-        passwordFeedback.value = $t('components.registerBox.registration.passwordError.minLength');
+        passwordFeedback.value = t('components.registerBox.registration.passwordError.minLength');
         return;
       }
       if (!/[a-z]/.test(passwordVal) || !/[A-Z]/.test(passwordVal)) {
-        passwordFeedback.value = $t('components.registerBox.registration.passwordError.case');
+        passwordFeedback.value = t('components.registerBox.registration.passwordError.case');
         return;
       }
       if (!/\d/.test(passwordVal)) {
-        passwordFeedback.value = $t('components.registerBox.registration.passwordError.number');
+        passwordFeedback.value = t('components.registerBox.registration.passwordError.number');
         return;
       }
       if (!/[!@#$%^&*(),.?":{}|<>]/.test(passwordVal)) {
-        passwordFeedback.value = $t('components.registerBox.registration.passwordError.symbol');
+        passwordFeedback.value = t('components.registerBox.registration.passwordError.symbol');
         return;
       }
 
@@ -153,7 +155,7 @@ export default {
         });
 
         if (!response.ok) {
-          throw new Error($t('components.registerBox.registration.registrationFailed'));
+          throw new Error(t('components.registerBox.registration.registrationFailed'));
         }
 
         const data = await response.json();
@@ -161,7 +163,7 @@ export default {
         closeModal();
       } catch (error) {
         console.error('Error:', error);
-        alert($t('components.registerBox.registration.registrationFailed'));
+        alert(t('components.registerBox.registration.registrationFailed'));
       }
     };
 
