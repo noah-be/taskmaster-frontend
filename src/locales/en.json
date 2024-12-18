@@ -78,7 +78,7 @@
       "dueDateLabel": "Due Date",
       "taskTitlePlaceholder": "Task title",
       "dueDatePlaceholder": "Select due date",
-      "addTaskButton": "Add Task",
+      "addTaskButton": "Save",
       "errorMessage": "Task title and due date are required.",
       "taskAddedSuccess": "Task added successfully!",
       "taskAddedFailure": "Failed to add task",

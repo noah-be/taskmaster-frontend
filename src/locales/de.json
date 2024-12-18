@@ -1,5 +1,137 @@
 {
-  "message": {
-    "home": "Startseite"
+  "views": {
+    "home": {},
+    "about": {
+      "personalProject": "Diese Seite ist ein persönliches Projekt, das ich im Rahmen meines Studiums verwende, um sowohl Backend- als auch Frontend-Technologien zu erforschen und zu lernen. Ursprünglich wurde das Projekt mit einfachem HTML, CSS und JavaScript erstellt, aber ich bin gerade dabei, es in eine Full-Stack-Anwendung umzuwandeln, um den Anforderungen meines Studiums gerecht zu werden.",
+      "backendIntro": "Das Backend wird betrieben mit",
+      "and": "und",
+      "integration": ", die beide bereits implementiert sind. Außerdem habe ich",
+      "forAuth": "für eine sichere Benutzer-Authentifizierung integriert. Zukünftig werde ich das Backend mit Funktionen wie",
+      "using": "mit",
+      "backendConclusion": "weiter verbessern, um Skalierbarkeit und Leistung zu optimieren. Im Frontend verwende ich",
+      "frontendConclusion": "um eine dynamische, komponentenbasierte Benutzeroberfläche zu erstellen.",
+      "siteEvolution": "Diese Website wird sich ständig weiterentwickeln, da ich meine Fähigkeiten ausbaue und neue Funktionen hinzufüge, um die Ziele sowohl der Frontend- als auch der Backend-Module zu erreichen. Sie können die Funktionen und Technologien, die ich implementiert habe, gerne erkunden.",
+      "contactIntro": "Wenn Sie Fragen haben oder einfach Hallo sagen möchten, zögern Sie nicht",
+      "contactLinkText": "mich zu kontaktieren",
+      "thankYou": "Vielen Dank für Ihren Besuch und Ihr Interesse an meinem Lernprojekt!"
+    },
+    "contact": {
+      "questionMessage": "Haben Sie eine Frage oder möchten einfach Hallo sagen? Zögern Sie nicht, mich zu kontaktieren!",
+      "reachMessage": "Sie können mich per E-Mail oder auf Github erreichen.",
+      "emailText": "Schreiben Sie mir eine E-Mail",
+      "githubText": "Besuchen Sie mein Github"
+    },
+    "tasks": {
+      "title": "To-Do-Liste"
+    },
+    "notFound": {
+      "homeButtonLabel": "Bring mich zur Startseite"
+    }
+  },
+  "components": {
+    "editTaskBox": {
+      "editTaskDialog": {
+        "title": "Aufgabe bearbeiten",
+        "taskTitleLabel": "Titel",
+        "taskDescriptionLabel": "Beschreibung",
+        "taskDueDateLabel": "Datum",
+        "taskPriorityLabel": "Priorität",
+        "taskTitlePlaceholder": "Titel",
+        "taskDescriptionPlaceholder": "Beschreibung",
+        "priorityOptions": {
+          "high": "Hoch",
+          "medium": "Mittel",
+          "low": "Niedrig"
+        },
+        "deleteButton": "Löschen",
+        "saveButton": "Änderungen speichern"
+      }
+    },
+    "loginForm": {
+      "usernameLabel": "Benutzername",
+      "passwordLabel": "Passwort",
+      "usernamePlaceholder": "Benutzername",
+      "passwordPlaceholder": "Passwort",
+      "loginButton": "Anmelden",
+      "createAccountButton": "Neues Konto erstellen"
+    },
+    "navBar": {
+      "home": "Startseite",
+      "about": "Über",
+      "contact": "Kontakt"
+    },
+    "newTaskForm": {
+      "taskTitleLabel": "Aufgabentitel",
+      "priorityLabel": "Priorität",
+      "dueDateLabel": "Datum",
+      "taskTitlePlaceholder": "Aufgabentitel",
+      "dueDatePlaceholder": "Fälligkeitsdatum auswählen",
+      "addTaskButton": "Speichern",
+      "errorMessage": "Aufgabentitel und Fälligkeitsdatum sind erforderlich.",
+      "taskAddedSuccess": "Aufgabe erfolgreich hinzugefügt!",
+      "taskAddedFailure": "Fehler beim Hinzufügen der Aufgabe",
+      "priorityOptions": {
+        "low": "Niedrig",
+        "medium": "Mittel",
+        "high": "Hoch"
+      }
+    },
+    "registerBox": {
+      "registration": {
+        "title": "Neues Konto erstellen",
+        "showGuidelinesButton": "Registrierungsrichtlinien anzeigen",
+        "hideGuidelinesButton": "Registrierungsrichtlinien ausblenden",
+        "usernameLabel": "Benutzername",
+        "passwordLabel": "Passwort",
+        "usernamePlaceholder": "Benutzername",
+        "passwordPlaceholder": "Passwort",
+        "signUpButton": "Registrieren",
+        "cancelButton": "Abbrechen",
+        "usernameError": {
+          "minLength": "Benutzername muss mindestens 3 Zeichen lang sein",
+          "taken": "Benutzername ist bereits vergeben",
+          "checkError": "Fehler beim Überprüfen des Benutzernamens"
+        },
+        "passwordError": {
+          "minLength": "Passwort muss mindestens 8 Zeichen lang sein",
+          "case": "Passwort muss sowohl Groß- als auch Kleinbuchstaben enthalten",
+          "number": "Passwort muss mindestens eine Zahl enthalten",
+          "symbol": "Passwort muss mindestens ein Sonderzeichen enthalten"
+        },
+        "registrationFailed": "Registrierung fehlgeschlagen. Bitte versuchen Sie es erneut."
+      }
+    },
+    "registrationGuidelines": {
+      "title": "Registrierungsrichtlinien",
+      "usernameLabel": "Benutzername",
+      "usernameRequirements": ["Muss einzigartig sein und darf nicht bereits verwendet werden", "Mindestens 3 Zeichen lang"],
+      "passwordLabel": "Passwort",
+      "passwordRequirements": [
+        "Mindestens 8 Zeichen lang",
+        "Eine Mischung aus Groß- und Kleinbuchstaben enthalten",
+        "Mindestens eine Zahl und ein Sonderzeichen (z. B. !, @, #) enthalten",
+        "Vermeiden Sie leicht erratbare Informationen wie Ihren Namen oder Ihr Geburtsdatum"
+      ]
+    },
+    "todoTable": {
+      "title": "Titel",
+      "description": "Beschreibung",
+      "dueDate": "Fälligkeitsdatum",
+      "priority": "Priorität",
+      "done": "Erledigt",
+      "invalidDate": "Ungültiges Datum",
+      "priorityColors": {
+        "high": "Hoch",
+        "medium": "Mittel",
+        "low": "Niedrig",
+        "unknown": "Unbekannt"
+      },
+      "completed": "Abgeschlossen"
+    }
+  },
+  "altText": {
+    "profileUser": "Benutzerprofil",
+    "todoList": "Ein Tisch mit Pflanzen, Büroklammern, einem Klemmbrett, einem Wecker und einem Kugelschreiber.",
+    "notFoundCat": "Eine traurig aussehende Katze und der weiße Text '404 nicht gefunden'."
   }
 }
