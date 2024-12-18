@@ -18,7 +18,7 @@
 
         <template #item.priority="{ item }">
           <v-chip :data-testid="'chip-' + item._id" :color="getPriorityColor(item.priority)" dark small>
-            {{ $t('components.todoTable.priorityColors.' + item.priority.toLowerCase()) }}
+            {{ $t('components.todoTable.priorityColors.' + (item.priority || 'default').toLowerCase()) }}
           </v-chip>
         </template>
 
@@ -27,7 +27,7 @@
             <label :for="'checkbox-' + item._id" class="d-flex align-center">
               <v-checkbox
                 :id="'checkbox-' + item._id"
-                v-model="item.completed"
+                :value="item.completed"
                 :data-testid="'checkbox-' + item._id"
                 @click.stop="toggleTask(item)"
                 class="d-flex align-center"
@@ -52,45 +52,52 @@ export default {
       required: true
     }
   },
-  setup() {
+  setup(props, { emit }) {
     const { t } = useI18n();
-    return { t };
-  },
-  data() {
-    return {
-      headers: [
-        { title: this.t('components.todoTable.title'), key: 'title' },
-        { title: this.t('components.todoTable.description'), key: 'description' },
-        { title: this.t('components.todoTable.dueDate'), key: 'dueDate' },
-        { title: this.t('components.todoTable.priority'), key: 'priority' },
-        { title: this.t('components.todoTable.done'), key: 'completed' }
-      ]
+
+    const headers = [
+      { title: t('components.todoTable.title'), key: 'title' },
+      { title: t('components.todoTable.description'), key: 'description' },
+      { title: t('components.todoTable.dueDate'), key: 'dueDate' },
+      { title: t('components.todoTable.priority'), key: 'priority' },
+      { title: t('components.todoTable.done'), key: 'completed' }
+    ];
+
+    const toggleTask = task => {
+      emit('toggle-task', task._id);
     };
-  },
-  methods: {
-    toggleTask(task) {
-      this.$emit('toggle-task', task._id);
-    },
-    onRowClick(event, row) {
-      this.$emit('edit-task', row.item);
-    },
-    getPriorityColor(priority) {
-      switch (priority) {
-        case 'High':
+
+    const onRowClick = (event, row) => {
+      emit('edit-task', row.item);
+    };
+
+    const getPriorityColor = priority => {
+      switch ((priority || '').toLowerCase()) {
+        case 'high':
           return 'red';
-        case 'Medium':
+        case 'medium':
           return 'orange';
-        case 'Low':
+        case 'low':
           return 'blue';
         default:
           return 'grey';
       }
-    },
-    formatDueDate(date) {
-      if (!date) return this.t('components.todoTable.invalidDate');
+    };
+
+    const formatDueDate = date => {
+      if (!date) return t('components.todoTable.invalidDate');
       const parsedDate = new Date(date);
-      return isNaN(parsedDate) ? this.t('components.todoTable.invalidDate') : parsedDate.toLocaleDateString();
-    }
+      return isNaN(parsedDate) ? t('components.todoTable.invalidDate') : parsedDate.toLocaleDateString();
+    };
+
+    return {
+      t,
+      headers,
+      toggleTask,
+      onRowClick,
+      getPriorityColor,
+      formatDueDate
+    };
   }
 };
 </script>
