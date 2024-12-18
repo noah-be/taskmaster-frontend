@@ -135,7 +135,8 @@
       "priorityColors": {
         "high": "High",
         "medium": "Medium",
-        "low": "Low"
+        "low": "Low",
+        "unknown": "Unknown"
       },
       "completed": "Completed"
     }
