@@ -18,7 +18,7 @@ describe('RegisterBox.vue', () => {
 
     wrapper = mount(RegisterBox, {
       global: {
-        plugins: [vuetify]
+        plugins: [vuetify, i18n]
       },
       props: {
         show: true

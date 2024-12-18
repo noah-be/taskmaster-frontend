@@ -4,6 +4,8 @@ import { createVuetify } from 'vuetify';
 import 'vuetify/styles';
 import NewTaskForm from '@/components/NewTaskForm.vue';
 
+// TODO: Fix tests
+
 vi.mock('vue-router', () => ({
   useRouter: vi.fn()
 }));
