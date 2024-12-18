@@ -22,7 +22,8 @@
       "githubText": "Besuchen Sie mein Github"
     },
     "tasks": {
-      "title": "To-Do-Liste"
+      "title": "To-Do-Liste",
+      "toggleFailure": "Fehler beim Umschalten des Aufgabenabschlusses. Bitte versuchen Sie es erneut."
     },
     "notFound": {
       "homeButtonLabel": "Bring mich zur Startseite"
@@ -53,7 +54,8 @@
       "usernamePlaceholder": "Benutzername",
       "passwordPlaceholder": "Passwort",
       "loginButton": "Anmelden",
-      "createAccountButton": "Neues Konto erstellen"
+      "createAccountButton": "Neues Konto erstellen",
+      "loginFailure": "Login fehlgeschlagen. Bitte versuchen Sie es erneut."
     },
     "navBar": {
       "home": "Startseite",

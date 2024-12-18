@@ -30,6 +30,7 @@ import { ref, onMounted } from 'vue';
 import NewTaskForm from '@/components/NewTaskForm.vue';
 import TodoTable from '@/components/TodoTable.vue';
 import EditTaskBox from '@/components/EditTaskBox.vue';
+import { useI18n } from 'vue-i18n';
 
 export default {
   components: {
@@ -38,6 +39,7 @@ export default {
     EditTaskBox
   },
   setup() {
+    const { t } = useI18n();
     const tasks = ref([]);
     const currentTask = ref({
       title: '',
@@ -99,7 +101,7 @@ export default {
         saveTaskChanges(updatedTask);
       } catch (error) {
         console.error(error);
-        alert('Error toggling task completion. Please try again.');
+        alert(t('views.tasks.toggleFailure'));
       }
     };
 

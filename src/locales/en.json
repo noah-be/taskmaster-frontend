@@ -28,7 +28,8 @@
       "githubText": "Visit my Github"
     },
     "tasks": {
-      "title": "To-Do List"
+      "title": "To-Do List",
+      "toggleFailure": "Error toggling task completion. Please try again."
     },
     "notFound": {
       "homeButtonLabel": "Bring Me Home"
@@ -65,7 +66,8 @@
       "usernamePlaceholder": "Username",
       "passwordPlaceholder": "Password",
       "loginButton": "Log In",
-      "createAccountButton": "Create New Account"
+      "createAccountButton": "Create New Account",
+      "loginFailure": "Login failed. Please try again."
     },
     "navBar": {
       "home": "Home",

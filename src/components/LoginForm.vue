@@ -43,12 +43,14 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import RegisterBox from '@/components/RegisterBox.vue';
+import { useI18n } from 'vue-i18n';
 
 export default {
   components: {
     RegisterBox
   },
   setup() {
+    const { t } = useI18n();
     const router = useRouter();
     const username = ref('');
     const password = ref('');
@@ -80,7 +82,7 @@ export default {
         router.push(data.redirectUrl);
       } catch (error) {
         console.error('Error:', error);
-        alert('Login failed. Please try again.');
+        alert(t('components.loginForm.loginFailure'));
       }
     };
 
