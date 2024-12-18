@@ -27,7 +27,7 @@
             <label :for="'checkbox-' + item._id" class="d-flex align-center">
               <v-checkbox
                 :id="'checkbox-' + item._id"
-                :value="item.completed"
+                v-model="item.completed"
                 :data-testid="'checkbox-' + item._id"
                 @click.stop="toggleTask(item)"
                 class="d-flex align-center"
