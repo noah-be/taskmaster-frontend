@@ -15,7 +15,9 @@
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
     "test:dot": "vitest --silent --reporter dot",
-    "test:coverage": "vitest --coverage"
+    "test:coverage": "vitest --coverage",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@mdi/font": "^7.4.47",
@@ -27,6 +29,14 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.1",
+    "@chromatic-com/storybook": "^3.2.3",
+    "@storybook/addon-essentials": "^8.4.7",
+    "@storybook/addon-interactions": "^8.4.7",
+    "@storybook/addon-onboarding": "^8.4.7",
+    "@storybook/blocks": "^8.4.7",
+    "@storybook/test": "^8.4.7",
+    "@storybook/vue3": "^8.4.7",
+    "@storybook/vue3-vite": "^8.4.7",
     "@vitejs/plugin-vue": "^5.2.0",
     "@vitest/coverage-istanbul": "^2.1.5",
     "@vitest/coverage-v8": "^2.1.5",
@@ -40,6 +50,7 @@
     "playwright": "^1.49.1",
     "prettier": "^3.3.3",
     "sass": "^1.81.0",
+    "storybook": "^8.4.7",
     "vite": "^5.4.11",
     "vite-plugin-vue-devtools": "^7.5.4",
     "vitest": "^2.1.8",
