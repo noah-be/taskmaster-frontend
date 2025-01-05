@@ -1,17 +1,8 @@
-import { createApp, h, Fragment } from 'vue';
+import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
-import { i18n } from './i18n';
-
-import { createVuetify } from 'vuetify';
-import 'vuetify/styles';
-import '@mdi/font/css/materialdesignicons.css';
-
-const vuetify = createVuetify({
-  icons: {
-    defaultSet: 'mdi'
-  }
-});
+import { registerPlugins } from './plugins';
 
 const app = createApp(App);
-app.use(router).use(vuetify).use(i18n).mount('#app');
+registerPlugins(app);
+app.use(router).mount('#app');
