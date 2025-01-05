@@ -13,25 +13,5 @@ const vuetify = createVuetify({
   }
 });
 
-let app = null;
-
-if (process.env.NODE_ENV === 'development') {
-  import('vue-axe').then(({ default: VueAxe, VueAxePopup }) => {
-    app = createApp({
-      render: () => h(Fragment, [h(App), h(VueAxePopup)])
-    });
-
-    app.use(VueAxe, {
-      auto: true,
-      config: {
-        branding: { application: 'vue-axe' }
-      },
-      delay: 1000
-    });
-
-    app.use(router).use(vuetify).use(i18n).mount('#app');
-  });
-} else {
-  app = createApp(App);
-  app.use(router).use(vuetify).use(i18n).mount('#app');
-}
+const app = createApp(App);
+app.use(router).use(vuetify).use(i18n).mount('#app');
