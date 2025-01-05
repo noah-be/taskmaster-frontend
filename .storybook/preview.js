@@ -1,4 +1,8 @@
-/** @type { import('@storybook/vue3').Preview } */
+import { setup } from '@storybook/vue3';
+import { registerPlugins } from '../src/plugins';
+
+setup(registerPlugins);
+
 const preview = {
   parameters: {
     controls: {
