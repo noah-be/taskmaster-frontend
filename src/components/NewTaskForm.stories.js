@@ -1,7 +1,7 @@
 import NewTaskForm from './NewTaskForm.vue';
 
 export default {
-  title: 'Components/NewTaskForm',
+  title: 'Forms/NewTaskForm',
   component: NewTaskForm
 };
 

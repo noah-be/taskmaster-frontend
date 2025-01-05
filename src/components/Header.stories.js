@@ -1,7 +1,7 @@
 import Header from './Header.vue';
 
 export default {
-  title: 'Components/Header',
+  title: 'Layout/Header',
   component: Header
 };
 

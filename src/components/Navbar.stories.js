@@ -1,7 +1,7 @@
 import Navbar from './Navbar.vue';
 
 export default {
-  title: 'Components/Navbar',
+  title: 'Navigation/Navbar',
   component: Navbar
 };
 
