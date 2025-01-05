@@ -1,7 +1,11 @@
 import { setup } from '@storybook/vue3';
+import { watchEffect } from 'vue';
 import { i18n, registerPlugins } from '../src/plugins';
+import { withVuetifyTheme } from './withVuetifyTheme.decorator';
 
-setup(registerPlugins);
+setup(app => {
+  registerPlugins(app);
+});
 
 export const globalTypes = {
   locale: {
@@ -21,7 +25,8 @@ export const decorators = [
   (Story, context) => {
     i18n.global.locale.value = context.globals.locale;
     return Story();
-  }
+  },
+  withVuetifyTheme
 ];
 
 const preview = {
