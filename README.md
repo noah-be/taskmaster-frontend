@@ -1,5 +1,9 @@
 ## About 📋✨
 
+This repository contains the frontend part of my Private To-Do List learning project.
+
+// TODO: Add more information
+
 ## Built With 🔧
 
 [![Vue][Vue.js]][Vue-url]
