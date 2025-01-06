@@ -8,27 +8,27 @@
 
 1. **Clone the repo**
 
-   ```sh
-   git clone https://github.com/noah-be/taskmaster-frontend.git
-   ```
+```sh
+git clone https://github.com/noah-be/taskmaster-frontend.git
+```
 
 2. **Go to the project directory**
 
-   ```sh
-   cd taskmaster-frontend
-   ```
+```sh
+cd taskmaster-frontend
+```
 
 3. **Install NPM packages**
 
-   ```sh
-   npm install
-   ```
+```sh
+npm install
+```
 
 4. **Start the dev server**
 
-   ```sh
-   npm run dev
-   ```
+```sh
+npm run dev
+```
 
 ## License
 
