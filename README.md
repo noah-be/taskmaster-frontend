@@ -12,11 +12,15 @@
    ```sh
    git clone https://github.com/noah-be/taskmaster-frontend.git
    ```
-2. Install NPM packages
+2. Go to the project directory
+   ```sh
+   cd taskmaster-frontend
+   ```
+3. Install NPM packages
    ```sh
    npm install
    ```
-3. Start the dev server
+4. Start the dev server
    ```sh
    npm run dev
    ```
