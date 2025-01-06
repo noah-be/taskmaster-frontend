@@ -4,23 +4,28 @@
 
 [![Vue][Vue.js]][Vue-url]
 
-## Getting Started
+## Run Locally 🖥️
 
-### Installation
+1. **Clone the repo**
 
-1. Clone the repo
    ```sh
    git clone https://github.com/noah-be/taskmaster-frontend.git
    ```
-2. Go to the project directory
+
+2. **Go to the project directory**
+
    ```sh
    cd taskmaster-frontend
    ```
-3. Install NPM packages
+
+3. **Install NPM packages**
+
    ```sh
    npm install
    ```
-4. Start the dev server
+
+4. **Start the dev server**
+
    ```sh
    npm run dev
    ```
