@@ -6,8 +6,6 @@
 
 ## Getting Started
 
-### Prerequisites
-
 ### Installation
 
 1. Clone the repo
