@@ -32,6 +32,7 @@
 
 Special thanks to the following tools and libraries used in this project:
 
+- [Choose an Open Source License](https://choosealicense.com)
 - [Storybook](https://storybook.js.org)
 - [Vuetify](https://vuetifyjs.com)
 - [i18n](https://www.npmjs.com/package/i18n)
