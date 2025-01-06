@@ -25,6 +25,8 @@
 
 ## License
 
+This project is licensed under the GNU General Public License v3. For more details, see the [LICENSE](LICENSE) file.
+
 ## Acknowledgments
 
 Special thanks to the following tools and libraries used in this project:
