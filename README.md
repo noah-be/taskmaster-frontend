@@ -1,6 +1,6 @@
-## About
+## About 📋✨
 
-## Built With
+## Built With 🔧
 
 [![Vue][Vue.js]][Vue-url]
 
@@ -30,11 +30,11 @@ npm install
 npm run dev
 ```
 
-## License
+## License 🖹
 
 This project is licensed under the GNU General Public License v3. For more details, see the [LICENSE](LICENSE) file.
 
-## Acknowledgments
+## Acknowledgments 🙏
 
 Special thanks to the following tools and libraries used in this project:
 
