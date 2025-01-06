@@ -10,6 +10,19 @@
 
 ### Installation
 
+1. Clone the repo
+   ```sh
+   git clone https://github.com/noah-be/taskmaster-frontend.git
+   ```
+2. Install NPM packages
+   ```sh
+   npm install
+   ```
+3. Start the dev server
+   ```sh
+   npm run dev
+   ```
+
 ## License
 
 [Vue.js]: https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D
