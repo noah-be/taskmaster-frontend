@@ -110,7 +110,7 @@ export default {
       }
 
       try {
-        const response = await fetch(`/api/auth/check-username?username=${encodeURIComponent(username.value)}`);
+        const response = await fetch(`${API_BASE_URL}/api/auth/check-username?username=${encodeURIComponent(username.value)}`);
         const data = await response.json();
         usernameFeedback.value = data.isAvailable ? '' : t('components.registerBox.registration.usernameError.taken');
       } catch (error) {
@@ -143,7 +143,7 @@ export default {
 
     const registerUser = async () => {
       try {
-        const response = await fetch('/api/auth/register', {
+        const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

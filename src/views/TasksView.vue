@@ -51,7 +51,7 @@ export default {
 
     const fetchTasks = async () => {
       try {
-        const response = await fetch('/api/task/getAll', {
+        const response = await fetch(`${API_BASE_URL}/api/task/getAll`, {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -90,7 +90,7 @@ export default {
 
     const toggleTaskCompletion = async taskId => {
       try {
-        const response = await fetch(`/api/task/toggle/${taskId}`, {
+        const response = await fetch(`${API_BASE_URL}/api/task/toggle/${taskId}`, {
           method: 'PATCH',
           headers: {
             Authorization: `Bearer ${localStorage.getItem('token')}`
