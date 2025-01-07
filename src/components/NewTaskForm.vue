@@ -51,7 +51,7 @@ export default {
       }
 
       try {
-        const response = await fetch('/api/task', {
+        const response = await fetch(`${API_BASE_URL}/api/task`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
