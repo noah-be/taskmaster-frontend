@@ -1,0 +1,10 @@
+.dockerignore
+.git
+.gitignore
+Dockerfile
+README.md
+node_modules/
+screenshots/
+tests/
+.storybook/
+.vscode/
