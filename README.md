@@ -22,17 +22,13 @@ git clone https://github.com/noah-be/taskmaster-frontend.git
 cd taskmaster-frontend
 ```
 
-3. **Install NPM packages**
+3. **Copy the .env.example file to .env.local and adjust the values as needed:**
 
 ```sh
-npm install
+cp .env.example .env.local
 ```
 
-4. **Start the dev server**
-
-```sh
-npm run dev
-```
+// TODO: Add build and run instructions
 
 ## License 🖹
 
