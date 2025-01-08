@@ -27,7 +27,7 @@ export const vuetify = createVuetify({
 function configureSentry(app, router) {
   Sentry.init({
     app,
-    dsn: 'https://e53a5ae2fedd71811ea4f5ecfe512b65@st.noah-frank.de/2',
+    dsn: 'https://34369ccf145b370fe8f6afb4bfd140bb@o4508607145967616.ingest.de.sentry.io/4508607151079504',
     integrations: [Sentry.browserTracingIntegration({ router }), Sentry.replayIntegration()],
     tracesSampleRate: 1.0,
     tracePropagationTargets: ['localhost', 'https://tm.noah-frank.de'],
