@@ -1,4 +1,4 @@
-import { sentryVitePlugin } from "@sentry/vite-plugin";
+import { sentryVitePlugin } from '@sentry/vite-plugin';
 import { fileURLToPath, URL } from 'node:url';
 
 import { defineConfig } from 'vite';
@@ -8,10 +8,15 @@ import vueDevTools from 'vite-plugin-vue-devtools';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue(), vuetify({ autoImport: true }), vueDevTools(), sentryVitePlugin({
-    org: "taskmaster",
-    project: "javascript-vue"
-  })],
+  plugins: [
+    vue(),
+    vuetify({ autoImport: true }),
+    vueDevTools(),
+    sentryVitePlugin({
+      org: 'taskmaster',
+      project: 'taskmaster-frontend'
+    })
+  ],
 
   optimizeDeps: {
     include: ['axe-core']
