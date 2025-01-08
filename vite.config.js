@@ -1,3 +1,4 @@
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 import { fileURLToPath, URL } from 'node:url';
 
 import { defineConfig } from 'vite';
@@ -7,10 +8,15 @@ import vueDevTools from 'vite-plugin-vue-devtools';
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [vue(), vuetify({ autoImport: true }), vueDevTools()],
+  plugins: [vue(), vuetify({ autoImport: true }), vueDevTools(), sentryVitePlugin({
+    org: "taskmaster",
+    project: "javascript-vue"
+  })],
+
   optimizeDeps: {
     include: ['axe-core']
   },
+
   test: {
     globals: true,
     setupFiles: ['./tests/vitest.setup.js'],
@@ -27,6 +33,7 @@ export default defineConfig({
       }
     }
   },
+
   css: {
     preprocessorOptions: {
       scss: {
@@ -34,11 +41,13 @@ export default defineConfig({
       }
     }
   },
+
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+
   server: {
     proxy: {
       '/api': {
@@ -46,5 +55,9 @@ export default defineConfig({
         changeOrigin: true
       }
     }
+  },
+
+  build: {
+    sourcemap: true
   }
 });
