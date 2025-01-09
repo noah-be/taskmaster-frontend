@@ -127,7 +127,7 @@ describe('TasksView.vue', () => {
     expect(taskIndex).not.toBe(-1);
     expect(wrapper.vm.tasks[taskIndex]).toEqual(updatedTask);
 
-    expect(global.fetch).toHaveBeenCalledWith(`/api/task/toggle/${taskIdToToggle}`, {
+    expect(global.fetch).toHaveBeenCalledWith(`${global.API_BASE_URL}/api/task/toggle/${taskIdToToggle}`, {
       method: 'PATCH',
       headers: {
         Authorization: `Bearer mockToken`
@@ -151,7 +151,7 @@ describe('TasksView.vue', () => {
 
     await wrapper.vm.toggleTaskCompletion(taskIdToToggle);
 
-    expect(global.fetch).toHaveBeenCalledWith(`/api/task/toggle/${taskIdToToggle}`, {
+    expect(global.fetch).toHaveBeenCalledWith(`${global.API_BASE_URL}/api/task/toggle/${taskIdToToggle}`, {
       method: 'PATCH',
       headers: {
         Authorization: `Bearer mockToken`
@@ -167,7 +167,7 @@ describe('TasksView.vue', () => {
 
     await wrapper.vm.fetchTasks();
 
-    expect(fetch).toHaveBeenCalledWith('/api/task/getAll', {
+    expect(fetch).toHaveBeenCalledWith(`${global.API_BASE_URL}/api/task/getAll`, {
       method: 'GET',
       headers: {
         Authorization: 'Bearer mockToken'
