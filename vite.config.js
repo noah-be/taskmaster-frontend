@@ -26,6 +26,7 @@ export default defineConfig({
     globals: true,
     setupFiles: ['./tests/vitest.setup.js'],
     include: ['tests/**/*.{test,spec}.{js,vue}'],
+    environment: 'jsdom',
     coverage: {
       exclude: ['src/main.js', 'src/App.vue', 'vite.config.js', 'src/components/Header.vue', 'src/components/Footer.vue'],
       provider: 'v8',

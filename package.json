@@ -11,7 +11,7 @@
     "test:e2e:run": "vitest run --environment node tests/e2e",
     "test:cleanup": "kill $(lsof -t -i:3000 || echo 0)",
     "preview": "vite preview",
-    "test:unit": "vitest run --environment jsdom tests/vue",
+    "test:unit": "vitest run tests/vue",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
     "test:dot": "vitest --silent --reporter dot",
