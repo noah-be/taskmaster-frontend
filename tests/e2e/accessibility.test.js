@@ -7,7 +7,7 @@ test('Accessibility', async () => {
   const page = await context.newPage();
 
   try {
-    await page.goto('http://localhost:3000');
+    await page.goto('http://localhost:3009');
     await page.addScriptTag({ url: 'https://cdn.jsdelivr.net/npm/axe-core@4.10.2/axe.min.js' });
     const results = await page.evaluate(async () => {
       return await axe.run();
