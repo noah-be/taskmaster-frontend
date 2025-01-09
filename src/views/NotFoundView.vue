@@ -12,7 +12,7 @@ function goHome() {
   <v-container class="text-center py-10">
     <v-img src="/images/404_cat.jpeg" :alt="$t('altText.notFoundCat')" max-width="400px" class="mx-auto rounded-xl" />
 
-    <v-btn class="mt-6" color="success" block large @click="goHome">
+    <v-btn data-testid="home-button" class="mt-6" color="success" block large @click="goHome">
       {{ $t('views.notFound.homeButtonLabel') }}
     </v-btn>
   </v-container>

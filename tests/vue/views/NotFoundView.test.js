@@ -11,23 +11,44 @@ const vuetify = createVuetify();
 describe('NotFoundView.vue', () => {
   let router;
 
-  beforeEach(() => {
+  it('calls plausible when the component is mounted', async () => {
     router = createRouter({
       history: createMemoryHistory(),
       routes: [{ path: '/:pathMatch(.*)*', name: 'NotFoundView', component: NotFoundView }]
     });
-  });
 
-  it('calls plausible when the component is mounted', async () => {
     router.push('/non-existent-route');
     await router.isReady();
 
     mount(NotFoundView, {
       global: {
-        plugins: [router, vuetify, i18n]
+        plugins: [router, vuetify, global.i18n]
       }
     });
 
     expect(global.plausible).toHaveBeenCalledWith('404', { props: { path: '/non-existent-route' } });
+  });
+
+  it('calls goHome and navigates to "/" when the home button is clicked', async () => {
+    const pushMock = vi.fn();
+    router = createRouter({
+      history: createMemoryHistory(),
+      routes: [{ path: '/:pathMatch(.*)*', name: 'NotFoundView', component: NotFoundView }]
+    });
+    router.push = pushMock;
+
+    const wrapper = mount(NotFoundView, {
+      global: {
+        plugins: [router, vuetify, global.i18n]
+      }
+    });
+
+    const button = wrapper.find('[data-testid="home-button"]');
+
+    expect(button.exists()).toBe(true);
+
+    await button.trigger('click');
+
+    expect(pushMock).toHaveBeenCalledWith('/');
   });
 });
