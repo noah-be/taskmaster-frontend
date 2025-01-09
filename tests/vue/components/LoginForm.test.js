@@ -6,8 +6,9 @@ import LoginForm from '@/components/LoginForm.vue';
 import RegisterBox from '@/components/RegisterBox.vue';
 import { useRouter } from 'vue-router';
 
+const pushMock = vi.fn();
 vi.mock('vue-router', () => ({
-  useRouter: vi.fn()
+  useRouter: () => ({ push: pushMock })
 }));
 
 describe('LoginForm.vue', () => {
@@ -51,6 +52,26 @@ describe('LoginForm.vue', () => {
 
     expect(wrapper.vm.username).toBe('testuser');
     expect(wrapper.vm.password).toBe('testpassword');
+  });
+
+  it('stores the token in localStorage and calls router.push', async () => {
+    global.fetch = vi.fn(() =>
+      Promise.resolve({
+        ok: true,
+        json: () => Promise.resolve({ token: 'exampleToken', redirectUrl: '/tasks' })
+      })
+    );
+
+    const wrapper = mount(LoginForm, {
+      global: {
+        plugins: [vuetify, global.i18n]
+      }
+    });
+
+    await wrapper.find('form').trigger('submit.prevent');
+
+    expect(localStorage.getItem('token')).toBe('exampleToken');
+    expect(pushMock).toHaveBeenCalledWith('/tasks');
   });
 
   // TODO: Fix this test
