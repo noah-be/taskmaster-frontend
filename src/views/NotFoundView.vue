@@ -17,3 +17,11 @@ function goHome() {
     </v-btn>
   </v-container>
 </template>
+
+<script>
+export default {
+  mounted() {
+    plausible('404', { props: { path: this.$route.path } });
+  }
+};
+</script>
