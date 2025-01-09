@@ -12,7 +12,7 @@ node_modules
 dist
 dist-ssr
 coverage
-*.local
+
 
 /cypress/videos/
 /cypress/screenshots/
@@ -29,5 +29,4 @@ coverage
 
 *storybook.log
 
-# Sentry Config File
-.env.sentry-build-plugin
+.env*

@@ -27,12 +27,13 @@ export const vuetify = createVuetify({
 function configureSentry(app, router) {
   Sentry.init({
     app,
-    dsn: 'https://34369ccf145b370fe8f6afb4bfd140bb@o4508607145967616.ingest.de.sentry.io/4508607151079504',
+    dsn: import.meta.env.SENTRY_DSN,
+    environment: import.meta.env.VITE_SENTRY_ENVIRONMENT,
     integrations: [Sentry.browserTracingIntegration({ router }), Sentry.replayIntegration()],
-    tracesSampleRate: 1.0,
-    tracePropagationTargets: ['localhost', 'https://tm.noah-frank.de'],
-    replaysSessionSampleRate: 1.0, // change to 0.1 in production
-    replaysOnErrorSampleRate: 1.0
+    tracesSampleRate: parseFloat(import.meta.env.VITE_SENTRY_TRACES_SAMPLE_RATE || '1.0'),
+    tracePropagationTargets: import.meta.env.VITE_SENTRY_TRACE_PROPAGATION_TARGETS.split(','),
+    replaysSessionSampleRate: parseFloat(import.meta.env.VITE_SENTRY_REPLAYS_SESSION_SAMPLE_RATE || '1.0'),
+    replaysOnErrorSampleRate: parseFloat(import.meta.env.VITE_SENTRY_REPLAYS_ON_ERROR_SAMPLE_RATE || '1.0')
   });
 }
 
