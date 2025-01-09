@@ -75,8 +75,6 @@ export default {
 
         const data = await response.json();
 
-        console.debug('Success:', data);
-
         localStorage.setItem('token', data.token);
 
         router.push(data.redirectUrl);
