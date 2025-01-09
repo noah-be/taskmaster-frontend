@@ -1,3 +1,3 @@
-import { i18n } from '../src/i18n';
+import { i18n } from '../src/plugins';
 
 global.i18n = i18n;
