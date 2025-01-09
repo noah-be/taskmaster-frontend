@@ -28,7 +28,16 @@ export default defineConfig({
     include: ['tests/**/*.{test,spec}.{js,vue}'],
     environment: 'jsdom',
     coverage: {
-      exclude: ['src/main.js', 'src/App.vue', 'vite.config.js', 'src/components/Header.vue', 'src/components/Footer.vue'],
+      include: ['src/**/*.{js,ts,vue}'],
+      exclude: [
+        'src/main.js',
+        'src/plugins.js',
+        'src/App.vue',
+        'vite.config.js',
+        'src/components/Header.vue',
+        'src/components/Footer.vue',
+        'src/**/*.stories.{js,ts,vue}'
+      ],
       provider: 'v8',
       reporter: ['text', 'html'],
       reportsDirectory: './coverage'
