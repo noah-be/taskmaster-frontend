@@ -7,7 +7,7 @@ test('Accessibility', async () => {
   const page = await context.newPage();
 
   try {
-    await page.goto('http://localhost:3009');
+    await page.goto('http://localhost:5173');
     await page.addScriptTag({ url: 'https://cdn.jsdelivr.net/npm/axe-core@4.10.2/axe.min.js' });
     const results = await page.evaluate(async () => {
       return await axe.run();
@@ -21,10 +21,13 @@ test('Accessibility', async () => {
         console.error(`Description: ${violation.description}`);
         console.error(`Help: ${violation.help}`);
         console.error(`Help URL: ${violation.helpUrl}`);
-        console.error(
-          'Nodes:',
-          violation.nodes.map(node => node.html)
-        );
+        console.error('Nodes:');
+
+        violation.nodes.forEach(node => {
+          console.error(`HTML Element: ${node.html}`);
+          console.error(`Target: ${node.target.join(', ')}`);
+          console.error(`Failure Summary: ${node.failureSummary}`);
+        });
       });
     }
 
