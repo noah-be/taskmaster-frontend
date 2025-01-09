@@ -10,7 +10,9 @@ test('Accessibility', async () => {
     await page.goto('http://localhost:5173');
     await page.addScriptTag({ url: 'https://cdn.jsdelivr.net/npm/axe-core@4.10.2/axe.min.js' });
     const results = await page.evaluate(async () => {
-      return await axe.run();
+      return await axe.run({
+        exclude: [['.panel-entry-btn']] // Ignore vue dev tools
+      });
     });
 
     if (results.violations.length > 0) {
