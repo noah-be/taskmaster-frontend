@@ -162,7 +162,7 @@ describe('NewTaskForm.vue', () => {
     await wrapper.findComponent({ name: 'VBtn' }).trigger('click');
 
     expect(mockFetch).toHaveBeenCalledWith(
-      '/api/task',
+      `${global.API_BASE_URL}/api/task`,
       expect.objectContaining({
         method: 'POST',
         headers: expect.objectContaining({
