@@ -11,11 +11,10 @@
     "test:e2e:run": "vitest run --environment node tests/e2e",
     "test:cleanup": "kill $(lsof -t -i:3000 || echo 0)",
     "preview": "vite preview",
-    "test:unit": "vitest run tests/vue",
+    "test:unit": "vitest run tests/unit --coverage",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
     "test:dot": "vitest --silent --reporter dot",
-    "test:coverage": "vitest --coverage",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
