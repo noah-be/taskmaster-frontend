@@ -11,8 +11,8 @@ describe('TodoTable.vue', () => {
   const tasks = [
     { _id: '1', title: 'Task 1', description: 'Description 1', dueDate: '2024-12-31', priority: 'High', completed: false },
     { _id: '2', title: 'Task 2', description: 'Description 2', dueDate: '2024-11-30', priority: 'Medium', completed: true },
-    { _id: '3', title: 'Task 3', description: 'Description 3', dueDate: '2024-10-15', priority: 'Low', completed: false },
-    { _id: '4', title: 'Task 4', description: 'Description 4', dueDate: '2024-09-20', priority: 'Unknown', completed: true }
+    { _id: '3', title: 'Task 3', description: 'Description 3', dueDate: null, priority: 'Low', completed: false },
+    { _id: '4', title: 'Task 4', description: 'Description 4', dueDate: 'Blueberry', priority: 'Unknown', completed: true }
   ];
 
   beforeAll(() => {
@@ -39,5 +39,28 @@ describe('TodoTable.vue', () => {
 
     expect(wrapper.emitted('edit-task')).toBeTruthy();
     expect(wrapper.emitted('edit-task')[0]).toEqual([tasks[0]]);
+  });
+
+  it('renders tasks with correct data', () => {
+    const rows = wrapper.findAll('tr');
+    expect(rows.length).toBe(tasks.length + 1);
+
+    const formatedDueDates = ['12/31/2024', '11/30/2024', 'Invalid Date', 'Invalid Date'];
+
+    tasks.forEach((task, index) => {
+      const columns = rows.at(index + 1).findAll('td');
+      expect(columns.at(0).text()).toBe(task.title);
+      expect(columns.at(1).text()).toBe(task.description);
+      expect(columns.at(2).text()).toBe(formatedDueDates[index]);
+      expect(columns.at(3).text()).toBe(task.priority);
+    });
+  });
+
+  it('stops event propagation on checkbox click', async () => {
+    const checkbox = wrapper.find('[data-testid="checkbox-1"]');
+    const stopPropagationSpy = vi.fn();
+
+    await checkbox.trigger('click', { stopPropagation: stopPropagationSpy });
+    expect(stopPropagationSpy).toHaveBeenCalled();
   });
 });

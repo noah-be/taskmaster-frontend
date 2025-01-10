@@ -122,6 +122,11 @@
       "priority": "Priorität",
       "done": "Erledigt",
       "invalidDate": "Ungültiges Datum",
+      "priorityOptions": {
+        "high": "Hoch",
+        "medium": "Mittel",
+        "low": "Niedrig"
+      },
       "priorityColors": {
         "high": "Hoch",
         "medium": "Mittel",
