@@ -36,6 +36,8 @@ export default defineConfig({
         'vite.config.js',
         'src/components/Header.vue',
         'src/components/Footer.vue',
+        'src/views/AboutView.vue',
+        'src/views/ContactView.vue',
         'src/**/*.stories.{js,ts,vue}'
       ],
       provider: 'istanbul',
