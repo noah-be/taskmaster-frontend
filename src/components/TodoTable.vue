@@ -13,12 +13,12 @@
         @click:row="onRowClick"
       >
         <template #item.dueDate="{ item }">
-          {{ formatDueDate(item.dueDate) }}
+          {{ new Intl.DateTimeFormat($i18n.locale).format(new Date(item.dueDate)) }}
         </template>
 
         <template #item.priority="{ item }">
           <v-chip :data-testid="'chip-' + item._id" :color="getPriorityColor(item.priority)" dark small>
-            {{ $t('components.todoTable.priorityColors.' + (item.priority || 'default').toLowerCase()) }}
+            {{ $t('components.todoTable.priorityColors.' + item.priority.toLowerCase()) }}
           </v-chip>
         </template>
 
@@ -67,12 +67,12 @@ export default {
       emit('toggle-task', task._id);
     };
 
-    const onRowClick = (event, row) => {
+    const onRowClick = row => {
       emit('edit-task', row.item);
     };
 
     const getPriorityColor = priority => {
-      switch ((priority || '').toLowerCase()) {
+      switch (priority.toLowerCase()) {
         case 'high':
           return 'red';
         case 'medium':
@@ -84,19 +84,12 @@ export default {
       }
     };
 
-    const formatDueDate = date => {
-      if (!date) return t('components.todoTable.invalidDate');
-      const parsedDate = new Date(date);
-      return isNaN(parsedDate) ? t('components.todoTable.invalidDate') : parsedDate.toLocaleDateString();
-    };
-
     return {
       t,
       headers,
       toggleTask,
       onRowClick,
-      getPriorityColor,
-      formatDueDate
+      getPriorityColor
     };
   }
 };

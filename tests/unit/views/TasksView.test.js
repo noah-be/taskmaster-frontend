@@ -12,8 +12,8 @@ describe('TasksView.vue', () => {
   let wrapper;
 
   const tasksMock = [
-    { _id: '1', title: 'Task 1', description: 'Description 1', priority: 'medium', completed: false },
-    { _id: '2', title: 'Task 2', description: 'Description 2', priority: 'medium', completed: true }
+    { _id: '1', title: 'Task 1', description: 'Description 1', dueDate: '2024-12-31', priority: 'medium', completed: false },
+    { _id: '2', title: 'Task 2', description: 'Description 2', dueDate: '2024-12-31', priority: 'medium', completed: true }
   ];
 
   const consoleErrorMock = vi.spyOn(console, 'error').mockImplementation(() => {});
@@ -63,7 +63,7 @@ describe('TasksView.vue', () => {
   });
 
   it('adds a new task to the list', async () => {
-    const newTask = { _id: '3', title: 'Task 3', priority: 'medium', completed: false };
+    const newTask = { _id: '3', title: 'Task 3', priority: 'medium', dueDate: '2024-12-31', completed: false };
 
     wrapper.vm.addTaskToList(newTask);
     await wrapper.vm.$nextTick();
