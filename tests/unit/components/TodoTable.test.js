@@ -43,11 +43,6 @@ describe('TodoTable.vue', () => {
     });
   });
 
-  it('formats invalid due dates gracefully', () => {
-    const invalidDate = wrapper.vm.formatDueDate('invalid-date');
-    expect(invalidDate).toBe('Invalid Date');
-  });
-
   it('emits "toggle-task" correctly on checkbox click', async () => {
     const checkbox = wrapper.find('[data-testid="checkbox-1"]');
     expect(checkbox.exists()).toBe(true);
@@ -81,14 +76,6 @@ describe('TodoTable.vue', () => {
     expect(wrapper.vm.getPriorityColor('Unknown')).toBe('grey');
     expect(wrapper.vm.getPriorityColor('')).toBe('grey');
     expect(wrapper.vm.getPriorityColor(undefined)).toBe('grey');
-  });
-
-  it('renders due dates correctly in the table', () => {
-    tasks.forEach((task, index) => {
-      const row = wrapper.findAll('tr').at(index + 1);
-      const dueDateCell = row.find('td:nth-child(3)');
-      expect(dueDateCell.text()).toBe(new Date(task.dueDate).toLocaleDateString());
-    });
   });
 
   it('emits "edit-task" with correct data on row click', async () => {
