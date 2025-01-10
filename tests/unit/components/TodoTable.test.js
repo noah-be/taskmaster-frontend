@@ -40,6 +40,11 @@ describe('TodoTable.vue', () => {
       expect(columns.at(1).text()).toBe(task.description);
       expect(columns.at(2).text()).toBe(new Date(task.dueDate).toLocaleDateString());
       expect(columns.at(3).text()).toBe(task.priority);
+
+      const chip = wrapper.find(`[data-testid="chip-${task._id}"]`);
+      expect(chip.exists()).toBe(true);
+      const expectedClass = `text-${wrapper.vm.getPriorityColor(task.priority)}`;
+      expect(chip.classes()).toContain(expectedClass);
     });
   });
 
@@ -58,15 +63,6 @@ describe('TodoTable.vue', () => {
 
     await checkbox.trigger('click', { stopPropagation: stopPropagationSpy });
     expect(stopPropagationSpy).toHaveBeenCalled();
-  });
-
-  it('renders priority chips with correct colors', () => {
-    tasks.forEach(task => {
-      const chip = wrapper.find(`[data-testid="chip-${task._id}"]`);
-      expect(chip.exists()).toBe(true);
-      const expectedClass = `text-${wrapper.vm.getPriorityColor(task.priority)}`;
-      expect(chip.classes()).toContain(expectedClass);
-    });
   });
 
   it('handles all priority levels in getPriorityColor method', () => {
