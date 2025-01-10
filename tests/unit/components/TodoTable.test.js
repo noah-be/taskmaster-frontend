@@ -35,7 +35,7 @@ describe('TodoTable.vue', () => {
       expect(columns.at(2).text()).toBe(new Date(task.dueDate).toLocaleDateString());
       expect(columns.at(3).text()).toBe(task.priority);
 
-      const chip = wrapper.find(`[data-testid="chip-${task._id}"]`);
+      const chip = rows.at(index + 1).find(`[data-testid="chip-${task._id}"]`);
       expect(chip.exists()).toBe(true);
       const expectedClass = `text-${wrapper.vm.getPriorityColor(task.priority)}`;
       expect(chip.classes()).toContain(expectedClass);
