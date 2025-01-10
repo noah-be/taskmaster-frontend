@@ -38,7 +38,7 @@ export default defineConfig({
         'src/components/Footer.vue',
         'src/**/*.stories.{js,ts,vue}'
       ],
-      provider: 'v8',
+      provider: 'istanbul',
       reporter: ['text', 'html'],
       reportsDirectory: './coverage'
     },
