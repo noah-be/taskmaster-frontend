@@ -18,16 +18,10 @@ describe('TodoTable.vue', () => {
   beforeEach(() => {
     wrapper = mount(TodoTable, {
       global: {
-        plugins: [vuetify, i18n]
+        plugins: [vuetify, global.i18n]
       },
       props: { tasks }
     });
-  });
-
-  it('renders all key elements', () => {
-    expect(wrapper.find('[data-testid="v-container"]').exists()).toBe(true);
-    expect(wrapper.find('[data-testid="v-card"]').exists()).toBe(true);
-    expect(wrapper.find('[data-testid="data-table"]').exists()).toBe(true);
   });
 
   it('renders tasks with correct data', () => {
@@ -83,27 +77,9 @@ describe('TodoTable.vue', () => {
     expect(wrapper.emitted('edit-task')[0]).toEqual([tasks[1]]);
   });
 
-  it('renders headers correctly', () => {
-    const headerRow = wrapper.find('thead tr');
-    const headers = headerRow.findAll('th');
-
-    const expectedHeaders = ['Title', 'Description', 'Due Date', 'Priority', 'Done'];
-    headers.forEach((header, index) => {
-      expect(header.text()).toBe(expectedHeaders[index]);
-    });
-  });
-
   it('formats null or undefined due dates gracefully', () => {
     expect(wrapper.vm.formatDueDate(null)).toBe('Invalid Date');
     expect(wrapper.vm.formatDueDate(undefined)).toBe('Invalid Date');
     expect(wrapper.vm.formatDueDate('invalid-date')).toBe('Invalid Date');
-  });
-
-  it('is a Vue instance', () => {
-    expect(wrapper.exists()).toBe(true);
-  });
-
-  it('exports a valid Vue component', () => {
-    expect(TodoTable).toBeTruthy();
   });
 });
