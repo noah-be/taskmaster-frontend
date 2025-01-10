@@ -40,7 +40,7 @@ export default defineConfig({
       ],
       provider: 'istanbul',
       reporter: ['text', 'html'],
-      reportsDirectory: './coverage'
+      reportsDirectory: './tests/unit/coverage'
     },
     server: {
       deps: {
