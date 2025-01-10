@@ -176,4 +176,17 @@ describe('TasksView.vue', () => {
 
     expect(wrapper.vm.tasks).toEqual([]);
   });
+
+  it('does not update task if it is not found', () => {
+    const updatedTask = { _id: '3', title: 'Updated Task' };
+
+    wrapper.vm.tasks = [...tasksMock];
+
+    const logSpy = vi.spyOn(console, 'log');
+
+    wrapper.vm.saveTaskChanges(updatedTask);
+
+    expect(wrapper.vm.tasks).toEqual(tasksMock);
+    expect(logSpy).toHaveBeenCalledWith('Task not found');
+  });
 });

@@ -84,7 +84,11 @@ export default {
 
     const saveTaskChanges = updatedTask => {
       const index = tasks.value.findIndex(task => task._id === updatedTask._id);
-      if (index !== -1) tasks.value.splice(index, 1, updatedTask);
+      if (index !== -1) {
+        tasks.value.splice(index, 1, updatedTask);
+      } else {
+        console.log('Task not found');
+      }
       closeEditDialog();
     };
 
