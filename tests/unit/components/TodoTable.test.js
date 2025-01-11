@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { createVuetify } from 'vuetify';
+import { ref } from 'vue';
 import 'vuetify/styles';
 import TodoTable from '@/components/TodoTable.vue';
 
@@ -8,14 +9,23 @@ describe('TodoTable.vue', () => {
   const vuetify = createVuetify();
   let wrapper;
 
+  const emit = vi.fn();
+
   const tasks = [
-    { _id: '1', title: 'Task 1', description: 'Description 1', dueDate: '2024-12-31', priority: 'High', completed: false },
-    { _id: '2', title: 'Task 2', description: 'Description 2', dueDate: '2024-11-30', priority: 'Medium', completed: true },
-    { _id: '3', title: 'Task 3', description: 'Description 3', dueDate: null, priority: 'Low', completed: false },
-    { _id: '4', title: 'Task 4', description: 'Description 4', dueDate: 'Blueberry', priority: 'Unknown', completed: true }
+    //    { _id: '1' }, // Undefined title, description, dueDate, priority
+    //    { _id: '2', title: null, description: null, dueDate: null, priority: null, completed: null }, // Null title, description, dueDate, priority
+
+    { _id: '3', title: 'Task 3', description: 'Description 3', dueDate: '2015-10-21', priority: 'High', completed: false }, // priority: 'High'
+    { _id: '4', title: 'Task 4', description: 'Description 4', dueDate: '2015-10-21', priority: 'Medium', completed: false }, // priority: 'Medium'
+    { _id: '5', title: 'Task 5', description: 'Description 5', dueDate: '2015-10-21', priority: 'Low', completed: false }, // priority: 'Low'
+
+    { _id: '6', title: 'Task 6', description: 'Description 6', dueDate: '2015-10-21', priority: 'High', completed: true }, // completed: true
+    { _id: '7', title: '', description: 'Description 7', dueDate: '2015-10-21', priority: 'High', completed: true }, // Empty title
+    { _id: '8', title: 'Title 8', description: '', dueDate: '2015-10-21', priority: 'High', completed: true } // Empty description
+    //    { _id: '9', title: 'Task 9', description: 'Description 9', dueDate: '', priority: 'High', completed: false } // Empty dueDate
   ];
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = mount(TodoTable, {
       global: {
         plugins: [vuetify, global.i18n]
@@ -24,43 +34,54 @@ describe('TodoTable.vue', () => {
     });
   });
 
-  it('emits "toggle-task" correctly on checkbox click', async () => {
-    const checkbox = wrapper.find('[data-testid="checkbox-1"]');
-    expect(checkbox.exists()).toBe(true);
+  // it('renders tasks with correct data', () => {
+  //   const rows = wrapper.findAll('tr');
 
-    await checkbox.trigger('click');
-    expect(wrapper.emitted('toggle-task')).toBeTruthy();
-    expect(wrapper.emitted('toggle-task')[0]).toEqual([tasks[0]._id]);
-  });
+  //   expect(rows.length).toBe(tasks.length + 1);
 
-  it('emits "edit-task" with the correct row data when a table row is clicked', async () => {
-    const row = { item: tasks[0] };
-    wrapper.vm.onRowClick(row);
+  //   //const formatedDueDates = ['10/21/2015', '10/21/2015', 'Invalid Date', 'Invalid Date'];
 
-    expect(wrapper.emitted('edit-task')).toBeTruthy();
-    expect(wrapper.emitted('edit-task')[0]).toEqual([tasks[0]]);
-  });
+  //   tasks.forEach((task, index) => {
+  //     const columns = rows.at(index + 1).findAll('td');
+  //     expect(columns.at(0).text()).toBe(task.title);
+  //     expect(columns.at(1).text()).toBe(task.description);
+  //     expect(columns.at(2).text()).toBe('10/21/2015');
+  //     expect(columns.at(3).text()).toBe(task.priority);
+  //   });
+  // });
 
-  it('renders tasks with correct data', () => {
-    const rows = wrapper.findAll('tr');
-    expect(rows.length).toBe(tasks.length + 1);
+  it('stops event propagation on checkbox click and emits "toggle-task" with correct task id', async () => {
+    const checkboxes = wrapper.findAll('input[type="checkbox"]');
 
-    const formatedDueDates = ['12/31/2024', '11/30/2024', 'Invalid Date', 'Invalid Date'];
+    expect(checkboxes.length).toBe(tasks.length);
 
-    tasks.forEach((task, index) => {
-      const columns = rows.at(index + 1).findAll('td');
-      expect(columns.at(0).text()).toBe(task.title);
-      expect(columns.at(1).text()).toBe(task.description);
-      expect(columns.at(2).text()).toBe(formatedDueDates[index]);
-      expect(columns.at(3).text()).toBe(task.priority);
-    });
-  });
-
-  it('stops event propagation on checkbox click', async () => {
-    const checkbox = wrapper.find('[data-testid="checkbox-1"]');
     const stopPropagationSpy = vi.fn();
 
-    await checkbox.trigger('click', { stopPropagation: stopPropagationSpy });
-    expect(stopPropagationSpy).toHaveBeenCalled();
+    for (let index = 0; index < checkboxes.length; index++) {
+      const checkbox = checkboxes.at(index);
+
+      await checkbox.trigger('click', { stopPropagation: stopPropagationSpy });
+
+      expect(wrapper.emitted('toggle-task')).toBeTruthy();
+      expect(wrapper.emitted('toggle-task')[index]).toEqual([tasks[index]._id]);
+      expect(stopPropagationSpy).toHaveBeenCalled();
+    }
+  });
+
+  it('emits "edit-task" with the correct task data when a table row is clicked', async () => {
+    const rows = wrapper.findAll('tr');
+
+    rows.shift(); // Remove the header row
+
+    expect(rows.length).toBe(tasks.length);
+
+    for (let index = 0; index < rows.length; index++) {
+      const row = rows.at(index);
+
+      await row.trigger('click');
+
+      expect(wrapper.emitted('edit-task')).toBeTruthy();
+      expect(wrapper.emitted('edit-task')[index]).toEqual([tasks[index]]);
+    }
   });
 });

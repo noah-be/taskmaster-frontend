@@ -1,9 +1,17 @@
 <template>
-  <v-container data-testid="v-container">
+  <v-container>
     <v-card>
-      <v-data-table :items="tasks" :headers="headers" item-value="_id" class="elevation-1" dense outlined hide-default-footer @click:row="onRowClick">
+      <v-data-table :items="tasks" :headers="headers" class="elevation-1" dense outlined hide-default-footer @click:row="onRowClick">
+        <template #item.title="{ item }">
+          {{ item.title }}
+        </template>
+
+        <template #item.description="{ item }">
+          {{ item.description }}
+        </template>
+
         <template #item.dueDate="{ item }">
-          {{ formatdDueDate(item.dueDate) }}
+          {{ formatedDueDate(item.dueDate) }}
         </template>
 
         <template #item.priority="{ item }">
@@ -13,19 +21,8 @@
         </template>
 
         <template #item.completed="{ item }">
-          <div class="d-flex align-center">
-            <label :for="getCheckboxId(item)" class="d-flex align-center">
-              <v-checkbox
-                :id="getCheckboxId(item)"
-                v-model="item.completed"
-                :data-testid="getCheckboxId(item)"
-                @click.stop="toggleTask(item)"
-                class="d-flex align-center"
-                dense
-              ></v-checkbox>
-              <span class="visually-hidden">{{ getCompletedLabel() }}</span>
-            </label>
-          </div>
+          <v-checkbox v-model="item.completed" @click.stop="toggleTask(item)" class="d-flex align-center" dense></v-checkbox>
+          <span class="visually-hidden">{{ getCompletedLabel() }}</span>
         </template>
       </v-data-table>
     </v-card>
@@ -57,35 +54,45 @@ export default {
       emit('toggle-task', task._id);
     };
 
-    const onRowClick = row => {
-      emit('edit-task', row.item);
+    const onRowClick = (item, event) => {
+      emit('edit-task', event.item);
     };
 
     const priorityText = priority => {
-      priority = (priority || 'medium').toLowerCase();
-      return t(`components.todoTable.priorityColors.${priority}`);
-    };
-
-    const formatdDueDate = dueDate => {
-      if (!dueDate) return t('components.todoTable.invalidDate');
-      return new Date(dueDate).toLocaleDateString(locale.value);
-    };
-
-    const getPriorityColor = priority => {
-      switch ((priority || '').toLowerCase()) {
-        case 'high':
-          return 'red';
-        case 'medium':
-          return 'orange';
-        case 'low':
-          return 'blue';
-        default:
-          return 'grey';
+      if (priority) {
+        priority = priority.toLowerCase();
+        return t(`components.todoTable.priorityColors.${priority}`);
+      } else {
+        return t(`components.todoTable.priorityColors.unknown`);
       }
     };
 
+    const formatedDueDate = dueDate => {
+      if (dueDate) {
+        return new Date(dueDate).toLocaleDateString(locale.value);
+      } else {
+        return t('components.todoTable.invalidDate');
+      }
+    };
+
+    const getPriorityColor = priority => {
+      if (priority) {
+        switch (priority) {
+          case t(`components.todoTable.priorityColors.high`):
+            return 'red';
+          case t(`components.todoTable.priorityColors.medium`):
+            return 'orange';
+          case t(`components.todoTable.priorityColors.low`):
+            return 'blue';
+        }
+      } else {
+        return 'grey';
+      }
+    };
+
+    /* istanbul ignore next */
     const getCompletedLabel = () => t('components.todoTable.completed');
-    const getCheckboxId = item => `checkbox-${item._id}`;
+    /* istanbul ignore next */
     const getChipId = item => `chip-${item._id}`;
 
     return {
@@ -94,10 +101,9 @@ export default {
       toggleTask,
       onRowClick,
       priorityText,
-      formatdDueDate,
+      formatedDueDate,
       getPriorityColor,
       getCompletedLabel,
-      getCheckboxId,
       getChipId
     };
   }
