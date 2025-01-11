@@ -14,7 +14,8 @@ export default defineConfig({
     vueDevTools(),
     sentryVitePlugin({
       org: 'taskmaster',
-      project: 'taskmaster-frontend'
+      project: 'taskmaster-frontend',
+      telemetry: false
     })
   ],
 
