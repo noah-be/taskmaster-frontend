@@ -102,7 +102,6 @@ export default {
         });
         if (!response.ok) throw new Error('Failed to toggle task completion');
         const updatedTask = await response.json();
-        saveTaskChanges(updatedTask);
       } catch (error) {
         console.error(error);
         alert(t('views.tasks.toggleFailure'));
