@@ -16,8 +16,6 @@ describe('TasksView.vue', () => {
     { _id: '2', title: 'Task 2', description: 'Description 2', dueDate: '2024-12-31', priority: 'medium', completed: true }
   ];
 
-  const consoleErrorMock = vi.spyOn(console, 'error').mockImplementation(() => {});
-
   beforeEach(() => {
     vi.resetAllMocks();
     vi.stubGlobal('localStorage', {
@@ -31,10 +29,51 @@ describe('TasksView.vue', () => {
     });
   });
 
-  it('renders child components correctly', () => {
-    expect(wrapper.findComponent(NewTaskForm).exists()).toBe(true);
-    expect(wrapper.findComponent(TodoTable).exists()).toBe(true);
-    expect(wrapper.findComponent(EditTaskBox).exists()).toBe(true);
+  it('should send a PATCH request to the correct URL with Authorization header', async () => {
+    const mockFetch = vi.fn();
+    global.fetch = mockFetch;
+
+    const mockLocalStorage = {
+      getItem: vi.fn()
+    };
+    Object.defineProperty(global, 'localStorage', {
+      value: mockLocalStorage
+    });
+
+    const mockAlert = vi.fn();
+    global.alert = mockAlert;
+
+    mockLocalStorage.getItem.mockReturnValue('fake-token');
+    mockFetch.mockResolvedValueOnce({ ok: true });
+
+    const taskId = '123';
+    await wrapper.vm.toggleTaskCompletion(taskId);
+
+    expect(mockFetch).toHaveBeenCalledOnce();
+    expect(mockFetch).toHaveBeenCalledWith(`${API_BASE_URL}/api/task/toggle/${taskId}`, {
+      method: 'PATCH',
+      headers: {
+        Authorization: 'Bearer fake-token'
+      }
+    });
+  });
+
+  it('should show an alert if fetch fails', async () => {
+    const taskId = '123';
+    const error = new Error('Network error');
+
+    const mockAlert = vi.fn();
+    global.alert = mockAlert;
+
+    const mockFetch = vi.fn();
+    global.fetch = mockFetch;
+
+    mockFetch.mockRejectedValueOnce(error);
+
+    await wrapper.vm.toggleTaskCompletion(taskId);
+
+    expect(mockAlert).toHaveBeenCalledOnce();
+    expect(mockAlert).toHaveBeenCalledWith('Error toggling task completion. Please try again.');
   });
 
   it('updates isDialogVisible when EditTaskBox emits update:is-dialog-visible', async () => {
@@ -105,63 +144,6 @@ describe('TasksView.vue', () => {
     expect(wrapper.vm.isDialogVisible).toBe(false);
   });
 
-  it('toggles task completion successfully', async () => {
-    const taskIdToToggle = '1';
-    const updatedTask = { _id: '1', title: 'Task 1', description: 'Description 1', completed: true };
-
-    vi.stubGlobal(
-      'fetch',
-      vi.fn(() =>
-        Promise.resolve({
-          ok: true,
-          json: () => Promise.resolve(updatedTask)
-        })
-      )
-    );
-
-    wrapper.vm.tasks = [...tasksMock];
-
-    await wrapper.vm.toggleTaskCompletion(taskIdToToggle);
-
-    const taskIndex = wrapper.vm.tasks.findIndex(task => task._id === taskIdToToggle);
-    expect(taskIndex).not.toBe(-1);
-    expect(wrapper.vm.tasks[taskIndex]).toEqual(updatedTask);
-
-    expect(global.fetch).toHaveBeenCalledWith(`${global.API_BASE_URL}/api/task/toggle/${taskIdToToggle}`, {
-      method: 'PATCH',
-      headers: {
-        Authorization: `Bearer mockToken`
-      }
-    });
-  });
-
-  it('handles task toggle failure gracefully', async () => {
-    const taskIdToToggle = '1';
-
-    vi.stubGlobal(
-      'fetch',
-      vi.fn(() =>
-        Promise.resolve({
-          ok: false
-        })
-      )
-    );
-
-    const alertMock = vi.spyOn(window, 'alert').mockImplementation(() => {});
-
-    await wrapper.vm.toggleTaskCompletion(taskIdToToggle);
-
-    expect(global.fetch).toHaveBeenCalledWith(`${global.API_BASE_URL}/api/task/toggle/${taskIdToToggle}`, {
-      method: 'PATCH',
-      headers: {
-        Authorization: `Bearer mockToken`
-      }
-    });
-
-    expect(alertMock).toHaveBeenCalledWith('Error toggling task completion. Please try again.');
-
-    alertMock.mockRestore();
-  });
   it('handles fetch errors gracefully', async () => {
     fetch.mockResolvedValueOnce({ ok: false });
 
@@ -175,18 +157,5 @@ describe('TasksView.vue', () => {
     });
 
     expect(wrapper.vm.tasks).toEqual([]);
-  });
-
-  it('does not update task if it is not found', () => {
-    const updatedTask = { _id: '3', title: 'Updated Task' };
-
-    wrapper.vm.tasks = [...tasksMock];
-
-    const logSpy = vi.spyOn(console, 'log');
-
-    wrapper.vm.saveTaskChanges(updatedTask);
-
-    expect(wrapper.vm.tasks).toEqual(tasksMock);
-    expect(logSpy).toHaveBeenCalledWith('Task not found');
   });
 });

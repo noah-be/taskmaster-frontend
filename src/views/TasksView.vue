@@ -84,11 +84,7 @@ export default {
 
     const saveTaskChanges = updatedTask => {
       const index = tasks.value.findIndex(task => task._id === updatedTask._id);
-      if (index !== -1) {
-        tasks.value.splice(index, 1, updatedTask);
-      } else {
-        console.log('Task not found');
-      }
+      tasks.value.splice(index, 1, updatedTask);
       closeEditDialog();
     };
 
@@ -100,10 +96,7 @@ export default {
             Authorization: `Bearer ${localStorage.getItem('token')}`
           }
         });
-        if (!response.ok) throw new Error('Failed to toggle task completion');
-        const updatedTask = await response.json();
       } catch (error) {
-        console.error(error);
         alert(t('views.tasks.toggleFailure'));
       }
     };
