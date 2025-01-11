@@ -8,7 +8,7 @@ import '@mdi/font/css/materialdesignicons.css';
 
 import * as Sentry from '@sentry/vue';
 
-export const i18n = createI18n({
+const i18n = createI18n({
   legacy: false,
   locale: 'en',
   fallbackLocale: 'en',
@@ -18,7 +18,7 @@ export const i18n = createI18n({
   }
 });
 
-export const vuetify = createVuetify({
+const vuetify = createVuetify({
   icons: {
     defaultSet: 'mdi'
   }
