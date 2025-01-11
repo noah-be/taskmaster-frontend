@@ -15,7 +15,7 @@
         </template>
 
         <template #item.priority="{ item }">
-          <v-chip :data-testid="getChipId(item)" :color="getPriorityColor(item.priority)" dark small>
+          <v-chip :color="getPriorityColor(item.priority)" dark small>
             {{ priorityText(item.priority) }}
           </v-chip>
         </template>
@@ -60,8 +60,16 @@ export default {
 
     const priorityText = priority => {
       if (priority) {
-        priority = priority.toLowerCase();
-        return t(`components.todoTable.priorityColors.${priority}`);
+        switch (priority) {
+          case 'High':
+            return t(`components.todoTable.priorityColors.high`);
+          case 'Medium':
+            return t(`components.todoTable.priorityColors.medium`);
+          case 'Low':
+            return t(`components.todoTable.priorityColors.low`);
+          default:
+            return t(`components.todoTable.priorityColors.unknown`);
+        }
       } else {
         return t(`components.todoTable.priorityColors.unknown`);
       }
@@ -78,22 +86,21 @@ export default {
     const getPriorityColor = priority => {
       if (priority) {
         switch (priority) {
-          case t(`components.todoTable.priorityColors.high`):
+          case t('components.newTaskForm.priorityOptions.high'):
             return 'red';
-          case t(`components.todoTable.priorityColors.medium`):
+          case t('components.newTaskForm.priorityOptions.medium'):
             return 'orange';
-          case t(`components.todoTable.priorityColors.low`):
+          case t('components.newTaskForm.priorityOptions.low'):
             return 'blue';
+          default:
+            return 'grey';
         }
       } else {
         return 'grey';
       }
     };
 
-    /* istanbul ignore next */
     const getCompletedLabel = () => t('components.todoTable.completed');
-    /* istanbul ignore next */
-    const getChipId = item => `chip-${item._id}`;
 
     return {
       t,
@@ -103,8 +110,7 @@ export default {
       priorityText,
       formatedDueDate,
       getPriorityColor,
-      getCompletedLabel,
-      getChipId
+      getCompletedLabel
     };
   }
 };
