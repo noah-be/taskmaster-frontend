@@ -84,4 +84,25 @@ describe('TodoTable.vue', () => {
       expect(wrapper.emitted('edit-task')[index]).toEqual([tasks[index]]);
     }
   });
+
+  it('returns grey for invalid priority', () => {
+    expect(wrapper.vm.getPriorityColor(null)).toBe('grey');
+    expect(wrapper.vm.getPriorityColor()).toBe('grey');
+    expect(wrapper.vm.getPriorityColor('')).toBe('grey');
+    expect(wrapper.vm.getPriorityColor('Blueberry muffin')).toBe('grey');
+  });
+
+  it('returns "unknown" priority text for invalid priority', () => {
+    expect(wrapper.vm.priorityText(null)).toBe('Unknown');
+    expect(wrapper.vm.priorityText()).toBe('Unknown');
+    expect(wrapper.vm.priorityText('')).toBe('Unknown');
+    expect(wrapper.vm.priorityText('Blueberry muffin')).toBe('Unknown');
+  });
+
+  it('returns "invalid date" for invalid dates', () => {
+    expect(wrapper.vm.formatedDueDate(null)).toBe('Invalid Date');
+    expect(wrapper.vm.formatedDueDate()).toBe('Invalid Date');
+    expect(wrapper.vm.formatedDueDate('')).toBe('Invalid Date');
+    expect(wrapper.vm.formatedDueDate('Blueberry muffin')).toBe('Invalid Date');
+  });
 });
