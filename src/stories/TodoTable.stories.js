@@ -1,4 +1,4 @@
-import TodoTable from './TodoTable.vue';
+import TodoTable from '../components/TodoTable.vue';
 
 export default {
   title: 'Components/TodoTable',

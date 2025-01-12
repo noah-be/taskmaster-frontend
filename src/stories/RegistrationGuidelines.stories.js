@@ -1,4 +1,4 @@
-import RegistrationGuidelines from './RegistrationGuidelines.vue';
+import RegistrationGuidelines from '../components/RegistrationGuidelines.vue';
 
 export default {
   title: 'Components/RegistrationGuidelines',

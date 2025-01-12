@@ -1,4 +1,4 @@
-import LoginForm from './LoginForm.vue';
+import LoginForm from '../components/LoginForm.vue';
 
 export default {
   title: 'Forms/LoginForm',

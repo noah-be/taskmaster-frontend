@@ -1,4 +1,4 @@
-import Header from './Header.vue';
+import Header from '../components/Header.vue';
 
 export default {
   title: 'Layout/Header',

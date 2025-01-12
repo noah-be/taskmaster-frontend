@@ -1,4 +1,4 @@
-import NewTaskForm from './NewTaskForm.vue';
+import NewTaskForm from '../components/NewTaskForm.vue';
 
 export default {
   title: 'Forms/NewTaskForm',

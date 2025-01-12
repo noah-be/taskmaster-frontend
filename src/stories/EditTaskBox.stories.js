@@ -1,4 +1,4 @@
-import EditTaskBox from './EditTaskBox.vue';
+import EditTaskBox from '../components/EditTaskBox.vue';
 
 export default {
   title: 'Components/EditTaskBox',
