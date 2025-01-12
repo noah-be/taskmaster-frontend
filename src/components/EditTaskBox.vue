@@ -76,40 +76,51 @@
   </v-dialog>
 </template>
 
-<script>
-export default {
-  props: {
-    task: { type: Object, required: true },
-    isDialogVisible: { type: Boolean, required: true }
-  },
-  watch: {
-    task: {
-      immediate: true,
-      deep: true,
-      handler(newTask) {
-        this.taskCopy = { ...newTask, dueDate: this.formatDateForInput(newTask.dueDate) };
-      }
+<script setup>
+import { computed, watch, ref } from 'vue';
+import { useTaskStore } from '@/stores/taskStore';
+
+const props = defineProps({
+  taskId: { type: String, required: true },
+  isDialogVisible: { type: Boolean, required: true }
+});
+
+const taskStore = useTaskStore();
+const taskCopy = ref({});
+
+const task = computed(() => taskStore.tasks.find(t => t.id === props.taskId));
+
+watch(
+  task,
+  newTask => {
+    if (newTask) {
+      taskCopy.value = {
+        ...newTask,
+        dueDate: formatDateForInput(newTask.dueDate)
+      };
     }
   },
-  methods: {
-    saveChanges() {
-      this.$emit('save-task', this.taskCopy);
-      this.closeDialog();
-    },
-    deleteTask() {
-      this.$emit('delete-task', this.taskCopy._id);
-      this.closeDialog();
-    },
-    closeDialog() {
-      this.$emit('update:is-dialog-visible', false);
-    },
-    formatDateForInput(date) {
-      const parsedDate = new Date(date);
-      if (isNaN(parsedDate)) return '';
-      return parsedDate.toISOString().split('T')[0];
-    }
-  }
-};
+  { immediate: true, deep: true }
+);
+
+function saveChanges() {
+  taskStore.updateTask(props.taskId, taskCopy.value);
+  closeDialog();
+}
+
+function deleteTask() {
+  taskStore.deleteTask(props.taskId);
+  closeDialog();
+}
+
+function closeDialog() {
+  emit('update:is-dialog-visible', false);
+}
+
+function formatDateForInput(date) {
+  const parsedDate = new Date(date);
+  return isNaN(parsedDate) ? '' : parsedDate.toISOString().split('T')[0];
+}
 </script>
 
 <style scoped>
