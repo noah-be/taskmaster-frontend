@@ -34,11 +34,11 @@ describe('NewTaskForm.vue', () => {
   });
 
   it('shows alert if title or due date are empty when adding a task', async () => {
-    global.alert = vi.fn();
+    alert = vi.fn();
 
     await wrapper.findComponent({ name: 'VBtn' }).trigger('click');
 
-    expect(global.alert).toHaveBeenCalledWith('Task title and due date are required.');
+    expect(alert).toHaveBeenCalledWith('Task title and due date are required.');
   });
 
   it('handles errors during task creation', async () => {
@@ -92,7 +92,7 @@ describe('NewTaskForm.vue', () => {
     await wrapper.findComponent({ name: 'VBtn' }).trigger('click');
 
     expect(mockFetch).toHaveBeenCalledWith(
-      `${global.API_BASE_URL}/api/task`,
+      `${API_BASE_URL}/api/task`,
       expect.objectContaining({
         method: 'POST',
         headers: expect.objectContaining({

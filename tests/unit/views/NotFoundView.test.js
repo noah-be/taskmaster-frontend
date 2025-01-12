@@ -19,11 +19,11 @@ describe('NotFoundView.vue', () => {
 
     mount(NotFoundView, {
       global: {
-        plugins: [router, vuetify, global.i18n]
+        plugins: [router, vuetify, i18n]
       }
     });
 
-    expect(global.plausible).toHaveBeenCalledWith('404', { props: { path: '/non-existent-route' } });
+    expect(plausible).toHaveBeenCalledWith('404', { props: { path: '/non-existent-route' } });
   });
 
   it('calls goHome and navigates to "/" when the home button is clicked', async () => {
@@ -36,7 +36,7 @@ describe('NotFoundView.vue', () => {
 
     const wrapper = mount(NotFoundView, {
       global: {
-        plugins: [router, global.vuetify, global.i18n]
+        plugins: [router, vuetify, i18n]
       }
     });
 

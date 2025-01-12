@@ -69,7 +69,7 @@ describe('EditTaskBox.vue', () => {
 
     const invalidDateWrapper = mount(EditTaskBox, {
       global: {
-        plugins: [vuetify, global.i18n]
+        plugins: [vuetify, i18n]
       },
       props: {
         task: invalidDateTask,

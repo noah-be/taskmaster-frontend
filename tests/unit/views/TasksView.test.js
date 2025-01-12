@@ -27,7 +27,7 @@ describe('TasksView.vue', () => {
 
   it('should send a PATCH request to the correct URL with Authorization header', async () => {
     const mockFetch = vi.fn();
-    global.fetch = mockFetch;
+    fetch = mockFetch;
 
     const mockLocalStorage = {
       getItem: vi.fn()
@@ -37,7 +37,7 @@ describe('TasksView.vue', () => {
     });
 
     const mockAlert = vi.fn();
-    global.alert = mockAlert;
+    alert = mockAlert;
 
     mockLocalStorage.getItem.mockReturnValue('fake-token');
     mockFetch.mockResolvedValueOnce({ ok: true });
@@ -59,10 +59,10 @@ describe('TasksView.vue', () => {
     const error = new Error('Network error');
 
     const mockAlert = vi.fn();
-    global.alert = mockAlert;
+    alert = mockAlert;
 
     const mockFetch = vi.fn();
-    global.fetch = mockFetch;
+    fetch = mockFetch;
 
     mockFetch.mockRejectedValueOnce(error);
 
@@ -145,7 +145,7 @@ describe('TasksView.vue', () => {
 
     await wrapper.vm.fetchTasks();
 
-    expect(fetch).toHaveBeenCalledWith(`${global.API_BASE_URL}/api/task/getAll`, {
+    expect(fetch).toHaveBeenCalledWith(`${API_BASE_URL}/api/task/getAll`, {
       method: 'GET',
       headers: {
         Authorization: 'Bearer mockToken'

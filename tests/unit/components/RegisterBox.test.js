@@ -117,7 +117,7 @@ describe('RegisterBox.vue', () => {
   });
 
   it('shows alert on registration failure', async () => {
-    global.alert = vi.fn();
+    alert = vi.fn();
 
     vi.stubGlobal(
       'fetch',
@@ -132,7 +132,7 @@ describe('RegisterBox.vue', () => {
     expect(form.exists()).toBe(true);
 
     await form.trigger('submit.prevent');
-    expect(global.alert).toHaveBeenCalledWith('Registration failed. Please try again.');
+    expect(alert).toHaveBeenCalledWith('Registration failed. Please try again.');
   });
 
   it('handles errors during username validation', async () => {

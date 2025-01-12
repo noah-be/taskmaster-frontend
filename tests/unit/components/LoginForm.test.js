@@ -12,7 +12,7 @@ describe('LoginForm.vue', () => {
   let wrapper;
 
   beforeEach(() => {
-    global.alert = vi.fn();
+    alert = vi.fn();
     vi.resetAllMocks();
 
     wrapper = mount(LoginForm, {
@@ -47,7 +47,7 @@ describe('LoginForm.vue', () => {
   });
 
   it('stores the token in localStorage and calls router.push', async () => {
-    global.fetch = vi.fn(() =>
+    fetch = vi.fn(() =>
       Promise.resolve({
         ok: true,
         json: () => Promise.resolve({ token: 'exampleToken', redirectUrl: '/tasks' })
@@ -56,7 +56,7 @@ describe('LoginForm.vue', () => {
 
     const wrapper = mount(LoginForm, {
       global: {
-        plugins: [vuetify, global.i18n]
+        plugins: [vuetify, i18n]
       }
     });
 
@@ -73,13 +73,13 @@ describe('LoginForm.vue', () => {
       })
     );
 
-    global.fetch = mockFetch;
+    fetch = mockFetch;
 
     const form = wrapper.find('form');
     await form.trigger('submit.prevent');
 
     expect(mockFetch).toHaveBeenCalled();
-    expect(global.alert).toHaveBeenCalledWith('Login failed. Please try again.');
+    expect(alert).toHaveBeenCalledWith('Login failed. Please try again.');
   });
 
   it('opens the RegisterBox when "Create New Account" button is clicked', async () => {
