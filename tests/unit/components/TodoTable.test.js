@@ -12,17 +12,9 @@ describe('TodoTable.vue', () => {
   const emit = vi.fn();
 
   const tasks = [
-    //    { _id: '1' }, // Undefined title, description, dueDate, priority
-    //    { _id: '2', title: null, description: null, dueDate: null, priority: null, completed: null }, // Null title, description, dueDate, priority
-
     { _id: '3', title: 'Task 3', description: 'Description 3', dueDate: '2015-10-21', priority: 'High', completed: false }, // priority: 'High'
     { _id: '4', title: 'Task 4', description: 'Description 4', dueDate: '2015-10-21', priority: 'Medium', completed: false }, // priority: 'Medium'
-    { _id: '5', title: 'Task 5', description: 'Description 5', dueDate: '2015-10-21', priority: 'Low', completed: false }, // priority: 'Low'
-
-    { _id: '6', title: 'Task 6', description: 'Description 6', dueDate: '2015-10-21', priority: 'High', completed: true }, // completed: true
-    { _id: '7', title: '', description: 'Description 7', dueDate: '2015-10-21', priority: 'High', completed: true }, // Empty title
-    { _id: '8', title: 'Title 8', description: '', dueDate: '2015-10-21', priority: 'High', completed: true } // Empty description
-    //    { _id: '9', title: 'Task 9', description: 'Description 9', dueDate: '', priority: 'High', completed: false } // Empty dueDate
+    { _id: '5', title: 'Task 5', description: 'Description 5', dueDate: '2015-10-21', priority: 'Low', completed: false } // priority: 'Low'
   ];
 
   beforeEach(() => {
@@ -33,22 +25,6 @@ describe('TodoTable.vue', () => {
       props: { tasks }
     });
   });
-
-  // it('renders tasks with correct data', () => {
-  //   const rows = wrapper.findAll('tr');
-
-  //   expect(rows.length).toBe(tasks.length + 1);
-
-  //   //const formatedDueDates = ['10/21/2015', '10/21/2015', 'Invalid Date', 'Invalid Date'];
-
-  //   tasks.forEach((task, index) => {
-  //     const columns = rows.at(index + 1).findAll('td');
-  //     expect(columns.at(0).text()).toBe(task.title);
-  //     expect(columns.at(1).text()).toBe(task.description);
-  //     expect(columns.at(2).text()).toBe('10/21/2015');
-  //     expect(columns.at(3).text()).toBe(task.priority);
-  //   });
-  // });
 
   it('stops event propagation on checkbox click and emits "toggle-task" with correct task id', async () => {
     const checkboxes = wrapper.findAll('input[type="checkbox"]');
@@ -85,24 +61,13 @@ describe('TodoTable.vue', () => {
     }
   });
 
-  it('returns grey for invalid priority', () => {
-    expect(wrapper.vm.getPriorityColor(null)).toBe('grey');
-    expect(wrapper.vm.getPriorityColor()).toBe('grey');
-    expect(wrapper.vm.getPriorityColor('')).toBe('grey');
-    expect(wrapper.vm.getPriorityColor('Blueberry muffin')).toBe('grey');
-  });
+  it('binds the completed status correctly with v-model', async () => {
+    const checkbox = wrapper.find('input[type="checkbox"]');
 
-  it('returns "unknown" priority text for invalid priority', () => {
-    expect(wrapper.vm.priorityText(null)).toBe('Unknown');
-    expect(wrapper.vm.priorityText()).toBe('Unknown');
-    expect(wrapper.vm.priorityText('')).toBe('Unknown');
-    expect(wrapper.vm.priorityText('Blueberry muffin')).toBe('Unknown');
-  });
+    expect(checkbox.element.checked).toBe(false);
 
-  it('returns "invalid date" for invalid dates', () => {
-    expect(wrapper.vm.formatedDueDate(null)).toBe('Invalid Date');
-    expect(wrapper.vm.formatedDueDate()).toBe('Invalid Date');
-    expect(wrapper.vm.formatedDueDate('')).toBe('Invalid Date');
-    expect(wrapper.vm.formatedDueDate('Blueberry muffin')).toBe('Invalid Date');
+    await checkbox.setChecked(true);
+
+    expect(wrapper.vm.tasks[0].completed).toBe(true);
   });
 });

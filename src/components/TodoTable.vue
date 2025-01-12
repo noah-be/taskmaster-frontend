@@ -22,7 +22,7 @@
 
         <template #item.completed="{ item }">
           <v-checkbox v-model="item.completed" @click.stop="toggleTask(item)" class="d-flex align-center" dense></v-checkbox>
-          <span class="visually-hidden">{{ getCompletedLabel() }}</span>
+          <span class="visually-hidden">{{ t('components.todoTable.completed') }}</span>
         </template>
       </v-data-table>
     </v-card>
@@ -100,8 +100,6 @@ export default {
       }
     };
 
-    const getCompletedLabel = () => t('components.todoTable.completed');
-
     return {
       t,
       headers,
@@ -109,8 +107,7 @@ export default {
       onRowClick,
       priorityText,
       formatedDueDate,
-      getPriorityColor,
-      getCompletedLabel
+      getPriorityColor
     };
   }
 };
