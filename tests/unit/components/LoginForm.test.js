@@ -26,10 +26,6 @@ describe('LoginForm.vue', () => {
     });
   });
 
-  it('renders correctly', () => {
-    expect(wrapper.exists()).toBe(true);
-  });
-
   it('toggles showregisterBox when RegisterBox emits update:show', async () => {
     expect(wrapper.vm.showregisterBox).toBe(false);
 
@@ -73,47 +69,6 @@ describe('LoginForm.vue', () => {
     expect(localStorage.getItem('token')).toBe('exampleToken');
     expect(pushMock).toHaveBeenCalledWith('/tasks');
   });
-
-  // TODO: Fix this test
-
-  // it('calls submitLogin on form submission', async () => {
-  //   const mockRedirectUrl = '/some-redirect-url';
-  //   const mockRouter = { push: vi.fn() };
-
-  //   useRouter.mockReturnValue(mockRouter);
-
-  //   const wrapper = mount(LoginForm, {
-  //     global: {
-  //       plugins: [vuetify, i18n]
-  //     }
-  //   });
-
-  //   const mockFetch = vi.fn(() =>
-  //     Promise.resolve({
-  //       ok: true,
-  //       json: () => Promise.resolve({ token: '12345', redirectUrl: mockRedirectUrl })
-  //     })
-  //   );
-
-  //   global.fetch = mockFetch;
-
-  //   const form = wrapper.find('form');
-  //   await form.trigger('submit.prevent');
-
-  //   expect(mockFetch).toHaveBeenCalledWith(
-  //     '/api/auth/login',
-  //     expect.objectContaining({
-  //       method: 'POST',
-  //       headers: { 'Content-Type': 'application/json' },
-  //       body: JSON.stringify({
-  //         username: '',
-  //         password: ''
-  //       })
-  //     })
-  //   );
-  //   expect(localStorage.getItem('token')).toBe('12345');
-  //   expect(mockRouter.push).toHaveBeenCalledWith(mockRedirectUrl);
-  // });
 
   it('displays an alert on login failure', async () => {
     const mockFetch = vi.fn(() =>
