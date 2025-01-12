@@ -8,6 +8,8 @@ import '@mdi/font/css/materialdesignicons.css';
 
 import * as Sentry from '@sentry/vue';
 
+import { createPinia } from 'pinia';
+
 const i18n = createI18n({
   legacy: false,
   locale: 'en',
@@ -41,4 +43,5 @@ export function registerPlugins(app, router) {
   configureSentry(app, router);
   app.use(vuetify);
   app.use(i18n);
+  app.use(createPinia());
 }
