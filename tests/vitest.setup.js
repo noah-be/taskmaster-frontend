@@ -16,4 +16,4 @@ global.i18n = createI18n({
   }
 });
 
-globalThis.API_BASE_URL = 'https://mockapi.com';
+global.API_BASE_URL = 'https://mockapi.com';
