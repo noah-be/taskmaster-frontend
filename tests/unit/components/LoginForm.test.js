@@ -1,10 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { mount } from '@vue/test-utils';
-import { createVuetify } from 'vuetify';
-import 'vuetify/styles';
 import LoginForm from '@/components/LoginForm.vue';
 import RegisterBox from '@/components/RegisterBox.vue';
-import { useRouter } from 'vue-router';
 
 const pushMock = vi.fn();
 vi.mock('vue-router', () => ({
@@ -12,7 +9,6 @@ vi.mock('vue-router', () => ({
 }));
 
 describe('LoginForm.vue', () => {
-  const vuetify = createVuetify();
   let wrapper;
 
   beforeEach(() => {

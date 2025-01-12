@@ -1,7 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { mount } from '@vue/test-utils';
-import { createVuetify } from 'vuetify';
-import 'vuetify/styles';
 import NewTaskForm from '@/components/NewTaskForm.vue';
 
 vi.mock('vue-router', () => ({
@@ -9,7 +7,6 @@ vi.mock('vue-router', () => ({
 }));
 
 describe('NewTaskForm.vue', () => {
-  const vuetify = createVuetify();
   let wrapper;
 
   beforeEach(() => {
@@ -23,12 +20,6 @@ describe('NewTaskForm.vue', () => {
   });
 
   it('binds title, priority, and dueDate to the data', async () => {
-    const wrapper = mount(NewTaskForm, {
-      global: {
-        plugins: [vuetify, i18n]
-      }
-    });
-
     const titleField = wrapper.find('input[placeholder="Task title"]');
     await titleField.setValue('New Task');
     expect(wrapper.vm.title).toBe('New Task');

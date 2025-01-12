@@ -1,7 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { mount } from '@vue/test-utils';
-import { createVuetify } from 'vuetify';
-import 'vuetify/styles';
 import EditTaskBox from '@/components/EditTaskBox.vue';
 
 vi.mock('vue-router', () => ({
@@ -10,7 +8,6 @@ vi.mock('vue-router', () => ({
 
 describe('EditTaskBox.vue', () => {
   let wrapper;
-  const vuetify = createVuetify();
   const task = {
     _id: '1',
     title: 'Test Task',
@@ -23,7 +20,7 @@ describe('EditTaskBox.vue', () => {
     vi.resetAllMocks();
     wrapper = mount(EditTaskBox, {
       global: {
-        plugins: [vuetify, global.i18n]
+        plugins: [vuetify, i18n]
       },
       props: {
         task,

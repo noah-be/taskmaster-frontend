@@ -1,14 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { mount } from '@vue/test-utils';
-import { createVuetify } from 'vuetify';
-import 'vuetify/styles';
 import TasksView from '@/views/TasksView.vue';
-import NewTaskForm from '@/components/NewTaskForm.vue';
 import TodoTable from '@/components/TodoTable.vue';
 import EditTaskBox from '@/components/EditTaskBox.vue';
 
 describe('TasksView.vue', () => {
-  const vuetify = createVuetify();
   let wrapper;
 
   const tasksMock = [
@@ -24,7 +20,7 @@ describe('TasksView.vue', () => {
 
     wrapper = mount(TasksView, {
       global: {
-        plugins: [vuetify, global.i18n]
+        plugins: [vuetify, i18n]
       }
     });
   });

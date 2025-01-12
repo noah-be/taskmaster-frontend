@@ -1,12 +1,8 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
-import { createVuetify } from 'vuetify';
-import { ref } from 'vue';
-import 'vuetify/styles';
 import TodoTable from '@/components/TodoTable.vue';
 
 describe('TodoTable.vue', () => {
-  const vuetify = createVuetify();
   let wrapper;
 
   const emit = vi.fn();
@@ -20,7 +16,7 @@ describe('TodoTable.vue', () => {
   beforeEach(() => {
     wrapper = mount(TodoTable, {
       global: {
-        plugins: [vuetify, global.i18n]
+        plugins: [vuetify, i18n]
       },
       props: { tasks }
     });

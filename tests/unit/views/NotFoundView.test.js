@@ -2,11 +2,8 @@ import { mount } from '@vue/test-utils';
 import { createRouter, createMemoryHistory } from 'vue-router';
 import { vi } from 'vitest';
 import NotFoundView from '@/views/NotFoundView.vue';
-import { createVuetify } from 'vuetify';
-import 'vuetify/styles';
 
 global.plausible = vi.fn();
-const vuetify = createVuetify();
 
 describe('NotFoundView.vue', () => {
   let router;
@@ -39,7 +36,7 @@ describe('NotFoundView.vue', () => {
 
     const wrapper = mount(NotFoundView, {
       global: {
-        plugins: [router, vuetify, global.i18n]
+        plugins: [router, global.vuetify, global.i18n]
       }
     });
 

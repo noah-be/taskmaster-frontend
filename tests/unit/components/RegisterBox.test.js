@@ -1,7 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { mount } from '@vue/test-utils';
-import { createVuetify } from 'vuetify';
-import 'vuetify/styles';
 import RegisterBox from '@/components/RegisterBox.vue';
 
 vi.mock('vue-router', () => ({
@@ -9,7 +7,6 @@ vi.mock('vue-router', () => ({
 }));
 
 describe('RegisterBox.vue', () => {
-  const vuetify = createVuetify();
   let wrapper;
 
   beforeEach(() => {

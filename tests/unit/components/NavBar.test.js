@@ -1,10 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import Navbar from '@/components/Navbar.vue';
-import { createVuetify } from 'vuetify';
-import 'vuetify/styles';
-
-const vuetify = createVuetify();
 
 describe('Navbar.vue', () => {
   const factory = () => {
