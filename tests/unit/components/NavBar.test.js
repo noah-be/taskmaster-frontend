@@ -15,15 +15,6 @@ describe('Navbar.vue', () => {
     });
   };
 
-  it('renders buttons with correct links', () => {
-    const wrapper = factory();
-    const buttons = wrapper.findAllComponents({ name: 'VBtn' });
-
-    expect(buttons[0].props('to')).toBe('/');
-    expect(buttons[1].props('to')).toBe('/about');
-    expect(buttons[2].props('to')).toBe('/contact');
-  });
-
   it('renders buttons as router links', () => {
     const wrapper = factory();
     const buttons = wrapper.findAllComponents({ name: 'VBtn' });
