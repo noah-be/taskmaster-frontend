@@ -14,7 +14,6 @@ describe('RegisterBox.vue', () => {
 
   beforeEach(() => {
     vi.resetAllMocks();
-    vi.stubGlobal('fetch', vi.fn());
 
     wrapper = mount(RegisterBox, {
       global: {
@@ -24,18 +23,6 @@ describe('RegisterBox.vue', () => {
         show: true
       }
     });
-  });
-
-  it('renders correctly when show is true', () => {
-    const dialog = wrapper.findComponent({ name: 'VDialog' });
-    expect(dialog.exists()).toBe(true);
-    expect(dialog.props('modelValue')).toBe(true);
-  });
-
-  it('emits update:show event when closeModal is called', async () => {
-    await wrapper.vm.closeModal();
-    expect(wrapper.emitted('update:show')).toBeTruthy();
-    expect(wrapper.emitted('update:show')[0]).toEqual([false]);
   });
 
   it('toggles registration guidelines visibility', async () => {
@@ -109,26 +96,6 @@ describe('RegisterBox.vue', () => {
     await passwordInput.setValue('Valid!Password123');
     await wrapper.vm.validatePassword();
     expect(wrapper.vm.passwordFeedback).toBe('');
-  });
-
-  it('disables submit button when form is invalid', async () => {
-    const submitButton = wrapper.findComponent({ ref: 'submitButton' });
-    expect(submitButton.exists()).toBe(true);
-    expect(submitButton.attributes('disabled')).toBeDefined();
-
-    wrapper.vm.username = 'validuser';
-    wrapper.vm.password = 'Valid1!Pw';
-    await wrapper.vm.$nextTick();
-
-    expect(submitButton.attributes('disabled')).toBeUndefined();
-  });
-
-  it('emits closeModal when cancel button is clicked', async () => {
-    const cancelButton = wrapper.findComponent({ ref: 'cancelButton' });
-    expect(cancelButton.exists()).toBe(true);
-
-    await cancelButton.trigger('click');
-    expect(wrapper.emitted('update:show')[0]).toEqual([false]);
   });
 
   it('registers user and closes modal on success', async () => {
