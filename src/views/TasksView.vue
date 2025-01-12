@@ -8,7 +8,7 @@
           </v-card-title>
           <v-divider></v-divider>
           <v-card-text>
-            <NewTaskForm @task-added="addTaskToList" />
+            <NewTaskForm />
             <TodoTable :tasks="tasks" @edit-task="openEditDialog" @toggle-task="toggleTaskCompletion" />
           </v-card-text>
         </v-card>
@@ -16,7 +16,7 @@
     </v-row>
 
     <EditTaskBox
-      :task="currentTask"
+      :task-id="currentTaskId"
       :is-dialog-visible="isDialogVisible"
       @update:is-dialog-visible="isDialogVisible = $event"
       @save-task="saveTaskChanges"
@@ -27,10 +27,11 @@
 
 <script>
 import { ref, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useTaskStore } from '@/stores/taskStore';
 import NewTaskForm from '@/components/NewTaskForm.vue';
 import TodoTable from '@/components/TodoTable.vue';
 import EditTaskBox from '@/components/EditTaskBox.vue';
-import { useI18n } from 'vue-i18n';
 
 export default {
   components: {
@@ -40,36 +41,19 @@ export default {
   },
   setup() {
     const { t } = useI18n();
-    const tasks = ref([]);
-    const currentTask = ref({
-      title: '',
-      description: '',
-      dueDate: '',
-      priority: 'Medium'
-    });
+    const taskStore = useTaskStore();
+
     const isDialogVisible = ref(false);
+    const currentTaskId = ref(null);
 
-    const fetchTasks = async () => {
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/task/getAll`, {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-        if (!response.ok) throw new Error('Failed to fetch tasks');
-        tasks.value = await response.json();
-      } catch (error) {
-        console.error('Error fetching tasks:', error);
-      }
+    const tasks = taskStore.tasks;
+
+    const addTaskToList = async newTask => {
+      await taskStore.addTask(newTask);
     };
 
-    const addTaskToList = newTask => {
-      tasks.value.push(newTask);
-    };
-
-    const openEditDialog = task => {
-      currentTask.value = { ...task };
+    const openEditDialog = taskId => {
+      currentTaskId.value = taskId;
       isDialogVisible.value = true;
     };
 
@@ -77,37 +61,25 @@ export default {
       isDialogVisible.value = false;
     };
 
-    const deleteTask = taskId => {
-      tasks.value = tasks.value.filter(task => task._id !== taskId);
+    const deleteTask = async taskId => {
+      await taskStore.deleteTask(taskId);
       closeEditDialog();
     };
 
-    const saveTaskChanges = updatedTask => {
-      const index = tasks.value.findIndex(task => task._id === updatedTask._id);
-      tasks.value.splice(index, 1, updatedTask);
+    const saveTaskChanges = async updatedTask => {
+      await taskStore.updateTask(updatedTask.id, updatedTask);
       closeEditDialog();
     };
 
     const toggleTaskCompletion = async taskId => {
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/task/toggle/${taskId}`, {
-          method: 'PATCH',
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          }
-        });
-      } catch (error) {
-        alert(t('views.tasks.toggleFailure'));
-      }
+      await taskStore.toggleTaskCompletion(taskId);
     };
 
-    onMounted(fetchTasks);
+    onMounted(() => taskStore.fetchTasks());
 
     return {
       tasks,
-      isDialogVisible,
-      currentTask,
-      fetchTasks,
+      currentTaskId,
       addTaskToList,
       openEditDialog,
       closeEditDialog,

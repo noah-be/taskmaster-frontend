@@ -21,7 +21,7 @@
         </template>
 
         <template #item.completed="{ item }">
-          <v-checkbox v-model="item.completed" @click.stop="toggleTask(item)" class="d-flex align-center" dense></v-checkbox>
+          <v-checkbox v-model="item.completed" @click.stop="toggleTask(item._id)" class="d-flex align-center" dense></v-checkbox>
           <span class="visually-hidden">{{ t('components.todoTable.completed') }}</span>
         </template>
       </v-data-table>
@@ -31,16 +31,14 @@
 
 <script>
 import { useI18n } from 'vue-i18n';
+import { useTaskStore } from '@/stores/taskStore';
 
 export default {
-  props: {
-    tasks: {
-      type: Array,
-      required: true
-    }
-  },
-  setup(props, { emit }) {
+  setup() {
     const { t, locale } = useI18n();
+
+    const taskStore = useTaskStore();
+    const tasks = taskStore.tasks;
 
     const headers = [
       { title: t('components.todoTable.title'), key: 'title' },
@@ -50,12 +48,12 @@ export default {
       { title: t('components.todoTable.done'), key: 'completed' }
     ];
 
-    const toggleTask = task => {
-      emit('toggle-task', task._id);
+    const toggleTask = taskId => {
+      taskStore.toggleTaskCompletion(taskId);
     };
 
-    const onRowClick = (item, event) => {
-      emit('edit-task', event.item);
+    const onRowClick = item => {
+      taskStore.openDialogWithTask(item._id);
     };
 
     const priorityText = priority => {
@@ -103,6 +101,7 @@ export default {
     return {
       t,
       headers,
+      tasks,
       toggleTask,
       onRowClick,
       priorityText,
