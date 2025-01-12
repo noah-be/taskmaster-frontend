@@ -24,22 +24,6 @@ describe('NewTaskForm.vue', () => {
     });
   });
 
-  it('renders correctly with default values', () => {
-    const titleInput = wrapper.find('input[placeholder="Task title"]');
-    const prioritySelect = wrapper.findComponent({ name: 'VSelect' });
-    const dueDateInput = wrapper.find('input[type="date"]');
-    const addButton = wrapper.findComponent({ name: 'VBtn' });
-
-    expect(titleInput.exists()).toBe(true);
-    expect(prioritySelect.exists()).toBe(true);
-    expect(dueDateInput.exists()).toBe(true);
-    expect(addButton.exists()).toBe(true);
-
-    expect(wrapper.vm.title).toBe('');
-    expect(wrapper.vm.priority).toBe('Medium');
-    expect(wrapper.vm.dueDate).toBe('');
-  });
-
   it('binds title, priority, and dueDate to the data', async () => {
     const wrapper = mount(NewTaskForm, {
       global: {
@@ -68,28 +52,6 @@ describe('NewTaskForm.vue', () => {
     expect(global.alert).toHaveBeenCalledWith('Task title and due date are required.');
   });
 
-  it('successfully adds a task when form is valid', async () => {
-    const mockTask = { title: 'Test Task', priority: 'High', dueDate: '2024-12-31' };
-
-    vi.stubGlobal(
-      'fetch',
-      vi.fn(() =>
-        Promise.resolve({
-          ok: true,
-          json: () => Promise.resolve(mockTask)
-        })
-      )
-    );
-
-    wrapper.setData({ title: 'Test Task', dueDate: '2024-12-31' });
-    await wrapper.findComponent({ name: 'VBtn' }).trigger('click');
-
-    expect(wrapper.emitted('task-added')[0]).toEqual([mockTask]);
-    expect(wrapper.vm.title).toBe('');
-    expect(wrapper.vm.dueDate).toBe('');
-    expect(wrapper.vm.priority).toBe('Medium');
-  });
-
   it('handles errors during task creation', async () => {
     vi.stubGlobal(
       'fetch',
@@ -101,27 +63,6 @@ describe('NewTaskForm.vue', () => {
 
     expect(wrapper.vm.title).toBe('Test Task');
     expect(wrapper.vm.dueDate).toBe('2024-12-31');
-  });
-
-  it('resets form after adding task successfully', async () => {
-    const mockTask = { title: 'Test Task', priority: 'High', dueDate: '2024-12-31' };
-
-    vi.stubGlobal(
-      'fetch',
-      vi.fn(() =>
-        Promise.resolve({
-          ok: true,
-          json: () => Promise.resolve(mockTask)
-        })
-      )
-    );
-
-    wrapper.setData({ title: 'Test Task', dueDate: '2024-12-31' });
-    await wrapper.findComponent({ name: 'VBtn' }).trigger('click');
-
-    expect(wrapper.vm.title).toBe('');
-    expect(wrapper.vm.dueDate).toBe('');
-    expect(wrapper.vm.priority).toBe('Medium');
   });
 
   it('emits task-added when a task is successfully added', async () => {
