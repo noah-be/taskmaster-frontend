@@ -2,13 +2,15 @@ import { defineStore } from 'pinia';
 
 export const useTaskStore = defineStore('task', {
   state: () => ({
-    tasks: []
+    tasks: [],
+    isEditDialogVisible: false,
+    currentTaskId: null
   }),
   getters: {
     allTasks: state => state.tasks
   },
   actions: {
-    fetchTasks: async function () {
+    async fetchTasks() {
       const response = await fetch(`${API_BASE_URL}/api/task/getAll`, {
         method: 'GET',
         headers: {
@@ -16,6 +18,15 @@ export const useTaskStore = defineStore('task', {
         }
       });
       this.tasks = await response.json();
+    },
+
+    openEditTaskBox(taskId) {
+      this.currentTaskId = taskId;
+      this.isEditDialogVisible = true;
+    },
+    closeEditTaskBox() {
+      this.isEditDialogVisible = false;
+      this.currentTaskId = null;
     },
 
     toggleTaskCompletion: async function (taskId) {

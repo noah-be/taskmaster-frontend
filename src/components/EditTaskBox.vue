@@ -1,8 +1,8 @@
 <template>
   <v-dialog
-    :model-value="isDialogVisible"
+    :model-value="taskStore.isEditDialogVisible"
     max-width="500"
-    @update:model-value="closeDialog"
+    @update:model-value="taskStore.closeEditDialog"
     role="dialog"
     aria-labelledby="edit-task-title"
     aria-describedby="edit-task-description"
@@ -77,49 +77,24 @@
 </template>
 
 <script setup>
-import { computed, watch, ref } from 'vue';
+import { computed } from 'vue';
 import { useTaskStore } from '@/stores/taskStore';
 
-const props = defineProps({
-  taskId: { type: String, required: true },
-  isDialogVisible: { type: Boolean, required: true }
+const taskStore = useTaskStore();
+
+const taskCopy = computed(() => {
+  const task = taskStore.tasks.find(t => t.id === taskStore.currentTaskId);
+  return task ? { ...task } : {};
 });
 
-const taskStore = useTaskStore();
-const taskCopy = ref({});
-
-const task = computed(() => taskStore.tasks.find(t => t.id === props.taskId));
-
-watch(
-  task,
-  newTask => {
-    if (newTask) {
-      taskCopy.value = {
-        ...newTask,
-        dueDate: formatDateForInput(newTask.dueDate)
-      };
-    }
-  },
-  { immediate: true, deep: true }
-);
-
 function saveChanges() {
-  taskStore.updateTask(props.taskId, taskCopy.value);
-  closeDialog();
+  taskStore.updateTask(taskStore.currentTaskId, taskCopy.value);
+  taskStore.closeEditDialog();
 }
 
 function deleteTask() {
-  taskStore.deleteTask(props.taskId);
-  closeDialog();
-}
-
-function closeDialog() {
-  emit('update:is-dialog-visible', false);
-}
-
-function formatDateForInput(date) {
-  const parsedDate = new Date(date);
-  return isNaN(parsedDate) ? '' : parsedDate.toISOString().split('T')[0];
+  taskStore.deleteTask(taskStore.currentTaskId);
+  taskStore.closeEditDialog();
 }
 </script>
 

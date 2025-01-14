@@ -26,19 +26,41 @@
         </template>
       </v-data-table>
     </v-card>
+
+    <EditTaskBox
+      v-if="currentTaskId"
+      :task-id="currentTaskId"
+      :is-dialog-visible="isDialogVisible"
+      @update:is-dialog-visible="isDialogVisible = $event"
+      @save-task="saveTaskChanges"
+      @delete-task="deleteTask"
+    />
   </v-container>
 </template>
 
 <script>
+import EditTaskBox from '@/components/EditTaskBox.vue';
 import { useI18n } from 'vue-i18n';
 import { useTaskStore } from '@/stores/taskStore';
+import { computed } from 'vue';
 
 export default {
-  setup() {
+  components: {
+    EditTaskBox
+  },
+  props: {
+    tasks: {
+      type: Array,
+      required: true
+    }
+  },
+  emits: ['edit-task', 'toggle-task'],
+  setup(props, { emit }) {
     const { t, locale } = useI18n();
 
     const taskStore = useTaskStore();
-    const tasks = taskStore.tasks;
+
+    const currentTaskId = computed(() => taskStore.currentTaskId);
 
     const headers = [
       { title: t('components.todoTable.title'), key: 'title' },
@@ -52,26 +74,12 @@ export default {
       taskStore.toggleTaskCompletion(taskId);
     };
 
-    const onRowClick = item => {
-      taskStore.openDialogWithTask(item._id);
+    const onRowClick = (event, item) => {
+      taskStore.currentTaskId = item._id;
+      taskStore.isEditDialogOpen = true;
     };
 
-    const priorityText = priority => {
-      if (priority) {
-        switch (priority) {
-          case 'High':
-            return t(`components.todoTable.priorityColors.high`);
-          case 'Medium':
-            return t(`components.todoTable.priorityColors.medium`);
-          case 'Low':
-            return t(`components.todoTable.priorityColors.low`);
-          default:
-            return t(`components.todoTable.priorityColors.unknown`);
-        }
-      } else {
-        return t(`components.todoTable.priorityColors.unknown`);
-      }
-    };
+    const priorityText = priority => t(`components.todoTable.priorityColors.${priority?.toLowerCase() || 'unknown'}`);
 
     const formatedDueDate = dueDate => {
       if (dueDate) {
@@ -82,26 +90,18 @@ export default {
     };
 
     const getPriorityColor = priority => {
-      if (priority) {
-        switch (priority) {
-          case t('components.newTaskForm.priorityOptions.high'):
-            return 'red';
-          case t('components.newTaskForm.priorityOptions.medium'):
-            return 'orange';
-          case t('components.newTaskForm.priorityOptions.low'):
-            return 'blue';
-          default:
-            return 'grey';
-        }
-      } else {
-        return 'grey';
-      }
+      const colors = {
+        High: 'red',
+        Medium: 'orange',
+        Low: 'blue'
+      };
+      return colors[priority] || 'grey';
     };
 
     return {
       t,
       headers,
-      tasks,
+      currentTaskId,
       toggleTask,
       onRowClick,
       priorityText,
