@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-card>
-      <v-data-table :items="tasks" :headers="headers" class="elevation-1" dense outlined hide-default-footer @click:row="onRowClick">
+      <v-data-table :items="taskStore.tasks" :headers="headers" class="elevation-1" dense outlined hide-default-footer @click:row="onRowClick">
         <template #item.title="{ item }">
           {{ item.title }}
         </template>
@@ -27,7 +27,9 @@
       </v-data-table>
     </v-card>
 
-    <EditTaskBox v-if="currentTaskId" />
+    <v-container v-if="taskStore.currentTaskId">
+      <EditTaskBox />
+    </v-container>
   </v-container>
 </template>
 
@@ -35,24 +37,15 @@
 import EditTaskBox from '@/components/EditTaskBox.vue';
 import { useI18n } from 'vue-i18n';
 import { useTaskStore } from '@/stores/taskStore';
-import { computed } from 'vue';
 
 export default {
   components: {
     EditTaskBox
   },
-  props: {
-    tasks: {
-      type: Array,
-      required: true
-    }
-  },
   setup() {
     const { t, locale } = useI18n();
 
     const taskStore = useTaskStore();
-
-    const currentTaskId = computed(() => taskStore.currentTaskId);
 
     const headers = [
       { title: t('components.todoTable.title'), key: 'title' },
@@ -67,8 +60,7 @@ export default {
     };
 
     const onRowClick = (event, item) => {
-      taskStore.currentTaskId = item.item._id;
-      taskStore.isEditDialogOpen = true;
+      taskStore.openEditTaskBox(item.item._id);
     };
 
     const priorityText = priority => t(`components.todoTable.priorityColors.${priority?.toLowerCase() || 'unknown'}`);
@@ -93,7 +85,7 @@ export default {
     return {
       t,
       headers,
-      currentTaskId,
+      taskStore,
       toggleTask,
       onRowClick,
       priorityText,

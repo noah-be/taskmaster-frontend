@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="taskStore.currentTaskId" max-width="500" role="dialog" aria-labelledby="edit-task-title" aria-describedby="edit-task-description">
+  <v-dialog :model-value="!!taskStore.currentTaskId" max-width="500" role="dialog" aria-labelledby="edit-task-title" aria-describedby="edit-task-description">
     <v-card>
       <v-card-title id="edit-task-title">
         <span class="text-h6">{{ $t('components.editTaskBox.editTaskDialog.title') }}</span>

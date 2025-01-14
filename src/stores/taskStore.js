@@ -19,13 +19,6 @@ export const useTaskStore = defineStore('task', {
       this.tasks = await response.json();
     },
 
-    openEditTaskBox(taskId) {
-      this.currentTaskId = taskId;
-    },
-    closeEditTaskBox() {
-      this.currentTaskId = null;
-    },
-
     toggleTaskCompletion: async function (taskId) {
       await fetch(`${API_BASE_URL}/api/task/toggle/${taskId}`, {
         method: 'PATCH',
@@ -50,6 +43,9 @@ export const useTaskStore = defineStore('task', {
       if (taskIndex !== -1) {
         this.tasks[taskIndex] = { ...this.tasks[taskIndex], ...updatedData };
       }
+    },
+    openEditTaskBox(taskId) {
+      this.currentTaskId = taskId;
     }
   }
 });
