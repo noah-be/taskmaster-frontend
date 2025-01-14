@@ -1,12 +1,5 @@
 <template>
-  <v-dialog
-    :model-value="taskStore.isEditDialogVisible"
-    max-width="500"
-    @update:model-value="taskStore.closeEditDialog"
-    role="dialog"
-    aria-labelledby="edit-task-title"
-    aria-describedby="edit-task-description"
-  >
+  <v-dialog :model-value="taskStore.currentTaskId" max-width="500" role="dialog" aria-labelledby="edit-task-title" aria-describedby="edit-task-description">
     <v-card>
       <v-card-title id="edit-task-title">
         <span class="text-h6">{{ $t('components.editTaskBox.editTaskDialog.title') }}</span>
@@ -34,6 +27,27 @@
               outlined
               dense
             ></v-textarea>
+          </div>
+
+          <div>
+            <label for="task-due-date">{{ $t('components.editTaskBox.editTaskDialog.taskDueDateLabel') }}</label>
+            <v-text-field id="task-due-date" v-model="taskCopy.dueDate" type="date" outlined dense ref="dueDateField"></v-text-field>
+          </div>
+
+          <div>
+            <label for="task-priority">{{ $t('components.editTaskBox.editTaskDialog.taskPriorityLabel') }}</label>
+            <v-select
+              id="task-priority"
+              v-model="taskCopy.priority"
+              :items="[
+                $t('components.editTaskBox.editTaskDialog.priorityOptions.high'),
+                $t('components.editTaskBox.editTaskDialog.priorityOptions.medium'),
+                $t('components.editTaskBox.editTaskDialog.priorityOptions.low')
+              ]"
+              outlined
+              dense
+              ref="prioritySelect"
+            ></v-select>
           </div>
         </v-form>
       </v-card-text>

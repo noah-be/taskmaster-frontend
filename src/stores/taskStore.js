@@ -3,7 +3,6 @@ import { defineStore } from 'pinia';
 export const useTaskStore = defineStore('task', {
   state: () => ({
     tasks: [],
-    isEditDialogVisible: false,
     currentTaskId: null
   }),
   getters: {
@@ -22,10 +21,8 @@ export const useTaskStore = defineStore('task', {
 
     openEditTaskBox(taskId) {
       this.currentTaskId = taskId;
-      this.isEditDialogVisible = true;
     },
     closeEditTaskBox() {
-      this.isEditDialogVisible = false;
       this.currentTaskId = null;
     },
 

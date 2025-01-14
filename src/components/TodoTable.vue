@@ -27,14 +27,7 @@
       </v-data-table>
     </v-card>
 
-    <EditTaskBox
-      v-if="currentTaskId"
-      :task-id="currentTaskId"
-      :is-dialog-visible="isDialogVisible"
-      @update:is-dialog-visible="isDialogVisible = $event"
-      @save-task="saveTaskChanges"
-      @delete-task="deleteTask"
-    />
+    <EditTaskBox v-if="currentTaskId" />
   </v-container>
 </template>
 
