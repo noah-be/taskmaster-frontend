@@ -20,7 +20,7 @@
 <script>
 import NewTaskForm from '@/components/NewTaskForm.vue';
 import TodoTable from '@/components/TodoTable.vue';
-import { onMounted } from 'vue';
+import { onMounted, computed } from 'vue';
 import { useTaskStore } from '@/stores/taskStore';
 
 export default {
@@ -35,8 +35,10 @@ export default {
       taskStore.fetchTasks();
     });
 
+    const tasks = computed(() => taskStore.tasks);
+
     return {
-      tasks: taskStore.tasks
+      tasks
     };
   }
 };
