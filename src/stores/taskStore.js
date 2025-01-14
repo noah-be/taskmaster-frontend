@@ -19,17 +19,18 @@ export const useTaskStore = defineStore('task', {
       this.tasks = await response.json();
     },
 
-    toggleTaskCompletion: async function (taskId) {
-      await fetch(`${API_BASE_URL}/api/task/toggle/${taskId}`, {
+    async toggleTaskCompletion(taskId) {
+      const response = await fetch(`${API_BASE_URL}/api/task/toggle/${taskId}`, {
         method: 'PATCH',
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
       });
-      const task = this.tasks.find(task => task.id === taskId);
-      if (task) {
-        task.completed = !task.completed;
-      }
+
+      const updatedTask = await response.json();
+      const taskIndex = this.tasks.findIndex(task => task._id === taskId);
+
+      this.tasks[taskIndex] = { ...this.tasks[taskIndex], ...updatedTask };
     },
 
     async addTask(task) {
