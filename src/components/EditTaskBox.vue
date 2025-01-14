@@ -22,7 +22,6 @@
               :placeholder="$t('components.editTaskBox.editTaskDialog.taskTitlePlaceholder')"
               outlined
               dense
-              ref="titleField"
             ></v-text-field>
           </div>
 
@@ -34,29 +33,7 @@
               :placeholder="$t('components.editTaskBox.editTaskDialog.taskDescriptionPlaceholder')"
               outlined
               dense
-              ref="descriptionField"
             ></v-textarea>
-          </div>
-
-          <div>
-            <label for="task-due-date">{{ $t('components.editTaskBox.editTaskDialog.taskDueDateLabel') }}</label>
-            <v-text-field id="task-due-date" v-model="taskCopy.dueDate" type="date" outlined dense ref="dueDateField"></v-text-field>
-          </div>
-
-          <div>
-            <label for="task-priority">{{ $t('components.editTaskBox.editTaskDialog.taskPriorityLabel') }}</label>
-            <v-select
-              id="task-priority"
-              v-model="taskCopy.priority"
-              :items="[
-                $t('components.editTaskBox.editTaskDialog.priorityOptions.high'),
-                $t('components.editTaskBox.editTaskDialog.priorityOptions.medium'),
-                $t('components.editTaskBox.editTaskDialog.priorityOptions.low')
-              ]"
-              outlined
-              dense
-              ref="prioritySelect"
-            ></v-select>
           </div>
         </v-form>
       </v-card-text>
@@ -64,28 +41,29 @@
       <v-divider></v-divider>
 
       <v-card-actions>
-        <v-btn color="error" @click="deleteTask" ref="deleteButton" aria-label="Delete Task">{{
-          $t('components.editTaskBox.editTaskDialog.deleteButton')
-        }}</v-btn>
+        <v-btn color="error" @click="deleteTask" aria-label="Delete Task">{{ $t('components.editTaskBox.editTaskDialog.deleteButton') }}</v-btn>
         <v-spacer></v-spacer>
-        <v-btn color="success" @click="saveChanges" ref="saveButton" aria-label="Save Changes">{{
-          $t('components.editTaskBox.editTaskDialog.saveButton')
-        }}</v-btn>
+        <v-btn color="success" @click="saveChanges" aria-label="Save Changes">{{ $t('components.editTaskBox.editTaskDialog.saveButton') }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { ref } from 'vue';
 import { useTaskStore } from '@/stores/taskStore';
 
 const taskStore = useTaskStore();
+const taskCopy = ref({});
 
-const taskCopy = computed(() => {
-  const task = taskStore.tasks.find(t => t.id === taskStore.currentTaskId);
-  return task ? { ...task } : {};
-});
+watch(
+  () => taskStore.currentTaskId,
+  () => {
+    const selectedTask = taskStore.tasks.find(t => t.id === taskStore.currentTaskId);
+    taskCopy.value = selectedTask ? { ...selectedTask } : {};
+  },
+  { immediate: true }
+);
 
 function saveChanges() {
   taskStore.updateTask(taskStore.currentTaskId, taskCopy.value);
