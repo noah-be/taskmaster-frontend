@@ -74,7 +74,7 @@ export default {
     };
 
     const onRowClick = (event, item) => {
-      taskStore.currentTaskId = item._id;
+      taskStore.currentTaskId = item.item._id;
       taskStore.isEditDialogOpen = true;
     };
 
