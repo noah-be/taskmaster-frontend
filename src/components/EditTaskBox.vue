@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { useTaskStore } from '@/stores/taskStore';
 
 const taskStore = useTaskStore();
