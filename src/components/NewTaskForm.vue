@@ -23,65 +23,51 @@
         <v-text-field id="due-date" v-model="dueDate" :placeholder="$t('components.newTaskForm.dueDatePlaceholder')" type="date" outlined dense></v-text-field>
       </v-col>
       <v-col cols="2">
-        <v-btn color="primary" block class="h-100" @click="addTask" aria-label="Add Task">{{ $t('components.newTaskForm.addTaskButton') }}</v-btn>
+        <v-btn color="primary" block class="h-100" @click="handleAddTask" aria-label="Add Task">
+          {{ $t('components.newTaskForm.addTaskButton') }}
+        </v-btn>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      title: '',
-      dueDate: '',
-      priorityOptions: [
-        this.$t('components.newTaskForm.priorityOptions.low'),
-        this.$t('components.newTaskForm.priorityOptions.medium'),
-        this.$t('components.newTaskForm.priorityOptions.high')
-      ],
-      priority: this.$t('components.newTaskForm.priorityOptions.medium')
-    };
-  },
-  methods: {
-    async addTask() {
-      if (!this.title.trim() || !this.dueDate) {
-        alert(this.$t('components.newTaskForm.errorMessage'));
-        return;
-      }
+<script setup>
+import { ref } from 'vue';
+import { useTaskStore } from '@/stores/taskStore';
+import { useI18n } from 'vue-i18n';
 
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/task`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${localStorage.getItem('token')}`
-          },
-          body: JSON.stringify({
-            title: this.title,
-            priority: this.priority,
-            dueDate: this.dueDate
-          })
-        });
+const { t } = useI18n();
+const taskStore = useTaskStore();
 
-        if (!response.ok) {
-          throw new Error(this.$t('components.newTaskForm.taskAddedFailure'));
-        }
+const title = ref('');
+const dueDate = ref('');
+const priorityOptions = [
+  t('components.newTaskForm.priorityOptions.low'),
+  t('components.newTaskForm.priorityOptions.medium'),
+  t('components.newTaskForm.priorityOptions.high')
+];
+const priority = ref(t('components.newTaskForm.priorityOptions.medium'));
 
-        const newTask = await response.json();
-        this.$emit('task-added', newTask);
-        this.resetForm();
-      } catch (error) {
-        console.error(error);
-      }
-    },
-    resetForm() {
-      this.title = '';
-      this.priority = this.$t('components.newTaskForm.priorityOptions.medium');
-      this.dueDate = '';
-    }
+async function handleAddTask() {
+  if (!title.value.trim() || !dueDate.value) {
+    alert(t('components.newTaskForm.errorMessage'));
+    return;
   }
-};
+
+  await taskStore.addTask({
+    title: title.value,
+    priority: priority.value,
+    dueDate: dueDate.value
+  });
+
+  resetForm();
+}
+
+function resetForm() {
+  title.value = '';
+  priority.value = t('components.newTaskForm.priorityOptions.medium');
+  dueDate.value = '';
+}
 </script>
 
 <style scoped>

@@ -32,11 +32,29 @@ export const useTaskStore = defineStore('task', {
       }
     },
 
-    addTask(task) {
-      this.tasks.push(task);
+    async addTask(task) {
+      const response = await fetch(`${API_BASE_URL}/api/task`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify(task)
+      });
+
+      const newTask = await response.json();
+      this.tasks.push(newTask);
     },
-    deleteTask(taskId) {
-      this.tasks = this.tasks.filter(task => task.id !== taskId);
+    async deleteTask(taskId) {
+      const response = await fetch(`${API_BASE_URL}/api/task/${taskId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      this.tasks = this.tasks.filter(task => task._id !== taskId);
     },
     updateTask(taskId, updatedData) {
       const taskIndex = this.tasks.findIndex(task => task.id === taskId);
@@ -46,6 +64,9 @@ export const useTaskStore = defineStore('task', {
     },
     openEditTaskBox(taskId) {
       this.currentTaskId = taskId;
+    },
+    closeEditDialog() {
+      this.currentTaskId = null;
     }
   }
 });
