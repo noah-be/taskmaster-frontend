@@ -73,8 +73,9 @@ const taskCopy = ref({});
 watch(
   () => taskStore.currentTaskId,
   () => {
-    const selectedTask = taskStore.tasks.find(t => t.id === taskStore.currentTaskId);
+    const selectedTask = taskStore.tasks.find(t => t._id === taskStore.currentTaskId);
     taskCopy.value = selectedTask ? { ...selectedTask } : {};
+    console.log('Updated taskCopy:', taskCopy.value);
   },
   { immediate: true }
 );
