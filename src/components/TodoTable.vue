@@ -54,8 +54,7 @@ export default {
       required: true
     }
   },
-  emits: ['edit-task', 'toggle-task'],
-  setup(props, { emit }) {
+  setup() {
     const { t, locale } = useI18n();
 
     const taskStore = useTaskStore();
