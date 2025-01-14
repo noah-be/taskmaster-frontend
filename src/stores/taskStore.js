@@ -56,11 +56,20 @@ export const useTaskStore = defineStore('task', {
 
       this.tasks = this.tasks.filter(task => task._id !== taskId);
     },
-    updateTask(taskId, updatedData) {
-      const taskIndex = this.tasks.findIndex(task => task.id === taskId);
-      if (taskIndex !== -1) {
-        this.tasks[taskIndex] = { ...this.tasks[taskIndex], ...updatedData };
-      }
+    async updateTask(taskId, updatedData) {
+      const response = await fetch(`${API_BASE_URL}/api/task/${taskId}`, {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedData)
+      });
+
+      const updatedTask = await response.json();
+      const taskIndex = this.tasks.findIndex(task => task._id === taskId);
+
+      this.tasks[taskIndex] = { ...this.tasks[taskIndex], ...updatedTask };
     },
     openEditTaskBox(taskId) {
       this.currentTaskId = taskId;
