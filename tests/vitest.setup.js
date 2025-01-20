@@ -3,10 +3,9 @@ import en from '@/locales/en.json';
 import de from '@/locales/de.json';
 
 import { createVuetify } from 'vuetify';
-
 import { defineStore } from 'pinia';
-
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import mount from '@vue/test-utils';
 
 global.vuetify = createVuetify();
 
@@ -43,3 +42,5 @@ global.it = it;
 global.expect = expect;
 global.beforeEach = beforeEach;
 global.afterEach = afterEach;
+
+global.mount = mount;
