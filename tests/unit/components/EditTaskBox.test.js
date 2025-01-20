@@ -1,14 +1,14 @@
 import EditTaskBox from '@/components/EditTaskBox.vue';
-import { beforeEach } from 'vitest';
 
 describe('EditTaskBox', () => {
-  it('should render the dialog', () => {
-    const wrapper = mount(EditTaskBox, {
-      global: {
-        plugins: [mockVuetify, mockI18n, mockPinia]
-      }
-    });
+  let wrapper;
 
+  beforeEach(() => {
+    wrapper = mount(EditTaskBox);
+  });
+
+  it('should render the dialog', () => {
     expect(true).toBe(true);
+    //expect(wrapper.html()).toContain('task');
   });
 });
