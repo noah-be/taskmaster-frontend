@@ -5,7 +5,7 @@ describe('EditTaskBox', () => {
   it('should render the dialog', () => {
     const wrapper = mount(EditTaskBox, {
       global: {
-        plugins: [vuetify, i18n, mockPinia]
+        plugins: [vuetify, mockI18n, mockPinia]
       }
     });
 
