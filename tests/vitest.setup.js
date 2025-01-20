@@ -6,6 +6,8 @@ import { createVuetify } from 'vuetify';
 
 import { defineStore } from 'pinia';
 
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+
 global.vuetify = createVuetify();
 
 global.i18n = createI18n({
@@ -35,3 +37,9 @@ global.taskStoreMock = defineStore('task', {
     closeEditDialog: vi.fn()
   }
 });
+
+global.describe = describe;
+global.it = it;
+global.expect = expect;
+global.beforeEach = beforeEach;
+global.afterEach = afterEach;
