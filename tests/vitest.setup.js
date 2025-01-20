@@ -3,9 +3,9 @@ import en from '@/locales/en.json';
 import de from '@/locales/de.json';
 
 import { createVuetify } from 'vuetify';
-import { defineStore } from 'pinia';
+import { createPinia, setActivePinia } from 'pinia';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
-import mount from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 
 global.vuetify = createVuetify();
 
@@ -21,7 +21,7 @@ global.i18n = createI18n({
 
 global.API_BASE_URL = 'https://mockapi.com';
 
-global.taskStoreMock = defineStore('task', {
+const useTaskStore = {
   state: () => ({
     tasks: [],
     currentTaskId: null
@@ -35,7 +35,7 @@ global.taskStoreMock = defineStore('task', {
     openEditTaskBox: vi.fn(),
     closeEditDialog: vi.fn()
   }
-});
+};
 
 global.describe = describe;
 global.it = it;
@@ -44,3 +44,10 @@ global.beforeEach = beforeEach;
 global.afterEach = afterEach;
 
 global.mount = mount;
+
+global.mockPinia = createPinia();
+setActivePinia(global.mockPinia);
+
+global.mockPinia.use(() => {
+  return { useTaskStore };
+});
