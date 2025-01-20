@@ -5,7 +5,7 @@ import { createPinia, setActivePinia } from 'pinia';
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { mount } from '@vue/test-utils';
 
-global.vuetify = createVuetify();
+global.mockVuetify = createVuetify();
 
 function createI18nMock() {
   return {
