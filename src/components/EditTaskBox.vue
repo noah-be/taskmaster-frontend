@@ -22,6 +22,7 @@
             <label for="task-title">{{ $t('components.editTaskBox.editTaskDialog.taskTitleLabel') }}</label>
             <v-text-field
               id="task-title"
+              ref="taskTitle"
               v-model="taskCopy.title"
               :placeholder="$t('components.editTaskBox.editTaskDialog.taskTitlePlaceholder')"
               outlined
@@ -33,6 +34,7 @@
             <label for="task-description">{{ $t('components.editTaskBox.editTaskDialog.taskDescriptionLabel') }}</label>
             <v-textarea
               id="task-description"
+              ref="taskDescription"
               v-model="taskCopy.description"
               :placeholder="$t('components.editTaskBox.editTaskDialog.taskDescriptionPlaceholder')"
               outlined
@@ -42,13 +44,14 @@
 
           <div>
             <label for="task-due-date">{{ $t('components.editTaskBox.editTaskDialog.taskDueDateLabel') }}</label>
-            <v-text-field id="task-due-date" v-model="taskCopy.dueDate" type="date" outlined dense ref="dueDateField"></v-text-field>
+            <v-text-field id="task-due-date" ref="taskDueDate" v-model="taskCopy.dueDate" type="date" outlined dense></v-text-field>
           </div>
 
           <div>
             <label for="task-priority">{{ $t('components.editTaskBox.editTaskDialog.taskPriorityLabel') }}</label>
             <v-select
               id="task-priority"
+              ref="taskPriority"
               v-model="taskCopy.priority"
               :items="[
                 $t('components.editTaskBox.editTaskDialog.priorityOptions.high'),
@@ -57,7 +60,6 @@
               ]"
               outlined
               dense
-              ref="prioritySelect"
             ></v-select>
           </div>
         </v-form>
