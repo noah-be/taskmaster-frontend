@@ -1,5 +1,3 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { mount } from '@vue/test-utils';
 import LoginForm from '@/components/LoginForm.vue';
 import RegisterBox from '@/components/RegisterBox.vue';
 
@@ -15,11 +13,7 @@ describe('LoginForm.vue', () => {
     alert = vi.fn();
     vi.resetAllMocks();
 
-    wrapper = mount(LoginForm, {
-      global: {
-        plugins: [vuetify, i18n]
-      }
-    });
+    wrapper = mount(LoginForm);
   });
 
   it('toggles showregisterBox when RegisterBox emits update:show', async () => {
@@ -54,12 +48,6 @@ describe('LoginForm.vue', () => {
       })
     );
 
-    const wrapper = mount(LoginForm, {
-      global: {
-        plugins: [vuetify, i18n]
-      }
-    });
-
     await wrapper.find('form').trigger('submit.prevent');
 
     expect(localStorage.getItem('token')).toBe('exampleToken');
@@ -79,7 +67,7 @@ describe('LoginForm.vue', () => {
     await form.trigger('submit.prevent');
 
     expect(mockFetch).toHaveBeenCalled();
-    expect(alert).toHaveBeenCalledWith('Login failed. Please try again.');
+    expect(alert).toHaveBeenCalledWith('components.loginForm.loginFailure');
   });
 
   it('opens the RegisterBox when "Create New Account" button is clicked', async () => {
