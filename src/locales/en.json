@@ -139,12 +139,6 @@
         "medium": "Medium",
         "low": "Low"
       },
-      "priorityColors": {
-        "high": "High",
-        "medium": "Medium",
-        "low": "Low",
-        "unknown": "Unknown"
-      },
       "completed": "Completed"
     }
   },

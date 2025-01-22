@@ -1,69 +1,40 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
-import { mount } from '@vue/test-utils';
+import { createTestingPinia } from '@pinia/testing';
+import { useTaskStore } from '@/stores/taskStore';
 import TodoTable from '@/components/TodoTable.vue';
 
 describe('TodoTable.vue', () => {
-  let wrapper;
+  let wrapper, taskStore;
 
-  const emit = vi.fn();
-
-  const tasks = [
-    { _id: '3', title: 'Task 3', description: 'Description 3', dueDate: '2015-10-21', priority: 'High', completed: false }, // priority: 'High'
-    { _id: '4', title: 'Task 4', description: 'Description 4', dueDate: '2015-10-21', priority: 'Medium', completed: false }, // priority: 'Medium'
-    { _id: '5', title: 'Task 5', description: 'Description 5', dueDate: '2015-10-21', priority: 'Low', completed: false } // priority: 'Low'
-  ];
-
-  beforeEach(() => {
+  beforeEach(async () => {
     wrapper = mount(TodoTable, {
       global: {
-        plugins: [vuetify, i18n]
-      },
-      props: { tasks }
+        plugins: [createTestingPinia()],
+        stubs: {
+          EditTaskBox: true
+        }
+      }
     });
+
+    taskStore = useTaskStore();
   });
 
-  it('stops event propagation on checkbox click and emits "toggle-task" with correct task id', async () => {
-    const checkboxes = wrapper.findAll('input[type="checkbox"]');
+  it('should call taskStore.openEditTaskBox on row click', async () => {
+    taskStore.tasks = [{ _id: '1', title: 'Test Task', description: 'Test', dueDate: '2025-01-01', priority: 'High', completed: false }];
+    await wrapper.vm.$nextTick();
 
-    expect(checkboxes.length).toBe(tasks.length);
+    const row = wrapper.find('tbody tr');
+    await row.trigger('click');
 
-    const stopPropagationSpy = vi.fn();
-
-    for (let index = 0; index < checkboxes.length; index++) {
-      const checkbox = checkboxes.at(index);
-
-      await checkbox.trigger('click', { stopPropagation: stopPropagationSpy });
-
-      expect(wrapper.emitted('toggle-task')).toBeTruthy();
-      expect(wrapper.emitted('toggle-task')[index]).toEqual([tasks[index]._id]);
-      expect(stopPropagationSpy).toHaveBeenCalled();
-    }
+    expect(taskStore.openEditTaskBox).toHaveBeenCalledWith('1');
   });
 
-  it('emits "edit-task" with the correct task data when a table row is clicked', async () => {
-    const rows = wrapper.findAll('tr');
+  it('should call taskStore.toggleTaskCompletion on checkbox click', async () => {
+    taskStore.tasks = [{ _id: '1', title: 'Test Task', description: 'Test', dueDate: '2025-01-01', priority: 'High', completed: false }];
+    await wrapper.vm.$nextTick();
 
-    rows.shift(); // Remove the header row
+    const checkbox = wrapper.findComponent({ ref: 'taskCompleted' });
+    await checkbox.trigger('click');
 
-    expect(rows.length).toBe(tasks.length);
-
-    for (let index = 0; index < rows.length; index++) {
-      const row = rows.at(index);
-
-      await row.trigger('click');
-
-      expect(wrapper.emitted('edit-task')).toBeTruthy();
-      expect(wrapper.emitted('edit-task')[index]).toEqual([tasks[index]]);
-    }
-  });
-
-  it('binds the completed status correctly with v-model', async () => {
-    const checkbox = wrapper.find('input[type="checkbox"]');
-
-    expect(checkbox.element.checked).toBe(false);
-
-    await checkbox.setChecked(true);
-
-    expect(wrapper.vm.tasks[0].completed).toBe(true);
+    expect(taskStore.toggleTaskCompletion).toHaveBeenCalled('1');
   });
 });

@@ -1,27 +1,41 @@
 <template>
   <v-container>
     <v-card>
-      <v-data-table :items="taskStore.tasks" :headers="headers" class="elevation-1" dense outlined hide-default-footer @click:row="onRowClick">
-        <template #item.title="{ item }">
+      <v-data-table
+        :items="taskStore.tasks"
+        :headers="headers"
+        class="elevation-1"
+        dense
+        outlined
+        hide-default-footer
+        @click:row="(event, item) => taskStore.openEditTaskBox(item.item._id)"
+      >
+        <template ref="taskTitle" #item.title="{ item }">
           {{ item.title }}
         </template>
 
-        <template #item.description="{ item }">
+        <template ref="taskDescription" #item.description="{ item }">
           {{ item.description }}
         </template>
 
-        <template #item.dueDate="{ item }">
-          {{ formatedDueDate(item.dueDate) }}
+        <template ref="taskDueDate" #item.dueDate="{ item }">
+          {{ formatDateByLocale(item.dueDate, locale) }}
         </template>
 
-        <template #item.priority="{ item }">
-          <v-chip :color="getPriorityColor(item.priority)" dark small>
-            {{ priorityText(item.priority) }}
+        <template ref="taskPriority" #item.priority="{ item }">
+          <v-chip dark small>
+            {{ t(`components.todoTable.priorityOptions.${item.priority.toLowerCase()}`) }}
           </v-chip>
         </template>
 
         <template #item.completed="{ item }">
-          <v-checkbox v-model="item.completed" @click.stop="toggleTask(item._id)" class="d-flex align-center" dense></v-checkbox>
+          <v-checkbox
+            ref="taskCompleted"
+            v-model="item.completed"
+            @click.stop="taskStore.toggleTaskCompletion(taskId)"
+            class="d-flex align-center"
+            dense
+          ></v-checkbox>
           <span class="visually-hidden">{{ t('components.todoTable.completed') }}</span>
         </template>
       </v-data-table>
@@ -37,6 +51,9 @@
 import EditTaskBox from '@/components/EditTaskBox.vue';
 import { useI18n } from 'vue-i18n';
 import { useTaskStore } from '@/stores/taskStore';
+import { formatDateByLocale } from '@/utils/dateUtils';
+
+// TODO: Add v-chip with color based on priority
 
 export default {
   components: {
@@ -44,53 +61,19 @@ export default {
   },
   setup() {
     const { t, locale } = useI18n();
-
     const taskStore = useTaskStore();
 
-    const headers = [
-      { title: t('components.todoTable.title'), key: 'title' },
-      { title: t('components.todoTable.description'), key: 'description' },
-      { title: t('components.todoTable.dueDate'), key: 'dueDate' },
-      { title: t('components.todoTable.priority'), key: 'priority' },
-      { title: t('components.todoTable.done'), key: 'completed' }
-    ];
-
-    const toggleTask = taskId => {
-      taskStore.toggleTaskCompletion(taskId);
-    };
-
-    const onRowClick = (event, item) => {
-      taskStore.openEditTaskBox(item.item._id);
-    };
-
-    const priorityText = priority => t(`components.todoTable.priorityColors.${priority?.toLowerCase() || 'unknown'}`);
-
-    const formatedDueDate = dueDate => {
-      if (dueDate) {
-        return new Date(dueDate).toLocaleDateString(locale.value);
-      } else {
-        return t('components.todoTable.invalidDate');
-      }
-    };
-
-    const getPriorityColor = priority => {
-      const colors = {
-        High: 'red',
-        Medium: 'orange',
-        Low: 'blue'
-      };
-      return colors[priority] || 'grey';
-    };
+    const headers = ['title', 'description', 'dueDate', 'priority', 'completed'].map(key => ({
+      title: t(`components.todoTable.${key}`),
+      key
+    }));
 
     return {
       t,
+      locale,
       headers,
       taskStore,
-      toggleTask,
-      onRowClick,
-      priorityText,
-      formatedDueDate,
-      getPriorityColor
+      formatDateByLocale
     };
   }
 };
