@@ -12,18 +12,33 @@
       </v-col>
       <v-col cols="2"></v-col>
     </v-row>
-    <v-row align="stretch" class="new-task-form">
+    <v-row class="align-stretch new-task-form">
       <v-col cols="6">
-        <v-text-field id="task-title" v-model="title" :placeholder="$t('components.newTaskForm.taskTitlePlaceholder')" outlined dense></v-text-field>
+        <v-text-field
+          id="new-task-title"
+          ref="newTaskTitle"
+          v-model="title"
+          :placeholder="$t('components.newTaskForm.taskTitlePlaceholder')"
+          outlined
+          dense
+        ></v-text-field>
       </v-col>
       <v-col cols="2">
-        <v-select id="task-priority" v-model="priority" :items="priorityOptions" outlined dense></v-select>
+        <v-select id="new-task-priority" ref="newTaskPriority" v-model="priority" :items="priorityOptions" outlined dense></v-select>
       </v-col>
       <v-col cols="2">
-        <v-text-field id="due-date" v-model="dueDate" :placeholder="$t('components.newTaskForm.dueDatePlaceholder')" type="date" outlined dense></v-text-field>
+        <v-text-field
+          id="new-task-due-date"
+          ref="newTaskDueDate"
+          v-model="dueDate"
+          :placeholder="$t('components.newTaskForm.dueDatePlaceholder')"
+          type="date"
+          outlined
+          dense
+        ></v-text-field>
       </v-col>
       <v-col cols="2">
-        <v-btn color="primary" block class="h-100" @click="handleAddTask" aria-label="Add Task">
+        <v-btn ref="addTaskBtn" :disabled="!title" color="primary" block class="h-100" @click="handleAddTask" aria-label="Add Task">
           {{ $t('components.newTaskForm.addTaskButton') }}
         </v-btn>
       </v-col>
@@ -40,33 +55,24 @@ const { t } = useI18n();
 const taskStore = useTaskStore();
 
 const title = ref('');
-const dueDate = ref('');
+const dueDate = ref(new Date().toISOString().split('T')[0]);
 const priorityOptions = [
   t('components.newTaskForm.priorityOptions.low'),
   t('components.newTaskForm.priorityOptions.medium'),
   t('components.newTaskForm.priorityOptions.high')
 ];
-const priority = ref(t('components.newTaskForm.priorityOptions.medium'));
+const priority = ref(priorityOptions[1]);
 
 async function handleAddTask() {
-  if (!title.value.trim() || !dueDate.value) {
-    alert(t('components.newTaskForm.errorMessage'));
-    return;
-  }
-
   await taskStore.addTask({
     title: title.value,
     priority: priority.value,
     dueDate: dueDate.value
   });
 
-  resetForm();
-}
-
-function resetForm() {
   title.value = '';
   priority.value = t('components.newTaskForm.priorityOptions.medium');
-  dueDate.value = '';
+  dueDate.value = new Date().toISOString().split('T')[0];
 }
 </script>
 

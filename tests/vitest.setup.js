@@ -1,7 +1,5 @@
-import { vi } from 'vitest';
-
 import { createVuetify } from 'vuetify';
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 function createI18nMock() {
@@ -16,11 +14,18 @@ function createI18nMock() {
   };
 }
 
+vi.mock('vue-i18n', () => ({
+  useI18n: () => ({
+    t: vi.fn(key => key)
+  })
+}));
+
 global.API_BASE_URL = 'https://mockapi.com';
 
 global.describe = describe;
 global.it = it;
 global.expect = expect;
+global.vi = vi;
 global.beforeEach = beforeEach;
 global.afterEach = afterEach;
 

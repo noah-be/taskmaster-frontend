@@ -1,110 +1,72 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { mount } from '@vue/test-utils';
 import NewTaskForm from '@/components/NewTaskForm.vue';
+import { createTestingPinia } from '@pinia/testing';
+import { useTaskStore } from '@/stores/taskStore';
 
-vi.mock('vue-router', () => ({
-  useRouter: vi.fn()
-}));
-
-describe('NewTaskForm.vue', () => {
-  let wrapper;
+describe('NewTaskForm', () => {
+  let wrapper, taskStore;
 
   beforeEach(() => {
-    vi.resetAllMocks();
-    vi.stubGlobal('fetch', vi.fn());
     wrapper = mount(NewTaskForm, {
       global: {
-        plugins: [vuetify, i18n]
+        plugins: [createTestingPinia()]
       }
     });
+
+    taskStore = useTaskStore();
   });
 
-  it('binds title, priority, and dueDate to the data', async () => {
-    const titleField = wrapper.find('input[placeholder="Task title"]');
-    await titleField.setValue('New Task');
-    expect(wrapper.vm.title).toBe('New Task');
-
-    const priorityField = wrapper.findComponent({ name: 'VSelect' });
-    await priorityField.setValue('High');
-    expect(wrapper.vm.priority).toBe('High');
-
-    const dueDateField = wrapper.find('input[type="date"]');
-    await dueDateField.setValue('2024-12-31');
-    expect(wrapper.vm.dueDate).toBe('2024-12-31');
+  afterEach(() => {
+    wrapper.unmount();
+    vi.resetAllMocks();
   });
 
-  it('shows alert if title or due date are empty when adding a task', async () => {
-    alert = vi.fn();
+  it('should call addTask and resetForm on handleAddTask', async () => {
+    const mockAddTask = vi.spyOn(taskStore, 'addTask').mockResolvedValue();
 
-    await wrapper.findComponent({ name: 'VBtn' }).trigger('click');
+    const mockDate = new Date('2023-01-01T12:00:00Z');
+    vi.useFakeTimers();
+    vi.setSystemTime(mockDate);
 
-    expect(alert).toHaveBeenCalledWith('Task title and due date are required.');
-  });
+    wrapper.vm.title = 'New Task';
+    wrapper.vm.dueDate = '2023-01-01';
+    wrapper.vm.priority = 'Medium';
 
-  it('handles errors during task creation', async () => {
-    vi.stubGlobal(
-      'fetch',
-      vi.fn(() => Promise.resolve({ ok: false }))
-    );
+    await wrapper.vm.handleAddTask();
 
-    wrapper.setData({ title: 'Test Task', dueDate: '2024-12-31' });
-    await wrapper.findComponent({ name: 'VBtn' }).trigger('click');
-
-    expect(wrapper.vm.title).toBe('Test Task');
-    expect(wrapper.vm.dueDate).toBe('2024-12-31');
-  });
-
-  it('emits task-added when a task is successfully added', async () => {
-    const mockTask = { title: 'New Task', priority: 'Low', dueDate: '2024-12-31' };
-
-    vi.stubGlobal(
-      'fetch',
-      vi.fn(() =>
-        Promise.resolve({
-          ok: true,
-          json: () => Promise.resolve(mockTask)
-        })
-      )
-    );
-
-    wrapper.setData({ title: 'New Task', dueDate: '2024-12-31' });
-    await wrapper.findComponent({ name: 'VBtn' }).trigger('click');
-
-    expect(wrapper.emitted('task-added')[0]).toEqual([mockTask]);
-  });
-
-  it('calls fetch with correct parameters when adding a task', async () => {
-    const mockToken = 'simulated-token';
-    vi.stubGlobal('localStorage', {
-      getItem: vi.fn().mockReturnValue(mockToken)
+    expect(mockAddTask).toHaveBeenCalledWith({
+      title: 'New Task',
+      priority: 'Medium',
+      dueDate: '2023-01-01'
     });
 
-    const mockFetch = vi.fn(() =>
-      Promise.resolve({
-        ok: true,
-        json: () => Promise.resolve({ title: 'New Task' })
-      })
-    );
-    vi.stubGlobal('fetch', mockFetch);
+    expect(wrapper.vm.title).toBe('');
+    expect(wrapper.vm.dueDate).toBe('2023-01-01');
+    expect(wrapper.vm.priority).toBe('components.newTaskForm.priorityOptions.medium');
 
-    wrapper.setData({ title: 'New Task', dueDate: '2024-12-31' });
+    mockAddTask.mockRestore();
+  });
 
-    await wrapper.findComponent({ name: 'VBtn' }).trigger('click');
+  it('should enable or disable the add task button based on the title value', async () => {
+    const button = wrapper.findComponent({ ref: 'addTaskBtn' });
 
-    expect(mockFetch).toHaveBeenCalledWith(
-      `${API_BASE_URL}/api/task`,
-      expect.objectContaining({
-        method: 'POST',
-        headers: expect.objectContaining({
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${mockToken}`
-        }),
-        body: JSON.stringify({
-          title: 'New Task',
-          priority: 'Medium',
-          dueDate: '2024-12-31'
-        })
-      })
-    );
+    expect(button.attributes('disabled')).toBeDefined();
+
+    wrapper.vm.title = 'New Task';
+    await wrapper.vm.$nextTick();
+    expect(button.attributes('disabled')).toBeUndefined();
+  });
+
+  it('should bind data correctly using v-model for title, priority, and dueDate', async () => {
+    const fields = [
+      { ref: 'newTaskTitle', value: 'Test Title', model: 'title' },
+      { ref: 'newTaskPriority', value: 'High', model: 'priority' },
+      { ref: 'newTaskDueDate', value: '2023-01-01', model: 'dueDate' }
+    ];
+
+    for (const { ref, value, model } of fields) {
+      const input = wrapper.findComponent({ ref });
+      await input.setValue(value);
+      expect(wrapper.vm[model]).toBe(value);
+    }
   });
 });
