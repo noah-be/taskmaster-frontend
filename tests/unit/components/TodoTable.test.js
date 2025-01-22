@@ -29,12 +29,12 @@ describe('TodoTable.vue', () => {
   });
 
   it('should call taskStore.toggleTaskCompletion on checkbox click', async () => {
-    taskStore.tasks = [{ _id: '1', title: 'Test Task', description: 'Test', dueDate: '2025-01-01', priority: 'High', completed: false }];
+    taskStore.tasks = [{ _id: '2', title: 'Test Task', description: 'Test', dueDate: '2025-01-01', priority: 'High', completed: false }];
     await wrapper.vm.$nextTick();
 
     const checkbox = wrapper.findComponent({ ref: 'taskCompleted' });
     await checkbox.trigger('click');
 
-    expect(taskStore.toggleTaskCompletion).toHaveBeenCalled('1');
+    expect(taskStore.toggleTaskCompletion).toHaveBeenCalledWith('2');
   });
 });

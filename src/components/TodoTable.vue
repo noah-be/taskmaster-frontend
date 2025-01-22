@@ -32,7 +32,7 @@
           <v-checkbox
             ref="taskCompleted"
             v-model="item.completed"
-            @click.stop="taskStore.toggleTaskCompletion(taskId)"
+            @click.stop="taskStore.toggleTaskCompletion(item._id)"
             class="d-flex align-center"
             dense
           ></v-checkbox>
