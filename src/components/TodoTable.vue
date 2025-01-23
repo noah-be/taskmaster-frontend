@@ -24,7 +24,7 @@
 
         <template ref="taskPriority" #item.priority="{ item }">
           <v-chip dark small>
-            {{ t(`components.todoTable.priorityOptions.${item.priority.toLowerCase()}`) }}
+            {{ t(`components.todoTable.priorityOptions.${item.priority?.toLowerCase()}`) }}
           </v-chip>
         </template>
 
