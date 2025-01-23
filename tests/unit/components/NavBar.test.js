@@ -1,14 +1,8 @@
-import { describe, it, expect } from 'vitest';
-import { mount } from '@vue/test-utils';
 import Navbar from '@/components/Navbar.vue';
 
 describe('Navbar.vue', () => {
   const factory = () => {
-    return mount(Navbar, {
-      global: {
-        plugins: [vuetify, i18n]
-      }
-    });
+    return mount(Navbar);
   };
 
   it('renders buttons as router links', () => {
