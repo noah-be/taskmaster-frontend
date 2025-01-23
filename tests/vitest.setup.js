@@ -34,6 +34,5 @@ const mockI18n = createI18nMock();
 
 global.mount = (component, options) =>
   mount(component, {
-    global: { plugins: [mockVuetify], config: { globalProperties: { ...mockI18n.global.config.globalProperties } }, ...options },
-    ...options
+    global: { plugins: [mockVuetify], config: { globalProperties: { ...mockI18n.global.config.globalProperties } }, ...options }
   });
