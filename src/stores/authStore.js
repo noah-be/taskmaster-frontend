@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { useRouter } from 'vue-router';
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -23,6 +24,8 @@ export const useAuthStore = defineStore('auth', {
         this.token = data.token;
         this.user = data.user;
         localStorage.setItem('token', data.token);
+        const router = useRouter();
+        router.push('/tasks');
       }
     },
     async register(username, password) {
@@ -39,12 +42,16 @@ export const useAuthStore = defineStore('auth', {
         this.token = data.token;
         this.user = data.user;
         localStorage.setItem('token', data.token);
+        const router = useRouter();
+        router.push('/tasks');
       }
     },
     logout() {
       this.token = null;
       this.user = null;
       localStorage.removeItem('token');
+      const router = useRouter();
+      router.push('/tasks');
     }
   }
 });

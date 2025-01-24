@@ -41,47 +41,21 @@
 
 <script>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import RegisterBox from '@/components/RegisterBox.vue';
-import { useI18n } from 'vue-i18n';
+import { useAuthStore } from '@/stores/authStore';
 
 export default {
   components: {
     RegisterBox
   },
   setup() {
-    const { t } = useI18n();
-    const router = useRouter();
+    const authStore = useAuthStore();
     const username = ref('');
     const password = ref('');
     const showregisterBox = ref(false);
 
     const submitLogin = async () => {
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            username: username.value,
-            password: password.value
-          })
-        });
-
-        if (!response.ok) {
-          throw new Error('Login failed');
-        }
-
-        const data = await response.json();
-
-        localStorage.setItem('token', data.token);
-
-        router.push(data.redirectUrl);
-      } catch (error) {
-        console.error('Error:', error);
-        alert(t('components.loginForm.loginFailure'));
-      }
+      await authStore.login(username.value, password.value);
     };
 
     return {
