@@ -1,41 +1,35 @@
 import { useI18n } from 'vue-i18n';
 
-const { t } = useI18n();
-
-export const getUserNameFeedback = async () => {
-  if (username.value.length < 3) {
-    usernameFeedback.value = t('components.registerBox.registration.usernameError.minLength');
-    return;
+export const getUserNameFeedback = async username => {
+  const { t } = useI18n();
+  if (username.length < 3) {
+    return t('components.registerBox.registration.usernameError.minLength');
   }
 
   try {
-    const response = await fetch(`${API_BASE_URL}/api/auth/check-username?username=${encodeURIComponent(username.value)}`);
+    const response = await fetch(`${API_BASE_URL}/api/auth/check-username?username=${encodeURIComponent(username)}`);
     const data = await response.json();
-    usernameFeedback.value = data.isAvailable ? '' : t('components.registerBox.registration.usernameError.taken');
+    return data.isAvailable ? '' : t('components.registerBox.registration.usernameError.taken');
   } catch (error) {
-    usernameFeedback.value = t('components.registerBox.registration.usernameError.checkError');
-    console.error('Error:', error);
+    console.error('Error checking username:', error);
+    return t('components.registerBox.registration.usernameError.checkError');
   }
 };
 
-export const getPasswordFeedback = () => {
-  const passwordVal = password.value;
-  if (passwordVal.length < 8) {
-    passwordFeedback.value = t('components.registerBox.registration.passwordError.minLength');
-    return;
+export const getPasswordFeedback = password => {
+  const { t } = useI18n();
+  if (password.length < 8) {
+    return t('components.registerBox.registration.passwordError.minLength');
   }
-  if (!/[a-z]/.test(passwordVal) || !/[A-Z]/.test(passwordVal)) {
-    passwordFeedback.value = t('components.registerBox.registration.passwordError.case');
-    return;
+  if (!/[a-z]/.test(password) || !/[A-Z]/.test(password)) {
+    return t('components.registerBox.registration.passwordError.case');
   }
-  if (!/\d/.test(passwordVal)) {
-    passwordFeedback.value = t('components.registerBox.registration.passwordError.number');
-    return;
+  if (!/\d/.test(password)) {
+    return t('components.registerBox.registration.passwordError.number');
   }
-  if (!/[!@#$%^&*(),.?":{}|<>]/.test(passwordVal)) {
-    passwordFeedback.value = t('components.registerBox.registration.passwordError.symbol');
-    return;
+  if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+    return t('components.registerBox.registration.passwordError.symbol');
   }
 
-  passwordFeedback.value = '';
+  return '';
 };
