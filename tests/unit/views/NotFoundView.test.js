@@ -1,51 +1,41 @@
-import { mount } from '@vue/test-utils';
-import { createRouter, createMemoryHistory } from 'vue-router';
-import { vi } from 'vitest';
 import NotFoundView from '@/views/NotFoundView.vue';
+import { useRouter, useRoute } from 'vue-router';
 
-global.plausible = vi.fn();
+vi.mock('vue-router', () => ({
+  useRouter: vi.fn(),
+  useRoute: vi.fn()
+}));
 
 describe('NotFoundView.vue', () => {
-  let router;
+  let wrapper, mockRouter, mockRoute;
 
-  it('calls plausible when the component is mounted', async () => {
-    router = createRouter({
-      history: createMemoryHistory(),
-      routes: [{ path: '/:pathMatch(.*)*', name: 'NotFoundView', component: NotFoundView }]
-    });
+  beforeEach(() => {
+    mockRouter = { push: vi.fn() };
+    mockRoute = { path: '/mock-path' };
 
-    router.push('/non-existent-route');
-    await router.isReady();
+    useRouter.mockReturnValue(mockRouter);
+    useRoute.mockReturnValue(mockRoute);
 
-    mount(NotFoundView, {
-      global: {
-        plugins: [router, vuetify, i18n]
-      }
-    });
+    global.plausible = vi.fn();
 
-    expect(plausible).toHaveBeenCalledWith('404', { props: { path: '/non-existent-route' } });
+    wrapper = mount(NotFoundView);
   });
 
-  it('calls goHome and navigates to "/" when the home button is clicked', async () => {
-    const pushMock = vi.fn();
-    router = createRouter({
-      history: createMemoryHistory(),
-      routes: [{ path: '/:pathMatch(.*)*', name: 'NotFoundView', component: NotFoundView }]
+  afterEach(() => {
+    vi.clearAllMocks();
+    wrapper.unmount();
+  });
+
+  it('calls plausible with correct path on mount', () => {
+    expect(global.plausible).toHaveBeenCalledWith('404', {
+      props: { path: '/mock-path' }
     });
-    router.push = pushMock;
+  });
 
-    const wrapper = mount(NotFoundView, {
-      global: {
-        plugins: [router, vuetify, i18n]
-      }
-    });
-
-    const button = wrapper.find('[data-testid="home-button"]');
-
-    expect(button.exists()).toBe(true);
-
+  it('navigates to home when button is clicked', async () => {
+    const button = wrapper.findComponent({ ref: 'homeBtn' });
     await button.trigger('click');
 
-    expect(pushMock).toHaveBeenCalledWith('/');
+    expect(mockRouter.push).toHaveBeenCalledWith('/');
   });
 });
