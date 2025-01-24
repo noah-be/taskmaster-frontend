@@ -142,29 +142,8 @@ export default {
     };
 
     const registerUser = async () => {
-      try {
-        const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            username: username.value,
-            password: password.value
-          })
-        });
-
-        if (!response.ok) {
-          throw new Error(t('components.registerBox.registration.registrationFailed'));
-        }
-
-        const data = await response.json();
-        console.debug('Success:', data);
-        closeModal();
-      } catch (error) {
-        console.error('Error:', error);
-        alert(t('components.registerBox.registration.registrationFailed'));
-      }
+      await authStore.register(username.value, password.value);
+      closeModal();
     };
 
     return {
