@@ -4,7 +4,9 @@ import { useRouter } from 'vue-router';
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     token: localStorage.getItem('token') || null,
-    user: null
+    user: null,
+    isRegisterBoxVisible: false,
+    isGuidelineTextVisible: false
   }),
   getters: {
     isAuthenticated: state => !!state.token
@@ -45,6 +47,7 @@ export const useAuthStore = defineStore('auth', {
         const router = useRouter();
         router.push('/tasks');
       }
+      this.closeRegisterBox();
     },
     logout() {
       this.token = null;
@@ -52,6 +55,12 @@ export const useAuthStore = defineStore('auth', {
       localStorage.removeItem('token');
       const router = useRouter();
       router.push('/tasks');
+    },
+    closeRegisterBox() {
+      this.isRegisterBoxVisible = false;
+    },
+    toggleGuidelineText() {
+      this.isGuidelineTextVisible = !this.isGuidelineTextVisible;
     }
   }
 });

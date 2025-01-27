@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="show" max-width="500" @update:model-value="closeModal" aria-labelledby="dialog-title">
+  <v-dialog :model-value="authStore.isRegisterBoxVisible" max-width="500" @update:model-value="closeModal" aria-labelledby="dialog-title">
     <v-card>
       <v-card-title id="dialog-title" class="d-flex justify-center">
         <span class="text-h6">{{ $t('components.registerBox.registration.title') }}</span>
@@ -12,8 +12,8 @@
             ref="registrationGuidelinesButton"
             block
             class="mb-4"
-            @click="toggleGuidelines"
-            :aria-expanded="guidelinesVisible"
+            @click="authStore.toggleGuidelinesVisibility"
+            :aria-expanded="authStore.isGuidelineTextVisible"
             aria-controls="registration-guidelines"
           >
             {{
@@ -23,7 +23,7 @@
             }}
           </v-btn>
 
-          <RegistrationGuidelines :visible="guidelinesVisible" />
+          <RegistrationGuidelines :visible="authStore.isGuidelineTextVisible" />
 
           <label for="register-username">{{ $t('components.registerBox.registration.usernameLabel') }}</label>
           <v-text-field
@@ -71,20 +71,14 @@
 import { ref, computed } from 'vue';
 import RegistrationGuidelines from '@/components/RegistrationGuidelines.vue';
 import { getUserNameFeedback, getPasswordFeedback } from '@/utils/authUtils';
+import { useAuthStore } from '@/stores/authStore';
 
 export default {
   components: {
     RegistrationGuidelines
   },
-  props: {
-    show: {
-      type: Boolean,
-      required: true
-    }
-  },
-  emits: ['update:show'],
-  setup(props, { emit }) {
-    const guidelinesVisible = ref(false);
+  setup() {
+    const authStore = useAuthStore();
     const username = ref('');
     const password = ref('');
     const usernameFeedback = ref('');
@@ -94,28 +88,16 @@ export default {
       return username.value.length >= 3 && password.value.length >= 8 && !usernameFeedback.value && !passwordFeedback.value;
     });
 
-    const closeModal = () => {
-      emit('update:show', false);
-    };
-
-    const toggleGuidelines = () => {
-      guidelinesVisible.value = !guidelinesVisible.value;
-    };
-
     const registerUser = async () => {
       await authStore.register(username.value, password.value);
-      closeModal();
     };
 
     return {
-      guidelinesVisible,
       username,
       password,
       usernameFeedback,
       passwordFeedback,
       formValid,
-      closeModal,
-      toggleGuidelines,
       getUserNameFeedback,
       getPasswordFeedback,
       registerUser
