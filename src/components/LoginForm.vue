@@ -33,13 +33,13 @@
       <v-divider></v-divider>
 
       <v-card-actions>
-        <v-btn ref="createAccountBtn" color="secondary" block class="mt-2" @click.prevent="showregisterBox = true">{{
+        <v-btn ref="createAccountBtn" color="secondary" block class="mt-2" @click.prevent="authStore.isRegisterBoxVisible = true">{{
           $t('components.loginForm.createAccountButton')
         }}</v-btn>
       </v-card-actions>
     </v-card>
 
-    <v-container v-if="authStore.isEditTaskBoxVisible">
+    <v-container v-if="authStore.isRegisterBoxVisible">
       <RegisterBox />
     </v-container>
   </v-container>
@@ -56,7 +56,6 @@ const router = useRouter();
 const authStore = useAuthStore();
 const username = ref('');
 const password = ref('');
-const showregisterBox = ref(false);
 
 const submitLogin = async () => {
   await authStore.login(username.value, password.value);
