@@ -59,7 +59,7 @@ export const useAuthStore = defineStore('auth', {
     closeRegisterBox() {
       this.isRegisterBoxVisible = false;
     },
-    toggleGuidelineText() {
+    toggleGuidelineVisibility() {
       this.isGuidelineTextVisible = !this.isGuidelineTextVisible;
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog :model-value="authStore.isRegisterBoxVisible" max-width="500" @update:model-value="closeModal" aria-labelledby="dialog-title">
+  <v-dialog v-model="authStore.isRegisterBoxVisible" max-width="500" @update:model-value="authStore.closeRegisterBox" aria-labelledby="dialog-title">
     <v-card>
       <v-card-title id="dialog-title" class="d-flex justify-center">
         <span class="text-h6">{{ $t('components.registerBox.registration.title') }}</span>
@@ -12,15 +12,11 @@
             ref="registrationGuidelinesButton"
             block
             class="mb-4"
-            @click="authStore.toggleGuidelinesVisibility"
+            @click="authStore.toggleGuidelineVisibility"
             :aria-expanded="authStore.isGuidelineTextVisible"
             aria-controls="registration-guidelines"
           >
-            {{
-              guidelinesVisible
-                ? $t('components.registerBox.registration.hideGuidelinesButton')
-                : $t('components.registerBox.registration.showGuidelinesButton')
-            }}
+            {{ guidelinesButtonText }}
           </v-btn>
 
           <RegistrationGuidelines :visible="authStore.isGuidelineTextVisible" />
@@ -61,47 +57,52 @@
       <v-divider></v-divider>
 
       <v-card-actions>
-        <v-btn color="secondary" ref="cancelButton" block @click="closeModal">{{ $t('components.registerBox.registration.cancelButton') }}</v-btn>
+        <v-btn color="secondary" ref="cancelButton" block @click="authStore.closeRegisterBox">{{
+          $t('components.registerBox.registration.cancelButton')
+        }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
-<script>
-import { ref, computed } from 'vue';
+<script setup>
+import { ref, watch, computed } from 'vue';
 import RegistrationGuidelines from '@/components/RegistrationGuidelines.vue';
 import { getUserNameFeedback, getPasswordFeedback } from '@/utils/authUtils';
 import { useAuthStore } from '@/stores/authStore';
+import { useI18n } from 'vue-i18n';
 
-export default {
-  components: {
-    RegistrationGuidelines
-  },
-  setup() {
-    const authStore = useAuthStore();
-    const username = ref('');
-    const password = ref('');
-    const usernameFeedback = ref('');
-    const passwordFeedback = ref('');
+const { t } = useI18n();
+const authStore = useAuthStore();
+const username = ref('');
+const password = ref('');
+const usernameFeedback = ref('');
+const passwordFeedback = ref('');
 
-    const formValid = computed(() => {
-      return username.value.length >= 3 && password.value.length >= 8 && !usernameFeedback.value && !passwordFeedback.value;
-    });
+const validateUsername = async () => {
+  usernameFeedback.value = await getUserNameFeedback(username.value);
+};
 
-    const registerUser = async () => {
-      await authStore.register(username.value, password.value);
-    };
+const validatePassword = async () => {
+  passwordFeedback.value = getPasswordFeedback(password.value);
+};
 
-    return {
-      username,
-      password,
-      usernameFeedback,
-      passwordFeedback,
-      formValid,
-      getUserNameFeedback,
-      getPasswordFeedback,
-      registerUser
-    };
+watch(username, validateUsername);
+watch(password, validatePassword);
+
+const formValid = computed(() => {
+  return username.value.length >= 3 && password.value.length >= 8 && !usernameFeedback.value && !passwordFeedback.value;
+});
+
+const registerUser = async () => {
+  if (formValid.value) {
+    await authStore.register(username.value, password.value);
   }
 };
+
+const guidelinesButtonText = computed(() => {
+  return authStore.isGuidelineTextVisible
+    ? t('components.registerBox.registration.hideGuidelinesButton')
+    : t('components.registerBox.registration.showGuidelinesButton');
+});
 </script>
