@@ -1,7 +1,5 @@
 import { defineStore } from 'pinia';
 
-// TODO: Router push implementation in LoginForm and RegisterBox
-
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     token: localStorage.getItem('token') || null,

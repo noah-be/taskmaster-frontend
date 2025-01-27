@@ -49,6 +49,9 @@
 import { ref } from 'vue';
 import RegisterBox from '@/components/RegisterBox.vue';
 import { useAuthStore } from '@/stores/authStore';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
 
 const authStore = useAuthStore();
 const username = ref('');
@@ -57,5 +60,6 @@ const showregisterBox = ref(false);
 
 const submitLogin = async () => {
   await authStore.login(username.value, password.value);
+  router.push('/tasks');
 };
 </script>
