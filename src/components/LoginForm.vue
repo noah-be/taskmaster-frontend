@@ -39,35 +39,23 @@
       </v-card-actions>
     </v-card>
 
-    <RegisterBox :show="showregisterBox" @update:show="showregisterBox = $event" />
+    <v-container v-if="authStore.isEditTaskBoxVisible">
+      <RegisterBox />
+    </v-container>
   </v-container>
 </template>
 
-<script>
+<script setup>
 import { ref } from 'vue';
 import RegisterBox from '@/components/RegisterBox.vue';
 import { useAuthStore } from '@/stores/authStore';
 
-export default {
-  components: {
-    RegisterBox
-  },
-  setup() {
-    const authStore = useAuthStore();
-    const username = ref('');
-    const password = ref('');
-    const showregisterBox = ref(false);
+const authStore = useAuthStore();
+const username = ref('');
+const password = ref('');
+const showregisterBox = ref(false);
 
-    const submitLogin = async () => {
-      await authStore.login(username.value, password.value);
-    };
-
-    return {
-      username,
-      password,
-      showregisterBox,
-      submitLogin
-    };
-  }
+const submitLogin = async () => {
+  await authStore.login(username.value, password.value);
 };
 </script>

@@ -1,5 +1,4 @@
 import LoginForm from '@/components/LoginForm.vue';
-import RegisterBox from '@/components/RegisterBox.vue';
 import { createTestingPinia } from '@pinia/testing';
 import { useAuthStore } from '@/stores/authStore';
 
@@ -36,18 +35,6 @@ describe('LoginForm', () => {
     const button = wrapper.findComponent({ ref: 'createAccountBtn' });
     await button.trigger('click');
     expect(wrapper.vm.showregisterBox).toBe(true);
-  });
-
-  it('renders RegisterBox with correct props and handles update:show event', async () => {
-    const registerBox = wrapper.findComponent(RegisterBox);
-    expect(registerBox.exists()).toBe(true);
-    expect(registerBox.props('show')).toBe(wrapper.vm.showregisterBox);
-
-    await registerBox.vm.$emit('update:show', true);
-    expect(wrapper.vm.showregisterBox).toBe(true);
-
-    await registerBox.vm.$emit('update:show', false);
-    expect(wrapper.vm.showregisterBox).toBe(false);
   });
 
   it('calls submitLogin on button click and triggers store login with correct data', async () => {
