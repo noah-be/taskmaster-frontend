@@ -1,7 +1,4 @@
-import { useI18n } from 'vue-i18n';
-
-export const getUserNameFeedback = async username => {
-  const { t } = useI18n();
+export const getUserNameFeedback = async (t, username) => {
   if (username.length < 3) {
     return t('components.registerBox.registration.usernameError.minLength');
   }
@@ -16,8 +13,7 @@ export const getUserNameFeedback = async username => {
   }
 };
 
-export const getPasswordFeedback = password => {
-  const { t } = useI18n();
+export const getPasswordFeedback = (t, password) => {
   if (password.length < 8) {
     return t('components.registerBox.registration.passwordError.minLength');
   }

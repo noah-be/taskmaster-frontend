@@ -71,7 +71,9 @@ import RegistrationGuidelines from '@/components/RegistrationGuidelines.vue';
 import { getUserNameFeedback, getPasswordFeedback } from '@/utils/authUtils';
 import { useAuthStore } from '@/stores/authStore';
 import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const { t } = useI18n();
 const authStore = useAuthStore();
 const username = ref('');
@@ -80,11 +82,11 @@ const usernameFeedback = ref('');
 const passwordFeedback = ref('');
 
 const validateUsername = async () => {
-  usernameFeedback.value = await getUserNameFeedback(username.value);
+  usernameFeedback.value = await getUserNameFeedback(t, username.value);
 };
 
 const validatePassword = async () => {
-  passwordFeedback.value = getPasswordFeedback(password.value);
+  passwordFeedback.value = getPasswordFeedback(t, password.value);
 };
 
 watch(username, validateUsername);
