@@ -40,7 +40,7 @@ function configureSentry(app, router) {
 }
 
 export function registerPlugins(app, router) {
-  configureSentry(app, router);
+  //configureSentry(app, router);
   app.use(vuetify);
   app.use(i18n);
   app.use(createPinia());
