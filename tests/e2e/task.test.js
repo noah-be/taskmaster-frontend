@@ -5,7 +5,7 @@ test.describe('Tasks CRUD', () => {
     const { page } = registeredUser;
 
     await page.goto('http://localhost:3000/tasks');
-    const taskItems = page.locator('[data-test="task-item"]');
+    const taskItems = page.locator('.v-data-table tbody tr');
 
     await expect(taskItems).toHaveCount(5);
   });
