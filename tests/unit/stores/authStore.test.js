@@ -24,6 +24,29 @@ describe('authStore', () => {
     vi.restoreAllMocks();
   });
 
+  describe('State', () => {
+    it('should have an initial state', () => {
+      expect(authStore.token).toBeNull();
+      expect(authStore.user).toBeNull();
+      expect(authStore.isRegisterBoxVisible).toBe(false);
+      expect(authStore.isGuidelineTextVisible).toBe(false);
+    });
+  });
+
+  describe('Getters', () => {
+    describe('isAuthenticated', () => {
+      it('should return true when token exists', () => {
+        authStore.token = 'validToken';
+        expect(authStore.isAuthenticated).toBe(true);
+      });
+
+      it('should return false when token is null', () => {
+        authStore.token = null;
+        expect(authStore.isAuthenticated).toBe(false);
+      });
+    });
+  });
+
   describe('Actions', () => {
     describe('login', () => {
       it('should update state on successful login', async () => {
