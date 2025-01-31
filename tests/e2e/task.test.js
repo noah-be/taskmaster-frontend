@@ -33,7 +33,7 @@ test.describe.serial('Tasks CRUD', () => {
     await expect(page.locator('.v-data-table')).toContainText('Updated Description');
   });
 
-  test('should delete a task and verify it is removed from the list', async ({ registeredUser }) => {
+  test('Delete a task and verify it is removed from the list', async ({ registeredUser }) => {
     const { page } = registeredUser;
 
     await page.goto('http://localhost:3000/tasks');
