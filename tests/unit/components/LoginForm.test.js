@@ -1,5 +1,4 @@
 import LoginForm from '@/components/LoginForm.vue';
-import { createTestingPinia } from '@pinia/testing';
 import { useAuthStore } from '@/stores/authStore';
 
 vi.mock('vue-router', () => ({
@@ -12,14 +11,7 @@ describe('LoginForm', () => {
   let wrapper, authStore;
 
   beforeEach(() => {
-    wrapper = mount(LoginForm, {
-      global: {
-        plugins: [createTestingPinia()],
-        stubs: {
-          RegisterBox: true
-        }
-      }
-    });
+    wrapper = mount(LoginForm);
 
     authStore = useAuthStore();
     authStore.login = vi.fn();

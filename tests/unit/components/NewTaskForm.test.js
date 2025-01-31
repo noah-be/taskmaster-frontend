@@ -1,17 +1,11 @@
 import NewTaskForm from '@/components/NewTaskForm.vue';
-import { createTestingPinia } from '@pinia/testing';
 import { useTaskStore } from '@/stores/taskStore';
 
 describe('NewTaskForm', () => {
   let wrapper, taskStore;
 
   beforeEach(() => {
-    wrapper = mount(NewTaskForm, {
-      global: {
-        plugins: [createTestingPinia()]
-      }
-    });
-
+    wrapper = mount(NewTaskForm);
     taskStore = useTaskStore();
   });
 

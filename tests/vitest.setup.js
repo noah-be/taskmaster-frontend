@@ -1,6 +1,7 @@
 import { createVuetify } from 'vuetify';
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import { mount } from '@vue/test-utils';
+import { createTestingPinia } from '@pinia/testing';
 
 function createI18nMock() {
   return {
@@ -36,3 +37,20 @@ global.mount = (component, options) =>
   mount(component, {
     global: { plugins: [mockVuetify], config: { globalProperties: { ...mockI18n.global.config.globalProperties } }, ...options }
   });
+
+global.mount = (component, options = {}) => {
+  const defaultPlugins = [mockVuetify, createTestingPinia()];
+
+  const extraPlugins = options.global?.plugins || [];
+
+  return mount(component, {
+    global: {
+      plugins: [...defaultPlugins, ...extraPlugins],
+      config: {
+        globalProperties: { ...mockI18n.global.config.globalProperties }
+      },
+      ...options.global
+    },
+    ...options
+  });
+};

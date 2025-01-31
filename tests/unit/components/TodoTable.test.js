@@ -1,4 +1,3 @@
-import { createTestingPinia } from '@pinia/testing';
 import { useTaskStore } from '@/stores/taskStore';
 import TodoTable from '@/components/TodoTable.vue';
 
@@ -6,14 +5,7 @@ describe('TodoTable.vue', async () => {
   let wrapper, taskStore;
 
   beforeEach(async () => {
-    wrapper = mount(TodoTable, {
-      global: {
-        plugins: [createTestingPinia()],
-        stubs: {
-          EditTaskBox: true
-        }
-      }
-    });
+    wrapper = mount(TodoTable);
 
     taskStore = useTaskStore();
 

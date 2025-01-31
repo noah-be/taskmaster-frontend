@@ -1,17 +1,11 @@
 import EditTaskBox from '@/components/EditTaskBox.vue';
-import { createTestingPinia } from '@pinia/testing';
 import { useTaskStore } from '@/stores/taskStore';
 
 describe('EditTaskBox', () => {
   let wrapper, taskStore;
 
   beforeEach(() => {
-    wrapper = mount(EditTaskBox, {
-      global: {
-        plugins: [createTestingPinia()]
-      }
-    });
-
+    wrapper = mount(EditTaskBox);
     taskStore = useTaskStore();
   });
 

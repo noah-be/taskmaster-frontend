@@ -1,16 +1,11 @@
 import TasksView from '@/views/TasksView.vue';
-import { createTestingPinia } from '@pinia/testing';
 import { useTaskStore } from '@/stores/taskStore';
 
 describe('TasksView', () => {
   let wrapper, taskStore;
 
   beforeEach(() => {
-    wrapper = mount(TasksView, {
-      global: {
-        plugins: [createTestingPinia()]
-      }
-    });
+    wrapper = mount(TasksView);
 
     taskStore = useTaskStore();
   });

@@ -1,5 +1,4 @@
 import RegisterBox from '@/components/RegisterBox.vue';
-import { createTestingPinia } from '@pinia/testing';
 import { useAuthStore } from '@/stores/authStore';
 import { getUserNameFeedback, getPasswordFeedback } from '@/utils/authUtils';
 import { flushPromises } from '@vue/test-utils';
@@ -19,11 +18,7 @@ describe('RegisterBox', () => {
   let wrapper, authStore;
 
   beforeEach(async () => {
-    wrapper = mount(RegisterBox, {
-      global: {
-        plugins: [createTestingPinia()]
-      }
-    });
+    wrapper = mount(RegisterBox);
     authStore = useAuthStore();
     vi.clearAllMocks();
 
