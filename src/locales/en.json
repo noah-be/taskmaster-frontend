@@ -37,7 +37,10 @@
   },
   "components": {
     "header": {
-      "title": "Task Master"
+      "title": "Task Master",
+      "menu": {
+        "logout": "Logout"
+      }
     },
     "footer": {
       "text": "Made with ❤️ in Berlin"

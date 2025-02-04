@@ -30,6 +30,12 @@
     }
   },
   "components": {
+    "header": {
+      "title": "Task Master",
+      "menu": {
+        "logout": "Ausloggen"
+      }
+    },
     "editTaskBox": {
       "editTaskDialog": {
         "title": "Aufgabe bearbeiten",

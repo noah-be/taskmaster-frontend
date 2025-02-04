@@ -15,9 +15,19 @@ import Navbar from '@/components/Navbar.vue';
         </v-col>
 
         <v-col cols="auto">
-          <v-btn icon>
-            <v-img src="/images/profile-user.png" :alt="$t('altText.profileUser')" width="40" height="40" cover class="rounded-circle" />
-          </v-btn>
+          <v-menu open-on-hover>
+            <template v-slot:activator="{ props }">
+              <v-btn icon v-bind="props">
+                <v-img src="/images/profile-user.png" :alt="$t('altText.profileUser')" width="40" height="40" cover class="rounded-circle" />
+              </v-btn>
+            </template>
+
+            <v-list>
+              <v-list-item>
+                <v-list-item-title>{{ $t('components.header.menu.logout') }}</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
         </v-col>
       </v-row>
     </v-container>
