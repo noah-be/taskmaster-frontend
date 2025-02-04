@@ -10,7 +10,7 @@ import * as Sentry from '@sentry/vue';
 
 import { createPinia } from 'pinia';
 
-const i18n = createI18n({
+export const i18n = createI18n({
   legacy: false,
   locale: 'en',
   fallbackLocale: 'en',
