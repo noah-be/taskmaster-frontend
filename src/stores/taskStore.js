@@ -114,6 +114,9 @@ export const useTaskStore = defineStore('task', {
     },
     closeEditDialog() {
       this.currentTaskId = null;
+    },
+    clearError() {
+      this.error = null;
     }
   }
 });

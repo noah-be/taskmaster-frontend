@@ -77,6 +77,9 @@ export const useAuthStore = defineStore('auth', {
     },
     toggleGuidelineVisibility() {
       this.isGuidelineTextVisible = !this.isGuidelineTextVisible;
+    },
+    clearError() {
+      this.error = null;
     }
   }
 });
