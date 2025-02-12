@@ -134,5 +134,19 @@
     "profileUser": "Benutzerprofil",
     "todoList": "Ein Tisch mit Pflanzen, Büroklammern, einem Klemmbrett, einem Wecker und einem Kugelschreiber.",
     "notFoundCat": "Eine traurig aussehende Katze und der weiße Text '404 nicht gefunden'."
+  },
+  "stores": {
+    "authStore": {
+      "loginError": "Fehler beim Anmelden",
+      "registerError": "Fehler beim Registrieren",
+      "logoutError": "Fehler beim Abmelden"
+    },
+    "taskStore": {
+      "fetchError": "Fehler beim Abrufen der Aufgaben",
+      "addTaskError": "Fehler beim Hinzufügen der Aufgabe",
+      "editTaskError": "Fehler beim Bearbeiten der Aufgabe",
+      "deleteTaskError": "Fehler beim Löschen der Aufgabe",
+      "toggleTaskError": "Fehler beim Umschalten des Aufgabenabschlusses"
+    }
   }
 }

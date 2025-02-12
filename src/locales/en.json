@@ -146,5 +146,19 @@
     "profileUser": "User Profile",
     "todoList": "A table on which there are plants, paper clips, a clipboard, an alarm clock and a ballpoint pen.",
     "notFoundCat": "A sad looking cat and the white text 404 not found."
+  },
+  "stores": {
+    "authStore": {
+      "loginError": "Error during login",
+      "registerError": "Error while registering",
+      "logoutError": "Error when logging out"
+    },
+    "taskStore": {
+      "fetchError": "Error retrieving the tasks",
+      "addTaskError": "Error when adding the task",
+      "editTaskError": "Error when editing the task",
+      "deleteTaskError": "Error when deleting the task",
+      "toggleTaskError": "Error when toggling the task completion"
+    }
   }
 }
