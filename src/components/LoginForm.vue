@@ -42,6 +42,13 @@
     <v-container v-if="authStore.isRegisterBoxVisible">
       <RegisterBox />
     </v-container>
+
+    <v-snackbar v-model="showSnackbar" :timeout="5000" color="error" top>
+      {{ errorMessage }}
+      <template v-slot:action="{ attrs }">
+        <v-btn color="white" text v-bind="attrs" @click="showSnackbar = false"> Close </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -50,15 +57,31 @@ import { ref } from 'vue';
 import RegisterBox from '@/components/RegisterBox.vue';
 import { useAuthStore } from '@/stores/authStore';
 import { useRouter } from 'vue-router';
+import { watch } from 'vue';
 
 const router = useRouter();
 
 const authStore = useAuthStore();
+
+const showSnackbar = ref(false);
+const errorMessage = ref('');
 const username = ref('');
 const password = ref('');
 
+watch(
+  () => authStore.error,
+  newError => {
+    if (newError) {
+      errorMessage.value = newError;
+      showSnackbar.value = true;
+      authStore.clearError();
+    }
+  },
+  { immediate: true }
+);
+
 const submitLogin = async () => {
   await authStore.login(username.value, password.value);
-  router.push('/tasks');
+  if (authStore.user) router.push('/tasks');
 };
 </script>
