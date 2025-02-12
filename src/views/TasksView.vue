@@ -14,6 +14,13 @@
         </v-card>
       </v-col>
     </v-row>
+
+    <v-snackbar v-model="showSnackbar" :timeout="5000" color="error" top>
+      {{ errorMessage }}
+      <template v-slot:action="{ attrs }">
+        <v-btn color="white" text v-bind="attrs" @click="showSnackbar = false"> Close </v-btn>
+      </template>
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -22,6 +29,7 @@ import NewTaskForm from '@/components/NewTaskForm.vue';
 import TodoTable from '@/components/TodoTable.vue';
 import { onMounted, computed } from 'vue';
 import { useTaskStore } from '@/stores/taskStore';
+import { watch, ref } from 'vue';
 
 export default {
   components: {
@@ -31,14 +39,31 @@ export default {
   setup() {
     const taskStore = useTaskStore();
 
+    const showSnackbar = ref(false);
+    const errorMessage = ref('');
+
     onMounted(() => {
       taskStore.fetchTasks();
     });
 
     const tasks = computed(() => taskStore.tasks);
 
+    watch(
+      () => taskStore.error,
+      newError => {
+        if (newError) {
+          errorMessage.value = newError;
+          showSnackbar.value = true;
+          taskStore.clearError();
+        }
+      },
+      { immediate: true }
+    );
+
     return {
-      tasks
+      tasks,
+      showSnackbar,
+      errorMessage
     };
   }
 };
