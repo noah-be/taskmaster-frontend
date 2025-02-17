@@ -12,7 +12,7 @@ export const useAuthStore = defineStore('auth', {
     isAuthenticated: state => !!state.token
   },
   actions: {
-    async login(username, password) {
+    async login(username, password, t) {
       try {
         const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
           method: 'POST',
@@ -32,10 +32,10 @@ export const useAuthStore = defineStore('auth', {
         localStorage.setItem('token', data.token);
       } catch (error) {
         console.error('Login error:', error.message);
-        this.error = error.message;
+        this.error = t('stores.authStore.loginError');
       }
     },
-    async register(username, password) {
+    async register(username, password, t) {
       try {
         const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
           method: 'POST',
@@ -55,20 +55,20 @@ export const useAuthStore = defineStore('auth', {
         localStorage.setItem('token', data.token);
       } catch (error) {
         console.error('Registration error:', error.message);
-        this.error = error.message;
+        this.error = t('stores.authStore.registerError');
       } finally {
         this.closeRegisterBox();
       }
     },
 
-    logout() {
+    logout(t) {
       try {
         localStorage.removeItem('token');
         this.token = null;
         this.user = null;
       } catch (error) {
         console.error('Logout failed:', error.message);
-        this.error = 'Error during logout.';
+        this.error = t('stores.authStore.logoutError');
       }
     },
 
@@ -83,5 +83,3 @@ export const useAuthStore = defineStore('auth', {
     }
   }
 });
-
-// TODO: Implement translations in snackbar error messages

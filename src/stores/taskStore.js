@@ -10,7 +10,7 @@ export const useTaskStore = defineStore('task', {
     allTasks: state => state.tasks
   },
   actions: {
-    async fetchTasks() {
+    async fetchTasks(t) {
       try {
         const response = await fetch(`${API_BASE_URL}/api/task/getAll`, {
           method: 'GET',
@@ -24,10 +24,10 @@ export const useTaskStore = defineStore('task', {
         this.tasks = await response.json();
       } catch (error) {
         console.error('Fetch tasks error:', error.message);
-        this.error = 'Error fetching tasks.';
+        this.error = t('stores.taskStore.fetchError');
       }
     },
-    async toggleTaskCompletion(taskId) {
+    async toggleTaskCompletion(taskId, t) {
       try {
         const response = await fetch(`${API_BASE_URL}/api/task/toggle/${taskId}`, {
           method: 'PATCH',
@@ -45,10 +45,10 @@ export const useTaskStore = defineStore('task', {
         }
       } catch (error) {
         console.error('Toggle task error:', error.message);
-        this.error = 'Error toggling task completion.';
+        this.error = t('stores.taskStore.toggleTaskError');
       }
     },
-    async addTask(task) {
+    async addTask(task, t) {
       try {
         const response = await fetch(`${API_BASE_URL}/api/task`, {
           method: 'POST',
@@ -65,10 +65,10 @@ export const useTaskStore = defineStore('task', {
         this.tasks.push(newTask);
       } catch (error) {
         console.error('Add task error:', error.message);
-        this.error = 'Error adding task.';
+        this.error = t('stores.taskStore.addTaskError');
       }
     },
-    async deleteTask(taskId) {
+    async deleteTask(taskId, t) {
       try {
         const response = await fetch(`${API_BASE_URL}/api/task/${taskId}`, {
           method: 'DELETE',
@@ -83,10 +83,10 @@ export const useTaskStore = defineStore('task', {
         this.tasks = this.tasks.filter(task => task._id !== taskId);
       } catch (error) {
         console.error('Delete task error:', error.message);
-        this.error = 'Error deleting task.';
+        this.error = t('stores.taskStore.deleteTaskError');
       }
     },
-    async updateTask(taskId, updatedData) {
+    async updateTask(taskId, updatedData, t) {
       try {
         const response = await fetch(`${API_BASE_URL}/api/task/${taskId}`, {
           method: 'PATCH',
@@ -106,7 +106,7 @@ export const useTaskStore = defineStore('task', {
         }
       } catch (error) {
         console.error('Update task error:', error.message);
-        this.error = 'Error updating task.';
+        this.error = t('stores.taskStore.editTaskError');
       }
     },
     openEditTaskBox(taskId) {
@@ -120,5 +120,3 @@ export const useTaskStore = defineStore('task', {
     }
   }
 });
-
-// TODO: Implement translations in snackbar error messages

@@ -67,7 +67,8 @@ async function handleAddTask() {
   await taskStore.addTask({
     title: title.value,
     priority: priority.value,
-    dueDate: dueDate.value
+    dueDate: dueDate.value,
+    t
   });
 
   title.value = '';

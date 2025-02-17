@@ -98,7 +98,7 @@ const formValid = computed(() => {
 
 const registerUser = async () => {
   if (formValid.value) {
-    await authStore.register(username.value, password.value);
+    await authStore.register(username.value, password.value, t);
     router.push('/tasks');
   }
 };

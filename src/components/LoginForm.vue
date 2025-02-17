@@ -58,9 +58,10 @@ import RegisterBox from '@/components/RegisterBox.vue';
 import { useAuthStore } from '@/stores/authStore';
 import { useRouter } from 'vue-router';
 import { watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const router = useRouter();
-
 const authStore = useAuthStore();
 
 const showSnackbar = ref(false);
@@ -81,7 +82,7 @@ watch(
 );
 
 const submitLogin = async () => {
-  await authStore.login(username.value, password.value);
+  await authStore.login(username.value, password.value, t);
   if (authStore.user) router.push('/tasks');
 };
 </script>

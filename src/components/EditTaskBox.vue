@@ -79,7 +79,9 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { useTaskStore } from '@/stores/taskStore';
+import { useI18n } from 'vue-i18n';
 
+const { t } = useI18n();
 const taskStore = useTaskStore();
 const taskCopy = ref({});
 
@@ -93,12 +95,12 @@ watch(
 );
 
 function saveChanges() {
-  taskStore.updateTask(taskStore.currentTaskId, taskCopy.value);
+  taskStore.updateTask(taskStore.currentTaskId, taskCopy.value, t);
   taskStore.closeEditDialog();
 }
 
 function deleteTask() {
-  taskStore.deleteTask(taskStore.currentTaskId);
+  taskStore.deleteTask(taskStore.currentTaskId, t);
   taskStore.closeEditDialog();
 }
 </script>
