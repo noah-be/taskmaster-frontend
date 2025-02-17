@@ -84,4 +84,4 @@ export const useAuthStore = defineStore('auth', {
   }
 });
 
-// TODO: Add user notification of errors. Maybe a toast or a modal.
+// TODO: Implement translations in snackbar error messages
