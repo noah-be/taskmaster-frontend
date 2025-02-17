@@ -32,7 +32,7 @@ describe('TodoTable.vue', async () => {
     const checkbox = wrapper.findComponent({ ref: 'taskCompleted' });
     await checkbox.trigger('click');
 
-    expect(taskStore.toggleTaskCompletion).toHaveBeenCalledWith('1');
+    expect(taskStore.toggleTaskCompletion).toHaveBeenCalledWith('1', expect.any(Function));
   });
 
   it('should update the checkbox state when item.completed changes', async () => {
