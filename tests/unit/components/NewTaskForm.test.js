@@ -36,7 +36,8 @@ describe('NewTaskForm', () => {
     expect(mockAddTask).toHaveBeenCalledWith({
       title: 'New Task',
       priority: 'Medium',
-      dueDate: '2023-01-01'
+      dueDate: '2023-01-01',
+      t: expect.any(Function)
     });
 
     expect(wrapper.vm.title).toBe('');
