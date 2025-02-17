@@ -30,6 +30,7 @@ import TodoTable from '@/components/TodoTable.vue';
 import { onMounted, computed } from 'vue';
 import { useTaskStore } from '@/stores/taskStore';
 import { watch, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 export default {
   components: {
@@ -38,12 +39,13 @@ export default {
   },
   setup() {
     const taskStore = useTaskStore();
+    const { t } = useI18n();
 
     const showSnackbar = ref(false);
     const errorMessage = ref('');
 
     onMounted(() => {
-      taskStore.fetchTasks();
+      taskStore.fetchTasks(t);
     });
 
     const tasks = computed(() => taskStore.tasks);
