@@ -100,7 +100,7 @@ describe('RegisterBox', () => {
     wrapper.vm.password = 'validPass123';
     await flushPromises();
     await wrapper.vm.registerUser();
-    expect(authStore.register).toHaveBeenCalledWith('validUser', 'validPass123');
+    expect(authStore.register).toHaveBeenCalledWith('validUser', 'validPass123', expect.any(Function));
   });
 
   it('should not call authStore.register when formValid is false', async () => {

@@ -53,6 +53,6 @@ describe('LoginForm', () => {
     await passwordInput.setValue('testpass');
     await wrapper.vm.submitLogin();
 
-    expect(authStore.login).toHaveBeenCalledWith('testuser', 'testpass');
+    expect(authStore.login).toHaveBeenCalledWith('testuser', 'testpass', expect.any(Function));
   });
 });
