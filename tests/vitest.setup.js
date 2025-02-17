@@ -28,6 +28,7 @@ global.expect = expect;
 global.vi = vi;
 global.beforeEach = beforeEach;
 global.afterEach = afterEach;
+global.t = vi.fn(key => key);
 
 const mockVuetify = createVuetify();
 const mockI18n = createI18nMock();

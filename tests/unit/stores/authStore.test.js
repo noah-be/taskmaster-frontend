@@ -60,7 +60,7 @@ describe('authStore', () => {
           json: vi.fn().mockResolvedValueOnce(mockResponse)
         });
 
-        await authStore.login('testUser', 'password123');
+        await authStore.login('testUser', 'password123', t);
 
         expect(authStore.token).toBe('testToken');
         expect(authStore.user).toEqual(mockResponse.user);
@@ -70,7 +70,7 @@ describe('authStore', () => {
       it('should not update state on login failure', async () => {
         fetch.mockResolvedValueOnce({ ok: false });
 
-        await authStore.login('testUser', 'password123');
+        await authStore.login('testUser', 'password123', t);
 
         expect(authStore.token).toBe(null);
         expect(authStore.user).toBe(null);
@@ -101,7 +101,7 @@ describe('authStore', () => {
       it('should not update state on registration failure', async () => {
         fetch.mockResolvedValueOnce({ ok: false });
 
-        await authStore.register('testUser', 'password123');
+        await authStore.register('testUser', 'password123', t);
 
         expect(authStore.token).toBe(null);
         expect(authStore.user).toBe(null);

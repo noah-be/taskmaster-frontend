@@ -32,11 +32,12 @@ describe('taskStore', () => {
     describe('fetchTasks', () => {
       it('should fetch tasks and update the state', async () => {
         global.fetch = vi.fn().mockResolvedValue({
+          ok: true,
           json: () => Promise.resolve([{ _id: '1', title: 'Task 1' }])
         });
 
-        await taskStore.fetchTasks();
-        expect(taskStore.tasks).toEqual([{ _id: '1', title: 'Task 1' }]);
+        await taskStore.fetchTasks(vi.fn(key => key));
+
         expect(global.fetch).toHaveBeenCalledWith(
           `${API_BASE_URL}/api/task/getAll`,
           expect.objectContaining({
@@ -44,6 +45,8 @@ describe('taskStore', () => {
             headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
           })
         );
+
+        expect(taskStore.tasks).toEqual([{ _id: '1', title: 'Task 1' }]);
       });
     });
 
@@ -51,6 +54,7 @@ describe('taskStore', () => {
       it('should toggle task completion and update the task', async () => {
         taskStore.tasks = [{ _id: '1', title: 'Task 1', completed: false }];
         global.fetch = vi.fn().mockResolvedValue({
+          ok: true,
           json: () => Promise.resolve({ _id: '1', completed: true })
         });
 
@@ -63,6 +67,7 @@ describe('taskStore', () => {
     describe('addTask', () => {
       it('should add a new task to the state', async () => {
         global.fetch = vi.fn().mockResolvedValue({
+          ok: true,
           json: () => Promise.resolve({ _id: '2', title: 'New Task' })
         });
 
@@ -74,7 +79,7 @@ describe('taskStore', () => {
     describe('deleteTask', () => {
       it('should remove a task by ID', async () => {
         taskStore.tasks = [{ _id: '1', title: 'Task 1' }];
-        global.fetch = vi.fn().mockResolvedValue({});
+        global.fetch = vi.fn().mockResolvedValue({ ok: true });
 
         await taskStore.deleteTask('1');
         expect(taskStore.tasks).toEqual([]);
@@ -85,6 +90,7 @@ describe('taskStore', () => {
       it('should update a task in the state', async () => {
         taskStore.tasks = [{ _id: '1', title: 'Task 1' }];
         global.fetch = vi.fn().mockResolvedValue({
+          ok: true,
           json: () => Promise.resolve({ _id: '1', title: 'Updated Task' })
         });
 
