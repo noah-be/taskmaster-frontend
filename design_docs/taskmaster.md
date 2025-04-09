@@ -101,7 +101,20 @@ Fields:
 ## 7. Key Architectural Decisions
 
 ### 7.1 Decision Log
-# TODO
++ #### Initial Scope (Web Development Basics):
+    The project started as a simple task manager using Node.js for the backend and plain HTML, CSS, and JavaScript for the frontend. It supported creating and displaying tasks and was built to fulfill the requirements of the Web Development Basics module.
+
++ #### Project Expansion:
+    To meet the learning goals of the Web Development Frontend and Web Development Backend modules, the frontend was completely rebuilt using Vue 3, Vuetify for the UI, and i18n for internationalization. The backend remained largely unchanged but was moved into a separate repository for better structure and modularity.
+
++ #### Repository Separation:
+    The application was split into two distinct repositories — one for the Vue-based frontend and one for the Node.js backend. This separation reflects common full-stack development practices and improves clarity and maintainability.
+
++ #### Monolithic Architecture:
+    Both the frontend and backend are implemented as monolithic applications. This approach keeps the project straightforward and manageable as a learning exercise.
+
++ #### Technology Stack:
+    The stack consists of Vue 3, Vuetify, Pinia, and i18n on the frontend, and Node.js, Express, and MongoDB on the backend. These technologies were chosen based not only on educational goals and strong documentation, but also due to a personal preference for open-source software and tools.
 
 ## 8. Quality Attributes
 
